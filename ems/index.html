@@ -369,7 +369,7 @@ nav:hover .ng-edit,.ng-edit:focus-visible,.ng-edit[data-on=true],.ng-edit:has(i)
 .hx-fbtn b{min-width:18px;height:18px;border-radius:999px;background:#72000d;color:#fff;font:800 10px Inter,sans-serif;display:grid;place-items:center;padding:0 5px}
 .hx-ic{position:relative;width:40px;height:40px;display:grid;place-items:center;border:0;background:transparent;border-radius:10px;color:#6f5f66;transition:background .2s,color .2s}
 .hx-ic:hover{background:#f6f1f3;color:#340006}
-.hx-dot{position:absolute;top:4px;inset-inline-end:3px;min-width:16px;height:16px;border-radius:999px;background:#d42a2a;color:#fff;font:800 9.5px Inter,sans-serif;font-style:normal;display:grid;place-items:center;padding:0 4px;border:2px solid #fff;box-sizing:content-box}
+.hx-ic>svg{position:relative;z-index:0}.hx-ic .hx-dot{position:absolute!important;top:3px!important;bottom:auto!important;left:auto;right:auto;inset-inline-end:1px!important;z-index:1;min-width:14px;height:14px;line-height:14px;border-radius:999px;background:#d42a2a;color:#fff;font:800 9px Inter,sans-serif;font-style:normal;display:block;text-align:center;padding:0 3px;border:2px solid #fff;box-sizing:content-box}
 .hx-play{height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;border:0;background:#340006;color:#fff;border-radius:10px;font-size:12.5px;font-weight:700;margin-inline-start:4px;transition:background .2s,transform .2s}
 .hx-play:hover{background:#4d0a14;transform:translateY(-1px)}
 .hx-user{height:40px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border:1px solid #ece6e8;background:#fff;border-radius:999px;color:#47363d;font-size:12px;font-weight:700;margin-inline-start:6px}
@@ -1281,7 +1281,7 @@ class Component extends DCLogic {
       fL: S('فلتر', 'Filter'), fN: String(fActive), fHasN: fActive > 0, fOn: fActive > 0 ? 'true' : 'false', fIsOpen: fOpen === 'panel', fExp: fOpen === 'panel' ? 'true' : 'false',
       fToggle: () => this.setState(fOpen === 'panel' ? { fOpen: '', fd: null } : { fOpen: 'panel', fd: null, uOpen: false }), fClose: () => this.setState({ fOpen: '', fd: null }),
       popT: S('فلتر البيانات', 'Filter data'), closeL: S('إغلاق', 'Close'), perL: S('الفترة', 'Period'), cityL: S('المدينة', 'City'), ctasL: S('مستوى CTAS', 'CTAS level'), allL: S('الكل', 'All'),
-      periods: ['today', 'week', 'month', 'quarter'].map((k) => ({ label: periodDefs[k][0], on: fd.period === k ? 'true' : 'false', go: () => setD({ period: k }) })),
+      periods: ['today', 'week', 'month', 'quarter'].map((k) => ({ label: ({ today: S('اليوم', 'Today'), week: S('7 أيام', '7 days'), month: S('الشهر', 'Month'), quarter: S('الربع', 'Quarter') })[k], on: fd.period === k ? 'true' : 'false', go: () => setD({ period: k }) })),
       cmpL: S('مقارنة مع الفترة السابقة', 'Compare with previous period'), cmpOn: fd.compare ? 'true' : 'false', cmpGo: () => setD({ compare: !fd.compare }),
       cityAll: () => setD({ cities: [] }),
       cities: cityKeys.map((k) => ({ label: t.cities[k], n: fmt(cityRep[k], 0), on: fd.cities.indexOf(k) >= 0 ? 'true' : 'false', go: () => setD({ cities: tgl(fd.cities, k) }) })),
