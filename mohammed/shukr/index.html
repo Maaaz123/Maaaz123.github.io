@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>شكراً لحضوركم ✨ عقيقة محمد</title>
+<meta name="description" content="شكراً لحضوركم ومشاركتنا فرحتنا بعقيقة محمد">
+<meta property="og:title" content="شكراً لحضوركم ✨">
+<meta property="og:description" content="رسالة شكر من أم محمد، اضغطي لفتحها">
+<meta name="theme-color" content="#06140f">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maazmajid.com/mohammed/shukr/">
+<meta property="og:image" content="https://maazmajid.com/mohammed/shukr/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://maazmajid.com/mohammed/shukr/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Reem+Kufi:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#06140f; --deep:#0b241e; --emerald:#12392f;
+  --gold:#e6c97f; --gold2:#f8e7b4; --gold3:#b8913f;
+  --ink:#f3ebdd; --muted:#cdbfa5; --rose:#e9b8a6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:'Amiri',serif;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:clip}
+body.locked{overflow:hidden;height:100%}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bgglow{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(90% 60% at 50% 30%, rgba(18,57,47,.95) 0%, rgba(11,36,30,.9) 45%, var(--bg) 100%)}
+.geo{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='%23e6c97f' stroke-width='1'><rect x='16' y='16' width='32' height='32'/><rect x='16' y='16' width='32' height='32' transform='rotate(45 32 32)'/><circle cx='32' cy='32' r='6'/><path d='M0 0L16 16M64 0L48 16M0 64L16 48M64 64L48 48'/></g></svg>");
+  background-size:64px 64px}
+
+/* ---------- Intro: envelope ---------- */
+#intro{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;
+  background:radial-gradient(80% 60% at 50% 45%, #0f2f27 0%, #06140f 75%);cursor:pointer;
+  transition:opacity 1.2s ease 1.9s, visibility 0s linear 3.1s}
+#intro.open{opacity:0;visibility:hidden;pointer-events:none}
+.env{position:relative;width:min(80vw,340px);aspect-ratio:1.45;perspective:900px;animation:float 3.6s ease-in-out infinite}
+#intro.open .env{animation:none}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.env-back{position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,#123a30,#0b261f);border:1.5px solid var(--gold);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.letter{position:absolute;left:7%;right:7%;top:8%;bottom:6%;border-radius:6px;
+  background:linear-gradient(180deg,#fbf3df,#efe0bb);box-shadow:0 4px 18px rgba(0,0,0,.25);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  transition:transform 1.4s cubic-bezier(.3,.9,.3,1) .7s;z-index:1}
+.letter b{font-family:'Aref Ruqaa',serif;font-size:clamp(34px,10vw,44px);color:#8a6420;line-height:1}
+.letter span{font-family:'Reem Kufi',sans-serif;font-size:13px;color:#7b6a48;letter-spacing:1px}
+#intro.open .letter{transform:translateY(-62%)}
+.env-front{position:absolute;inset:0;z-index:2;pointer-events:none}
+.flap{position:absolute;left:0;right:0;top:0;height:62%;z-index:3;transform-origin:50% 0;
+  transition:transform 1s cubic-bezier(.6,.05,.3,1);transform-style:preserve-3d}
+#intro.open .flap{transform:rotateX(180deg);z-index:0}
+.seal{position:absolute;left:50%;top:62%;width:74px;height:74px;margin:-37px 0 0 -37px;z-index:4;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 35% 30%,#f8e7b4,#c9a24f 60%,#8f6b25);
+  box-shadow:0 0 0 5px rgba(230,201,127,.18),0 0 34px rgba(230,201,127,.55);
+  font-family:'Aref Ruqaa',serif;font-size:24px;color:#3b2a0a;animation:sealPulse 2.4s ease-in-out infinite;
+  transition:transform .6s ease, opacity .5s ease}
+#intro.open .seal{transform:scale(1.5);opacity:0}
+@keyframes sealPulse{0%,100%{box-shadow:0 0 0 5px rgba(230,201,127,.18),0 0 26px rgba(230,201,127,.4)}50%{box-shadow:0 0 0 12px rgba(230,201,127,.06),0 0 52px rgba(230,201,127,.8)}}
+.intro-text{text-align:center}
+.intro-text .t1{font-family:'Reem Kufi',sans-serif;font-size:15px;letter-spacing:3px;color:var(--muted)}
+.intro-text .guest{font-family:'Reem Kufi',sans-serif;font-size:20px;color:var(--gold2);margin-top:6px}
+.intro-text .t2{margin-top:8px;font-family:'Reem Kufi',sans-serif;font-size:19px;color:var(--gold);animation:breathe 2.2s ease-in-out infinite}
+#intro.open .intro-text{opacity:0;transition:opacity .4s}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+
+/* ---------- Main ---------- */
+main{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 22px calc(90px + env(safe-area-inset-bottom));text-align:center}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:clip;padding-top:calc(40px + env(safe-area-inset-top))}
+.rosette{position:absolute;width:min(94vw,460px);aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity 2s ease 1s}
+.go .rosette{opacity:.3}
+.rosette svg{width:100%;height:100%;animation:spin 140s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hello{font-family:'Reem Kufi',sans-serif;font-size:17px;color:var(--gold2);margin:0 0 10px}
+.hamd{font-size:clamp(20px,5.6vw,25px);color:var(--gold);margin:0}
+.namewrap{position:relative;width:min(94vw,480px);margin:4px 0 -6px}
+.namewrap svg{width:100%;height:auto;overflow:visible}
+.nm{font-family:'Aref Ruqaa',serif;font-weight:700;font-size:190px;fill:url(#goldGrad);fill-opacity:0;
+  stroke:var(--gold2);stroke-width:2.2;stroke-dasharray:2400;stroke-dashoffset:2400}
+.go .nm{animation:write 3.6s cubic-bezier(.45,.05,.3,1) .5s forwards, fillIn 1.4s ease 3.5s forwards}
+@keyframes write{to{stroke-dashoffset:0}}
+@keyframes fillIn{to{fill-opacity:1;stroke-width:.6}}
+.go .nameglow{animation:glow 4s ease-in-out 4.4s infinite}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 12px rgba(230,201,127,.25))}50%{filter:drop-shadow(0 0 34px rgba(248,231,180,.7))}}
+.for{font-size:clamp(19px,5.2vw,23px);line-height:1.9;margin:0}
+.for .k{font-family:'Aref Ruqaa',serif;color:var(--gold);font-size:1.25em}
+.scroll-hint{position:absolute;bottom:calc(26px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'Reem Kufi',sans-serif;font-size:13px;color:var(--muted);opacity:0;transition:opacity 1s ease 5s}
+.go .scroll-hint{opacity:1}
+.scroll-hint svg{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+.fade{opacity:0;transform:translateY(26px);filter:blur(4px);transition:opacity 1.1s ease, transform 1.1s ease, filter 1.1s ease}
+.fade.on{opacity:1;transform:none;filter:none}
+.go .hero .fade{opacity:1;transform:none;filter:none}
+.go .hero .d1{transition-delay:.2s}.go .hero .d2{transition-delay:4.2s}
+
+section{padding:64px 0 10px}
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 26px;color:var(--gold)}
+.divider span{height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold))}
+.divider span:last-child{background:linear-gradient(270deg,transparent,var(--gold))}
+
+.note{position:relative;margin:0 auto;max-width:430px;padding:34px 26px 30px;border-radius:26px;
+  background:linear-gradient(160deg,rgba(18,57,47,.8),rgba(6,20,15,.8));border:1px solid rgba(230,201,127,.4);
+  box-shadow:0 14px 40px rgba(0,0,0,.4), inset 0 1px 0 rgba(248,231,180,.12);overflow:hidden}
+.note::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(248,231,180,.13) 50%,transparent 70%);transform:translateX(-120%)}
+.note.on::after{animation:shine 2.4s ease .6s}
+@keyframes shine{to{transform:translateX(120%)}}
+.note .q{font-family:'Aref Ruqaa',serif;font-size:56px;line-height:.6;color:var(--gold3);display:block;height:26px}
+.note p{margin:0;font-size:clamp(19px,5vw,21px);line-height:2}
+.note p+p{margin-top:12px}
+.note .sig{margin-top:22px;font-family:'Reem Kufi',sans-serif;font-size:14px;color:var(--muted);letter-spacing:1px}
+.note .sig b{display:block;margin-top:4px;font-family:'Aref Ruqaa',serif;font-size:28px;color:var(--gold);font-weight:700;letter-spacing:0}
+
+.verse{font-size:clamp(22px,6vw,27px);line-height:1.9;color:var(--gold2);margin:0}
+.verse small{display:block;font-size:14px;color:var(--muted);margin-top:6px;font-family:'Reem Kufi',sans-serif;letter-spacing:1px}
+
+.moments{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mo{padding:18px 6px 14px;border-radius:18px;border:1px solid rgba(230,201,127,.35);background:rgba(6,20,15,.55)}
+.mo svg{display:block;margin:0 auto 8px}
+.mo span{font-family:'Reem Kufi',sans-serif;font-size:13.5px;color:var(--ink);line-height:1.5}
+
+.dua{font-size:clamp(21px,5.6vw,25px);line-height:2;color:var(--gold2);margin:0}
+.big{margin:34px 0 0;font-family:'Aref Ruqaa',serif;font-size:clamp(40px,11vw,50px);color:var(--gold);line-height:1.3}
+.end{margin-top:14px;font-family:'Reem Kufi',sans-serif;font-size:14px;letter-spacing:2px;color:var(--muted)}
+.heart{display:inline-block;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+
+.hidden{display:none !important}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .nm{stroke-dashoffset:0;fill-opacity:1}
+}
+</style>
+</head>
+<body class="locked">
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="bgglow" aria-hidden="true"></div>
+<div class="geo" aria-hidden="true"></div>
+
+<!-- Intro: envelope -->
+<div id="intro" role="button" tabindex="0" aria-label="اضغطي لفتح الرسالة">
+  <div class="env">
+    <div class="env-back"></div>
+    <div class="letter"><b>شكراً</b><span>من أم محمد</span></div>
+    <svg class="env-front" viewBox="0 0 290 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 200L145 112L290 200Z" fill="#0f3028" stroke="#e6c97f" stroke-width="1.2"/>
+      <path d="M0 0L118 118Q145 136 172 118L290 0V200H0Z" fill="#11372d" stroke="#e6c97f" stroke-width="1.2" opacity=".96"/>
+    </svg>
+    <svg class="flap" viewBox="0 0 290 124" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0H290L172 112Q145 130 118 112Z" fill="#164438" stroke="#e6c97f" stroke-width="1.5"/>
+    </svg>
+    <div class="seal" aria-hidden="true">م</div>
+  </div>
+  <div class="intro-text">
+    <div class="t1">رسالة شكر</div>
+    <div class="guest hidden" id="gGuest"></div>
+    <div class="t2">اضغطي لفتح الرسالة</div>
+  </div>
+</div>
+
+<main id="main">
+  <div class="hero">
+    <div class="rosette" aria-hidden="true">
+      <svg viewBox="0 0 400 400"><g fill="none" stroke="#e6c97f" stroke-width="1">
+        <rect x="80" y="80" width="240" height="240"/>
+        <rect x="80" y="80" width="240" height="240" transform="rotate(22.5 200 200)"/>
+        <rect x="80" y="80" width="240" height="240" transform="rotate(45 200 200)"/>
+        <rect x="80" y="80" width="240" height="240" transform="rotate(67.5 200 200)"/>
+        <circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="176" stroke-dasharray="2 6"/>
+        <circle cx="200" cy="200" r="98"/>
+      </g></svg>
+    </div>
+    <p class="hello fade d1 hidden" id="hello"></p>
+    <p class="hamd fade d1">الحمد لله الذي بنعمته تتمّ الصالحات</p>
+    <div class="namewrap nameglow">
+      <svg viewBox="0 0 600 280" role="img" aria-label="شكراً">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff3cc"/><stop offset=".45" stop-color="#e6c97f"/><stop offset="1" stop-color="#a77f30"/>
+          </linearGradient>
+        </defs>
+        <text class="nm" x="300" y="200" text-anchor="middle" direction="rtl">شكراً</text>
+      </svg>
+    </div>
+    <p class="for fade d2">لحضوركم ومشاركتنا فرحتنا<br>بعقيقة ابننا <span class="k">محمد</span></p>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>اسحبي للأسفل</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c97f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </div>
+
+  <section>
+    <div class="note fade">
+      <span class="q" aria-hidden="true">“</span>
+      <p id="dear" class="hidden"></p>
+      <p>كان لحضوركم أجمل الأثر في قلوبنا، ونوّرتم ليلتنا بوجودكم ودعواتكم الطيبة.</p>
+      <p>شكراً على كل كلمة حلوة، وكل هدية، وكل دعوة لمحمد. الله يجزاكم عنا كل خير، ويديم بيننا المحبة والفرح.</p>
+      <div class="sig">مع خالص المحبة والتقدير<b id="vHost"></b></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="moments">
+      <div class="mo fade">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e6c97f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+        <span>حضوركم<br>فرحتنا</span>
+      </div>
+      <div class="mo fade" style="transition-delay:.15s">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e6c97f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.8 4.2 3.8 7.2 8 8-4.2.8-7.2 3.8-8 8-.8-4.2-3.8-7.2-8-8 4.2-.8 7.2-3.8 8-8z"/></svg>
+        <span>دعواتكم<br>نورنا</span>
+      </div>
+      <div class="mo fade" style="transition-delay:.3s">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e6c97f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18v-3H3zM12 6v14M12 6c-1.5-3-5-3-5-1s3 1 5 1c2 0 5 1 5-1s-3.5-2-5 1"/></svg>
+        <span>هداياكم<br>محبتكم</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="divider fade" aria-hidden="true"><span></span><svg width="18" height="18" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" fill="#e6c97f"/><rect x="6" y="6" width="12" height="12" fill="#e6c97f" transform="rotate(45 12 12)"/></svg><span></span></div>
+    <p class="verse fade">﴿ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ﴾<small>سورة إبراهيم ، ٧</small></p>
+  </section>
+
+  <section>
+    <p class="dua fade">اللهم بارك لنا في محمد<br>واجعله قرّةَ عينٍ لنا ولكم<br>وبارك لكم في أبنائكم وأحبابكم<br>وأدِم عليكم الأفراح والمسرّات</p>
+    <p class="big fade">جزاكم الله خيراً</p>
+    <p class="end fade">أم محمد وأبو محمد <span class="heart">🤍</span></p>
+  </section>
+</main>
+
+<script>
+/* ================= عدّل هنا ================= */
+var HOST = "الدكتورة دعاء (أم محمد)";
+/* ============================================ */
+document.getElementById('vHost').textContent = HOST;
+
+/* personal name: ?to=الاسم */
+var guest='';try{guest=(new URLSearchParams(location.search).get('to')||'').trim().slice(0,40);}catch(e){}
+if(guest){
+  var gg=document.getElementById('gGuest');gg.textContent='إلى '+guest;gg.classList.remove('hidden');
+  var hl=document.getElementById('hello');hl.textContent='عزيزتي '+guest;hl.classList.remove('hidden');
+  var dr=document.getElementById('dear');dr.textContent='عزيزتي '+guest+'،';dr.classList.remove('hidden');
+}
+
+/* ---------- canvas: stars, falling petals, sparks ---------- */
+var cv=document.getElementById('fx'),cx=cv.getContext('2d'),W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+var stars=[],petals=[],sparks=[],opened=false;
+function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);}
+size();addEventListener('resize',size);
+for(var i=0;i<80;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.3,p:Math.random()*6.28,s:Math.random()*.02+.005});
+var PCOL=['#e6c97f','#f8e7b4','#e9b8a6','#f3d0c2','#d9b26a'];
+function newPetal(init){return{x:Math.random()*W,y:init?Math.random()*H:-20,s:Math.random()*5+4,vy:Math.random()*.6+.35,vx:(Math.random()-.5)*.3,
+  a:Math.random()*6.28,va:(Math.random()-.5)*.04,w:Math.random()*6.28,c:PCOL[Math.floor(Math.random()*PCOL.length)],o:Math.random()*.4+.45};}
+function petal(p){cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.scale(1,Math.abs(Math.cos(p.w))*.7+.3);
+  cx.fillStyle=p.c;cx.globalAlpha=p.o;cx.beginPath();cx.moveTo(0,-p.s);cx.bezierCurveTo(p.s*.9,-p.s*.6,p.s*.7,p.s*.7,0,p.s);
+  cx.bezierCurveTo(-p.s*.7,p.s*.7,-p.s*.9,-p.s*.6,0,-p.s);cx.fill();cx.restore();}
+function burst(x,y,n){for(var k=0;k<n;k++){var an=Math.random()*6.283,sp=Math.random()*4+1.2;sparks.push({x:x,y:y,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp-1,life:1,r:Math.random()*2.2+.8,star:Math.random()<.4});}}
+function star4(x,y,r){cx.beginPath();cx.moveTo(x,y-r*2.4);cx.quadraticCurveTo(x,y,x+r*2.4,y);cx.quadraticCurveTo(x,y,x,y+r*2.4);cx.quadraticCurveTo(x,y,x-r*2.4,y);cx.quadraticCurveTo(x,y,x,y-r*2.4);cx.fill();}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame(){
+  cx.clearRect(0,0,W,H);
+  stars.forEach(function(s){s.p+=s.s;cx.globalAlpha=.2+.7*Math.abs(Math.sin(s.p));cx.fillStyle='#fff3cc';cx.beginPath();cx.arc(s.x*W,s.y*H*.7,s.r,0,6.283);cx.fill();});
+  if(opened){petals.forEach(function(p,i){p.y+=p.vy;p.w+=.03;p.a+=p.va;p.x+=p.vx+Math.sin(p.w)*.5;if(p.y>H+20)petals[i]=newPetal(false);petal(p);});}
+  for(var k=sparks.length-1;k>=0;k--){var p=sparks[k];p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.985;p.life-=.016;
+    if(p.life<=0){sparks.splice(k,1);continue;}
+    cx.globalAlpha=p.life;cx.fillStyle=p.star?'#fff6d8':'#e6c97f';
+    if(p.star)star4(p.x,p.y,p.r);else{cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();}}
+  cx.globalAlpha=1;
+  if(!reduce)requestAnimationFrame(frame);
+}
+frame();
+addEventListener('pointerdown',function(e){if(opened)burst(e.clientX,e.clientY,24);});
+
+/* ---------- open ---------- */
+var intro=document.getElementById('intro');
+function openIt(){if(opened)return;opened=true;intro.classList.add('open');
+  for(var j=0;j<(reduce?0:34);j++)petals.push(newPetal(true));
+  setTimeout(function(){burst(W/2,H*.42,90);},900);
+  setTimeout(function(){document.body.classList.remove('locked');document.getElementById('main').classList.add('go');burst(W/2,H*.35,60);},1900);
+  if(reduce)frame();}
+intro.addEventListener('click',openIt);
+intro.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openIt();}});
+
+/* ---------- scroll reveal ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.2});
+document.querySelectorAll('section .fade').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
