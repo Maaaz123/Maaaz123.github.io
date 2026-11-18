@@ -507,14 +507,14 @@ button.cc-r:hover{background:#fbf6f8}
 .fc-hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px}
 .fc-leg{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:#6f5f66}.fc-leg span::before{content:"";display:inline-block;vertical-align:middle;margin-inline-end:6px}
 .fc-leg .p::before{width:10px;height:10px;border-radius:3px;background:#a3164f}.fc-leg .u::before{width:12px;height:0;border-top:2px solid #340006}.fc-leg .c::before{width:14px;height:0;border-top:2px dashed #e5484d}
-.fc-chart{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;height:190px;margin-top:22px;padding-bottom:22px;direction:ltr}
+.fc-chart{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;height:200px;margin-top:22px;padding-bottom:22px;direction:ltr}
 .fc-chart::after{content:"";position:absolute;left:0;right:0;bottom:calc(22px + (100% - 22px) * 0);height:0;pointer-events:none}
 .fc-col{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
 .fc-bar{position:relative;width:100%;flex:1}
 .fc-bar::before{content:"";position:absolute;left:-4px;right:-4px;bottom:var(--cap);border-top:2px dashed rgba(229,72,77,.55);z-index:2}
-.fc-p{position:absolute;left:14%;right:14%;bottom:0;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#d6457f,#a3164f);transform-origin:bottom;animation:fcUp .8s var(--d) cubic-bezier(.2,.8,.2,1) backwards}
+.fc-p{position:absolute;left:18%;right:18%;z-index:2;bottom:0;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#d6457f,#a3164f);transform-origin:bottom;animation:fcUp .8s var(--d) cubic-bezier(.2,.8,.2,1) backwards}
 .fc-col[data-over=true] .fc-p{background:linear-gradient(180deg,#ff6b72,#d42a2a)}
-.fc-band{position:absolute;left:4%;right:4%;border-radius:6px;background:rgba(163,22,79,.09)}
+.fc-band{position:absolute;left:2%;right:2%;border-radius:6px;background:rgba(163,22,79,.12);z-index:1}
 .fc-u{position:absolute;left:6%;right:6%;height:0;border-top:2.5px solid #340006;z-index:3}
 @keyframes fcUp{from{transform:scaleY(0)}}
 .fc-n{font:800 11px Inter,sans-serif;color:#47363d;margin-bottom:4px}.fc-col[data-over=true] .fc-n{color:#d42a2a}
@@ -2562,10 +2562,10 @@ class Component extends DCLogic {
       note: S('أكبر فرق بين النهار والليل في ' + t.cities[ccGap] + ' (+' + fmt(ccNight[ccGap] - (cityMed[ccGap] - 0.4), 1) + ' دقيقة) · كل المدن ما عدا الرياض فوق المستهدف ليلاً', 'Biggest day–night gap in ' + t.cities[ccGap] + ' (+' + fmt(ccNight[ccGap] - (cityMed[ccGap] - 0.4), 1) + ' min) · every city except Riyadh misses target at night')
     };
     const aiOk = this.state.aiOk || {}, aiFix = this.state.aiFix || {};
-    const fcPred = [96, 102, 108, 110, 104, 98, 94, 92, 97, 118, 126, 121], fcTyp = [88, 93, 97, 98, 94, 90, 87, 85, 89, 96, 99, 95], fcCap = 112, fcMax = 140;
-    const fcH = (v) => ((v / fcMax) * 100).toFixed(1) + '%';
+    const fcPred = [96, 102, 108, 110, 104, 98, 94, 92, 97, 118, 126, 121], fcTyp = [88, 93, 97, 98, 94, 90, 87, 85, 89, 96, 99, 95], fcCap = 112, fcMin = 60, fcMax = 135;
+    const fcH = (v) => (((v - fcMin) / (fcMax - fcMin)) * 100).toFixed(1) + '%';
     const recs = [
-      ['kharj', S('الخرج: نقص متوقع بين 18:00 و21:00', 'Al-Kharj: expected shortfall 18:00–21:00'), S('حرّك AMB-KHJ-01 من STN-KHJ-01 إلى STN-KHJ-03 قبل 17:30، وأخّر صيانة AMB-KHJ-12 لبكرة.', 'Move AMB-KHJ-01 from STN-KHJ-01 to STN-KHJ-03 before 17:30 and push AMB-KHJ-12 maintenance to tomorrow.'), [S('يكسب ~6 د للجنوب', '~6 min saved in the south'), S('تغطية 94% ← 81%', 'Coverage 81% → 94%'), S('ثقة عالية', 'High confidence')]],
+      ['kharj', S('الخرج: نقص متوقع بين 18:00 و21:00', 'Al-Kharj: expected shortfall 18:00–21:00'), S('حرّك AMB-KHJ-01 من STN-KHJ-01 إلى STN-KHJ-03 قبل 17:30، وأخّر صيانة AMB-KHJ-12 لبكرة.', 'Move AMB-KHJ-01 from STN-KHJ-01 to STN-KHJ-03 before 17:30 and push AMB-KHJ-12 maintenance to tomorrow.'), [S('يكسب ~6 د للجنوب', '~6 min saved in the south'), S('التغطية من 81% إلى 94%', 'Coverage 81% → 94%'), S('ثقة عالية', 'High confidence')]],
       ['riyadh', S('الرياض: ذروة 19:00 أعلى من المعتاد بـ 27%', 'Riyadh: 19:00 peak 27% above normal'), S('فعّل فريقاً إضافياً في STN-RUH-04 من 18:00 إلى 22:00 بسبب مباراة في ملعب المملكة.', 'Add a standby team at STN-RUH-04 18:00–22:00 for the match at Kingdom Arena.'), [S('تقليل الطابور 30%', 'Queue −30%'), S('ثقة متوسطة', 'Medium confidence')]]
     ];
     const anRaw = [
@@ -2588,7 +2588,7 @@ class Component extends DCLogic {
       sendL: S('أرسل للمدير 7:00 ص', 'Send to director at 7 AM'), sendWa: () => this.showToast(S('سيصل الملخص يومياً 7:00 ص عبر واتساب والبريد', 'Brief will arrive daily at 7 AM by WhatsApp and email')),
       fcT: S('توقع الـ 12 ساعة الجاية', 'Next 12 hours forecast'), fcSub: S('البلاغات المتوقعة ساعة بساعة لمنطقة الرياض · مبني على 3 سنوات من بيانات Wave والمواسم والفعاليات', 'Expected calls per hour · Riyadh region · trained on 3 years of Wave data, seasons and events'),
       fcPredL: S('المتوقع', 'Forecast'), fcTypL: S('المعتاد', 'Typical'), fcCapL: S('سعة الأسطول', 'Fleet capacity'), capPos: '--cap: ' + fcH(fcCap),
-      hours: fcPred.map((v, i) => { const hr = (8 + i) % 24, over = v > fcCap; return { h: String(hr).padStart(2, '0'), n: fmt(v, 0), over: over ? 'true' : 'false', p: 'height: ' + fcH(v), u: 'bottom: ' + fcH(fcTyp[i]), band: 'bottom: ' + fcH(v * 0.92) + '; height: ' + fcH(v * 0.16), d: '--d: ' + (0.05 + i * 0.04).toFixed(2) + 's', tip: String(hr).padStart(2, '0') + ':00 · ' + S('متوقع ', 'forecast ') + v + ' · ' + S('معتاد ', 'typical ') + fcTyp[i] + (over ? S(' · فوق السعة', ' · over capacity') : '') }; }),
+      hours: fcPred.map((v, i) => { const hr = (8 + i) % 24, over = v > fcCap; return { h: String(hr).padStart(2, '0'), n: fmt(v, 0), over: over ? 'true' : 'false', p: 'height: ' + fcH(v), u: 'bottom: ' + fcH(fcTyp[i]), band: 'bottom: ' + fcH(v * 0.93) + '; height: ' + (((v * 0.14) / (fcMax - fcMin)) * 100).toFixed(1) + '%', d: '--d: ' + (0.05 + i * 0.04).toFixed(2) + 's', tip: String(hr).padStart(2, '0') + ':00 · ' + S('متوقع ', 'forecast ') + v + ' · ' + S('معتاد ', 'typical ') + fcTyp[i] + (over ? S(' · فوق السعة', ' · over capacity') : '') }; }),
       recs: recs.map((r) => ({ t: r[1], d: r[2], gains: r[3], ok: aiOk[r[0]] ? 'true' : 'false', pending: !aiOk[r[0]], done: !!aiOk[r[0]], ok1: () => { this.setState({ aiOk: Object.assign({}, aiOk, { [r[0]]: true }) }); this.showToast(S('اعتُمد الاقتراح · وصل لمركز العمليات', 'Approved · sent to dispatch')); }, why: () => this.ask(r[0] === 'kharj' ? 'aiKharj' : 'aiRiyadh') })),
       fcFoot: S('دقة التوقع في آخر 30 يوم: 91% ضمن ±8 بلاغات للساعة · كل اقتراح يحتاج اعتماد المشرف قبل التنفيذ', 'Last 30 days accuracy: 91% within ±8 calls/hour · every suggestion needs supervisor approval'),
       anT: S('أنماط غير معتادة', 'Unusual patterns'), anSub: S('يرصدها ويف تلقائياً بمقارنة كل حي وطريق ومركز بمعدّله الطبيعي', 'Wave flags them by comparing each district, road and station to its normal'),
