@@ -287,7 +287,7 @@ function frame(){
 frame();
 addEventListener('pointerdown',function(e){if(opened)burst(e.clientX,e.clientY,24);if(audio&&audio.on)audio.chime(e.clientX/W);});
 
-/* ---------- music: original composition, Sudanese-style original, pentatonic with daloka rhythm ---------- */
+/* ---------- music: original composition, maqam Nahawand on D (thank-you theme) ---------- */
 function Music(){
   var AC=window.AudioContext||window.webkitAudioContext; if(!AC) throw 0;
   var c=new AC(),self=this; this.c=c; this.on=false;
@@ -298,20 +298,17 @@ function Music(){
   for(var ch=0;ch<2;ch++){var dt=ir.getChannelData(ch);for(var i=0;i<len;i++)dt[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6);}
   rv.buffer=ir;var rg=c.createGain();rg.gain.value=.55;rv.connect(rg);rg.connect(master);this.rev=rv;
   var nb=c.createBuffer(1,c.sampleRate,c.sampleRate),nd=nb.getChannelData(0);for(var k=0;k<nd.length;k++)nd[k]=Math.random()*2-1;this.noise=nb;
-  this.bpm=92;
+  this.bpm=68;
   // melody: [midi, beats]
-  // Sudanese style: D major pentatonic (D E F# A B), call-and-response phrases
   this.mel=[
-    [69,.5],[71,.5],[74,1],[71,.5],[69,.5],[66,1],[69,1],[66,.5],[64,.5],[62,2],
-    [69,.5],[71,.5],[74,1],[76,.5],[74,.5],[71,1],[69,1],[71,.5],[69,.5],[66,2],
-    [74,1],[76,.5],[78,.5],[76,1],[74,1],[71,.5],[74,.5],[71,.5],[69,.5],[66,2],
-    [64,.5],[66,.5],[69,1],[66,.5],[64,.5],[62,1],[64,1],[62,2],
-    [74,1],[76,.5],[78,.5],[81,1],[78,.5],[76,.5],[74,1],[71,1],[74,2],
-    [71,.5],[69,.5],[66,.5],[69,.5],[71,1],[69,.5],[66,.5],[64,1],[66,1],[62,3]
+    [62,1.5],[64,.5],[65,1],[67,1],[69,2],[67,.5],[65,.5],[64,1],
+    [65,1],[67,.5],[69,.5],[70,1],[69,1],[67,2],[65,1],[64,1],
+    [69,1],[70,.5],[72,.5],[74,2],[73,.5],[70,.5],[69,1],[67,1],[69,1],
+    [70,.5],[69,.5],[67,.5],[65,.5],[67,1],[65,.5],[64,.5],[62,1],[64,1],[61,1],[62,3],
+    [65,.5],[67,.5],[69,1],[67,.5],[65,.5],[64,1],[65,.5],[64,.5],[62,4]
   ];
-  // daloka-style rhythm in triplet feel (12 steps = 4 beats)
-  this.daf=['D',null,'T','D','T',null,'D',null,'T','D','T','T'];
-  this.bass=[50,50,57,57,52,52,57,50];
+  this.daf=['D',null,null,'T','D',null,null,null];
+  this.bass=[50,53,55,57, 50,55,53,50];
 }
 Music.prototype.out=function(node,wet){node.connect(this.master);if(wet){var s=this.c.createGain();s.gain.value=wet;node.connect(s);s.connect(this.rev);}};
 Music.prototype.ney=function(m,t,d){var c=this.c,f=440*Math.pow(2,(m-69)/12);
@@ -326,13 +323,6 @@ Music.prototype.ney=function(m,t,d){var c=this.c,f=440*Math.pow(2,(m-69)/12);
   g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.19,t+.08);g.gain.setValueAtTime(.19,t+Math.max(.09,d*.72));g.gain.exponentialRampToValueAtTime(.0001,e);
   o.connect(lp);o2.connect(g2);g2.connect(lp);lp.connect(g);bg.connect(g);this.out(g,.6);
   [o,o2,lfo].forEach(function(x){x.start(t);x.stop(e+.05);});br.start(t,Math.random()*.4);br.stop(e);};
-Music.prototype.acc=function(m,t,d){var c=this.c,f=440*Math.pow(2,(m-69)/12),e=t+d+.12;
-  var o1=c.createOscillator(),o2=c.createOscillator();o1.type='sawtooth';o2.type='sawtooth';o1.frequency.value=f;o2.frequency.value=f*1.0045;
-  var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1900;lp.Q.value=.7;
-  var trem=c.createOscillator();trem.frequency.value=6;var tg=c.createGain();tg.gain.value=.025;
-  var g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.075,t+.04);g.gain.setValueAtTime(.075,t+Math.max(.05,d*.8));g.gain.exponentialRampToValueAtTime(.0001,e);
-  trem.connect(tg);tg.connect(g.gain);o1.connect(lp);o2.connect(lp);lp.connect(g);this.out(g,.35);
-  [o1,o2,trem].forEach(function(x){x.start(t);x.stop(e+.05);});};
 Music.prototype.pluck=function(m,t,v){var c=this.c,f=440*Math.pow(2,(m-69)/12);
   var o=c.createOscillator();o.type='triangle';o.frequency.value=f;var o2=c.createOscillator();o2.type='sine';o2.frequency.value=f*3.01;
   var g=c.createGain(),g2=c.createGain();g2.gain.value=.25;
@@ -348,20 +338,20 @@ Music.prototype.hit=function(k,t){var c=this.c;
     var j=c.createBufferSource();j.buffer=this.noise;var hp=c.createBiquadFilter();hp.type='highpass';hp.frequency.value=7000;var jg=c.createGain();
     jg.gain.setValueAtTime(.05,t);jg.gain.exponentialRampToValueAtTime(.0001,t+.24);j.connect(hp);hp.connect(jg);this.out(jg,.2);j.start(t,Math.random()*.5);j.stop(t+.26);}
   n.connect(f);f.connect(ng);this.out(ng,.12);n.start(t,Math.random()*.5);n.stop(t+.15);};
-Music.prototype.chime=function(px){if(!this.on)return;var t=this.c.currentTime+.01,sc=[74,76,78,81,83,86,88,90];var m=sc[Math.max(0,Math.min(7,Math.floor(px*8)))];this.pluck(m,t,.08);this.pluck(m+12,t+.07,.04);};
+Music.prototype.chime=function(px){if(!this.on)return;var t=this.c.currentTime+.01,sc=[74,76,77,79,81,82,85,86];var m=sc[Math.max(0,Math.min(7,Math.floor(px*8)))];this.pluck(m,t,.08);this.pluck(m+12,t+.07,.04);};
 Music.prototype.swell=function(t){var c=this.c,self=this;
-  [50,57,62,66,69].forEach(function(m,i){var o=c.createOscillator();o.type='sine';o.frequency.value=440*Math.pow(2,(m-69)/12);
+  [50,57,62,65,69].forEach(function(m,i){var o=c.createOscillator();o.type='sine';o.frequency.value=440*Math.pow(2,(m-69)/12);
     var g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.05,t+1.6);g.gain.exponentialRampToValueAtTime(.0001,t+5);
     o.connect(g);self.out(g,.8);o.start(t);o.stop(t+5.1);});
-  [62,64,66,69,71,74,76].forEach(function(m,i){self.pluck(m,t+.25+i*.11,.09);});};
+  [62,65,69,74,77,81,86].forEach(function(m,i){self.pluck(m,t+.25+i*.11,.09);});};
 Music.prototype.drone=function(t){var c=this.c,self=this;
   this.dr=[[146.83,.04],[220,.03],[73.42,.05]].map(function(a){var o=c.createOscillator();o.type='sine';o.frequency.value=a[0];
     var g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(a[1],t+3);o.connect(g);self.out(g,.3);o.start(t);return o;});};
 Music.prototype.tick=function(){var c=this.c,ahead=c.currentTime+.3,spb=60/this.bpm;
-  while(this.mT<ahead){var m=this.mel[this.mI];this.acc(m[0],this.mT,m[1]*spb);this.pluck(m[0]-12,this.mT,.07);this.mT+=m[1]*spb;this.mI=(this.mI+1)%this.mel.length;}
-  while(this.pT<ahead){var k=this.daf[this.pI%12];if(k)this.hit(k,this.pT);
-    if(this.pI%3===0){var b=this.bass[(this.pI/3)%8];this.pluck(b,this.pT,.13);if(this.pI%6===0)this.pluck(b+12,this.pT+spb/3,.06);}
-    this.pT+=spb/3;this.pI++;}};
+  while(this.mT<ahead){var m=this.mel[this.mI];this.ney(m[0],this.mT,m[1]*spb);this.mT+=m[1]*spb;this.mI=(this.mI+1)%this.mel.length;}
+  while(this.pT<ahead){var k=this.daf[this.pI%8];if(k)this.hit(k,this.pT);
+    if(this.pI%4===0){var b=this.bass[(this.pI/4)%8];this.pluck(b,this.pT,.12);this.pluck(b+7,this.pT+.09,.07);this.pluck(b+12,this.pT+.18,.06);}
+    this.pT+=spb/2;this.pI++;}};
 Music.prototype.play=function(intro){var self=this,c=this.c;
   return c.resume().then(function(){var t=c.currentTime+.05;self.on=true;
     self.master.gain.cancelScheduledValues(t);self.master.gain.setValueAtTime(self.master.gain.value,t);self.master.gain.linearRampToValueAtTime(.85,t+(intro?.3:1.2));
