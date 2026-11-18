@@ -130,6 +130,15 @@ section{padding:64px 0 10px}
 .heart{display:inline-block;animation:beat 1.6s ease-in-out infinite}
 @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
 
+#music{position:fixed;z-index:40;bottom:calc(18px + env(safe-area-inset-bottom));left:18px;width:54px;height:54px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(6,20,15,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding:0}
+#music.show{display:flex}
+#music i{display:block;width:3px;height:16px;border-radius:2px;background:var(--gold);transform-origin:50% 100%}
+#music.on i{animation:eq .9s ease-in-out infinite}
+#music.on i:nth-child(2){animation-delay:-.3s}#music.on i:nth-child(3){animation-delay:-.6s}#music.on i:nth-child(4){animation-delay:-.15s}
+#music:not(.on) i{transform:scaleY(.25)}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
 .hidden{display:none !important}
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -233,6 +242,8 @@ section{padding:64px 0 10px}
   </section>
 </main>
 
+<button id="music" aria-label="إيقاف الموسيقى"><i></i><i></i><i></i><i></i></button>
+
 <script>
 /* ================= عدّل هنا ================= */
 var HOST = "الدكتورة دعاء (أم محمد)";
@@ -249,7 +260,7 @@ if(guest){
 
 /* ---------- canvas: stars, falling petals, sparks ---------- */
 var cv=document.getElementById('fx'),cx=cv.getContext('2d'),W,H,DPR=Math.min(window.devicePixelRatio||1,2);
-var stars=[],petals=[],sparks=[],opened=false;
+var stars=[],petals=[],sparks=[],opened=false,audio=null;
 function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);}
 size();addEventListener('resize',size);
 for(var i=0;i<80;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.3,p:Math.random()*6.28,s:Math.random()*.02+.005});
@@ -274,17 +285,99 @@ function frame(){
   if(!reduce)requestAnimationFrame(frame);
 }
 frame();
-addEventListener('pointerdown',function(e){if(opened)burst(e.clientX,e.clientY,24);});
+addEventListener('pointerdown',function(e){if(opened)burst(e.clientX,e.clientY,24);if(audio&&audio.on)audio.chime(e.clientX/W);});
+
+/* ---------- music: original composition, maqam Nahawand on D (thank-you theme) ---------- */
+function Music(){
+  var AC=window.AudioContext||window.webkitAudioContext; if(!AC) throw 0;
+  var c=new AC(),self=this; this.c=c; this.on=false;
+  var comp=c.createDynamicsCompressor();comp.threshold.value=-14;comp.connect(c.destination);
+  var master=c.createGain();master.gain.value=0;master.connect(comp);this.master=master;
+  // simple reverb: generated impulse
+  var rv=c.createConvolver(),len=c.sampleRate*3.2,ir=c.createBuffer(2,len,c.sampleRate);
+  for(var ch=0;ch<2;ch++){var dt=ir.getChannelData(ch);for(var i=0;i<len;i++)dt[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6);}
+  rv.buffer=ir;var rg=c.createGain();rg.gain.value=.55;rv.connect(rg);rg.connect(master);this.rev=rv;
+  var nb=c.createBuffer(1,c.sampleRate,c.sampleRate),nd=nb.getChannelData(0);for(var k=0;k<nd.length;k++)nd[k]=Math.random()*2-1;this.noise=nb;
+  this.bpm=68;
+  // melody: [midi, beats]
+  this.mel=[
+    [62,1.5],[64,.5],[65,1],[67,1],[69,2],[67,.5],[65,.5],[64,1],
+    [65,1],[67,.5],[69,.5],[70,1],[69,1],[67,2],[65,1],[64,1],
+    [69,1],[70,.5],[72,.5],[74,2],[73,.5],[70,.5],[69,1],[67,1],[69,1],
+    [70,.5],[69,.5],[67,.5],[65,.5],[67,1],[65,.5],[64,.5],[62,1],[64,1],[61,1],[62,3],
+    [65,.5],[67,.5],[69,1],[67,.5],[65,.5],[64,1],[65,.5],[64,.5],[62,4]
+  ];
+  this.daf=['D',null,null,'T','D',null,null,null];
+  this.bass=[50,53,55,57, 50,55,53,50];
+}
+Music.prototype.out=function(node,wet){node.connect(this.master);if(wet){var s=this.c.createGain();s.gain.value=wet;node.connect(s);s.connect(this.rev);}};
+Music.prototype.ney=function(m,t,d){var c=this.c,f=440*Math.pow(2,(m-69)/12);
+  var o=c.createOscillator();o.type='sine';o.frequency.value=f;
+  var o2=c.createOscillator();o2.type='triangle';o2.frequency.value=f*2;var g2=c.createGain();g2.gain.value=.1;
+  var lfo=c.createOscillator();lfo.frequency.value=5.3;var lg=c.createGain();lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(f*.008,t+Math.min(d,.7));
+  lfo.connect(lg);lg.connect(o.frequency);lg.connect(o2.frequency);
+  var br=c.createBufferSource();br.buffer=this.noise;var bf=c.createBiquadFilter();bf.type='bandpass';bf.frequency.value=f*2;bf.Q.value=3;var bg=c.createGain();
+  bg.gain.setValueAtTime(.0001,t);bg.gain.exponentialRampToValueAtTime(.05,t+.05);bg.gain.exponentialRampToValueAtTime(.0001,t+d+.1);
+  br.connect(bf);bf.connect(bg);
+  var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2100;var g=c.createGain(),e=t+d+.22;
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.19,t+.08);g.gain.setValueAtTime(.19,t+Math.max(.09,d*.72));g.gain.exponentialRampToValueAtTime(.0001,e);
+  o.connect(lp);o2.connect(g2);g2.connect(lp);lp.connect(g);bg.connect(g);this.out(g,.6);
+  [o,o2,lfo].forEach(function(x){x.start(t);x.stop(e+.05);});br.start(t,Math.random()*.4);br.stop(e);};
+Music.prototype.pluck=function(m,t,v){var c=this.c,f=440*Math.pow(2,(m-69)/12);
+  var o=c.createOscillator();o.type='triangle';o.frequency.value=f;var o2=c.createOscillator();o2.type='sine';o2.frequency.value=f*3.01;
+  var g=c.createGain(),g2=c.createGain();g2.gain.value=.25;
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v||.13,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+1.1);
+  var lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(4200,t);lp.frequency.exponentialRampToValueAtTime(700,t+.6);
+  o.connect(lp);o2.connect(g2);g2.connect(lp);lp.connect(g);this.out(g,.45);o.start(t);o2.start(t);o.stop(t+1.2);o2.stop(t+1.2);};
+Music.prototype.hit=function(k,t){var c=this.c;
+  if(k==='D'){var o=c.createOscillator();o.frequency.setValueAtTime(115,t);o.frequency.exponentialRampToValueAtTime(46,t+.2);
+    var g=c.createGain();g.gain.setValueAtTime(.6,t);g.gain.exponentialRampToValueAtTime(.0001,t+.38);o.connect(g);this.out(g,.15);o.start(t);o.stop(t+.42);}
+  var n=c.createBufferSource();n.buffer=this.noise;var f=c.createBiquadFilter(),ng=c.createGain();
+  if(k==='D'){f.type='lowpass';f.frequency.value=500;ng.gain.setValueAtTime(.16,t);ng.gain.exponentialRampToValueAtTime(.0001,t+.12);}
+  else{f.type='bandpass';f.frequency.value=3300;f.Q.value=.9;ng.gain.setValueAtTime(.15,t);ng.gain.exponentialRampToValueAtTime(.0001,t+.07);
+    var j=c.createBufferSource();j.buffer=this.noise;var hp=c.createBiquadFilter();hp.type='highpass';hp.frequency.value=7000;var jg=c.createGain();
+    jg.gain.setValueAtTime(.05,t);jg.gain.exponentialRampToValueAtTime(.0001,t+.24);j.connect(hp);hp.connect(jg);this.out(jg,.2);j.start(t,Math.random()*.5);j.stop(t+.26);}
+  n.connect(f);f.connect(ng);this.out(ng,.12);n.start(t,Math.random()*.5);n.stop(t+.15);};
+Music.prototype.chime=function(px){if(!this.on)return;var t=this.c.currentTime+.01,sc=[74,76,77,79,81,82,85,86];var m=sc[Math.max(0,Math.min(7,Math.floor(px*8)))];this.pluck(m,t,.08);this.pluck(m+12,t+.07,.04);};
+Music.prototype.swell=function(t){var c=this.c,self=this;
+  [50,57,62,65,69].forEach(function(m,i){var o=c.createOscillator();o.type='sine';o.frequency.value=440*Math.pow(2,(m-69)/12);
+    var g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.05,t+1.6);g.gain.exponentialRampToValueAtTime(.0001,t+5);
+    o.connect(g);self.out(g,.8);o.start(t);o.stop(t+5.1);});
+  [62,65,69,74,77,81,86].forEach(function(m,i){self.pluck(m,t+.25+i*.11,.09);});};
+Music.prototype.drone=function(t){var c=this.c,self=this;
+  this.dr=[[146.83,.04],[220,.03],[73.42,.05]].map(function(a){var o=c.createOscillator();o.type='sine';o.frequency.value=a[0];
+    var g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(a[1],t+3);o.connect(g);self.out(g,.3);o.start(t);return o;});};
+Music.prototype.tick=function(){var c=this.c,ahead=c.currentTime+.3,spb=60/this.bpm;
+  while(this.mT<ahead){var m=this.mel[this.mI];this.ney(m[0],this.mT,m[1]*spb);this.mT+=m[1]*spb;this.mI=(this.mI+1)%this.mel.length;}
+  while(this.pT<ahead){var k=this.daf[this.pI%8];if(k)this.hit(k,this.pT);
+    if(this.pI%4===0){var b=this.bass[(this.pI/4)%8];this.pluck(b,this.pT,.12);this.pluck(b+7,this.pT+.09,.07);this.pluck(b+12,this.pT+.18,.06);}
+    this.pT+=spb/2;this.pI++;}};
+Music.prototype.play=function(intro){var self=this,c=this.c;
+  return c.resume().then(function(){var t=c.currentTime+.05;self.on=true;
+    self.master.gain.cancelScheduledValues(t);self.master.gain.setValueAtTime(self.master.gain.value,t);self.master.gain.linearRampToValueAtTime(.85,t+(intro?.3:1.2));
+    var lead=intro?3.2:.4;if(intro)self.swell(t);
+    self.drone(t+(intro?1.5:0));self.mI=0;self.pI=0;self.mT=self.pT=t+lead;self.tick();
+    self.timer=setInterval(function(){self.tick();},70);});};
+Music.prototype.stop=function(){var c=this.c,t=c.currentTime;this.on=false;clearInterval(this.timer);
+  this.master.gain.cancelScheduledValues(t);this.master.gain.setValueAtTime(this.master.gain.value,t);this.master.gain.linearRampToValueAtTime(0,t+.6);
+  (this.dr||[]).forEach(function(o){try{o.stop(t+.7);}catch(e){}});};
 
 /* ---------- open ---------- */
-var intro=document.getElementById('intro');
-function openIt(){if(opened)return;opened=true;intro.classList.add('open');
+var intro=document.getElementById('intro'),mbtn=document.getElementById('music');
+function openIt(){if(opened)return;opened=true;
+  try{var unlock=new Audio('data:audio/wav;base64,UklGRsQPAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YaAPAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA');unlock.loop=true;unlock.setAttribute('playsinline','');var up=unlock.play();if(up&&up.catch)up.catch(function(){});window._unlock=unlock;}catch(e){}
+  try{audio=new Music();audio.play(true).catch(function(){});mbtn.classList.add('show','on');}catch(e){audio=null;}
+  intro.classList.add('open');
   for(var j=0;j<(reduce?0:34);j++)petals.push(newPetal(true));
   setTimeout(function(){burst(W/2,H*.42,90);},900);
   setTimeout(function(){document.body.classList.remove('locked');document.getElementById('main').classList.add('go');burst(W/2,H*.35,60);},1900);
   if(reduce)frame();}
 intro.addEventListener('click',openIt);
 intro.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openIt();}});
+mbtn.addEventListener('click',function(e){e.stopPropagation();if(!audio)return;
+  if(audio.on){audio.stop();mbtn.classList.remove('on');mbtn.setAttribute('aria-label','تشغيل الموسيقى');}
+  else{audio.play(false);mbtn.classList.add('on');mbtn.setAttribute('aria-label','إيقاف الموسيقى');}});
+document.addEventListener('visibilitychange',function(){if(document.hidden&&audio&&audio.on){audio.stop();mbtn.classList.remove('on');}});
 
 /* ---------- scroll reveal ---------- */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.2});
