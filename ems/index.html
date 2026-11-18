@@ -117,9 +117,9 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #50bd
 .khero>.kh .kv{font-size:48px !important;letter-spacing:-1.6px !important}
 .khero>:not(.kh){min-height:0 !important;padding:12px 14px !important}
 .khero>:not(.kh) .kv{font-size:22px !important;letter-spacing:-.4px !important}
-.brandbtn{width:100%;border:0;background:none;font:inherit;color:inherit;text-align:start;cursor:pointer;border-radius:12px;transition:background .2s}
+.brandbtn{position:relative;width:100%;border:0;background:none;font:inherit;color:inherit;text-align:start;cursor:pointer;border-radius:12px;transition:background .2s}
 .brandbtn:hover{background:#fdf6f9}
-.bm-chev{flex:none;color:#b59aa3;transition:transform .25s}
+.bm-chev{position:absolute;top:2px;inset-inline-end:2px;color:#b59aa3;opacity:0;transition:transform .25s,opacity .2s}.brandbtn:hover .bm-chev,.brandbtn:focus-visible .bm-chev,.brandbtn[aria-expanded=true] .bm-chev{opacity:1}@media (hover:none){.bm-chev{opacity:.7}}
 .brandbtn[aria-expanded=true] .bm-chev{transform:rotate(180deg);color:#72000d}
 .bm-scrim{position:fixed;inset:0;z-index:60}
 .bm-menu{position:absolute;top:calc(100% - 10px);inset-inline:0;z-index:61;background:#fff;border-radius:14px;padding:6px;box-shadow:0 18px 40px -12px rgba(52,0,6,.28),0 0 0 1px rgba(52,0,6,.06);animation:bmIn .22s cubic-bezier(.2,.8,.2,1);transform-origin:top center}
