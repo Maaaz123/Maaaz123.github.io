@@ -346,7 +346,6 @@ nav.side{scrollbar-width:none}nav.side::-webkit-scrollbar{display:none}
 
 /* ===== Ask Wave ===== */
 .wv-wrap{position:fixed;bottom:22px;inset-inline-end:22px;z-index:85;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-[dir=rtl] .wv-wrap{align-items:flex-start}
 .wv-fab{position:relative;border:0;padding:3px;border-radius:999px;background:transparent;cursor:pointer;animation:wvIn .7s cubic-bezier(.2,.9,.3,1.3) both .6s, wvFloat 4s ease-in-out infinite 1.4s;filter:drop-shadow(0 14px 28px rgba(249,20,149,.32))}
 .wv-ring{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
 .wv-ring::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,#f91495,#1d294f,#5fd3c6,#f91495,#72000d,#f91495);animation:wvSpin 3.2s linear infinite}
@@ -362,8 +361,7 @@ nav.side{scrollbar-width:none}nav.side::-webkit-scrollbar{display:none}
 .wv-fab:hover{transform:translateY(-3px) scale(1.03);transition:transform .25s}
 .wv-fab:focus-visible{outline:3px solid #f91495;outline-offset:4px}
 .wv-hi{background:#fff;color:#1d294f;font-size:12.5px;font-weight:700;padding:10px 14px;border-radius:14px;box-shadow:0 12px 30px rgba(29,41,79,.18);max-width:240px;animation:wvBubble .5s cubic-bezier(.2,.9,.3,1.3) both;position:relative}
-.wv-hi::after{content:"";position:absolute;bottom:-6px;inset-inline-end:28px;width:12px;height:12px;background:#fff;transform:rotate(45deg)}
-[dir=rtl] .wv-hi::after{inset-inline-end:auto;inset-inline-start:28px}
+.wv-hi::after{content:"";position:absolute;bottom:-6px;inset-inline-end:22px;width:12px;height:12px;background:#fff;transform:rotate(45deg)}
 .wv-av{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);display:grid;place-items:center;flex:none}.wv-av img{width:32px;height:auto;animation:wvWave 2.6s ease-in-out infinite}
 @keyframes wvSpin{to{transform:rotate(360deg)}}
 @keyframes wvFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
