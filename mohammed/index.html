@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>دعوة سماية محمد</title>
-<meta name="description" content="بقلوب عامرة بالفرح نتشرّف بدعوتكم لسماية ابننا محمد">
-<meta property="og:title" content="دعوة سماية محمد ✨">
+<title>دعوة عقيقة محمد</title>
+<meta name="description" content="الجمعة ٢٠ نوفمبر · ٨ مساءً · شاليهات وندهام">
+<meta property="og:title" content="دعوة عقيقة محمد ✨">
 <meta property="og:description" content="اضغط لفتح الدعوة">
 <meta name="theme-color" content="#06140f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -201,7 +201,7 @@ section{padding:70px 0 10px}
       </g></svg>
     </div>
     <p class="bism fade d1">بسم الله الرحمن الرحيم</p>
-    <p class="sub fade d1">سِمَايَة</p>
+    <p class="sub fade d1">عَقِيقَة</p>
     <div class="namewrap nameglow">
       <svg viewBox="0 0 600 300" role="img" aria-label="محمد">
         <defs>
@@ -225,7 +225,7 @@ section{padding:70px 0 10px}
   </section>
 
   <section>
-    <p class="lead fade">بقلوبٍ عامرةٍ بالفرح<br>وألسنةٍ تلهج بالحمد والشكر لله<br>نتشرّف بدعوتكم لمشاركتنا فرحتنا<br>بـ<span class="k">سماية</span> ابننا الغالي <span class="k">محمد</span></p>
+    <p class="lead fade"><span class="k" style="font-family:'Aref Ruqaa',serif;font-size:1.5em">الحمد لله حمدًا كثيرًا</span><br>على سلامة الأم ومولودها<br>نتشرّف بدعوتكم لحضور حفل<br><span class="k">عقيقة</span> ابننا الغالي <span class="k">محمد</span></p>
   </section>
 
   <section>
@@ -268,6 +268,7 @@ section{padding:70px 0 10px}
     <div class="divider fade" aria-hidden="true"><span></span><svg width="18" height="18" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" fill="#e6c97f"/><rect x="6" y="6" width="12" height="12" fill="#e6c97f" transform="rotate(45 12 12)"/></svg><span></span></div>
     <p class="dua fade">اللهم اجعله من عبادك الصالحين<br>وأنبِته نباتًا حسنًا<br>واجعله قُرّةَ عينٍ لوالديه</p>
     <p class="host fade">حضوركم يُتمّ فرحتنا<b id="vHost"></b></p>
+    <p class="fade" style="margin:34px 0 0;font-family:'Aref Ruqaa',serif;font-size:46px;color:var(--gold)">حيّاكم الله</p>
     <p class="end fade">في انتظاركم</p>
   </section>
 </main>
@@ -277,13 +278,13 @@ section{padding:70px 0 10px}
 <script>
 /* ================= عدّل التفاصيل هنا ================= */
 var EVENT = {
-  dateText:  "[اليوم والتاريخ]",
-  timeText:  "[الساعة]",
-  placeText: "[العنوان]",
+  dateText:  "الجمعة ٢٠ نوفمبر ٢٠٢٦",
+  timeText:  "٨:٠٠ مساءً",
+  placeText: "شاليهات وندهام",
   host:      "معاذ عبدالمجيد وأسرته",
-  startISO:  "",   // مثال: "2026-11-27T17:00:00-04:00"  (يشغّل العدّاد وزر التقويم)
+  startISO:  "2026-11-20T20:00:00+03:00",   // مثال: "2026-11-27T17:00:00-04:00"  (يشغّل العدّاد وزر التقويم)
   hours:     4,
-  mapUrl:    ""    // رابط قوقل ماب للمكان
+  mapUrl:    "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("شاليهات وندهام")    // رابط قوقل ماب للمكان
 };
 /* ===================================================== */
 
@@ -298,7 +299,7 @@ var start = EVENT.startISO ? new Date(EVENT.startISO) : null;
 if (start && !isNaN(start)){
   var end = new Date(start.getTime()+EVENT.hours*3600e3);
   function g(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');}
-  var cal='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('سماية محمد')+
+  var cal='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('عقيقة محمد')+
     '&dates='+g(start)+'/'+g(end)+'&location='+encodeURIComponent(EVENT.placeText)+'&details='+encodeURIComponent('حضوركم يُتمّ فرحتنا');
   var cb=document.getElementById('calBtn');cb.href=cal;cb.classList.remove('hidden');
   var sec=document.getElementById('countSec');
