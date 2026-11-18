@@ -365,9 +365,9 @@ nav:hover .ng-edit,.ng-edit:focus-visible,.ng-edit[data-on=true],.ng-edit:has(i)
 .sd-row[data-tone=good]{--tc:#078960;--tb:#e6f5ee}.sd-row[data-tone=bad]{--tc:#d42a2a;--tb:#fdecec}.sd-row[data-tone=warn]{--tc:#b7791f;--tb:#fff4dc}
 .sd-ic{width:36px;height:36px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--tb);color:var(--tc)}
 .sd-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.sd-main b{font-size:13px;color:#22131a}.sd-main small{font-size:11.5px;color:#8a7a80;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sd-vals{display:flex;align-items:center;gap:6px;font:600 12px Inter,sans-serif;color:#9a8a90;white-space:nowrap;direction:ltr}.sd-vals s{text-decoration:none}.sd-vals strong{font-size:14px;color:#22131a}
-[dir=rtl] .sd-vals{flex-direction:row-reverse}[dir=rtl] .sd-arr{transform:scaleX(-1)}
-.sd-delta{min-width:58px;text-align:center;font:800 11.5px Inter,sans-serif;border-radius:8px;padding:5px 8px;background:var(--tb);color:var(--tc);white-space:nowrap;direction:ltr}
+.sd-vals{display:flex;align-items:center;gap:6px;font:600 12px Inter,sans-serif;color:#9a8a90;white-space:nowrap}.sd-vals s,.sd-vals strong{text-decoration:none;unicode-bidi:plaintext}.sd-vals strong{font-size:14px;color:#22131a}
+[dir=rtl] .sd-arr{transform:scaleX(-1)}
+.sd-delta{min-width:58px;text-align:center;font:800 11.5px Inter,sans-serif;border-radius:8px;padding:5px 8px;background:var(--tb);color:var(--tc);white-space:nowrap;direction:ltr;unicode-bidi:isolate}
 .sd-ft{font-size:11px;color:#a8989e;margin-top:12px}
 @media (max-width:1100px){.sd-list{grid-template-columns:1fr}}
 @media (max-width:560px){.sd-vals{display:none}}
@@ -2280,11 +2280,11 @@ class Component extends DCLogic {
     const IC = { calls: 'M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z', clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2', truck: 'M3 6h11v10H3zM14 9h4l3 3v4h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', hosp: 'M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M9 21v-4h6v4M12 7v6M9 10h6', doc: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h4', heart: 'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z' };
     const sdRaw = [
       ['calls', S('البلاغات', 'Calls'), '412', '461', '+12%', 'warn', S('الارتفاع بعد منتصف الليل في الرياض', 'Rise after midnight in Riyadh'), 'dispatch'],
-      ['clock', S('الزمن المعتاد للاستجابة', 'Typical response time'), '11.9 ' + S('د', 'min'), '11.2 ' + S('د', 'min'), '−0.7 ' + S('د', 'min'), 'good', S('تحسّن في الخرج بعد إعادة التموضع', 'Improved in Al-Kharj after repositioning'), 'dispatch'],
+      ['clock', S('الزمن المعتاد للاستجابة', 'Typical response time'), '11.9 ' + S('د', 'min'), '11.2 ' + S('د', 'min'), '−0.7', 'good', S('تحسّن في الخرج بعد إعادة التموضع', 'Improved in Al-Kharj after repositioning'), 'dispatch'],
       ['truck', S('مركبات خارج الخدمة', 'Vehicles out of service'), '2', '4', '+2', 'bad', 'AMB-KHJ-07 · AMB-RUH-11', 'fleet'],
-      ['hosp', S('التسليم في المستشفى (أ)', 'Handover at Hospital A'), '27 ' + S('د', 'min'), '35 ' + S('د', 'min'), '+8 ' + S('د', 'min'), 'bad', S('ازدحام الطوارئ من بعد الفجر', 'ED crowding since dawn'), 'handover'],
+      ['hosp', S('التسليم في المستشفى (أ)', 'Handover at Hospital A'), '27 ' + S('د', 'min'), '35 ' + S('د', 'min'), '+8', 'bad', S('ازدحام الطوارئ من بعد الفجر', 'ED crowding since dawn'), 'handover'],
       ['heart', S('توقف القلب بدون توقيت ROSC', 'Cardiac arrests missing ROSC time'), '1 ' + S('من', 'of') + ' 3', '2 ' + S('من', 'of') + ' 5', '+1', 'bad', S('تقارير الفريق الليلي', 'Night crew reports'), 'pathways'],
-      ['doc', S('اكتمال ePCR', 'ePCR completeness'), '88%', '91%', '+3 ' + S('نقاط', 'pts'), 'good', S('أُغلقت 14 مسودة قبل نهاية الوردية', '14 drafts closed before shift end'), 'quality']
+      ['doc', S('اكتمال ePCR', 'ePCR completeness'), '88%', '91%', '+3', 'good', S('أُغلقت 14 مسودة قبل نهاية الوردية', '14 drafts closed before shift end'), 'quality']
     ];
     const sdGood = sdRaw.filter((x) => x[5] === 'good').length, sdBad = sdRaw.filter((x) => x[5] === 'bad').length;
     const sd = {
