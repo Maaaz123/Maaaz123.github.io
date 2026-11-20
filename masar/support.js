@@ -66,7 +66,7 @@
         const fn = lookup(m[1], scope);
         let ev = a.name.slice(2);
         if (ev === 'change' && (tag === 'input' && !['checkbox', 'radio'].includes(node.getAttribute('type')) || tag === 'textarea')) ev = 'input';
-        if (typeof fn === 'function') el.addEventListener(ev, fn);
+        if (typeof fn === 'function') { (el.__on = el.__on || {})[ev] = fn; }
         else window.__dcWarnings.push('handler not a function: ' + m[1]);
         continue;
       }
@@ -79,6 +79,50 @@
     kids.forEach((k) => el.appendChild(k));
     for (const [k, v] of props) el[k] = k === 'checked' ? !!v : (v == null ? '' : v);
     out.push(el);
+  }
+
+  // Patch the live DOM in place so elements persist between renders
+  // (keeps CSS animations, transitions, hover and focus intact).
+  function bindEvents(real, fresh) {
+    const on = fresh.__on || {};
+    real.__on = on;
+    real.__bound = real.__bound || {};
+    for (const ev in on) {
+      if (!real.__bound[ev]) { real.__bound[ev] = true; real.addEventListener(ev, (e) => { const f = real.__on && real.__on[ev]; if (f) f(e); }); }
+    }
+  }
+  function sameKind(a, b) {
+    return a.nodeType === b.nodeType && a.nodeName === b.nodeName && (a.nodeType !== 1 || a.namespaceURI === b.namespaceURI);
+  }
+  function adopt(fresh) {
+    // first insertion of a freshly built subtree: wire its events
+    if (fresh.nodeType === 1) {
+      bindEvents(fresh, fresh); fresh.__real = fresh;
+      fresh.querySelectorAll('*').forEach((n) => { bindEvents(n, n); n.__real = n; });
+    }
+    return fresh;
+  }
+  function morphEl(real, fresh) {
+    fresh.__real = real;
+    for (const a of Array.from(real.attributes)) if (!fresh.hasAttribute(a.name)) real.removeAttribute(a.name);
+    for (const a of Array.from(fresh.attributes)) if (real.getAttribute(a.name) !== a.value) real.setAttribute(a.name, a.value);
+    bindEvents(real, fresh);
+    if ('value' in fresh && (real.localName === 'input' || real.localName === 'textarea' || real.localName === 'select')) {
+      if (real.value !== fresh.value) real.value = fresh.value;
+      if (real.checked !== fresh.checked) real.checked = fresh.checked;
+    }
+    morphChildren(real, Array.from(fresh.childNodes));
+  }
+  function morphChildren(parent, freshKids) {
+    const realKids = Array.from(parent.childNodes);
+    freshKids.forEach((f, i) => {
+      const r = realKids[i];
+      if (!r) { parent.appendChild(adopt(f)); return; }
+      if (!sameKind(r, f)) { parent.replaceChild(adopt(f), r); return; }
+      if (f.nodeType === 3) { if (r.nodeValue !== f.nodeValue) r.nodeValue = f.nodeValue; return; }
+      morphEl(r, f);
+    });
+    for (let i = realKids.length - 1; i >= freshKids.length; i--) parent.removeChild(realKids[i]);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -105,8 +149,8 @@
         window.__dcRefs = [];
         const vals = comp.renderVals();
         tpl.content.childNodes.forEach((c) => renderNode(c, vals, out));
-        host.replaceChildren(...out);
-        window.__dcRefs.forEach(([fn, el]) => fn(el));
+        morphChildren(host, out);
+        window.__dcRefs.forEach(([fn, el]) => fn(el.__real || el));
         if (window.__dcMounted && comp.componentDidUpdate) comp.componentDidUpdate();
         if (active) { const a = document.getElementById(active); if (a) a.focus(); }
         window.__dcRenders = (window.__dcRenders || 0) + 1;
