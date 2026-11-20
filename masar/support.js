@@ -1,0 +1,119 @@
+// Masar demo runtime: renders the .dc.html screens as a static site.
+(function () {
+  const FONT_DIR = './fonts/';
+  const faces = [];
+  for (const w of [400, 500, 600, 700]) {
+    faces.push(`@font-face{font-family:'IBM Plex Sans Arabic';font-weight:${w};src:url(${FONT_DIR}ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-${w}-normal.woff2) format('woff2')}`);
+  }
+  for (const w of [400, 500, 600, 700]) {
+    faces.push(`@font-face{font-family:'IBM Plex Sans';font-weight:${w};src:url(${FONT_DIR}ibm-plex-sans/files/ibm-plex-sans-latin-${w}-normal.woff2) format('woff2')}`);
+  }
+  for (const w of [600, 700, 800]) {
+    faces.push(`@font-face{font-family:'Manrope';font-weight:${w};src:url(${FONT_DIR}manrope/files/manrope-latin-${w}-normal.woff2) format('woff2')}`);
+  }
+
+  window.DCLogic = class DCLogic {
+    constructor(props) { this.props = props || {}; this.state = {}; }
+    setState(p) {
+      const patch = typeof p === 'function' ? p(this.state) : p;
+      this.state = Object.assign({}, this.state, patch);
+      window.__dcRender();
+    }
+    forceUpdate() { window.__dcRender(); }
+  };
+
+  function lookup(path, scope) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    let cur = scope;
+    for (const part of path.split('.')) {
+      if (cur == null) { window.__dcWarnings.push('unresolved hole: ' + path); return undefined; }
+      cur = cur[part];
+    }
+    if (cur === undefined) window.__dcWarnings.push('undefined hole: ' + path);
+    return cur;
+  }
+  const WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+  const interp = (s, scope) => s.replace(/\{\{\s*([^}]+?)\s*\}\}/g, (_, p) => { const v = lookup(p, scope); return v == null ? '' : String(v); });
+
+  function renderNode(node, scope, out) {
+    if (node.nodeType === 3) { out.push(document.createTextNode(interp(node.nodeValue, scope))); return; }
+    if (node.nodeType !== 1) return;
+    const tag = node.localName;
+    if (tag === 'helmet') return;
+    if (tag === 'sc-if') {
+      const v = lookup(WHOLE.exec(node.getAttribute('value'))[1], scope);
+      if (v) node.childNodes.forEach((c) => renderNode(c, scope, out));
+      return;
+    }
+    if (tag === 'sc-for') {
+      const list = lookup(WHOLE.exec(node.getAttribute('list'))[1], scope) || [];
+      const as = node.getAttribute('as');
+      list.forEach((item, i) => {
+        const s2 = Object.assign({}, scope, { [as]: item, $index: i });
+        node.childNodes.forEach((c) => renderNode(c, s2, out));
+      });
+      return;
+    }
+    const el = node.namespaceURI === 'http://www.w3.org/2000/svg'
+      ? document.createElementNS(node.namespaceURI, tag) : document.createElement(tag);
+    const props = [];
+    for (const a of Array.from(node.attributes)) {
+      const m = WHOLE.exec(a.value);
+      if (a.name.startsWith('on') && m) {
+        const fn = lookup(m[1], scope);
+        let ev = a.name.slice(2);
+        if (ev === 'change' && (tag === 'input' && !['checkbox', 'radio'].includes(node.getAttribute('type')) || tag === 'textarea')) ev = 'input';
+        if (typeof fn === 'function') el.addEventListener(ev, fn);
+        else window.__dcWarnings.push('handler not a function: ' + m[1]);
+        continue;
+      }
+      if ((a.name === 'value' || a.name === 'checked') && m) { props.push([a.name, lookup(m[1], scope)]); continue; }
+      if (a.name === 'ref' && m) { const fn = lookup(m[1], scope); if (typeof fn === 'function') window.__dcRefs.push([fn, el]); continue; }
+      el.setAttribute(a.name, interp(a.value, scope));
+    }
+    const kids = [];
+    node.childNodes.forEach((c) => renderNode(c, scope, kids));
+    kids.forEach((k) => el.appendChild(k));
+    for (const [k, v] of props) el[k] = k === 'checked' ? !!v : (v == null ? '' : v);
+    out.push(el);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.__dcWarnings = [];
+    const host = document.querySelector('x-dc');
+    const tpl = document.createElement('template');
+    tpl.innerHTML = host.innerHTML;
+    const helmet = tpl.content.querySelector('helmet');
+    const style = document.createElement('style');
+    style.textContent = faces.join('\n');
+    document.head.appendChild(style);
+    if (helmet) Array.from(helmet.children).forEach((c) => { if (c.localName !== 'link') document.head.appendChild(c.cloneNode(true)); });
+    const code = document.querySelector('script[data-dc-script]').textContent;
+    const Component = new Function(code + '\nreturn Component;')();
+    const pd = (()=>{try{const j=JSON.parse(document.querySelector('[data-dc-script]').getAttribute('data-props')||'{}');const o={};for(const k in j){if(k[0]!=='$'&&j[k].default!==undefined)o[k]=j[k].default;}return o;}catch(e){return {};}})();
+    const comp = new Component(pd);
+    let queued = false;
+    window.__dcRender = () => {
+      if (queued) return; queued = true;
+      Promise.resolve().then(() => {
+        queued = false;
+        const active = document.activeElement && document.activeElement.id;
+        const out = [];
+        window.__dcRefs = [];
+        const vals = comp.renderVals();
+        tpl.content.childNodes.forEach((c) => renderNode(c, vals, out));
+        host.replaceChildren(...out);
+        window.__dcRefs.forEach(([fn, el]) => fn(el));
+        if (window.__dcMounted && comp.componentDidUpdate) comp.componentDidUpdate();
+        if (active) { const a = document.getElementById(active); if (a) a.focus(); }
+        window.__dcRenders = (window.__dcRenders || 0) + 1;
+      });
+    };
+    host.style.display = 'block';
+    window.__dcRender();
+    setTimeout(() => { window.__dcMounted = true; if (comp.componentDidMount) comp.componentDidMount(); }, 0);
+  });
+})();
