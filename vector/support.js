@@ -1,4 +1,4 @@
-// Masar demo runtime: renders the .dc.html screens as a static site.
+// The Vector demo runtime: renders the .dc.html screens as a static site.
 (function () {
   const FONT_DIR = './fonts/';
   const faces = [];
