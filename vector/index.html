@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="./assets/vector-icon.svg">
 <meta name="theme-color" content="#1F7A55">
+<style>html{overflow-x:clip}</style>
 <meta name="description" content="The Vector — initiative tracking demo with illustrative data.">
 <title>The Vector — اختيار الدور</title>
 <script src="./support.js"></script>
@@ -262,9 +263,9 @@ const loginGo = () => { try { window.localStorage.setItem('masar.role', selR); }
 const rsel = (k) => '';
 
 const roleK = s.role || 'pmo';
-const NAV = { minister: ['minister', 'main', 'initiative', 'assistant'], pmo: ['minister', 'main', 'initiative', 'assistant', 'entry'], manager: ['initiative', 'assistant', 'entry'] }[roleK];
+const NAV = { minister: ['minister', 'main', 'budget', 'initiative', 'assistant'], pmo: ['minister', 'main', 'budget', 'initiative', 'assistant', 'entry'], manager: ['initiative', 'assistant', 'entry'] }[roleK];
 return Object.assign({
-nav_minister: NAV.includes('minister'), nav_main: NAV.includes('main'), nav_initiative: NAV.includes('initiative'), nav_assistant: NAV.includes('assistant'), nav_entry: NAV.includes('entry'),
+nav_minister: NAV.includes('minister'), nav_main: NAV.includes('main'), nav_initiative: NAV.includes('initiative'), nav_assistant: NAV.includes('assistant'), nav_entry: NAV.includes('entry'), nav_budget: NAV.includes('budget'),
 homeHref: { minister: 'Minister.dc.html', pmo: 'Main.dc.html', manager: 'Initiative.dc.html' }[roleK],
 screensLabel: L(NAV.length + ' شاشات · 48 مبادرة', NAV.length + ' screens · 48 initiatives'),
 roleLabel: { minister: L('معالي الوزير', 'H.E. the Minister'), pmo: L('مكتب إدارة المشاريع', 'Project Management Office'), manager: L('مدير مبادرة', 'Initiative manager') }[roleK],
