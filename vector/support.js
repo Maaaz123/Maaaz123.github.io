@@ -3,6 +3,7 @@
   const FONT_DIR = './fonts/';
   const faces = [];
   for (const w of [400, 500, 600, 700]) {
+    if (w === 600 || w === 700) faces.push(`@font-face{font-family:'Noto Kufi Arabic';font-weight:${w};src:url(${FONT_DIR}noto-kufi-arabic/files/noto-kufi-arabic-arabic-${w}-normal.woff2) format('woff2')}`);
     faces.push(`@font-face{font-family:'IBM Plex Sans Arabic';font-weight:${w};src:url(${FONT_DIR}ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-${w}-normal.woff2) format('woff2')}`);
   }
   for (const w of [400, 500, 600, 700]) {
