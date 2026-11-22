@@ -155,6 +155,7 @@
         if (window.__dcMounted && comp.componentDidUpdate) comp.componentDidUpdate();
         if (active) { const a = document.getElementById(active); if (a) a.focus(); }
         window.__dcRenders = (window.__dcRenders || 0) + 1;
+        document.documentElement.classList.toggle('is-dark', !!host.querySelector('.theme.dark'));
         if (window.__dcRenders === 1) requestAnimationFrame(() => { host.classList.add('dc-on'); document.documentElement.classList.add('dc-ready'); const bt = document.getElementById('boot'); if (bt) setTimeout(() => bt.remove(), 500); });
       });
     };
