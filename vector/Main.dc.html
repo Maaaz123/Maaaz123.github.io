@@ -144,7 +144,7 @@ input,select,textarea{box-sizing:border-box}
 <main style="display: flex; flex-direction: column; gap: 14px">
 <article data-rvid="r6" class="{{rv.r6}}" style="--d: 0s; position: relative; overflow: hidden; background: var(--bg-f2f6f3); border: 1px solid var(--bd-e0e7e2); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
 <div style="position: relative; display: flex; flex-direction: column; gap: 4px">
-<p style="margin: 0 0 6px; font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 15px; font-weight: 600; color: var(--fg-1a6a4a)">مساء الخير، معالي الوزير</p><p style="margin: 0; font-size: 13.5px; color: var(--fg-5b6660)">المبادرات · وزارة البلديات والإسكان</p>
+<p style="margin: 0 0 6px; font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 15px; font-weight: 600; color: var(--fg-1a6a4a)">{{dayGreet}}</p><p style="margin: 0; font-size: 13.5px; color: var(--fg-5b6660)">المبادرات · وزارة البلديات والإسكان</p>
 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap"><h1 style="margin: 0; font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 28px; font-weight: 800; color: var(--fg-16201b); line-height: 1.35">متابعة المبادرات</h1><span style="display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--fg-1a6a4a); background: var(--bg-e5f0e9); border-radius: 999px; padding: 4px 12px"><span style="width: 7px; height: 7px; border-radius: 99px; background: var(--bg-1a6a4a)"></span>حتى نهاية 2026</span></div>
 </div>
 <div class="htiles kband" style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 0; background: var(--bg-ffffff); border: 1px solid var(--bd-e0e7e2); border-radius: 14px; padding: 12px 0">
@@ -457,7 +457,7 @@ input,select,textarea{box-sizing:border-box}
 <main style="display: flex; flex-direction: column; gap: 14px">
 <article data-rvid="r17" class="{{rv.r17}}" style="--d: 0s; position: relative; overflow: hidden; background: var(--bg-f2f6f3); border: 1px solid var(--bd-e0e7e2); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
 <div style="position: relative; display: flex; flex-direction: column; gap: 4px">
-<p style="margin: 0 0 6px; font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 15px; font-weight: 600; color: var(--fg-1a6a4a)">Good evening, Your Excellency</p><p style="margin: 0; font-size: 13.5px; color: var(--fg-5b6660)">Initiatives · Ministry of Municipalities and Housing</p>
+<p style="margin: 0 0 6px; font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 15px; font-weight: 600; color: var(--fg-1a6a4a)">{{dayGreet}}</p><p style="margin: 0; font-size: 13.5px; color: var(--fg-5b6660)">Initiatives · Ministry of Municipalities and Housing</p>
 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap"><h1 style="margin: 0; font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 28px; font-weight: 800; color: var(--fg-16201b); line-height: 1.35">Initiative tracking</h1><span style="display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--fg-1a6a4a); background: var(--bg-e5f0e9); border-radius: 999px; padding: 4px 12px"><span style="width: 7px; height: 7px; border-radius: 99px; background: var(--bg-1a6a4a)"></span>Through end of 2026</span></div>
 </div>
 <div class="htiles kband" style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 0; background: var(--bg-ffffff); border: 1px solid var(--bd-e0e7e2); border-radius: 14px; padding: 12px 0">
@@ -836,7 +836,8 @@ setDark: () => { this.setState({ dark: true }); this.save('masar.theme', 'dark')
 arOn: ar ? 'true' : 'false', enOn: ar ? 'false' : 'true', arStyle: ar ? SEG_ON : SEG_OFF, enStyle: ar ? SEG_OFF : SEG_ON,
 lightOn: s.dark ? 'false' : 'true', darkOn: s.dark ? 'true' : 'false', lightStyle: s.dark ? SEG_OFF : SEG_ON, darkStyle: s.dark ? SEG_ON : SEG_OFF,
 updatedAgo: ar ? (mins <= 2 ? 'محدّثة قبل دقيقتين' : 'محدّثة قبل ' + mins + ' دقائق') : 'Updated ' + mins + ' min ago',
-greet: s.greet, greetTitle: L(GR[0], GR[2]), greetText: L(GR[1], GR[3]),
+dayGreet: (() => { const h = new Date().getHours(); const g = h < 12 ? L('صباح الخير', 'Good morning') : (h < 18 ? L('مساء الخير', 'Good afternoon') : L('مساء الخير', 'Good evening')); return roleK === 'minister' ? g + L('، معالي الوزير', ', Your Excellency') : g; })(),
+greet: s.greet, greetTitle: (GR[0] === 'مساء الخير') ? L(new Date().getHours() < 12 ? 'صباح الخير' : 'مساء الخير', new Date().getHours() < 12 ? 'Good morning' : 'Good evening') : L(GR[0], GR[2]), greetText: L(GR[1], GR[3]),
 hideGreet: () => this.setState({ greet: false, greetDone: true }),
 openSummary: () => this.play('summary'),
 chatOpen: s.chatOpen, chatClosed: !s.chatOpen, chatOpenAttr: s.chatOpen ? 'true' : 'false',

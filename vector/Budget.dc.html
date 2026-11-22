@@ -30,7 +30,7 @@ input,select,textarea{box-sizing:border-box}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes draw{from{stroke-dashoffset:1200}to{stroke-dashoffset:0}}
-@keyframes fade{from{opacity:0}to{opacity:1}} @media (max-width: 1100px){.bcols{grid-template-columns:minmax(0,1fr)!important}.budctl{grid-template-columns:minmax(0,1fr)!important}.mgrid{grid-template-columns:minmax(0,1fr)!important}}@media (max-width: 1100px) and (min-width: 601px){.tiles4{grid-template-columns:repeat(2,minmax(0,1fr))!important}}@media (max-width: 600px){.tiles4{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@keyframes fade{from{opacity:0}to{opacity:1}} .subwarn{color:#A61B1B}.dark .subwarn{color:#F29B9B} @media (max-width: 1100px){.bcols{grid-template-columns:minmax(0,1fr)!important}.budctl{grid-template-columns:minmax(0,1fr)!important}.mgrid{grid-template-columns:minmax(0,1fr)!important}}@media (max-width: 1100px) and (min-width: 601px){.tiles4{grid-template-columns:repeat(2,minmax(0,1fr))!important}}@media (max-width: 600px){.tiles4{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @keyframes sweep{from{stroke-dasharray:0 600}}
 @keyframes slidein{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
 @keyframes blink{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
@@ -160,7 +160,7 @@ input,select,textarea{box-sizing:border-box}
 <div class="kflat" style="padding: 4px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0">
 <span style="font-size: 13.5px; color: var(--fg-4b5560); line-height: 1.45">ما توفّره التوصية</span>
 <strong style="font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 28px; font-weight: 800; color: var(--fg-16201b); line-height: 1.15; font-variant-numeric: tabular-nums">{{savedLbl}}</strong>
-<span style="font-size: 13px; font-weight: 600; color: var(--fg-1a6a4a)">{{savedSub}}</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--fg-1a6a4a)"><span class="{{savedCls}}">{{savedSub}}</span></span>
 </div>
 <div class="kflat" style="padding: 4px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0">
 <span style="font-size: 13.5px; color: var(--fg-4b5560); line-height: 1.45">الإنجاز المتوقع نهاية السنة</span>
@@ -361,7 +361,7 @@ input,select,textarea{box-sizing:border-box}
 <div class="kflat" style="padding: 4px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0">
 <span style="font-size: 13.5px; color: var(--fg-4b5560); line-height: 1.45">Saving in the proposal</span>
 <strong style="font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif; font-size: 28px; font-weight: 800; color: var(--fg-16201b); line-height: 1.15; font-variant-numeric: tabular-nums">{{savedLbl}}</strong>
-<span style="font-size: 13px; font-weight: 600; color: var(--fg-1a6a4a)">{{savedSub}}</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--fg-1a6a4a)"><span class="{{savedCls}}">{{savedSub}}</span></span>
 </div>
 <div class="kflat" style="padding: 4px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0">
 <span style="font-size: 13.5px; color: var(--fg-4b5560); line-height: 1.45">Expected year-end progress</span>
@@ -626,7 +626,8 @@ setDark: () => { this.setState({ dark: true }); this.save('masar.theme', 'dark')
 arOn: ar ? 'true' : 'false', enOn: ar ? 'false' : 'true', arStyle: ar ? SEG_ON : SEG_OFF, enStyle: ar ? SEG_OFF : SEG_ON,
 lightOn: s.dark ? 'false' : 'true', darkOn: s.dark ? 'true' : 'false', lightStyle: s.dark ? SEG_OFF : SEG_ON, darkStyle: s.dark ? SEG_ON : SEG_OFF,
 updatedAgo: ar ? (mins <= 2 ? 'محدّثة قبل دقيقتين' : 'محدّثة قبل ' + mins + ' دقائق') : 'Updated ' + mins + ' min ago',
-greet: s.greet, greetTitle: L(GR[0], GR[2]), greetText: L(GR[1], GR[3]),
+dayGreet: (() => { const h = new Date().getHours(); const g = h < 12 ? L('صباح الخير', 'Good morning') : (h < 18 ? L('مساء الخير', 'Good afternoon') : L('مساء الخير', 'Good evening')); return roleK === 'minister' ? g + L('، معالي الوزير', ', Your Excellency') : g; })(),
+greet: s.greet, greetTitle: (GR[0] === 'مساء الخير') ? L(new Date().getHours() < 12 ? 'صباح الخير' : 'مساء الخير', new Date().getHours() < 12 ? 'Good morning' : 'Good evening') : L(GR[0], GR[2]), greetText: L(GR[1], GR[3]),
 hideGreet: () => this.setState({ greet: false, greetDone: true }),
 openSummary: () => this.play('summary'),
 chatOpen: s.chatOpen, chatClosed: !s.chatOpen, chatOpenAttr: s.chatOpen ? 'true' : 'false',
@@ -640,7 +641,7 @@ showTyping: s.phase === 1, showAnswer: s.phase >= 2, showMore: s.phase >= 3, sho
 q: s.q, onQ: (e) => this.setState({ q: e.target.value }),
 send: () => { const v = (s.q || '').trim(); if (v) this.play('summary', v); },
 sendStyle: (s.q || '').trim() ? 'background: var(--bg-1f7a55); color: var(--fg-ffffff)' : 'background: var(--bg-e3eae5); color: var(--fg-4b5560)'
-}, { cut: cut, cutText: cut + '%', setCut: (e) => this.setState({ cut: +e.target.value, sent: false }), presets: presets, pvOn: pv ? 'true' : 'false', pnOn: pn ? 'true' : 'false', pvTrack: swv(pv).track, pvKnob: swv(pv).knob, pnTrack: swv(pn).track, pnKnob: swv(pn).knob, toggle_pv: () => this.setState({ pv: !pv, sent: false }), toggle_pn: () => this.setState({ pn: !pn, sent: false }), needLbl: M(need), savedLbl: M(saved), savedSub: need === 0 ? L('لا خفض', 'no cut') : short ? L('أقل من المطلوب', 'short of the target') : L('يغطي المطلوب', 'covers the target'), fcLbl: fc + '%', affLbl: String(nAff), narrative: narrative, short: short, shortText: shortText, keepList: keepList, reduceList: reduceList, postList: postList, keepN: String(keepList.length), reduceN: String(nRed), postN: String(nPost), keepEmpty: !keepList.length, reduceEmpty: !nRed, postEmpty: !nPost, objImpact: objImpact, risks: risks, sent: !!s.sent, sentText: L('أُرسلت التوصية إلى مكتب معالي الوزير مع ملخص الأثر.', 'The recommendation was sent to the Minister’s office with an impact summary.'), sendLabel: s.sent ? L('أُرسلت ✓', 'Sent ✓') : L('إرسال لمعالي الوزير', 'Send to the Minister'), sendStyle: s.sent ? 'color: var(--fg-1a6a4a); background: var(--bg-e2f0e7); border: 1px solid var(--bd-bfe0cb)' : 'color: var(--fg-ffffff); background: var(--bg-1f7a55); border: 1px solid var(--bd-1f7a55)', sendRec: () => { this.setState({ sent: true }); clearTimeout(this._st); this._st = setTimeout(() => this.setState({ sent: false }), 3500); } });
+}, { savedCls: short ? 'subwarn' : '', cut: cut, cutText: cut + '%', setCut: (e) => this.setState({ cut: +e.target.value, sent: false }), presets: presets, pvOn: pv ? 'true' : 'false', pnOn: pn ? 'true' : 'false', pvTrack: swv(pv).track, pvKnob: swv(pv).knob, pnTrack: swv(pn).track, pnKnob: swv(pn).knob, toggle_pv: () => this.setState({ pv: !pv, sent: false }), toggle_pn: () => this.setState({ pn: !pn, sent: false }), needLbl: M(need), savedLbl: M(saved), savedSub: need === 0 ? L('لا خفض', 'no cut') : short ? L('أقل من المطلوب', 'short of the target') : L('يغطي المطلوب', 'covers the target'), fcLbl: fc + '%', affLbl: String(nAff), narrative: narrative, short: short, shortText: shortText, keepList: keepList, reduceList: reduceList, postList: postList, keepN: String(keepList.length), reduceN: String(nRed), postN: String(nPost), keepEmpty: !keepList.length, reduceEmpty: !nRed, postEmpty: !nPost, objImpact: objImpact, risks: risks, sent: !!s.sent, sentText: L('أُرسلت التوصية إلى مكتب معالي الوزير مع ملخص الأثر.', 'The recommendation was sent to the Minister’s office with an impact summary.'), sendLabel: s.sent ? L('أُرسلت ✓', 'Sent ✓') : L('إرسال لمعالي الوزير', 'Send to the Minister'), sendStyle: s.sent ? 'color: var(--fg-1a6a4a); background: var(--bg-e2f0e7); border: 1px solid var(--bd-bfe0cb)' : 'color: var(--fg-ffffff); background: var(--bg-1f7a55); border: 1px solid var(--bd-1f7a55)', sendRec: () => { this.setState({ sent: true }); clearTimeout(this._st); this._st = setTimeout(() => this.setState({ sent: false }), 3500); } });
 }
 }
 </script>
