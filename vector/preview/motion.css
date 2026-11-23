@@ -149,3 +149,12 @@
   .mx-in, .mx-grow { opacity: 1 !important; transform: none !important; }
   @view-transition { navigation: none; }
 }
+.period__pop:not([hidden]), .combo__list:not([hidden]) { animation: mx-drop 220ms var(--mx-ease) both; transform-origin: top; }
+.period.is-up .period__pop { transform-origin: bottom; }
+@keyframes mx-drop { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+.period.is-picked .period__btn { animation: mx-pick 400ms var(--mx-spring); }
+@keyframes mx-pick { 40% { transform: scale(1.02); border-color: var(--dga-sa-600); } }
+.period__dur { animation: mx-pop 400ms var(--mx-spring) both; }
+
+/* Mint gradient page background (identity green, softened) */
+body { background: linear-gradient(180deg, #E8F1EB 0, #F1F6F3 360px, #F6F9F7 900px) fixed; }

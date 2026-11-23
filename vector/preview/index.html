@@ -10,46 +10,115 @@
 <link rel="stylesheet" href="components.css">
 <link rel="stylesheet" href="motion.css">
 <style>
-  .w-head { background: var(--dga-surface); border-block-end: 1px solid var(--dga-border); }
-  .w-head__in { max-inline-size: 1200px; margin-inline: auto; padding: var(--dga-space-3) var(--dga-space-6); display: flex; align-items: center; gap: var(--dga-space-4); }
+  body { background: linear-gradient(170deg, #E4EFE8 0%, #ECF3EE 30%, #F3F7F4 65%, #F8FAF9 100%); min-block-size: 100vh; }
+  .w-head { background: rgb(255 255 255 / .7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-block-end: 1px solid rgb(27 131 84 / .12); position: sticky; inset-block-start: 0; z-index: 30; }
+  .w-head__in { max-inline-size: 1240px; margin-inline: auto; padding: var(--dga-space-3) var(--dga-space-6); display: flex; align-items: center; gap: var(--dga-space-4); }
   .w-head .brand { padding: 0; }
   .w-head .seg { margin-inline-start: auto; }
-  .w-hero { background: var(--dga-sa-950); color: var(--dga-gray-0); }
-  .w-hero__in { max-inline-size: 1200px; margin-inline: auto; padding: var(--dga-space-7) var(--dga-space-6) var(--dga-space-6); display: grid; gap: var(--dga-space-4); }
-  .w-hero__eyebrow { color: var(--dga-sa-200); font-weight: var(--dga-fw-medium); display: flex; align-items: center; gap: var(--dga-space-2); }
-  .w-hero__eyebrow::before { content: ""; inline-size: 24px; block-size: 3px; background: var(--dga-gold-400); border-radius: 2px; }
-  .w-hero h1 { font-size: var(--dga-fs-4xl); line-height: var(--dga-lh-4xl); max-inline-size: 30ch; }
-  .w-hero p { color: var(--dga-sa-100); font-size: var(--dga-fs-lg); line-height: var(--dga-lh-lg); max-inline-size: 60ch; }
-  .flow { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: var(--dga-space-5); border-block-start: 1px solid var(--dga-sa-800); counter-reset: f; }
-  .flow li { padding: var(--dga-space-5) 0 0; padding-inline-end: var(--dga-space-5); display: grid; gap: var(--dga-space-1); counter-increment: f; position: relative; }
-  .flow li::before { content: counter(f); position: absolute; inset-block-start: -14px; inset-inline-start: 0; inline-size: 28px; block-size: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--dga-sa-950); border: 1px solid var(--dga-sa-400); color: var(--dga-gray-0); font-size: var(--dga-fs-sm); font-weight: var(--dga-fw-semibold); }
-  .flow b { font-size: var(--dga-fs-md); }
-  .flow span { color: var(--dga-sa-200); font-size: var(--dga-fs-sm); line-height: var(--dga-lh-sm); }
-  .w-body { max-inline-size: 1200px; margin-inline: auto; padding: var(--dga-space-7) var(--dga-space-6); display: grid; gap: var(--dga-space-5); }
+
+  /* ---------- hero ---------- */
+  .hx { position: relative; isolation: isolate; overflow: hidden; }
+  .hx::before { content: ""; position: absolute; inset: 0; z-index: -2;
+    background: radial-gradient(60% 70% at 85% 10%, rgb(84 192 138 / .28), transparent 70%), radial-gradient(50% 60% at 10% 80%, rgb(27 131 84 / .16), transparent 70%), radial-gradient(30% 30% at 40% 30%, rgb(245 189 2 / .10), transparent 70%); }
+  .hx::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%231B8354' stroke-opacity='.10'%3E%3Cpath d='M40 16l7 17 17 7-17 7-7 17-7-17-17-7 17-7z'/%3E%3Cpath d='M0 40h16M64 40h16M40 0v16M40 64v16'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 80px 80px;
+    -webkit-mask-image: linear-gradient(100deg, transparent 10%, #000 55%, #000 100%); mask-image: linear-gradient(100deg, transparent 10%, #000 55%, #000 100%);
+    animation: drift 70s linear infinite; }
+  @keyframes drift { to { background-position: -80px 80px; } }
+  .hx__in { max-inline-size: 1240px; margin-inline: auto; padding: var(--dga-space-8, 64px) var(--dga-space-6) var(--dga-space-7); display: grid; grid-template-columns: minmax(0, 1fr) 540px; gap: var(--dga-space-7); align-items: center; }
+  .hx__eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: 999px; background: rgb(255 255 255 / .75); border: 1px solid var(--dga-sa-100); color: var(--dga-sa-800); font-size: var(--dga-fs-sm); font-weight: var(--dga-fw-medium); justify-self: start; }
+  .hx__eyebrow i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--dga-sa-500); box-shadow: 0 0 0 0 rgb(37 147 95 / .5); animation: ping 2s ease-out infinite; }
+  @keyframes ping { 70%, 100% { box-shadow: 0 0 0 8px rgb(37 147 95 / 0); } }
+  .hx__text { display: grid; gap: var(--dga-space-5); }
+  .hx h1 { font-size: clamp(2rem, 1.2rem + 2.6vw, 3.25rem); line-height: 1.35; color: var(--dga-sa-950); letter-spacing: -.01em; }
+  .hx h1 .w { display: inline-block; opacity: 0; transform: translateY(18px); animation: wIn 700ms cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(var(--i) * 90ms + 150ms); }
+  @keyframes wIn { to { opacity: 1; transform: none; } }
+  .hx h1 .hl { position: relative; color: var(--dga-sa-700); white-space: nowrap; }
+  .hx h1 .hl svg { position: absolute; inset-inline: -4px; inset-block-end: -10px; inline-size: calc(100% + 8px); block-size: 16px; overflow: visible; }
+  .hx h1 .hl path { fill: none; stroke: var(--dga-gold-400); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 300; stroke-dashoffset: 300; animation: draw 1s cubic-bezier(.6,0,.2,1) 1.1s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .hx__lede { font-size: var(--dga-fs-lg); line-height: var(--dga-lh-lg); color: var(--dga-text-secondary); max-inline-size: 52ch; opacity: 0; animation: wIn 700ms ease 700ms forwards; }
+  .hx__cta { display: flex; flex-wrap: wrap; gap: var(--dga-space-3); align-items: center; opacity: 0; animation: wIn 700ms ease 850ms forwards; }
+  .hx__cta .btn--primary { padding-inline: 28px; min-block-size: 52px; font-size: var(--dga-fs-md); }
+  .hx__cta .btn svg { transition: transform 260ms; }
+  .hx__cta .btn:hover svg { transform: translateY(3px); }
+  .stats { display: flex; flex-wrap: wrap; gap: var(--dga-space-5); padding-block-start: var(--dga-space-4); border-block-start: 1px solid rgb(27 131 84 / .15); opacity: 0; animation: wIn 700ms ease 1000ms forwards; }
+  .stats div { display: grid; gap: 2px; }
+  .stats b { font-size: var(--dga-fs-2xl); color: var(--dga-sa-900); line-height: 1.2; }
+  .stats span { font-size: var(--dga-fs-sm); color: var(--dga-text-muted); }
+
+  /* ---------- journey stage ---------- */
+  .stage { position: relative; inline-size: 540px; block-size: 660px; direction: ltr; }
+  .stage svg.path { position: absolute; inset: 0; overflow: visible; }
+  .stage .track { fill: none; stroke: rgb(27 131 84 / .22); stroke-width: 2; stroke-dasharray: 6 8; animation: flow 1.2s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -28; } }
+  .stage .lit { fill: none; stroke: url(#g1); stroke-width: 3; stroke-linecap: round; stroke-dasharray: var(--L, 800); stroke-dashoffset: var(--L, 800); transition: stroke-dashoffset 1.6s cubic-bezier(.6,0,.2,1); }
+  .stage[data-s="2"] .lit { stroke-dashoffset: calc(var(--L, 800) - var(--L2, 270)); } .stage[data-s="3"] .lit { stroke-dashoffset: 0; }
+  .dot { position: absolute; inset-block-start: 0; inset-inline-start: 0; inline-size: 18px; block-size: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #FFE38A, var(--dga-gold-400)); box-shadow: 0 0 0 6px rgb(245 189 2 / .18), 0 0 24px 4px rgb(245 189 2 / .45);
+    offset-path: path("M390 207 C390 240 150 222 150 257 L150 432 C150 467 390 448 390 482"); offset-rotate: 0deg; offset-distance: 0%; transition: offset-distance 1.6s cubic-bezier(.6,0,.2,1); }
+  .stage[data-s="2"] .dot { offset-distance: var(--P2, 38%); } .stage[data-s="3"] .dot { offset-distance: 100%; }
+  .sc { position: absolute; inline-size: 300px; box-sizing: border-box; align-content: start; direction: rtl; background: #fff; border-radius: 18px; padding: 16px 18px; border: 1px solid rgb(27 131 84 / .12); box-shadow: 0 2px 6px rgb(9 42 30 / .05), 0 18px 40px -24px rgb(9 42 30 / .35); display: grid; gap: 10px; transition: transform 600ms cubic-bezier(.34,1.4,.64,1), box-shadow 500ms, opacity 500ms; opacity: .72; transform: scale(.97); }
+  .sc.on { opacity: 1; transform: scale(1.03) translateY(-4px); box-shadow: 0 0 0 2px var(--dga-sa-400), 0 24px 50px -20px rgb(27 131 84 / .55); }
+  .sc--1 { left: 240px; top: 0; min-block-size: 207px; } .sc--2 { left: 0; top: 257px; min-block-size: 175px; } .sc--3 { left: 240px; top: 482px; min-block-size: 170px; }
+  .sc__who { display: flex; align-items: center; gap: 10px; font-size: var(--dga-fs-sm); color: var(--dga-text-muted); }
+  .sc__ic { inline-size: 32px; block-size: 32px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--dga-sa-400), var(--dga-sa-700)); flex: none; }
+  .sc__ic svg { inline-size: 18px; block-size: 18px; }
+  .sc--3 .sc__ic { background: linear-gradient(135deg, #D4A20A, #8F6A02); }
+  .sc__title { font-weight: var(--dga-fw-semibold); color: var(--dga-text-primary); font-size: var(--dga-fs-md); }
+  .bar { block-size: 8px; border-radius: 4px; background: var(--dga-gray-100); position: relative; overflow: hidden; }
+  .bar i { position: absolute; inset-block: 0; inset-inline-start: 0; inline-size: 38%; border-radius: 4px; background: linear-gradient(90deg, var(--dga-sa-500), var(--dga-sa-700)); transition: inline-size 1.2s cubic-bezier(.2,.8,.2,1) .3s; }
+  .sc--1.on .bar i { inline-size: 45%; }
+  .row { display: flex; justify-content: space-between; font-size: var(--dga-fs-sm); color: var(--dga-text-secondary); }
+  .row b { color: var(--dga-text-primary); }
+  .mini-btn { justify-self: start; font-size: 12px; font-weight: 600; color: #fff; padding: 5px 12px; border-radius: 8px; background: linear-gradient(135deg, var(--dga-sa-500), var(--dga-sa-700)); transition: transform 200ms; }
+  .sc--1.on .mini-btn { animation: press 600ms ease 1.3s; }
+  @keyframes press { 40% { transform: scale(.9); } }
+  .stamp { position: absolute; inset-inline-start: 16px; inset-block-start: 14px; transform: rotate(-12deg) scale(1.8); opacity: 0; border: 2px solid var(--dga-sa-600); color: var(--dga-sa-700); padding: 2px 10px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: all 400ms cubic-bezier(.34,1.6,.64,1) .9s; }
+  .sc--2.on .stamp { opacity: 1; transform: rotate(-12deg) scale(1); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--dga-warning-50); color: var(--dga-warning-900); border: 1px solid var(--dga-warning-200); justify-self: start; transition: all 400ms; }
+  .sc--3.on .chip { background: var(--dga-success-50); color: var(--dga-success-800); border-color: var(--dga-success-200); transition-delay: 1.1s; }
+  .chip .a, .chip .b { transition: opacity 300ms; } .chip .b { display: none; }
+  .sc--3.on .chip .a { display: none; } .sc--3.on .chip .b { display: inline; animation: wIn 400ms ease 1.1s both; }
+  .kp { display: flex; gap: 14px; } .kp div { display: grid; } .kp b { font-size: 22px; color: var(--dga-sa-900); line-height: 1.2; } .kp span { font-size: 11px; color: var(--dga-text-muted); }
+  .stage-wrap { display: grid; place-items: center; opacity: 0; animation: wIn 900ms ease 400ms forwards; }
+
+  /* ---------- roles ---------- */
+  .w-body { max-inline-size: 1240px; margin-inline: auto; padding: var(--dga-space-7) var(--dga-space-6) var(--dga-space-8, 64px); display: grid; gap: var(--dga-space-5); }
+  .w-body h2 { font-size: var(--dga-fs-2xl); line-height: var(--dga-lh-2xl); color: var(--dga-sa-950); }
   .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dga-space-4); }
-  .role { padding: var(--dga-space-5); flex-direction: column; gap: var(--dga-space-4); }
-  .role input { position: absolute; inset-block-start: var(--dga-space-5); inset-inline-end: var(--dga-space-5); margin: 0; }
+  .role { --bd: rgb(27 131 84 / .14); position: relative; padding: var(--dga-space-5); flex-direction: column; gap: var(--dga-space-4); border-radius: 20px !important; background: rgb(255 255 255 / .85) !important; border: 1.5px solid var(--bd) !important; transition: transform 300ms cubic-bezier(.34,1.4,.64,1), box-shadow 300ms, border-color 200ms !important; }
+  .role:hover { transform: translateY(-5px); box-shadow: 0 26px 50px -28px rgb(9 42 30 / .5); }
+  .role:has(input:checked) { border-color: transparent !important; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(135deg, var(--dga-sa-400), var(--dga-sa-800), var(--dga-gold-400)) border-box !important; border: 2px solid transparent !important; box-shadow: 0 24px 50px -26px rgb(27 131 84 / .65); }
+  .role input { position: absolute; inset-block-start: var(--dga-space-5); inset-inline-end: var(--dga-space-5); margin: 0; accent-color: var(--dga-sa-600); inline-size: 20px; block-size: 20px; }
+  .role__ic { inline-size: 52px; block-size: 52px; border-radius: 16px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--dga-sa-400), var(--dga-sa-700)); box-shadow: 0 10px 20px -10px rgb(27 131 84 / .8); transition: transform 400ms cubic-bezier(.34,1.6,.64,1); }
+  .role__ic svg { inline-size: 26px; block-size: 26px; }
+  .role:hover .role__ic, .role:has(input:checked) .role__ic { transform: rotate(-8deg) scale(1.06); }
+  .role--head .role__ic { background: linear-gradient(135deg, #D4A20A, #8F6A02); box-shadow: 0 10px 20px -10px rgb(143 106 2 / .7); }
+  .role--pmo .role__ic { background: linear-gradient(135deg, #1B8354, #092A1E); }
   .role .choice__body > .tag, .role .choice__body > .cluster { justify-self: start; }
-  .role__name { font-size: var(--dga-fs-xl); line-height: var(--dga-lh-xl); font-weight: var(--dga-fw-bold); }
+  .role__name { font-size: var(--dga-fs-xl); line-height: var(--dga-lh-xl); font-weight: var(--dga-fw-bold); color: var(--dga-sa-950); }
   .role ul { list-style: none; display: grid; gap: var(--dga-space-2); font-size: var(--dga-fs-sm); line-height: var(--dga-lh-sm); color: var(--dga-text-secondary); }
   .role li { display: flex; gap: var(--dga-space-2); }
   .role li svg { color: var(--dga-sa-600); margin-block-start: 2px; }
-  .role__start { margin-block-start: auto; padding-block-start: var(--dga-space-3); border-block-start: 1px solid var(--dga-border); font-size: var(--dga-fs-sm); color: var(--dga-text-muted); inline-size: 100%; }
+  .role__start { margin-block-start: auto; padding-block-start: var(--dga-space-3); border-block-start: 1px solid var(--dga-border); font-size: var(--dga-fs-sm); color: var(--dga-text-muted); inline-size: 100%; display: flex; justify-content: space-between; align-items: center; }
   .role__start b { color: var(--dga-text-primary); font-weight: var(--dga-fw-semibold); }
+  .role__start svg { color: var(--dga-sa-700); opacity: 0; transform: translateX(8px); transition: all 300ms; }
+  .role:has(input:checked) .role__start svg, .role:hover .role__start svg { opacity: 1; transform: none; }
   .go { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dga-space-4); }
-  @media (max-width: 900px) {
-    .roles { grid-template-columns: 1fr; }
-    .flow { grid-template-columns: 1fr; border: 0; gap: var(--dga-space-4); margin-block-start: var(--dga-space-3); }
-    .flow li { padding: 0; padding-inline-start: 44px; }
-    .flow li::before { inset-block-start: 0; }
+  .go .btn--primary { min-block-size: 52px; padding-inline: 28px; }
+  .go .btn--primary svg { transition: transform 260ms; } .go .btn--primary:hover svg { transform: translateX(-5px); }
+  .foot { background: transparent !important; }
+
+  @media (max-width: 1100px) { .hx__in { grid-template-columns: 1fr; } .stage-wrap { overflow: hidden; display: flex; justify-content: center; } }
+  @media (max-width: 900px) { .roles { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) {
+    .w-head__in, .hx__in, .w-body { padding-inline: var(--dga-space-4); }
+    .hx__in { padding-block: var(--dga-space-6) var(--dga-space-5); gap: var(--dga-space-5); }
+    .stage { zoom: .64; }
+    .stats { gap: var(--dga-space-4); } .stats b { font-size: var(--dga-fs-xl); }
+    .go .btn { inline-size: 100%; } .hx__cta .btn { inline-size: 100%; }
   }
-  @media (max-width: 720px) {
-    .w-head__in, .w-hero__in, .w-body { padding-inline: var(--dga-space-4); }
-    .w-hero__in { padding-block: var(--dga-space-6) var(--dga-space-5); }
-    .w-hero h1 { font-size: var(--dga-fs-3xl); line-height: var(--dga-lh-3xl); }
-    .w-body { padding-block: var(--dga-space-6); }
-    .go .btn { inline-size: 100%; }
-  }
+  @media (prefers-reduced-motion: reduce) { .hx h1 .w, .hx__lede, .hx__cta, .stats, .stage-wrap { opacity: 1; transform: none; animation: none; } .hx h1 .hl path { stroke-dashoffset: 0; } }
 </style>
 </head>
 <body>
@@ -67,56 +136,91 @@
 </header>
 
 <main id="main">
-  <section class="w-hero" aria-labelledby="hero-title">
-    <div class="w-hero__in">
-      <p class="w-hero__eyebrow">منصة متابعة المبادرات التطويرية</p>
-      <h1 id="hero-title">متابعة مبادرات البرنامج شهرًا بشهر</h1>
-      <p>مدير المبادرة يرفع التحديث، ومكتب البرنامج يراجعه وينشره، والقيادة تطّلع على المنشور وتتخذ القرار.</p>
-      <ol class="flow" aria-label="كيف تعمل المنصة">
-        <li><b>مدير المبادرة يحدّث</b><span>في التطبيق: إن لم يتغير شيء يكفي سؤال واحد، وإن تغير فأربع خطوات.</span></li>
-        <li><b>مكتب البرنامج يراجع وينشر</b><span>في التطبيق: يقارن بتحديث الشهر الماضي، ثم ينشر أو يعيد التحديث بملاحظة.</span></li>
-        <li><b>القيادة تقرأ وتقرر</b><span>في الطبقة الذكية: تظهر التحديثات المنشورة فقط، وتأتي القرارات المعلّقة في أعلى الصفحة.</span></li>
-      </ol>
+  <section class="hx" aria-labelledby="hero-title">
+    <div class="hx__in">
+      <div class="hx__text">
+        <p class="hx__eyebrow"><i aria-hidden="true"></i>دورة نوفمبر 2026 مفتوحة حتى 30 نوفمبر</p>
+        <h1 id="hero-title"><span class="w" style="--i:0">مبادرات</span> <span class="w" style="--i:1">البرنامج</span> <span class="w" style="--i:2">تحت</span> <span class="w" style="--i:3">عينك،</span><br><span class="w hl" style="--i:4">شهرًا بشهر<svg viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M2 11 C 50 3, 120 3, 198 9"/></svg></span></h1>
+        <p class="hx__lede">مدير المبادرة يرفع التحديث، ومكتب البرنامج يراجعه وينشره، والقيادة ترى المنشور فقط وتتخذ القرار.</p>
+        <div class="hx__cta">
+          <a class="btn btn--primary" href="#roles">اختر دورك وادخل<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        </div>
+        <div class="stats" aria-label="أرقام الدورة الحالية">
+          <div><b data-count="33">33</b><span>مبادرة تحت المتابعة</span></div>
+          <div><b data-count="18">18</b><span>تحديثًا نُشر هذا الشهر</span></div>
+          <div><b data-count="3">3</b><span>قرارات بانتظار القيادة</span></div>
+        </div>
+      </div>
+
+      <div class="stage-wrap" aria-hidden="true">
+        <div class="stage" id="stage" data-s="1">
+          <svg class="path" viewBox="0 0 540 660" width="540" height="660">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#54C08A"/><stop offset=".6" stop-color="#1B8354"/><stop offset="1" stop-color="#F5BD02"/></linearGradient></defs>
+            <path class="track" d="M390 207 C390 240 150 222 150 257 L150 432 C150 467 390 448 390 482"/>
+            <path class="lit" d="M390 207 C390 240 150 222 150 257 L150 432 C150 467 390 448 390 482"/>
+          </svg>
+          <div class="sc sc--1" data-k="1">
+            <div class="sc__who"><span class="sc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></span>مدير المبادرة يحدّث</div>
+            <div class="sc__title">رقمنة رحلة المستفيد</div>
+            <div class="row"><span>الإنجاز الفعلي</span><b class="pct">38%</b></div>
+            <div class="bar"><i></i></div>
+            <span class="mini-btn">إرسال للمراجعة</span>
+          </div>
+          <div class="sc sc--2" data-k="2">
+            <span class="stamp">نُشر</span>
+            <div class="sc__who"><span class="sc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="m9 13 2 2 4-4"/></svg></span>مكتب البرنامج يراجع</div>
+            <div class="row"><span>أكتوبر</span><b>38%</b></div>
+            <div class="row"><span>نوفمبر</span><b style="color:var(--dga-sa-700)">45% ↑</b></div>
+            <div class="row"><span>المخطط</span><b>56%</b></div>
+          </div>
+          <div class="sc sc--3" data-k="3">
+            <div class="sc__who"><span class="sc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h11l-2 4 2 4H5"/></svg></span>القيادة تقرر</div>
+            <div class="kp"><div><b>17</b><span>على المسار</span></div><div><b>6</b><span>متأخرة</span></div><div><b>3</b><span>قرارات</span></div></div>
+            <span class="chip"><span class="a">قرار معلّق: نطاق دمج الإدارات</span><span class="b">✓ أُدرج في اجتماع 25 نوفمبر</span></span>
+          </div>
+          <span class="dot"></span>
+        </div>
+      </div>
     </div>
   </section>
 
   <form class="w-body" action="app-home.html" id="role-form" novalidate>
-    <fieldset class="stack" style="--stack:20px">
+    <fieldset class="stack" style="--stack:20px" id="roles">
       <legend class="section-head" style="display:block;margin:0">
-        <h2 style="font-size:var(--dga-fs-2xl);line-height:var(--dga-lh-2xl)">اختر دورك</h2>
+        <h2>اختر دورك</h2>
         <p class="t-muted" style="margin-block-start:4px">تختلف الصفحة الأولى حسب الدور.</p>
       </legend>
       <div class="roles">
-        <label class="choice role">
+        <label class="choice role role--mgr">
           <input type="radio" name="role" value="manager" data-href="my-tasks.html">
+          <span class="role__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13 7 4 4"/></svg></span>
           <span class="choice__body">
-            <span class="tag">التطبيق</span>
             <span class="role__name">مدير المبادرة</span>
             <span class="choice__desc">تحدّث مبادراتك مرة في الشهر.</span>
           </span>
           <ul>
             <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>ترى التحديثات المطلوبة منك فقط</li>
-            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>التحديث الشهري لا يتجاوز دقائق</li>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>إن لم يتغير شيء يكفي سؤال واحد</li>
           </ul>
-          <span class="role__start">تبدأ من: <b>مهامي</b></span>
+          <span class="role__start"><span>تبدأ من: <b>مهامي</b></span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
         </label>
-        <label class="choice role">
+        <label class="choice role role--pmo">
           <input type="radio" name="role" value="pmo" data-href="app-home.html" checked>
+          <span class="role__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg></span>
           <span class="choice__body">
-            <span class="cluster" style="--gap:6px"><span class="tag">التطبيق</span><span class="tag">الطبقة الذكية</span></span>
             <span class="role__name">مكتب البرنامج</span>
-            <span class="choice__desc">تراجع التحديثات وتنشرها، وتُعدّ البرامج.</span>
+            <span class="choice__desc">تراجع التحديثات وتنشرها، وتضيف البرامج.</span>
           </span>
           <ul>
             <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>مهام اليوم مرتبة حسب الأولوية</li>
             <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تغلق الدورة الشهرية بعد اكتمال النشر</li>
           </ul>
-          <span class="role__start">تبدأ من: <b>الرئيسية</b></span>
+          <span class="role__start"><span>تبدأ من: <b>الرئيسية</b></span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
         </label>
-        <label class="choice role">
+        <label class="choice role role--head">
           <input type="radio" name="role" value="head" data-href="leadership-brief.html">
+          <span class="role__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h11l-2 4 2 4H5"/></svg></span>
           <span class="choice__body">
-            <span class="tag">الطبقة الذكية</span>
             <span class="role__name">رئيس الجهة</span>
             <span class="choice__desc">وضع البرنامج والقرارات المطلوبة منك في صفحة واحدة.</span>
           </span>
@@ -124,13 +228,13 @@
             <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تقرأ ما نُشر فقط، بلا مسودات</li>
             <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تُدرج القرار في اجتماع القيادة بضغطة</li>
           </ul>
-          <span class="role__start">تبدأ من: <b>خلاصة القيادة</b></span>
+          <span class="role__start"><span>تبدأ من: <b>خلاصة القيادة</b></span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
         </label>
       </div>
     </fieldset>
     <div class="go">
-      <button class="btn btn--primary" type="submit" id="go-btn">الدخول بدور مكتب البرنامج</button>
-      <p class="t-sm t-muted">في النسخة الفعلية يُحدَّد دورك تلقائيًا من حسابك في الجهة عبر النفاذ الوطني الموحد.</p>
+      <button class="btn btn--primary" type="submit" id="go-btn"><span id="go-t">الدخول بدور مكتب البرنامج</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <p class="t-sm t-muted">في النسخة الفعلية يُحدَّد دورك تلقائيًا من حسابك عبر النفاذ الوطني الموحد.</p>
     </div>
   </form>
 </main>
@@ -145,15 +249,32 @@
 <script>
   document.getElementById("logo").innerHTML = window.VLogo();
   const form = document.getElementById("role-form");
-  const go = document.getElementById("go-btn");
   const names = { manager: "مدير المبادرة", pmo: "مكتب البرنامج", head: "رئيس الجهة" };
-  form.addEventListener("change", e => { if (e.target.name === "role") go.textContent = "الدخول بدور " + names[e.target.value]; });
+  form.addEventListener("change", e => { if (e.target.name === "role") document.getElementById("go-t").textContent = "الدخول بدور " + names[e.target.value]; });
   form.addEventListener("submit", e => {
     e.preventDefault();
     const r = form.querySelector("input[name=role]:checked");
     try { localStorage.setItem("tv-role", r.value); } catch (err) {}
     location.href = r.dataset.href;
   });
+  /* journey loop: update → review → decision */
+  (function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { document.querySelectorAll(".sc").forEach(c => c.classList.add("on")); document.getElementById("stage").dataset.s = "3"; return; }
+    const st0 = document.getElementById("stage"), lit = st0.querySelector(".lit"), L = lit.getTotalLength();
+    let L2 = 0; for (let l = 0; l <= L; l += 2) { const q = lit.getPointAtLength(l); if (q.y >= 257 && q.x <= 152) { L2 = l; break; } }
+    st0.style.setProperty("--L", L); st0.style.setProperty("--L2", L2); st0.style.setProperty("--P2", (L2 / L * 100).toFixed(2) + "%");
+    const st = st0, cards = [...st.querySelectorAll(".sc")], pct = st.querySelector(".pct");
+    let s = 0;
+    function step() {
+      s = s % 3 + 1; st.dataset.s = s;
+      cards.forEach(c => c.classList.toggle("on", +c.dataset.k === s));
+      if (s === 1) { pct.textContent = "38%"; setTimeout(() => { let v = 38; const t = setInterval(() => { pct.textContent = ++v + "%"; if (v >= 45) clearInterval(t); }, 120); }, 400); }
+    }
+    setTimeout(() => { step(); setInterval(step, 3400); }, 900);
+  })();
+  /* count-up for the stats */
+  document.querySelectorAll("[data-count]").forEach((b, k) => { const n = +b.dataset.count; b.textContent = "0"; setTimeout(() => { const t0 = performance.now();
+    (function f(t) { const p = Math.min(1, (t - t0) / 1200), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(n * e); if (p < 1) requestAnimationFrame(f); })(t0); }, 1100 + k * 150); });
 </script>
 </body>
 </html>

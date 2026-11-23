@@ -3,386 +3,550 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>إعداد برنامج جديد · The Vector</title>
+<title>برنامج جديد · The Vector</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
 <link rel="stylesheet" href="motion.css">
 <style>
-  .wiz { display: grid; gap: var(--dga-space-5); }
-  .wiz-panel { display: grid; gap: var(--dga-space-5); }
-  .wiz-panel > .card .card__body { display: grid; gap: var(--dga-space-5); }
-  .wiz-panel h2.step-title { font-size: var(--dga-fs-2xl); line-height: var(--dga-lh-2xl); }
-  .wiz-foot { display: flex; flex-wrap: wrap; gap: var(--dga-space-3); align-items: center; padding: var(--dga-space-4) var(--dga-space-5); background: var(--dga-surface); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); }
-  .wiz-foot .spacer { flex: 1; }
-  .table td .input { min-block-size: 44px; }
-  .table .col-n { inline-size: 48px; color: var(--dga-text-muted); }
-  .table .col-act { inline-size: 56px; }
-  .phase-table td { padding-block: var(--dga-space-2); }
-  .added-row.is-new { background: var(--dga-sa-25); }
-  .check-list { list-style: none; display: grid; }
-  .check-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: var(--dga-space-3); align-items: center; padding: var(--dga-space-4) 0; border-block-end: 1px solid var(--dga-border); }
-  .check-list li:last-child { border-block-end: 0; }
-  .check-list .ok { color: var(--dga-success-700); }
-  .check-list .warn { color: var(--dga-warning-700); }
-  .mini-list { list-style: none; display: grid; gap: var(--dga-space-2); }
-  .mini-list li { display: flex; gap: var(--dga-space-2); align-items: center; }
-  .mini-list .input { flex: 1; }
-  .pkg { border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); padding: var(--dga-space-5); display: grid; gap: var(--dga-space-4); }
-  .pkg__head { display: flex; align-items: center; gap: var(--dga-space-3); }
-  .pkg__order { inline-size: 32px; block-size: 32px; border-radius: var(--dga-radius-sm); background: var(--dga-gray-950); color: var(--dga-gray-0); display: grid; place-items: center; font-weight: var(--dga-fw-semibold); }
-  .summary-kpis { --kpi-cols: 4; }
+  .wz { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--dga-space-5); align-items: start; }
+  .wz__main { display: grid; gap: var(--dga-space-5); min-inline-size: 0; }
+  .wz__aside { position: sticky; inset-block-start: var(--dga-space-5); display: grid; gap: var(--dga-space-4); }
+  @media (max-width: 1100px) { .wz { grid-template-columns: minmax(0, 1fr); } .wz__aside { position: static; order: -1; } .live__tl, .live__ring, .tip { display: none !important; } .live { padding: var(--dga-space-4); gap: var(--dga-space-3); } }
+
+  /* stepper */
+  .stp { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--dga-space-3); list-style: none; }
+  .stp li { position: relative; display: flex; align-items: center; gap: var(--dga-space-3); padding: var(--dga-space-3) var(--dga-space-4); border-radius: var(--dga-radius-md); background: var(--dga-surface); border: 1px solid var(--dga-border); color: var(--dga-text-muted); font-weight: var(--dga-fw-medium); transition: all 300ms; }
+  .stp__n { inline-size: 32px; block-size: 32px; border-radius: 50%; display: grid; place-items: center; flex: none; border: 1.5px solid var(--dga-gray-300); font-weight: var(--dga-fw-semibold); background: var(--dga-surface); transition: all 300ms; }
+  .stp li.is-done { color: var(--dga-text-secondary); }
+  .stp li.is-done .stp__n { background: var(--dga-sa-600); border-color: var(--dga-sa-600); color: #fff; }
+  .stp li[aria-current="step"] { color: var(--dga-sa-900); border-color: var(--dga-sa-300); background: linear-gradient(135deg, var(--dga-sa-50), #fff 70%); box-shadow: 0 8px 20px -14px rgb(27 131 84 / .6); }
+  .stp li[aria-current="step"] .stp__n { background: linear-gradient(135deg, var(--dga-sa-500), var(--dga-sa-800)); border-color: transparent; color: #fff; box-shadow: 0 0 0 4px rgb(27 131 84 / .14); }
+  .stp small { display: block; font-weight: var(--dga-fw-regular); font-size: var(--dga-fs-xs); color: var(--dga-text-muted); }
+  .stp button { all: unset; display: contents; cursor: pointer; }
+  @media (max-width: 640px) { .stp li { padding: var(--dga-space-2); flex-direction: column; text-align: center; gap: 4px; font-size: var(--dga-fs-sm); } .stp small { display: none; } }
+
+  /* start chooser */
+  .start { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dga-space-4); }
+  @media (max-width: 720px) { .start { grid-template-columns: 1fr; } }
+  .start__card { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: var(--dga-space-3); padding: var(--dga-space-6); border-radius: var(--dga-radius-lg, 16px); border: 1.5px solid var(--dga-border); background: var(--dga-surface); position: relative; overflow: hidden; transition: transform 260ms var(--mx-spring, ease), box-shadow 260ms, border-color 200ms; }
+  .start__card:hover, .start__card:focus-visible { transform: translateY(-4px); border-color: var(--dga-sa-400); box-shadow: 0 22px 40px -22px rgb(9 42 30 / .45); }
+  .start__card:focus-visible { outline: 3px solid var(--dga-sa-600); outline-offset: 3px; }
+  .start__card--main { background: linear-gradient(150deg, #fff 30%, var(--dga-sa-50)); }
+  .start__ic { inline-size: 56px; block-size: 56px; border-radius: 16px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--dga-sa-400), var(--dga-sa-700)); box-shadow: 0 10px 22px -10px rgb(27 131 84 / .8); }
+  .start__card:not(.start__card--main) .start__ic { background: linear-gradient(135deg, #2E7D5B, #0E5A3A); }
+  .start__ic svg { inline-size: 28px; block-size: 28px; }
+  .start__card h2 { font-size: var(--dga-fs-xl); }
+  .start__card p { color: var(--dga-text-secondary); }
+  .start__meta { display: flex; gap: var(--dga-space-2); flex-wrap: wrap; }
+  .start__go { display: inline-flex; align-items: center; gap: 6px; color: var(--dga-sa-800); font-weight: var(--dga-fw-semibold); }
+  .start__go svg { transition: transform 260ms; }
+  .start__card:hover .start__go svg { transform: translateX(-5px); }
+  .drop { border: 2px dashed var(--dga-sa-300); border-radius: var(--dga-radius-lg, 16px); background: linear-gradient(180deg, var(--dga-sa-25, #F7FDF9), #fff); padding: var(--dga-space-7) var(--dga-space-5); display: grid; justify-items: center; gap: var(--dga-space-3); text-align: center; transition: background 200ms, border-color 200ms; }
+  .drop.is-over { border-color: var(--dga-sa-600); background: var(--dga-sa-50); }
+  .drop__ic { inline-size: 64px; block-size: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--dga-sa-100); color: var(--dga-sa-800); animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-6px); } }
+  .drop__bar { inline-size: min(320px, 100%); block-size: 6px; border-radius: 3px; background: var(--dga-gray-100); overflow: hidden; }
+  .drop__bar i { display: block; block-size: 100%; inline-size: 0; background: linear-gradient(90deg, var(--dga-sa-400), var(--dga-sa-700)); transition: inline-size 1.4s cubic-bezier(.2,.8,.2,1); }
+
+  /* sections */
+  .sec { background: var(--dga-surface); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); padding: var(--dga-space-5); display: grid; gap: var(--dga-space-5); }
+  .sec__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--dga-space-3); flex-wrap: wrap; }
+  .sec__head h2 { font-size: var(--dga-fs-xl); }
+  .sec__head p { color: var(--dga-text-muted); font-size: var(--dga-fs-sm); }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dga-space-4) var(--dga-space-5); }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+  .seg { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--dga-gray-100); gap: 4px; }
+  .seg button { border: 0; background: transparent; font: inherit; padding: 8px 18px; min-block-size: 40px; border-radius: 999px; cursor: pointer; color: var(--dga-text-secondary); transition: all 220ms; }
+  .seg button[aria-pressed="true"] { background: #fff; color: var(--dga-sa-800); font-weight: var(--dga-fw-semibold); box-shadow: var(--dga-shadow-sm); }
+
+  /* timeline (phases + review) */
+  .tl { display: grid; gap: 6px; }
+  .tl__axis { display: grid; grid-template-columns: repeat(var(--m), 1fr); font-size: 11px; color: var(--dga-text-muted); text-align: center; }
+  .tl__row { position: relative; block-size: 30px; border-radius: 8px; background: var(--dga-gray-50); }
+  .tl__bar { position: absolute; inset-block: 3px; border-radius: 6px; display: flex; align-items: center; padding-inline: 10px; font-size: 12px; font-weight: var(--dga-fw-semibold); color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transform-origin: right; animation: grow 700ms cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes grow { from { transform: scaleX(0); } }
+  .c0 { background: linear-gradient(90deg, #1B8354, #0F5A3A); } .c1 { background: linear-gradient(90deg, #2F9E6E, #17704A); }
+  .c2 { background: linear-gradient(90deg, #54C08A, #25935F); } .c3 { background: linear-gradient(90deg, #C99A06, #8F6A02); }
+  .c4 { background: linear-gradient(90deg, #3E7E9A, #23566D); } .c5 { background: linear-gradient(90deg, #7A8F3A, #55662A); }
+  .tl__lbl { font-size: var(--dga-fs-xs); color: var(--dga-text-secondary); margin-block-start: 4px; }
+
+  .phase { display: grid; grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1.1fr) 44px; gap: var(--dga-space-3); align-items: center; animation: rowin 420ms cubic-bezier(.34,1.4,.64,1) both; }
+  .phase__dot { inline-size: 14px; block-size: 14px; border-radius: 50%; justify-self: center; }
+  @media (max-width: 720px) { .phase { grid-template-columns: 20px minmax(0, 1fr) 44px; } .phase .period { grid-column: 2 / 4; } }
+  @keyframes rowin { from { opacity: 0; transform: translateY(-8px); } }
+
+  /* packages + initiatives */
+  .pk { border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); background: var(--dga-surface); overflow: visible; animation: rowin 460ms cubic-bezier(.34,1.4,.64,1) both; }
+  .pk__head { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) 44px; gap: var(--dga-space-3) var(--dga-space-4); align-items: end; padding: var(--dga-space-4) var(--dga-space-5); border-block-end: 1px solid var(--dga-border); background: linear-gradient(90deg, #fff, var(--dga-sa-25, #F7FDF9)); border-radius: var(--dga-radius-md) var(--dga-radius-md) 0 0; }
+  .pk__head > .pk__tag { grid-row: 1 / 3; align-self: start; margin-block-start: 30px; }
+  .pk__head > .x-btn { grid-column: 4; grid-row: 1; }
+  .pk__head > .f-per { grid-column: 2 / 4; }
+  .pk__tag { inline-size: 40px; block-size: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; font-weight: 700; }
+  .pk__body { padding: var(--dga-space-3) var(--dga-space-5) var(--dga-space-5); display: grid; gap: 0; }
+  .ini { display: grid; grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1fr) 44px; gap: var(--dga-space-2) var(--dga-space-3); align-items: center; padding: var(--dga-space-4) 0; border-block-end: 1px dashed var(--dga-border); animation: rowin 420ms cubic-bezier(.34,1.4,.64,1) both; }
+  .ini > input { grid-column: 2 / 4; font-weight: var(--dga-fw-medium); }
+  .ini > .x-btn { grid-column: 4; grid-row: 1; }
+  .ini > .combo { grid-column: 2; } .ini > .period { grid-column: 3; }
+  .ini__n { color: var(--dga-text-muted); font-size: var(--dga-fs-sm); text-align: center; grid-row: 1; inline-size: 26px; block-size: 26px; border-radius: 50%; background: var(--dga-gray-100); display: grid; place-items: center; }
+  .ini.is-invalid .input:placeholder-shown, .ini.is-invalid .combo__input:placeholder-shown { border-color: var(--dga-error-600); background: var(--dga-error-50); }
+  .add-row { justify-self: start; margin-block-start: var(--dga-space-3); }
+  .ini, .pk, .phase, .sec, .grid2 > .field { position: relative; }
+  .ini:focus-within, .pk:focus-within, .phase:focus-within, .sec:focus-within, .grid2 > .field:focus-within, .pk__head > .field:focus-within { z-index: 30; }
+  html { scroll-padding-block-end: 120px; scroll-padding-block-start: 90px; }
+  .x-btn { inline-size: 44px; block-size: 44px; border-radius: 50%; border: 0; background: transparent; color: var(--dga-text-muted); display: grid; place-items: center; cursor: pointer; }
+  .x-btn:hover { background: var(--dga-error-50); color: var(--dga-error-700); }
+  .is-removing { animation: rowout 260ms ease forwards !important; }
+  @keyframes rowout { to { opacity: 0; transform: translateX(20px); } }
   @media (max-width: 720px) {
-    .wiz-foot .btn { flex: 1 1 auto; }
-    .wiz-foot .spacer { display: none; }
-    .wiz-foot #w-next, .wiz-foot #w-send { order: -1; flex-basis: 100%; }
-    .table--reflow td .input { inline-size: 100%; }
-    .table--reflow.phase-table td { display: grid; gap: var(--dga-space-1); }
-    .table--reflow.phase-table td.col-n { display: block; font-weight: var(--dga-fw-semibold); color: var(--dga-text-primary); }
-    .table--reflow.phase-table td.col-n::before { content: "المرحلة "; }
-    .table--reflow.phase-table td.col-act { display: flex; justify-content: flex-end; }
-    .table--reflow.phase-table td.col-act::before { content: none; }
+    .pk__head { grid-template-columns: minmax(0, 1fr) 44px; padding: var(--dga-space-4); }
+    .pk__head > .pk__tag { display: none; }
+    .pk__head > .field, .pk__head > .f-per { grid-column: 1 / 2; }
+    .pk__head > .x-btn { grid-column: 2; }
+    .pk__body { padding: var(--dga-space-2) var(--dga-space-4) var(--dga-space-4); }
+    .ini { grid-template-columns: minmax(0, 1fr) 44px; padding-block: var(--dga-space-3); }
+    .ini__n { grid-column: 1; justify-self: start; inline-size: auto; padding-inline: 10px; border-radius: 999px; font-size: var(--dga-fs-xs); }
+    .ini__n::before { content: "مبادرة "; }
+    .ini > input, .ini > .combo, .ini > .period { grid-column: 1 / -1; }
+    .ini > .x-btn { grid-column: 2; inline-size: 36px; block-size: 36px; }
   }
+
+  .note { display: flex; gap: var(--dga-space-3); align-items: flex-start; padding: var(--dga-space-3) var(--dga-space-4); border-radius: var(--dga-radius-md); background: var(--dga-sa-25, #F7FDF9); border: 1px solid var(--dga-sa-100); color: var(--dga-text-secondary); font-size: var(--dga-fs-sm); }
+  .note svg { color: var(--dga-sa-700); flex: none; margin-block-start: 2px; }
+
+  /* live summary */
+  .live { background: linear-gradient(160deg, #0F3D2A, var(--dga-sa-900) 40%, var(--dga-sa-700)); color: #fff; border-radius: var(--dga-radius-lg, 16px); padding: var(--dga-space-5); display: grid; gap: var(--dga-space-4); position: relative; overflow: hidden; }
+  .live::after { content: ""; position: absolute; inset-inline: 0; inset-block-end: 0; block-size: 2px; background: linear-gradient(90deg, transparent, var(--dga-gold-400), transparent); }
+  .live__eyebrow { font-size: var(--dga-fs-xs); color: var(--dga-sa-200); display: flex; justify-content: space-between; align-items: center; }
+  .live__save { display: inline-flex; align-items: center; gap: 6px; }
+  .live__save i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--dga-sa-300); }
+  .live__save.is-saving i { background: var(--dga-gold-400); animation: blink .6s ease infinite alternate; }
+  @keyframes blink { to { opacity: .3; } }
+  .live__name { font-size: var(--dga-fs-lg); font-weight: var(--dga-fw-semibold); line-height: 1.5; min-block-size: 1.5em; }
+  .live__name.is-empty { color: rgb(255 255 255 / .45); font-weight: var(--dga-fw-regular); }
+  .live__per { font-size: var(--dga-fs-sm); color: var(--dga-sa-100); }
+  .live__nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgb(255 255 255 / .12); border-radius: 10px; overflow: hidden; }
+  .live__nums div { background: rgb(0 0 0 / .18); padding: 10px; display: grid; gap: 2px; }
+  .live__nums b { font-size: var(--dga-fs-xl); }
+  .live__nums span { font-size: 11px; color: var(--dga-sa-200); }
+  .live__nums b.bump { animation: bump 420ms cubic-bezier(.34,1.6,.64,1); }
+  @keyframes bump { 40% { transform: scale(1.3); color: var(--dga-gold-300); } }
+  .live__tl { display: grid; gap: 5px; }
+  .live__tl div { block-size: 8px; border-radius: 4px; background: rgb(255 255 255 / .1); position: relative; }
+  .live__tl i { position: absolute; inset-block: 0; border-radius: 4px; transition: all 500ms cubic-bezier(.2,.8,.2,1); }
+  .live__ring { display: flex; align-items: center; gap: var(--dga-space-3); font-size: var(--dga-fs-sm); color: var(--dga-sa-100); }
+  .live__ring svg { inline-size: 44px; block-size: 44px; transform: rotate(-90deg); flex: none; }
+  .live__ring circle { fill: none; stroke-width: 5; }
+  .live__ring .bg { stroke: rgb(255 255 255 / .15); }
+  .live__ring .fg { stroke: var(--dga-gold-400); stroke-linecap: round; stroke-dasharray: 113; transition: stroke-dashoffset 600ms cubic-bezier(.2,.8,.2,1); }
+  .tip { background: var(--dga-surface); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); padding: var(--dga-space-4); font-size: var(--dga-fs-sm); color: var(--dga-text-secondary); display: grid; gap: var(--dga-space-2); }
+  .tip b { color: var(--dga-text-primary); }
+
+  /* review */
+  .chk { list-style: none; display: grid; gap: var(--dga-space-2); }
+  .chk li { display: flex; gap: var(--dga-space-3); align-items: center; padding: var(--dga-space-3) var(--dga-space-4); border-radius: var(--dga-radius-md); background: var(--dga-success-50); color: var(--dga-success-800); animation: rowin 400ms both; }
+  .chk li.warn { background: var(--dga-warning-50); color: var(--dga-warning-900); }
+  .chk li button { margin-inline-start: auto; }
+  .gantt { display: grid; gap: 4px; overflow-x: auto; max-inline-size: 100%; }
+  .sec > *, .wz__main > * { min-inline-size: 0; }
+  .gantt__r { display: grid; grid-template-columns: 210px minmax(420px, 1fr); gap: var(--dga-space-3); align-items: center; }
+  .gantt__r > span { font-size: var(--dga-fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gantt__r.is-pk > span { font-weight: var(--dga-fw-semibold); padding-block-start: var(--dga-space-2); }
+  .gantt__r.is-ini > span { padding-inline-start: var(--dga-space-4); color: var(--dga-text-secondary); }
+  .gantt .tl__row { block-size: 22px; }
+  .gantt .tl__bar { inset-block: 4px; padding: 0; }
+  .gantt__r.is-ini .tl__bar { opacity: .75; }
+  @media (max-width: 720px) { .gantt__r { grid-template-columns: 130px minmax(300px, 1fr); } }
+
+  .wz-foot { display: flex; flex-wrap: wrap; gap: var(--dga-space-3); align-items: center; padding: var(--dga-space-4) var(--dga-space-5); background: var(--dga-surface); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); position: sticky; inset-block-end: var(--dga-space-3); z-index: 20; box-shadow: 0 -6px 24px -18px rgb(9 42 30 / .4); }
+  .wz-foot .spacer { flex: 1; }
+  .wz-foot .t-sm { color: var(--dga-text-muted); }
+  @media (max-width: 720px) { .wz-foot { flex-wrap: nowrap; padding: var(--dga-space-3); inset-block-end: 0; border-radius: var(--dga-radius-md) var(--dga-radius-md) 0 0; } .wz-foot .spacer, .wz-foot .t-sm { display: none; } .wz-foot .btn--primary { flex: 1; } .wz-foot #w-prev { flex: none; } }
+  [data-panel][hidden] { display: none !important; }
+  .field.is-invalid .input, .field.is-invalid .period__btn, .is-invalid .combo__input { border-color: var(--dga-error-600) !important; }
+  .err-line { color: var(--dga-error-700); font-size: var(--dga-fs-xs); }
 </style>
 </head>
-<body data-ws="app" data-page="setup" data-roles="pmo" data-crumb="البرامج|إعداد برنامج جديد">
+<body data-ws="app" data-page="setup" data-roles="pmo" data-crumb="البرامج|برنامج جديد">
 <main id="main" class="page">
 
   <header class="page-head">
-    <p class="page-head__eyebrow">مسودة، آخر حفظ قبل دقيقتين</p>
-    <h1>برنامج التحول الرقمي 2027</h1>
+    <p class="page-head__eyebrow">البرامج</p>
+    <h1>برنامج جديد</h1>
   </header>
 
-  <section class="card" aria-label="ملخص المسودة">
-    <div class="kpis summary-kpis">
-      <div class="kpi"><span class="kpi__label">المراحل</span><span class="kpi__value num" id="k-phases">3</span><span class="kpi__note">2027 كاملًا</span></div>
-      <div class="kpi"><span class="kpi__label">الحزم</span><span class="kpi__value num">2</span><span class="kpi__note">لكل حزمة فريق</span></div>
-      <div class="kpi"><span class="kpi__label">المبادرات</span><span class="kpi__value num" id="k-inits">4</span><span class="kpi__note">3 تأسيسية و1 تمكينية</span></div>
-      <div class="kpi"><span class="kpi__label">مجموع الميزانيات</span><span class="kpi__value num"><span id="k-budget">46</span><small>مليون ريال</small></span><span class="kpi__note">أرقام توضيحية</span></div>
+  <!-- ================= Start: how do you want to add it ================= -->
+  <section data-panel="start" aria-labelledby="start-h">
+    <h2 id="start-h" class="visually-hidden">طريقة الإضافة</h2>
+    <div class="start">
+      <button class="start__card start__card--main" type="button" id="go-manual">
+        <span class="start__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13 7 4 4"/></svg></span>
+        <h2>أدخله خطوة بخطوة</h2>
+        <p>اسم البرنامج ومدته، ثم الحزم والمبادرات. نحفظ عملك أولًا بأول.</p>
+        <span class="start__meta"><span class="tag">3 خطوات</span><span class="tag">10 دقائق تقريبًا</span></span>
+        <span class="start__go">ابدأ <svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+      </button>
+      <button class="start__card" type="button" id="go-excel">
+        <span class="start__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="m9 12 4 5M13 12l-4 5"/></svg></span>
+        <h2>استورده من ملف Excel</h2>
+        <p>عندك البرنامج في جدول؟ ارفعه بقالب المنصة، وراجعه قبل الإرسال.</p>
+        <span class="start__meta"><span class="tag">قالب جاهز</span><span class="tag">يقرأ الحزم والمبادرات</span></span>
+        <span class="start__go">ارفع الملف <svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+      </button>
     </div>
   </section>
 
-  <div class="wiz">
-    <div class="card"><div class="card__body" style="padding-block:16px">
-      <nav class="steps" aria-label="خطوات إعداد البرنامج">
-        <p class="steps__count" id="w-count" aria-live="polite"></p>
-        <ol class="steps__list" style="--steps:5" id="w-steps"></ol>
+  <section data-panel="excel" hidden aria-labelledby="xl-h">
+    <div class="sec">
+      <div class="sec__head"><div><h2 id="xl-h">استيراد من Excel</h2><p>نقرأ ورقتي «الحزم» و«المبادرات» من القالب.</p></div><a class="btn btn--tertiary btn--sm" href="#" data-soon>تنزيل القالب</a></div>
+      <div class="drop" id="drop">
+        <span class="drop__ic"><svg class="i i--lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg></span>
+        <b id="drop-t">اسحب الملف هنا</b>
+        <span class="t-sm t-muted" id="drop-s">أو اختره من جهازك · ‎.xlsx</span>
+        <div class="drop__bar" id="drop-bar" hidden><i></i></div>
+        <div class="cluster" id="drop-act"><button class="btn btn--secondary" type="button" id="pick-file">اختيار ملف</button><button class="btn btn--tertiary" type="button" id="demo-file">جرّب بملف تجريبي</button></div>
+      </div>
+      <div><button class="btn btn--tertiary" type="button" data-back-start>رجوع</button></div>
+    </div>
+  </section>
+
+  <!-- ================= Wizard ================= -->
+  <div class="wz" data-panel="wizard" hidden>
+    <div class="wz__main">
+      <nav aria-label="خطوات الإضافة">
+        <ol class="stp" id="stp">
+          <li data-s="1"><button type="button" data-goto="1"><span class="stp__n">1</span><span>البرنامج<small>الاسم والمدة والمراحل</small></span></button></li>
+          <li data-s="2"><button type="button" data-goto="2"><span class="stp__n">2</span><span>الحزم والمبادرات<small>من ينفذ ماذا ومتى</small></span></button></li>
+          <li data-s="3"><button type="button" data-goto="3"><span class="stp__n">3</span><span>المراجعة والإرسال<small>نظرة أخيرة</small></span></button></li>
+        </ol>
       </nav>
-    </div></div>
 
-    <form id="wiz-form" novalidate>
-    <!-- ================= Step 1 ================= -->
-    <div class="wiz-panel" data-step="1">
-      <section class="card" aria-labelledby="s1-h">
-        <div class="card__head"><h2 id="s1-h" tabindex="-1">بيانات البرنامج</h2></div>
-        <div class="card__body">
-          <div class="form-grid">
-            <div class="field" id="f-pname">
-              <label class="field__label" for="pname">اسم البرنامج <span class="req" aria-hidden="true">*</span></label>
-              <input class="input" id="pname" value="برنامج التحول الرقمي 2027" required aria-describedby="pname-err">
-              <p class="field__error" id="pname-err">اكتب اسم البرنامج.</p>
+      <!-- Step 1 -->
+      <section data-panel="s1" aria-labelledby="s1-h">
+        <div class="sec">
+          <div class="sec__head"><h2 id="s1-h">بيانات البرنامج</h2></div>
+          <div class="grid2">
+            <div class="field" id="f-name">
+              <label class="field__label" for="p-name">اسم البرنامج <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="p-name" autocomplete="off" placeholder="مثال: برنامج التحول الرقمي 2027">
+              <p class="field__error"><span>اكتب اسم البرنامج.</span></p>
             </div>
-            <div class="field">
-              <label class="field__label" for="pname-en">الاسم بالإنجليزية <span class="opt">(اختياري)</span></label>
-              <input class="input" id="pname-en" dir="ltr" lang="en" value="Digital Transformation Programme 2027">
-            </div>
-            <div class="field">
+            <div class="field" id="f-owner">
               <label class="field__label" for="owner">الجهة المالكة <span class="req" aria-hidden="true">*</span></label>
-              <div class="combo" data-id="owner" data-label="الجهات" data-required="1" data-selected="الإدارة العامة للتحول الرقمي" data-describedby="owner-hint"
-                data-options="الإدارة العامة للتحول الرقمي::وكالة التطوير المؤسسي|وكالة التطوير المؤسسي|وكالة الخدمات المشتركة|الإدارة العامة للموارد البشرية::وكالة الخدمات المشتركة|إدارة الاستراتيجية والأداء|الإدارة العامة للتواصل المؤسسي|مكتب إدارة البرامج والمشاريع|الإدارة العامة لتقنية المعلومات::وكالة الخدمات المشتركة|الإدارة العامة للشؤون القانونية|إدارة تجربة المستفيد|إدارة المراكز الميدانية::وكالة العمليات|الإدارة العامة للشراكات"></div>
-              <p class="field__hint" id="owner-hint">مثل «تقنية» أو «الموارد».</p>
+              <div class="combo" data-id="owner" data-label="الجهات" data-placeholder="اختر الجهة"></div>
+              <p class="field__error"><span>اختر الجهة المالكة.</span></p>
+            </div>
+            <div class="field" id="f-per">
+              <label class="field__label" for="p-per">مدة البرنامج <span class="req" aria-hidden="true">*</span></label>
+              <div class="period" data-id="p-per" data-label="مدة البرنامج" data-min="2026-01" data-max="2031-12"></div>
+              <p class="field__error"><span>اختر شهر البداية والنهاية.</span></p>
             </div>
             <div class="field">
-              <label class="field__label" for="src">مرجع البرنامج <span class="opt">(اختياري)</span></label>
-              <input class="input" id="src" value="قرار اللجنة التنفيذية رقم 14، صفحة 3" aria-describedby="src-hint">
-              <p class="field__hint" id="src-hint">الوثيقة والصفحة التي اعتُمد فيها البرنامج.</p>
+              <label class="field__label" for="p-ref">مرجع الاعتماد <span class="t-muted t-sm">(اختياري)</span></label>
+              <input class="input" id="p-ref" autocomplete="off" placeholder="مثال: محضر اللجنة التنفيذية رقم 14">
             </div>
-            <div class="field">
-              <label class="field__label" for="h-from">بداية البرنامج <span class="req" aria-hidden="true">*</span></label>
-              <input class="input input--date" id="h-from" value="يناير 2027" placeholder="مثال: يناير 2027">
-            </div>
-            <div class="field">
-              <label class="field__label" for="h-to">نهاية البرنامج <span class="req" aria-hidden="true">*</span></label>
-              <input class="input input--date" id="h-to" value="ديسمبر 2027" placeholder="مثال: يناير 2027">
-            </div>
+          </div>
+        </div>
+
+        <div class="sec" style="margin-block-start: var(--dga-space-5)">
+          <div class="sec__head">
+            <div><h2>المراحل</h2><p>المرحلة الحالية تُحدد تلقائيًا من التاريخ.</p></div>
+            <div class="seg" role="group" aria-label="هل للبرنامج مراحل؟"><button type="button" data-ph="1" aria-pressed="true">على مراحل</button><button type="button" data-ph="0" aria-pressed="false">بدون مراحل</button></div>
+          </div>
+          <div id="ph-wrap">
+            <div class="tl" id="ph-tl"></div>
+            <div style="display:grid;gap:var(--dga-space-3);margin-block-start:var(--dga-space-4)" id="ph-list"></div>
+            <button class="btn btn--tertiary add-row" type="button" id="ph-add" style="margin-block-start:var(--dga-space-2)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة مرحلة</button>
           </div>
         </div>
       </section>
 
-      <section class="card" aria-labelledby="ph-h">
-        <div class="card__head"><h2 id="ph-h">المراحل</h2><span class="t-sm t-muted">تصبح المرحلة «حالية» تلقائيًا حين يقع تاريخ اليوم بين بدايتها ونهايتها.</span></div>
-        <div class="table-wrap">
-          <table class="table table--reflow phase-table">
-            <thead><tr><th scope="col" class="col-n">#</th><th scope="col">اسم المرحلة</th><th scope="col">من</th><th scope="col">إلى</th><th scope="col" class="col-act"><span class="visually-hidden">حذف</span></th></tr></thead>
-            <tbody id="phases"></tbody>
-          </table>
+      <!-- Step 2 -->
+      <section data-panel="s2" hidden aria-labelledby="s2-h">
+        <div class="sec">
+          <div class="sec__head">
+            <div><h2 id="s2-h">الحزم والمبادرات</h2><p>كل حزمة يديرها فريق، وتحتها مبادراتها.</p></div>
+            <button class="btn btn--secondary" type="button" id="pk-add"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>حزمة جديدة</button>
+          </div>
+          <div id="pk-list" style="display:grid;gap:var(--dga-space-4)"></div>
+          <p class="note"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg><span>المخرجات والمعالم والميزانية يضيفها مدير كل مبادرة بعد اعتماد البرنامج، فلا تحتاجها الآن.</span></p>
         </div>
-        <div class="card__foot"><button class="btn btn--secondary btn--sm" type="button" id="add-phase"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة مرحلة</button></div>
       </section>
+
+      <!-- Step 3 -->
+      <section data-panel="s3" hidden aria-labelledby="s3-h">
+        <div class="sec">
+          <div class="sec__head"><div><h2 id="s3-h">المراجعة والإرسال</h2><p>بعد الإرسال يعتمده صاحب الصلاحية، ثم تبدأ أول دورة تحديث.</p></div></div>
+          <ul class="chk" id="chk"></ul>
+          <div>
+            <h3 style="font-size:var(--dga-fs-md);margin-block-end:var(--dga-space-3)">الخطة الزمنية</h3>
+            <div class="gantt" id="gantt"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wz-foot">
+        <button class="btn btn--secondary" type="button" id="w-prev">السابق</button>
+        <span class="t-sm" id="w-saved">تُحفظ المسودة تلقائيًا</span>
+        <span class="spacer"></span>
+        <button class="btn btn--primary" type="button" id="w-next">التالي: الحزم والمبادرات</button>
+      </div>
     </div>
 
-    <!-- ================= Step 2 ================= -->
-    <div class="wiz-panel" data-step="2" hidden>
-      <section class="card" aria-labelledby="s2-h">
-        <div class="card__head"><h2 id="s2-h" tabindex="-1">الحزم</h2><span class="t-sm t-muted">الحزمة مجموعة مبادرات يديرها فريق واحد في فترة محددة.</span></div>
-        <div class="card__body">
-          <div class="pkg">
-            <div class="pkg__head"><span class="pkg__order" aria-label="الترتيب 1">1</span><h3>البنية الرقمية</h3></div>
-            <div class="form-grid">
-              <div class="field"><label class="field__label" for="pk1-team">الفريق المسؤول</label>
-                <div class="combo" data-id="pk1-team" data-label="الفرق" data-selected="فريق البنية والبيانات" data-options="فريق البنية والبيانات::5 أعضاء|فريق الخدمات الرقمية::4 أعضاء|فريق الحوكمة والامتثال::3 أعضاء|فريق إدارة التغيير::3 أعضاء"></div></div>
-              <div class="field"><label class="field__label" for="pk1-from">من</label><input class="input input--date" id="pk1-from" value="يناير 2027" placeholder="مثال: يناير 2027"></div>
-              <div class="field"><label class="field__label" for="pk1-to">إلى</label><input class="input input--date" id="pk1-to" value="سبتمبر 2027" placeholder="مثال: يناير 2027"></div>
-            </div>
-          </div>
-          <div class="pkg">
-            <div class="pkg__head"><span class="pkg__order" aria-label="الترتيب 2">2</span><h3>الخدمات الرقمية</h3></div>
-            <div class="form-grid">
-              <div class="field"><label class="field__label" for="pk2-team">الفريق المسؤول</label>
-                <div class="combo" data-id="pk2-team" data-label="الفرق" data-selected="فريق الخدمات الرقمية" data-options="فريق البنية والبيانات::5 أعضاء|فريق الخدمات الرقمية::4 أعضاء|فريق الحوكمة والامتثال::3 أعضاء|فريق إدارة التغيير::3 أعضاء"></div></div>
-              <div class="field"><label class="field__label" for="pk2-from">من</label><input class="input input--date" id="pk2-from" value="أبريل 2027" placeholder="مثال: يناير 2027"></div>
-              <div class="field"><label class="field__label" for="pk2-to">إلى</label><input class="input input--date" id="pk2-to" value="ديسمبر 2027" placeholder="مثال: يناير 2027"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- ================= Step 3 ================= -->
-    <div class="wiz-panel" data-step="3" hidden>
-      <section class="card" aria-labelledby="s3-h">
-        <div class="card__head"><h2 id="s3-h" tabindex="-1">المبادرات المضافة</h2><span class="end t-sm t-muted" id="init-count">4 مبادرات</span></div>
-        <div class="table-wrap">
-          <table class="table table--reflow">
-            <thead><tr><th scope="col">المبادرة</th><th scope="col">الحزمة</th><th scope="col">النوع</th><th scope="col">الموجة</th><th scope="col" class="is-num">الميزانية (مليون ريال)</th><th scope="col">المدة المخططة</th></tr></thead>
-            <tbody id="inits">
-              <tr class="added-row"><td class="cell-main"><div class="cell-title">بناء منصة البيانات الموحدة</div><div class="cell-sub">الإدارة العامة لتقنية المعلومات</div></td><td data-label="الحزمة">البنية الرقمية</td><td data-label="النوع">تأسيسية</td><td data-label="الموجة">الأولى</td><td data-label="الميزانية" class="is-num">18</td><td data-label="المدة">يناير – سبتمبر 2027</td></tr>
-              <tr class="added-row"><td class="cell-main"><div class="cell-title">إطار حوكمة البيانات</div><div class="cell-sub">مكتب إدارة البرامج والمشاريع</div></td><td data-label="الحزمة">البنية الرقمية</td><td data-label="النوع">تأسيسية</td><td data-label="الموجة">الأولى</td><td data-label="الميزانية" class="is-num">7</td><td data-label="المدة">يناير – يونيو 2027</td></tr>
-              <tr class="added-row"><td class="cell-main"><div class="cell-title">تحديث البنية السحابية للأنظمة</div><div class="cell-sub">الإدارة العامة لتقنية المعلومات</div></td><td data-label="الحزمة">البنية الرقمية</td><td data-label="النوع">تأسيسية</td><td data-label="الموجة">الثانية</td><td data-label="الميزانية" class="is-num">12</td><td data-label="المدة">أبريل – سبتمبر 2027</td></tr>
-              <tr class="added-row"><td class="cell-main"><div class="cell-title">رقمنة الخدمات الأكثر طلبًا</div><div class="cell-sub">إدارة تجربة المستفيد</div></td><td data-label="الحزمة">الخدمات الرقمية</td><td data-label="النوع">تمكينية</td><td data-label="الموجة">الثانية</td><td data-label="الميزانية" class="is-num">9</td><td data-label="المدة">مايو – ديسمبر 2027</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="card" aria-labelledby="add-h" id="add-card">
-        <div class="card__head"><h2 id="add-h">إضافة مبادرة</h2></div>
-        <div class="card__body">
-          <div class="alert alert--error err-summary" role="alert" tabindex="-1" id="i-err" hidden>
-            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>
-            <div class="alert__body"><p class="alert__title">أكمل الحقول المطلوبة</p><ul id="i-err-list" style="list-style:none"></ul></div>
-          </div>
-          <div class="form-grid">
-            <div class="field span-all" id="f-iname">
-              <label class="field__label" for="iname">اسم المبادرة <span class="req" aria-hidden="true">*</span></label>
-              <input class="input" id="iname" placeholder="مثال: تطوير بوابة الخدمات الإلكترونية" aria-describedby="iname-err">
-              <p class="field__error" id="iname-err">اكتب اسم المبادرة.</p>
-            </div>
-            <div class="field" id="f-ipkg">
-              <label class="field__label" for="ipkg">الحزمة <span class="req" aria-hidden="true">*</span></label>
-              <div class="combo" data-id="ipkg" data-label="الحزم" data-placeholder="اختر الحزمة" data-options="البنية الرقمية::يناير – سبتمبر|الخدمات الرقمية::أبريل – ديسمبر"></div>
-              <p class="field__error">اختر الحزمة.</p>
-            </div>
-            <div class="field" id="f-ient">
-              <label class="field__label" for="ient">الجهة المنفذة <span class="req" aria-hidden="true">*</span></label>
-              <div class="combo" data-id="ient" data-label="الجهات" data-options="الإدارة العامة للتحول الرقمي|وكالة التطوير المؤسسي|وكالة الخدمات المشتركة|الإدارة العامة للموارد البشرية|إدارة الاستراتيجية والأداء|الإدارة العامة للتواصل المؤسسي|مكتب إدارة البرامج والمشاريع|الإدارة العامة لتقنية المعلومات|الإدارة العامة للشؤون القانونية|إدارة تجربة المستفيد|إدارة المراكز الميدانية|الإدارة العامة للشراكات"></div>
-              <p class="field__error">اختر الجهة المنفذة.</p>
-            </div>
-            <div class="field">
-              <label class="field__label" for="itheme">المحور</label>
-              <div class="combo" data-id="itheme" data-label="المحاور" data-options="الحوكمة والتنظيم|العمليات والخدمات|الاستراتيجية والأداء|رأس المال البشري|التواصل والشراكات|البيانات والتقنية"></div>
-            </div>
-            <div class="field">
-              <label class="field__label" for="ibudget">الميزانية <span class="opt">(مليون ريال)</span></label>
-              <input class="input input--num" id="ibudget" inputmode="decimal" placeholder="0">
-            </div>
-            <fieldset class="field span-all" id="f-itype">
-              <legend class="field__label" style="margin-block-end:8px">نوع المبادرة <span class="req" aria-hidden="true">*</span></legend>
-              <div class="choices choices--row">
-                <label class="choice"><input type="radio" name="itype" value="تأسيسية"><span class="choice__body"><span class="choice__title">تأسيسية</span><span class="choice__desc">تبني الأطر والسياسات والنماذج والمعايير.</span></span></label>
-                <label class="choice"><input type="radio" name="itype" value="تمكينية"><span class="choice__body"><span class="choice__title">تمكينية</span><span class="choice__desc">تطبّق الأطر وتفعّلها عبر البرامج والخدمات.</span></span></label>
-              </div>
-              <p class="field__error">اختر نوع المبادرة.</p>
-            </fieldset>
-            <fieldset class="field" id="f-iwave">
-              <legend class="field__label" style="margin-block-end:8px">الموجة <span class="req" aria-hidden="true">*</span></legend>
-              <div class="pills">
-                <label class="pill"><input type="radio" name="iwave" value="الأولى"><span>الأولى</span></label>
-                <label class="pill"><input type="radio" name="iwave" value="الثانية"><span>الثانية</span></label>
-                <label class="pill"><input type="radio" name="iwave" value="الثالثة"><span>الثالثة</span></label>
-              </div>
-              <p class="field__error">اختر الموجة.</p>
-            </fieldset>
-            <div class="field">
-              <label class="field__label" for="ifrom">البداية المخططة</label>
-              <input class="input input--date" id="ifrom" value="يناير 2027" placeholder="مثال: يناير 2027">
-            </div>
-            <div class="field">
-              <label class="field__label" for="ito">النهاية المخططة</label>
-              <input class="input input--date" id="ito" value="يونيو 2027" placeholder="مثال: يناير 2027">
-            </div>
-          </div>
-          <div class="btn-row"><button class="btn btn--secondary" type="button" id="add-init"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة المبادرة إلى القائمة</button></div>
-        </div>
-      </section>
-    </div>
-
-    <!-- ================= Step 4 ================= -->
-    <div class="wiz-panel" data-step="4" hidden>
-      <section class="card" aria-labelledby="s4-h">
-        <div class="card__head"><h2 id="s4-h" tabindex="-1">المخرجات والمعالم والاعتماديات</h2></div>
-        <div class="card__body">
-          <div class="field" style="max-inline-size:560px">
-            <label class="field__label" for="s4-init">المبادرة</label>
-            <div class="combo" data-id="s4-init" data-label="المبادرات" data-selected="بناء منصة البيانات الموحدة" data-options="بناء منصة البيانات الموحدة::البنية الرقمية|إطار حوكمة البيانات::البنية الرقمية|تحديث البنية السحابية للأنظمة::البنية الرقمية|رقمنة الخدمات الأكثر طلبًا::الخدمات الرقمية"></div>
-          </div>
-          <div class="form-grid">
-            <div class="field">
-              <span class="field__label" id="out-l">المخرجات</span>
-              <ul class="mini-list" aria-labelledby="out-l">
-                <li><label class="visually-hidden" for="o1">المخرج 1</label><input class="input" id="o1" value="تقرير تقييم الوضع الراهن للبيانات"></li>
-                <li><label class="visually-hidden" for="o2">المخرج 2</label><input class="input" id="o2" value="نموذج البيانات الموحد"></li>
-                <li><label class="visually-hidden" for="o3">المخرج 3</label><input class="input" id="o3" value="المنصة في بيئة التشغيل"></li>
-              </ul>
-            </div>
-            <div class="field">
-              <span class="field__label" id="ms-l">المعالم</span>
-              <ul class="mini-list" aria-labelledby="ms-l">
-                <li><label class="visually-hidden" for="m1">المعلم 1</label><input class="input" id="m1" value="اعتماد نموذج البيانات"><label class="visually-hidden" for="m1d">تاريخ المعلم 1</label><input class="input input--date" id="m1d" value="مارس 2027" placeholder="مثال: يناير 2027" style="flex:0 0 170px"></li>
-                <li><label class="visually-hidden" for="m2">المعلم 2</label><input class="input" id="m2" value="إطلاق تجريبي"><label class="visually-hidden" for="m2d">تاريخ المعلم 2</label><input class="input input--date" id="m2d" value="يونيو 2027" placeholder="مثال: يناير 2027" style="flex:0 0 170px"></li>
-              </ul>
-            </div>
-          </div>
-          <div class="field" style="max-inline-size:560px">
-            <label class="field__label" for="dep">تعتمد على</label>
-            <div class="combo" data-id="dep" data-label="المبادرات" data-selected="إطار حوكمة البيانات" data-options="إطار حوكمة البيانات::البنية الرقمية|تحديث البنية السحابية للأنظمة::البنية الرقمية|رقمنة الخدمات الأكثر طلبًا::الخدمات الرقمية"></div>
-            <p class="field__hint">إن تأخرت المبادرة التي تعتمد عليها، تظهر هذه المبادرة للقيادة ضمن «ما يوقفه التأخر».</p>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- ================= Step 5 ================= -->
-    <div class="wiz-panel" data-step="5" hidden>
-      <section class="card" aria-labelledby="s5-h">
-        <div class="card__head"><h2 id="s5-h" tabindex="-1">المراجعة والاعتماد</h2></div>
-        <div class="card__body">
-          <ul class="check-list">
-            <li><svg class="i ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span><b>البرنامج والمراحل</b><br><span class="t-sm t-muted">3 مراحل تغطي يناير – ديسمبر 2027 بلا فجوات</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="1">مراجعة</button></li>
-            <li><svg class="i ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span><b>الحزم</b><br><span class="t-sm t-muted">حزمتان، لكل منهما فريق مسؤول</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="2">مراجعة</button></li>
-            <li><svg class="i ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span><b>المبادرات</b><br><span class="t-sm t-muted" id="s5-inits">4 مبادرات بميزانية 46 مليون ريال</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="3">مراجعة</button></li>
-            <li><svg class="i warn" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg><span><b>المعالم</b> <span class="badge badge--behind">تنبيه</span><br><span class="t-sm t-muted">«رقمنة الخدمات الأكثر طلبًا» بلا معالم. يمكن الإرسال، لكن المتابعة الشهرية ستكون أضعف.</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="4">إكمال</button></li>
-          </ul>
-          <div class="alert">
-            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
-            <div class="alert__body"><p>يُرسل البرنامج إلى صاحب الصلاحية للاعتماد. بعد الاعتماد تبدأ أول دورة تحديث شهرية تلقائيًا في بداية الشهر التالي.</p></div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div class="wiz-foot" style="margin-block-start:24px">
-      <button class="btn btn--secondary" type="button" id="w-prev">السابق</button>
-      <button class="btn btn--tertiary" type="button" id="w-draft">حفظ كمسودة</button>
-      <span class="spacer"></span>
-      <button class="btn btn--primary" type="submit" id="w-next">التالي</button>
-      <button class="btn btn--primary" type="button" id="w-send" hidden>إرسال للاعتماد</button>
-    </div>
-    </form>
+    <aside class="wz__aside" aria-label="ملخص البرنامج">
+      <div class="live">
+        <div class="live__eyebrow"><span>ملخص البرنامج</span><span class="live__save" id="live-save"><i></i><span>محفوظ</span></span></div>
+        <div><p class="live__name is-empty" id="live-name">اسم البرنامج</p><p class="live__per" id="live-per">لم تُحدد المدة</p></div>
+        <div class="live__nums"><div><b id="n-ph">0</b><span>مراحل</span></div><div><b id="n-pk">0</b><span>حزم</span></div><div><b id="n-in">0</b><span>مبادرات</span></div></div>
+        <div class="live__tl" id="live-tl" aria-hidden="true"></div>
+        <div class="live__ring"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="bg" cx="22" cy="22" r="18"/><circle class="fg" id="ring" cx="22" cy="22" r="18" stroke-dashoffset="113"/></svg><span id="ring-t">اكتمل 0% من البيانات المطلوبة</span></div>
+      </div>
+      <div class="tip" id="tip"></div>
+    </aside>
   </div>
+
 </main>
 <script src="shell.js"></script>
+<script src="period.js"></script>
 <script src="motion.js"></script>
 <script>
 (function () {
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const STEPS = ["البرنامج والمراحل", "الحزم", "المبادرات", "المخرجات والمعالم والاعتماديات", "المراجعة والاعتماد"];
-  let step = 1;
+  "use strict";
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const ENTS = ["الإدارة العامة للتحول الرقمي", "وكالة التطوير المؤسسي", "وكالة الخدمات المشتركة", "الإدارة العامة للموارد البشرية", "إدارة الاستراتيجية والأداء", "الإدارة العامة للتواصل المؤسسي", "مكتب إدارة البرامج والمشاريع", "الإدارة العامة لتقنية المعلومات", "الإدارة العامة للشؤون القانونية", "إدارة تجربة المستفيد", "إدارة المراكز الميدانية", "الإدارة العامة للشراكات", "الإدارة العامة للأمن السيبراني", "إدارة البيانات والذكاء الاصطناعي"];
+  const TEAMS = ["فريق البنية والبيانات::5 أعضاء", "فريق الخدمات الرقمية::4 أعضاء", "فريق الحوكمة والامتثال::3 أعضاء", "فريق إدارة التغيير::3 أعضاء", "فريق تجربة المستفيد::4 أعضاء"];
+  const PHC = ["c0", "c1", "c2", "c3", "c4", "c5"];
+  const P = { name: "", owner: "", from: "", to: "", ref: "", phased: true,
+    phases: [{ name: "التأسيس", from: "2027-01", to: "2027-04" }, { name: "البناء", from: "2027-05", to: "2027-09" }, { name: "التشغيل", from: "2027-10", to: "2027-12" }],
+    pkgs: [
+      { name: "البنية الرقمية", team: "فريق البنية والبيانات", from: "2027-01", to: "2027-09", inits: [
+        { name: "بناء منصة البيانات الموحدة", ent: "الإدارة العامة للتحول الرقمي", from: "2027-01", to: "2027-06" },
+        { name: "إطار حوكمة البيانات", ent: "إدارة البيانات والذكاء الاصطناعي", from: "2027-02", to: "2027-05" } ] },
+      { name: "الخدمات الرقمية", team: "فريق الخدمات الرقمية", from: "2027-04", to: "2027-12", inits: [
+        { name: "رقمنة رحلة المستفيد في 12 خدمة", ent: "إدارة تجربة المستفيد", from: "2027-04", to: "2027-11" },
+        { name: "", ent: "", from: "", to: "" } ] } ] };
 
-  function renderSteps() {
-    $("#w-count").textContent = `الخطوة ${step} من ${STEPS.length}: ${STEPS[step - 1]}`;
-    $("#w-steps").innerHTML = STEPS.map((n, i) => {
-      const k = i + 1, cur = k === step, done = k < step;
-      const marker = done ? VIcon("check", "i--sm") : k;
-      const state = cur ? "الحالية" : done ? "مكتملة" : "لم تبدأ";
-      const inner = `<span class="steps__bar"></span><span class="steps__label"><span class="steps__marker">${marker}</span><span><span class="steps__name">${n}</span><span class="steps__state">${state}</span></span></span>`;
-      return `<li class="steps__item ${done ? "is-done" : ""}"${cur ? ' aria-current="step"' : ""}>${done ? `<button type="button" class="steps__link" data-goto="${k}">${inner}</button>` : inner}</li>`;
-    }).join("");
-  }
-  function go(n, focus = true) {
+  const num = s => { const [y, m] = (s || "").split("-").map(Number); return y ? y * 12 + m - 1 : null; };
+  let step = 0;
+
+  /* ---------- panels ---------- */
+  function panel(name) { $$("[data-panel]").forEach(p => { if (["start", "excel", "wizard"].includes(p.dataset.panel)) p.hidden = p.dataset.panel !== name; }); }
+  function go(n) {
     step = n;
-    $$(".wiz-panel").forEach(p => p.hidden = +p.dataset.step !== n);
-    $("#w-prev").hidden = n === 1;
-    $("#w-next").hidden = n === 5;
-    $("#w-send").hidden = n !== 5;
-    renderSteps();
-    if (focus) { const h = $(`.wiz-panel[data-step="${n}"] h2`); h.focus({ preventScroll: true }); h.scrollIntoView({ block: "center" }); }
-    history.replaceState(null, "", "#step-" + n);
+    panel("wizard");
+    ["s1", "s2", "s3"].forEach((s, i) => $(`[data-panel="${s}"]`).hidden = i + 1 !== n);
+    $$("#stp li").forEach(li => { const s = +li.dataset.s; li.classList.toggle("is-done", s < n); li.toggleAttribute("aria-current", s === n); if (s === n) li.setAttribute("aria-current", "step"); });
+    $("#w-prev").textContent = n === 1 ? "رجوع" : "السابق";
+    $("#w-next").textContent = n === 1 ? "التالي: الحزم والمبادرات" : n === 2 ? "التالي: المراجعة" : "إرسال للاعتماد";
+    if (n === 2) renderPkgs();
+    if (n === 3) renderReview();
+    tip(); history.replaceState(null, "", "#step-" + n);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
-  document.addEventListener("click", e => { const b = e.target.closest("[data-goto]"); if (b) go(+b.dataset.goto); });
-  $("#wiz-form").addEventListener("submit", e => {
-    e.preventDefault();
-    if (step === 1) {
-      const ok = $("#pname").value.trim();
-      $("#f-pname").classList.toggle("is-invalid", !ok);
-      if (!ok) { $("#pname").setAttribute("aria-invalid", "true"); $("#pname").focus(); return; }
-    }
-    go(step + 1);
-  });
-  $("#w-prev").onclick = () => go(step - 1);
-  $("#w-draft").onclick = () => notify({ title: "تم حفظ المسودة", text: "البرنامج محفوظ كمسودة ولا يظهر في المتابعة قبل اعتماده." });
-  $("#w-send").onclick = function () { this.setAttribute("aria-busy", "true"); setTimeout(() => { this.removeAttribute("aria-busy"); this.disabled = true; this.textContent = "أُرسل للاعتماد"; successSheet({ title: "تمت إضافة البرنامج بنجاح", text: "أُرسل البرنامج إلى صاحب الصلاحية للاعتماد، وتبدأ أول دورة تحديث بعد اعتماده.", rows: [["البرنامج", "برنامج التحول الرقمي 2027"], ["المراحل", "3"], ["الحزم", "2"], ["المبادرات", "4"], ["الحالة", "بانتظار الاعتماد"]], primary: { label: "الذهاب إلى الرئيسية", href: "app-home.html" }, secondary: { label: "إغلاق" } }); }, 700); };
-
-  /* Phases (editable rows) */
-  const phases = [["التأسيس", "يناير 2027", "أبريل 2027"], ["التنفيذ", "مايو 2027", "أكتوبر 2027"], ["الاستدامة", "نوفمبر 2027", "ديسمبر 2027"]];
-  function phaseRow(p, i) {
-    return `<tr><td class="col-n num">${i + 1}</td>
-      <td data-label="اسم المرحلة"><label class="visually-hidden" for="ph-n${i}">اسم المرحلة ${i + 1}</label><input class="input" id="ph-n${i}" value="${p[0]}" placeholder="اسم المرحلة"></td>
-      <td data-label="من"><label class="visually-hidden" for="ph-f${i}">بداية المرحلة ${i + 1}</label><input class="input input--date" id="ph-f${i}" value="${p[1]}" placeholder="مثال: يناير 2027"></td>
-      <td data-label="إلى"><label class="visually-hidden" for="ph-t${i}">نهاية المرحلة ${i + 1}</label><input class="input input--date" id="ph-t${i}" value="${p[2]}" placeholder="مثال: يناير 2027"></td>
-      <td class="col-act"><button class="btn btn--tertiary icon-btn" type="button" data-del="${i}" aria-label="حذف المرحلة ${i + 1}">${VIcon("x")}</button></td></tr>`;
-  }
-  function renderPhases() { $("#phases").innerHTML = phases.map(phaseRow).join(""); $("#k-phases").textContent = phases.length; }
-  renderPhases();
-  $("#add-phase").onclick = () => { $$("#phases tr").forEach((tr, i) => { phases[i] = [ $("#ph-n" + i).value, $("#ph-f" + i).value, $("#ph-t" + i).value ]; }); phases.push(["", "", ""]); renderPhases(); $("#ph-n" + (phases.length - 1)).focus(); };
-  $("#phases").addEventListener("click", e => { const b = e.target.closest("[data-del]"); if (!b) return; const i = +b.dataset.del, gone = phases.splice(i, 1)[0]; renderPhases(); notify({ type: "info", title: "تم حذف المرحلة", text: "يمكنك التراجع خلال ثوانٍ.", undo: () => { phases.splice(i, 0, gone); renderPhases(); notify({ title: "تمت استعادة المرحلة" }); } }); });
-
-  /* Add initiative */
-  let budget = 46, count = 4;
-  $("#add-init").onclick = () => {
-    const errs = [];
-    const need = (fid, ok, msg, focusSel) => { $(fid).classList.toggle("is-invalid", !ok); if (!ok) errs.push([focusSel, msg]); };
-    need("#f-iname", $("#iname").value.trim(), "اسم المبادرة", "#iname");
-    need("#f-ipkg", $("input[name=ipkg]").value, "الحزمة", "#ipkg");
-    need("#f-ient", $("input[name=ient]").value, "الجهة المنفذة", "#ient");
-    need("#f-itype", $("input[name=itype]:checked"), "نوع المبادرة", "input[name=itype]");
-    need("#f-iwave", $("input[name=iwave]:checked"), "الموجة", "input[name=iwave]");
-    if (errs.length) {
-      $("#i-err-list").innerHTML = errs.map(([s, m]) => `<li><a href="#" data-f="${s}">${m}</a></li>`).join("");
-      $("#i-err").hidden = false; $("#i-err").focus(); return;
-    }
-    $("#i-err").hidden = true;
-    const esc = s => s.replace(/</g, "&lt;");
-    const b = parseFloat($("#ibudget").value) || 0;
-    const month = v => esc(v || "—");
-    const tr = document.createElement("tr");
-    tr.className = "added-row is-new";
-    tr.innerHTML = `<td class="cell-main"><div class="cell-title">${esc($("#iname").value)}</div><div class="cell-sub">${esc($("input[name=ient]").value)}</div></td><td data-label="الحزمة">${$("input[name=ipkg]").value}</td><td data-label="النوع">${$("input[name=itype]:checked").value}</td><td data-label="الموجة">${$("input[name=iwave]:checked").value}</td><td data-label="الميزانية" class="is-num">${b || "—"}</td><td data-label="المدة">${month($("#ifrom").value)} – ${month($("#ito").value)}</td>`;
-    $("#inits").appendChild(tr);
-    budget += b; count++;
-    $("#k-budget").textContent = budget; $("#k-inits").textContent = count;
-    $("#init-count").textContent = count + " مبادرات"; $("#s5-inits").textContent = `${count} مبادرات بميزانية ${budget} مليون ريال`;
-    notify({ title: "تمت إضافة المبادرة بنجاح", text: "تظهر الآن في قائمة المبادرات المضافة." });
-    $("#iname").value = ""; $("#ibudget").value = ""; $("#iname").focus();
+  $("#go-manual").onclick = () => { go(1); setTimeout(() => $("#p-name").focus(), 350); };
+  $("#go-excel").onclick = () => panel("excel");
+  $("[data-back-start]").onclick = () => panel("start");
+  $$("[data-goto]").forEach(b => b.onclick = () => { const n = +b.dataset.goto; if (n <= step || validate(step)) go(n); });
+  $("#w-prev").onclick = () => step === 1 ? panel("start") : go(step - 1);
+  $("#w-next").onclick = () => {
+    if (!validate(step)) return;
+    if (step < 3) return go(step + 1);
+    const b = $("#w-next"); b.setAttribute("aria-busy", "true");
+    setTimeout(() => {
+      b.removeAttribute("aria-busy"); b.disabled = true; b.textContent = "أُرسل للاعتماد";
+      const ni = P.pkgs.reduce((a, p) => a + p.inits.filter(i => i.name).length, 0);
+      successSheet({ title: "تمت إضافة البرنامج بنجاح", text: "أُرسل إلى صاحب الصلاحية للاعتماد، وتبدأ أول دورة تحديث بعد اعتماده.",
+        rows: [["البرنامج", esc(P.name)], ["المدة", VPeriodText(P.from, P.to)], ["الحزم والمبادرات", `${P.pkgs.length} حزم، ${ni} مبادرات`], ["الحالة", "بانتظار الاعتماد"]],
+        primary: { label: "الذهاب إلى الرئيسية", href: "app-home.html" }, secondary: { label: "إغلاق" } });
+    }, 800);
   };
-  $("#i-err").addEventListener("click", e => { const a = e.target.closest("[data-f]"); if (a) { e.preventDefault(); $(a.dataset.f).focus(); } });
-  ["#iname"].forEach(s => $(s).addEventListener("input", () => $("#f-iname").classList.remove("is-invalid")));
-  document.addEventListener("combo:change", e => e.target.closest(".field")?.classList.remove("is-invalid"));
-  $$("input[name=itype],input[name=iwave]").forEach(r => r.addEventListener("change", () => r.closest(".field").classList.remove("is-invalid")));
 
-  const m = location.hash.match(/^#step-(\d)/);
-  go(m ? +m[1] : 1, false);
+  /* ---------- Excel demo ---------- */
+  const drop = $("#drop");
+  ["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("is-over"); }));
+  ["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("is-over"); if (ev === "drop") fakeImport(); }));
+  $("#pick-file").onclick = fakeImport; $("#demo-file").onclick = fakeImport;
+  function fakeImport() {
+    $("#drop-act").hidden = true; $("#drop-bar").hidden = false; $("#drop-t").textContent = "جارٍ قراءة «برنامج التحول الرقمي 2027.xlsx»";
+    $("#drop-s").textContent = "نقرأ الحزم والمبادرات…";
+    requestAnimationFrame(() => $("#drop-bar i").style.inlineSize = "100%");
+    setTimeout(() => {
+      fillDemo(); P.pkgs[1].inits[1] = { name: "بوابة الخدمات الموحدة للأعمال", ent: "الإدارة العامة لتقنية المعلومات", from: "2027-06", to: "2027-12" };
+      notify({ title: "تمت قراءة الملف بنجاح", text: "2 حزم و4 مبادرات. راجعها قبل الإرسال." });
+      go(3);
+    }, 1600);
+  }
+  function fillDemo() {
+    Object.assign(P, { name: "برنامج التحول الرقمي 2027", owner: "الإدارة العامة للتحول الرقمي", from: "2027-01", to: "2027-12" });
+    $("#p-name").value = P.name; setCombo("owner", P.owner); $(".period[data-id='p-per']").setValue(P.from, P.to); live();
+  }
+
+  /* ---------- Step 1 ---------- */
+  const owner = $(".combo[data-id=owner]");
+  owner.dataset.options = ENTS.join("|"); owner.innerHTML = ""; VBuildCombo(owner); VCombo(owner);
+  function setCombo(id, v) { const c = $(`.combo[data-id="${id}"]`); if (!c) return; c.querySelector(".combo__input").value = v; c.querySelector("input[type=hidden]").value = v; c.querySelectorAll("[role=option]").forEach(o => o.setAttribute("aria-selected", String(o.dataset.value === v))); }
+  $("#p-name").addEventListener("input", e => { P.name = e.target.value.trim(); clearErr("f-name"); live(); });
+  owner.addEventListener("combo:change", e => { P.owner = e.detail.value; clearErr("f-owner"); live(); });
+  $("#p-ref").addEventListener("input", e => P.ref = e.target.value);
+  $(".period[data-id='p-per']").addEventListener("period:change", e => { P.from = e.detail.from; P.to = e.detail.to; clearErr("f-per"); fitPhases(); renderPhases(); live(); });
+
+  $$("[data-ph]").forEach(b => b.onclick = () => { P.phased = b.dataset.ph === "1"; $$("[data-ph]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); $("#ph-wrap").hidden = !P.phased; live(); });
+  function fitPhases() { /* keep phases inside the programme period */
+    const a = num(P.from), z = num(P.to); if (a == null) return;
+    const span = z - a + 1, n = P.phases.length; if (!n) return;
+    let cur = a; P.phases.forEach((ph, i) => { const len = i === n - 1 ? z - cur + 1 : Math.max(1, Math.round(span / n)); ph.from = fmt(cur); ph.to = fmt(Math.min(z, cur + len - 1)); cur = Math.min(z, cur + len); });
+  }
+  const fmt = n => `${Math.floor(n / 12)}-${String(n % 12 + 1).padStart(2, "0")}`;
+  function renderPhases() {
+    const list = $("#ph-list");
+    list.innerHTML = P.phases.map((ph, i) => `<div class="phase" data-i="${i}"><span class="phase__dot ${PHC[i % 6]}"></span>
+      <input class="input" aria-label="اسم المرحلة ${i + 1}" value="${esc(ph.name)}" placeholder="اسم المرحلة" data-k="name">
+      <div class="period" data-id="ph-${i}" data-label="مدة المرحلة" data-from="${ph.from}" data-to="${ph.to}" data-min="${P.from || "2026-01"}" data-max="${P.to || "2031-12"}"></div>
+      <button class="x-btn" type="button" aria-label="حذف المرحلة ${i + 1}" data-del>${VIcon("x")}</button></div>`).join("");
+    list.querySelectorAll(".period").forEach(VPeriod);
+    timeline(); live();
+  }
+  function timeline() {
+    const a = num(P.from), z = num(P.to), tl = $("#ph-tl");
+    if (a == null) { tl.innerHTML = `<p class="t-sm t-muted">اختر مدة البرنامج ليظهر الخط الزمني.</p>`; return; }
+    const m = z - a + 1, M = ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"];
+    const axis = Array.from({ length: m }, (_, k) => `<span>${M[(a + k) % 12]}</span>`).join("");
+    const bars = P.phases.map((ph, i) => { const f = num(ph.from), t = num(ph.to); if (f == null) return ""; const s = Math.max(0, f - a), e = Math.min(m, t - a + 1);
+      return `<span class="tl__bar ${PHC[i % 6]}" style="inset-inline-start:${s / m * 100}%;inline-size:${(e - s) / m * 100}%;animation-delay:${i * 90}ms">${esc(ph.name)}</span>`; }).join("");
+    tl.innerHTML = `<div class="tl__axis" style="--m:${m}">${m <= 24 ? axis : ""}</div><div class="tl__row">${bars}</div>`;
+  }
+  $("#ph-list").addEventListener("input", e => { const r = e.target.closest(".phase"); if (r && e.target.dataset.k) { P.phases[+r.dataset.i].name = e.target.value; timeline(); saving(); } });
+  $("#ph-list").addEventListener("period:change", e => { const r = e.target.closest(".phase"); P.phases[+r.dataset.i].from = e.detail.from; P.phases[+r.dataset.i].to = e.detail.to; timeline(); saving(); });
+  $("#ph-list").addEventListener("click", e => { const b = e.target.closest("[data-del]"); if (!b) return; const r = b.closest(".phase"), i = +r.dataset.i, gone = P.phases[i];
+    r.classList.add("is-removing"); setTimeout(() => { P.phases.splice(i, 1); renderPhases();
+      notify({ type: "info", title: "تم حذف المرحلة", text: `«${esc(gone.name || "بدون اسم")}»`, undo: () => { P.phases.splice(i, 0, gone); renderPhases(); } }); }, 240); });
+  $("#ph-add").onclick = () => { const last = P.phases[P.phases.length - 1]; const s = last ? Math.min(num(P.to) ?? num(last.to) + 1, num(last.to) + 1) : num(P.from) ?? num("2027-01");
+    P.phases.push({ name: "", from: fmt(s), to: fmt(Math.min(num(P.to) ?? s + 2, s + 2)) }); renderPhases(); $("#ph-list .phase:last-child input").focus(); };
+
+  /* ---------- Step 2 ---------- */
+  function renderPkgs() {
+    const L = $("#pk-list");
+    L.innerHTML = P.pkgs.map((pk, p) => `<article class="pk" data-p="${p}" style="animation-delay:${p * 80}ms">
+      <div class="pk__head">
+        <span class="pk__tag ${PHC[p % 6]}" aria-hidden="true">${p + 1}</span>
+        <div class="field"><label class="field__label" for="pk-${p}-n">اسم الحزمة</label><input class="input" id="pk-${p}-n" value="${esc(pk.name)}" data-k="name" placeholder="مثال: البنية الرقمية"></div>
+        <div class="field"><label class="field__label" for="pk-${p}-team">الفريق المسؤول</label><div class="combo" data-id="pk-${p}-team" data-label="الفرق" data-placeholder="اختر الفريق" data-selected="${esc(pk.team)}" data-options="${TEAMS.join("|")}"></div></div>
+        <div class="field f-per"><label class="field__label" for="pk-${p}-per">مدة الحزمة</label><div class="period" data-id="pk-${p}-per" data-label="مدة الحزمة" data-from="${pk.from}" data-to="${pk.to}" data-min="${P.from || "2026-01"}" data-max="${P.to || "2031-12"}"></div></div>
+        <button class="x-btn" type="button" aria-label="حذف الحزمة ${p + 1}" data-delpk>${VIcon("x")}</button>
+      </div>
+      <div class="pk__body">
+        ${pk.inits.map((it, i) => iniRow(p, i, it)).join("")}
+        <button class="btn btn--tertiary add-row" type="button" data-addini><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة مبادرة إلى «${esc(pk.name || "الحزمة")}»</button>
+      </div></article>`).join("");
+    L.querySelectorAll(".combo").forEach(c => { VBuildCombo(c); VCombo(c); });
+    L.querySelectorAll(".period").forEach(VPeriod);
+    live();
+  }
+  function iniRow(p, i, it) {
+    return `<div class="ini" data-i="${i}">
+      <span class="ini__n">${i + 1}</span>
+      <input class="input" aria-label="اسم المبادرة ${i + 1}" value="${esc(it.name)}" data-k="name" placeholder="اسم المبادرة">
+      <div class="combo" data-id="pk-${p}-i${i}-ent" data-label="الجهات" data-placeholder="الجهة المنفذة" data-selected="${esc(it.ent)}" data-options="${ENTS.join("|")}"></div>
+      <div class="period" data-id="pk-${p}-i${i}-per" data-label="مدة المبادرة" data-from="${it.from}" data-to="${it.to}" data-min="${P.from || "2026-01"}" data-max="${P.to || "2031-12"}"></div>
+      <button class="x-btn" type="button" aria-label="حذف المبادرة ${i + 1}" data-delini>${VIcon("x")}</button></div>`;
+  }
+  const where = el => { const pk = el.closest(".pk"), ini = el.closest(".ini"); return { p: pk ? +pk.dataset.p : -1, i: ini ? +ini.dataset.i : -1 }; };
+  const L = $("#pk-list");
+  L.addEventListener("input", e => { const k = e.target.dataset.k; if (!k) return; const { p, i } = where(e.target);
+    if (i >= 0) P.pkgs[p].inits[i].name = e.target.value; else { P.pkgs[p].name = e.target.value; const b = e.target.closest(".pk").querySelector("[data-addini]"); b.lastChild.textContent = `إضافة مبادرة إلى «${e.target.value || "الحزمة"}»`; }
+    e.target.closest(".ini")?.classList.remove("is-invalid"); live(); });
+  L.addEventListener("combo:change", e => { e.target.closest(".ini")?.classList.remove("is-invalid"); const { p, i } = where(e.target); if (i >= 0) P.pkgs[p].inits[i].ent = e.detail.value; else P.pkgs[p].team = e.detail.value; live(); });
+  L.addEventListener("period:change", e => { const { p, i } = where(e.target); const o = i >= 0 ? P.pkgs[p].inits[i] : P.pkgs[p]; o.from = e.detail.from; o.to = e.detail.to; live(); });
+  L.addEventListener("click", e => {
+    const add = e.target.closest("[data-addini]"), di = e.target.closest("[data-delini]"), dp = e.target.closest("[data-delpk]");
+    if (add) { const { p } = where(add); const pk = P.pkgs[p]; pk.inits.push({ name: "", ent: "", from: pk.from, to: pk.to });
+      const i = pk.inits.length - 1; add.insertAdjacentHTML("beforebegin", iniRow(p, i, pk.inits[i]));
+      const row = add.previousElementSibling; row.querySelectorAll(".combo").forEach(c => { VBuildCombo(c); VCombo(c); }); row.querySelectorAll(".period").forEach(VPeriod);
+      row.querySelector("input").focus(); live(); }
+    if (di) { const { p, i } = where(di); const r = di.closest(".ini"), gone = P.pkgs[p].inits[i]; r.classList.add("is-removing");
+      setTimeout(() => { P.pkgs[p].inits.splice(i, 1); renderPkgs(); notify({ type: "info", title: "تم حذف المبادرة", text: gone.name ? `«${esc(gone.name)}»` : "", undo: () => { P.pkgs[p].inits.splice(i, 0, gone); renderPkgs(); } }); }, 240); }
+    if (dp) { const { p } = where(dp); const gone = P.pkgs[p]; dp.closest(".pk").classList.add("is-removing");
+      setTimeout(() => { P.pkgs.splice(p, 1); renderPkgs(); notify({ type: "info", title: "تم حذف الحزمة", text: `ومعها ${gone.inits.length} مبادرات`, undo: () => { P.pkgs.splice(p, 0, gone); renderPkgs(); } }); }, 240); }
+  });
+  $("#pk-add").onclick = () => { P.pkgs.push({ name: "", team: "", from: P.from, to: P.to, inits: [{ name: "", ent: "", from: P.from, to: P.to }] }); renderPkgs();
+    const last = $("#pk-list .pk:last-child"); last.scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => last.querySelector("input").focus(), 300); };
+
+  /* ---------- Step 3 ---------- */
+  function renderReview() {
+    const a = num(P.from), z = num(P.to), m = z - a + 1, items = [];
+    const inits = P.pkgs.flatMap(p => p.inits.filter(i => i.name));
+    items.push([true, `البرنامج «${esc(P.name)}» مدته ${VPeriodText(P.from, P.to)}، وتملكه ${esc(P.owner)}.`]);
+    items.push([P.pkgs.every(p => p.team), P.pkgs.every(p => p.team) ? `لكل حزمة فريق مسؤول (${P.pkgs.length} حزم).` : "حزمة بدون فريق مسؤول.", 2]);
+    const noEnt = inits.filter(i => !i.ent).length;
+    items.push([!noEnt, noEnt ? `${noEnt} مبادرة بدون جهة منفذة.` : `لكل مبادرة جهة منفذة (${inits.length} مبادرات).`, 2]);
+    const out = P.pkgs.flatMap(p => p.inits.filter(i => i.name && (num(i.from) < num(p.from) || num(i.to) > num(p.to))).map(i => i.name));
+    items.push([!out.length, out.length ? `«${esc(out[0])}» تتجاوز مدة حزمتها${out.length > 1 ? ` (و${out.length - 1} غيرها)` : ""}. هذا مسموح، لكن تأكد منه.` : "كل المبادرات داخل مدة حزمها.", 2]);
+    $("#chk").innerHTML = items.map(([ok, t, s], k) => `<li class="${ok ? "" : "warn"}" style="animation-delay:${k * 90}ms">${VIcon(ok ? "checkCircle" : "alert")}<span>${t}</span>${!ok && s ? `<button class="btn btn--tertiary btn--sm" type="button" data-goto="${s}">تعديل</button>` : ""}</li>`).join("");
+    $$("#chk [data-goto]").forEach(b => b.onclick = () => go(+b.dataset.goto));
+    const bar = (f, t, cls, d) => { const s = Math.max(0, num(f) - a), e = Math.min(m, num(t) - a + 1); return `<div class="tl__row"><span class="tl__bar ${cls}" style="inset-inline-start:${s / m * 100}%;inline-size:${Math.max(0, e - s) / m * 100}%;animation-delay:${d}ms"></span></div>`; };
+    const M = ["ينا", "فبر", "مار", "أبر", "ماي", "يون", "يول", "أغس", "سبت", "أكت", "نوف", "ديس"];
+    let rows = `<div class="gantt__r"><span></span><div class="tl__axis" style="--m:${m}">${Array.from({ length: m }, (_, k) => `<span>${M[(a + k) % 12]}</span>`).join("")}</div></div>`, d = 0;
+    P.pkgs.forEach((pk, p) => { rows += `<div class="gantt__r is-pk"><span>${esc(pk.name || "حزمة " + (p + 1))}</span>${bar(pk.from, pk.to, PHC[p % 6], d += 60)}</div>`;
+      pk.inits.filter(i => i.name).forEach(i => rows += `<div class="gantt__r is-ini"><span title="${esc(i.name)}">${esc(i.name)}</span>${bar(i.from, i.to, PHC[p % 6], d += 60)}</div>`); });
+    $("#gantt").innerHTML = rows;
+  }
+
+  /* ---------- validation ---------- */
+  function setErr(id, on) { $("#" + id).classList.toggle("is-invalid", on); }
+  function clearErr(id) { setErr(id, false); }
+  function validate(n) {
+    if (n === 1) {
+      const bad = [["f-name", !P.name], ["f-owner", !P.owner], ["f-per", !P.from]];
+      bad.forEach(([id, b]) => setErr(id, b));
+      const first = bad.find(b => b[1]);
+      if (first) { notify({ type: "error", title: "بقيت بيانات مطلوبة", text: "أكمل الحقول المعلَّمة باللون الأحمر." }); $("#" + first[0]).querySelector("input,button").focus(); return false; }
+    }
+    if (n === 2) {
+      let bad = 0, firstEl = null;
+      P.pkgs.forEach((pk, p) => pk.inits.forEach((it, i) => {
+        const row = $(`.pk[data-p="${p}"] .ini[data-i="${i}"]`); const empty = !it.name && !it.ent;
+        if (empty) return;
+        const miss = !it.name || !it.ent; row?.classList.toggle("is-invalid", miss);
+        if (miss) { bad++; firstEl = firstEl || row; }
+      }));
+      if (!P.pkgs.length || !P.pkgs.some(p => p.inits.some(i => i.name))) { notify({ type: "error", title: "أضف مبادرة واحدة على الأقل" }); return false; }
+      if (bad) { notify({ type: "error", title: `${bad} مبادرة ناقصة`, text: "لكل مبادرة اسم وجهة منفذة." }); firstEl.querySelector("input").focus(); return false; }
+      P.pkgs.forEach(pk => pk.inits = pk.inits.filter(i => i.name || i.ent));   // drop untouched empty rows
+    }
+    return true;
+  }
+
+  /* ---------- live summary ---------- */
+  let saveT;
+  function saving() { const s = $("#live-save"); s.classList.add("is-saving"); s.lastChild.textContent = "يحفظ…"; clearTimeout(saveT); saveT = setTimeout(() => { s.classList.remove("is-saving"); s.lastChild.textContent = "محفوظ"; $("#w-saved").textContent = "حُفظت المسودة قبل لحظات"; }, 700); }
+  function setNum(id, v) { const el = $("#" + id); if (el.textContent !== String(v)) { el.textContent = v; el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); } }
+  function live() {
+    const n = $("#live-name"); n.textContent = P.name || "اسم البرنامج"; n.classList.toggle("is-empty", !P.name);
+    $("#live-per").textContent = P.from ? `${VPeriodText(P.from, P.to)} · ${P.owner || "الجهة المالكة لم تُحدد"}` : "لم تُحدد المدة";
+    const inits = P.pkgs.reduce((s, p) => s + p.inits.filter(i => i.name).length, 0);
+    setNum("n-ph", P.phased ? P.phases.length : 0); setNum("n-pk", P.pkgs.length); setNum("n-in", inits);
+    const a = num(P.from), z = num(P.to);
+    $("#live-tl").innerHTML = a == null ? "" : P.pkgs.map((pk, p) => { const f = num(pk.from), t = num(pk.to); if (f == null) return "<div></div>"; const m = z - a + 1;
+      return `<div><i class="${PHC[p % 6]}" style="inset-inline-start:${Math.max(0, f - a) / m * 100}%;inline-size:${(Math.min(z, t) - Math.max(a, f) + 1) / m * 100}%"></i></div>`; }).join("");
+    const req = [!!P.name, !!P.owner, !!P.from, P.pkgs.length > 0, inits > 0, P.pkgs.every(p => p.team), P.pkgs.every(p => p.inits.every(i => !i.name || i.ent))];
+    const pct = Math.round(req.filter(Boolean).length / req.length * 100);
+    $("#ring").setAttribute("stroke-dashoffset", 113 - 113 * pct / 100);
+    $("#ring-t").textContent = pct === 100 ? "البيانات المطلوبة مكتملة" : `اكتمل ${pct}% من البيانات المطلوبة`;
+    saving();
+  }
+  function tip() {
+    const T = { 1: ["اسم البرنامج", "اكتبه كما ورد في قرار الاعتماد، فهو ما تراه القيادة في الخلاصة."],
+      2: ["الحزمة", "مجموعة مبادرات يديرها فريق واحد. اسم المبادرة يكون فعلًا ونتيجة، مثل «رقمنة رحلة المستفيد»."],
+      3: ["بعد الإرسال", "يصل البرنامج لصاحب الصلاحية. بعد اعتماده تُنشأ بطاقة لكل مبادرة، ويبدأ مديروها التحديث الشهري."] }[step] || ["", ""];
+    $("#tip").innerHTML = `<b>${T[0]}</b><span>${T[1]}</span>`;
+  }
+
+  /* ---------- boot ---------- */
+  renderPhases(); live(); $("#live-save").lastChild.textContent = "محفوظ";
+  const h = location.hash.match(/^#step-(\d)/);
+  if (h) { fillDemo(); fitPhases(); renderPhases(); if (+h[1] >= 3) P.pkgs[1].inits[1] = { name: "بوابة الخدمات الموحدة للأعمال", ent: "الإدارة العامة لتقنية المعلومات", from: "2027-06", to: "2027-12" }; go(Math.min(3, +h[1])); }
+  else if (location.hash === "#excel") panel("excel");
 })();
 </script>
 </body>

@@ -296,8 +296,8 @@
       if (i >= 0 && v[i]) { v[i].classList.add("is-active"); input.setAttribute("aria-activedescendant", v[i].id); v[i].scrollIntoView({ block: "nearest" }); }
       else input.removeAttribute("aria-activedescendant");
     };
-    const filter = () => {
-      const q = input.value.trim();
+    const filter = (all) => {
+      const q = all ? "" : input.value.trim();
       opts.forEach(o => {
         const label = o.dataset.label;
         o.hidden = !!q && !matches(label + " " + (o.dataset.keywords || ""), q);
@@ -326,11 +326,12 @@
     });
     input.addEventListener("input", () => { open(); filter(); });
     input.addEventListener("focus", () => { input.select(); });
-    input.addEventListener("click", () => { if (list.hidden) { open(); filter(); } });
-    toggle.addEventListener("click", () => { if (list.hidden) { input.focus(); open(); input.value = ""; filter(); } else close(); });
+    const openAll = () => { open(); filter(true); const sel = visible().findIndex(o => o.getAttribute("aria-selected") === "true"); if (sel >= 0) setActive(sel); };
+    input.addEventListener("click", () => { if (list.hidden) openAll(); });
+    toggle.addEventListener("click", () => { if (list.hidden) { input.focus(); openAll(); } else close(); });
     input.addEventListener("keydown", e => {
       const v = visible();
-      if (e.key === "ArrowDown") { e.preventDefault(); if (list.hidden) { open(); filter(); } else setActive(Math.min(active + 1, v.length - 1)); }
+      if (e.key === "ArrowDown") { e.preventDefault(); if (list.hidden) { openAll(); } else setActive(Math.min(active + 1, v.length - 1)); }
       else if (e.key === "ArrowUp") { e.preventDefault(); setActive(Math.max(active - 1, 0)); }
       else if (e.key === "Enter") { e.preventDefault(); if (!list.hidden && v[active]) choose(v[active]); }
       else if (e.key === "Escape") { if (!list.hidden) { e.preventDefault(); const sel = opts.find(o => o.getAttribute("aria-selected") === "true"); input.value = sel ? sel.dataset.label : ""; close(); } }
