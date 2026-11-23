@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تحديث نوفمبر · إدارة المواهب · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .ctx { display: grid; gap: var(--dga-space-2); }
+  .ctx__meta { display: flex; flex-wrap: wrap; gap: var(--dga-space-2) var(--dga-space-4); align-items: center; color: var(--dga-text-secondary); font-size: var(--dga-fs-sm); }
+  .stage[hidden], .panel[hidden] { display: none !important; }
+  .q-card .card__body { display: grid; gap: var(--dga-space-5); }
+  .q-legend { font-size: var(--dga-fs-2xl); line-height: var(--dga-lh-2xl); font-weight: var(--dga-fw-bold); margin-block-end: var(--dga-space-4); }
+  .choice--big { padding: var(--dga-space-5); }
+  .choice--big .choice__title { font-size: var(--dga-fs-lg); }
+  .flow-card .card__body { display: grid; gap: var(--dga-space-5); }
+  .panel h2 { font-size: var(--dga-fs-2xl); line-height: var(--dga-lh-2xl); }
+  .panel > * + * { margin-block-start: var(--dga-space-5); }
+  .result { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); background: var(--dga-surface-sunken); }
+  .result .kpi { grid-row: span 3; }
+  .result .kpis { display: contents; }
+  .step-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--dga-space-3) var(--dga-space-5); padding: var(--dga-space-4) 0; border-block-end: 1px solid var(--dga-border); }
+  .step-row:first-of-type { border-block-start: 1px solid var(--dga-border); }
+  .step-row legend { float: inline-start; font-weight: var(--dga-fw-medium); max-inline-size: 60ch; }
+  .step-row.is-invalid legend { color: var(--dga-error-700); }
+  .next-list { list-style: none; display: grid; gap: var(--dga-space-3); }
+  .next-list li { display: flex; gap: var(--dga-space-2); align-items: center; }
+  .next-list .input { flex: 1; }
+  .err-summary:focus { outline: 3px solid var(--dga-error-700); outline-offset: 2px; }
+  .err-summary ul { list-style: none; display: grid; gap: var(--dga-space-1); }
+  .err-summary a { color: var(--dga-error-700); font-weight: var(--dga-fw-medium); }
+  .flow-foot { display: flex; flex-wrap: wrap; gap: var(--dga-space-3); align-items: center; }
+  .flow-foot .spacer { flex: 1; }
+  .sum-section { border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); }
+  .sum-section__head { display: flex; align-items: center; justify-content: space-between; gap: var(--dga-space-3); padding: var(--dga-space-3) var(--dga-space-4); background: var(--dga-surface-sunken); border-block-end: 1px solid var(--dga-border); border-start-start-radius: var(--dga-radius-md); border-start-end-radius: var(--dga-radius-md); }
+  .sum-section__head h3 { font-size: var(--dga-fs-md); }
+  .sum-section__body { padding: var(--dga-space-2) var(--dga-space-4); }
+  .sum-section .dl dt, .sum-section .dl dd { border-block-end-color: var(--dga-gray-100); }
+  .sum-section .dl > :nth-last-child(-n+2) { border-block-end: 0; }
+  .sent { text-align: start; display: grid; gap: var(--dga-space-5); }
+  .sent__icon { inline-size: 56px; block-size: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--dga-success-50); color: var(--dga-success-700); border: 1px solid var(--dga-success-200); }
+  .sent__icon svg { inline-size: 28px; block-size: 28px; }
+  .timeline { list-style: none; display: grid; gap: 0; }
+  .timeline li { display: grid; grid-template-columns: 32px 1fr; gap: var(--dga-space-3); padding-block-end: var(--dga-space-4); position: relative; }
+  .timeline li::before { content: ""; position: absolute; inset-inline-start: 15px; inset-block: 28px 0; inline-size: 2px; background: var(--dga-border); }
+  .timeline li:last-child::before { content: none; }
+  .timeline .dot { inline-size: 32px; block-size: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--dga-surface); border: 1.5px solid var(--dga-gray-400); color: var(--dga-text-muted); }
+  .timeline .is-done .dot { background: var(--dga-success-600); border-color: var(--dga-success-600); color: var(--dga-gray-0); }
+  .timeline .is-now .dot { border-color: var(--dga-gray-950); color: var(--dga-gray-950); border-width: 2px; }
+  @media (max-width: 720px) {
+    .result { grid-template-columns: 1fr; }
+    .result .kpi { grid-row: auto; grid-template-rows: auto; border-inline-start: 0; border-block-start: 1px solid var(--dga-border); }
+    .result .kpi:first-child { border-block-start: 0; }
+    .step-row { display: grid; }
+    .flow-foot .btn { flex: 1 1 100%; }
+    .flow-foot .spacer { display: none; }
+    .flow-foot #btn-next, .flow-foot #btn-send { order: -1; }
+  }
+</style>
+</head>
+<body data-ws="app" data-page="update" data-roles="manager" data-crumb="مهامي|تحديث نوفمبر">
+<main id="main" class="page">
+
+  <a class="btn btn--tertiary" href="my-tasks.html" style="margin-inline-start:-12px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>مهامي</a>
+
+  <header class="ctx" style="margin-block-start:8px">
+    <p class="page-head__eyebrow">تحديث نوفمبر 2026، حزمة رأس المال البشري</p>
+    <h1>تصميم وتنفيذ برامج إدارة المواهب وإدارة الأداء الوظيفي</h1>
+    <p class="ctx__meta"><span>آخر تحديث منشور في 17 أكتوبر: <b class="num">38%</b> فعلي مقابل <span class="num">50%</span> مخطط</span><span data-badge="behind"></span></p>
+  </header>
+
+  <!-- ============ Stage A: the one question ============ -->
+  <section class="stage card q-card" id="stage-q" aria-labelledby="q-title">
+    <form class="card__body" id="q-form" novalidate>
+      <div class="alert alert--error err-summary" role="alert" tabindex="-1" id="q-err" hidden>
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>
+        <div class="alert__body"><p class="alert__title">اختر إجابة للمتابعة</p><ul><li><a href="#q-yes">هل تغيّر شيء منذ آخر تحديث؟</a></li></ul></div>
+      </div>
+      <fieldset>
+        <legend class="q-legend" id="q-title">هل تغيّر شيء منذ آخر تحديث؟</legend>
+        <div class="choices choices--row">
+          <label class="choice choice--big"><input type="radio" name="changed" value="yes" id="q-yes">
+            <span class="choice__body"><span class="choice__title">نعم، هناك تقدم أو تغيير</span><span class="choice__desc">الخطوات: النسب، ما تم، القادم والعوائق، ثم المراجعة والإرسال.</span></span></label>
+          <label class="choice choice--big"><input type="radio" name="changed" value="no">
+            <span class="choice__body"><span class="choice__title">لا تغيير</span><span class="choice__desc">تُرسل نسخة من تحديث أكتوبر بتاريخ اليوم إلى مكتب البرنامج للمراجعة.</span></span></label>
+        </div>
+      </fieldset>
+      <div class="flow-foot">
+        <button class="btn btn--primary" type="submit">متابعة</button>
+        <span class="spacer"></span>
+        <a class="t-sm" href="#" data-soon="1">تحتاج تعديل المعالم أو العوائق السابقة؟ افتح النموذج الكامل</a>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ Stage B: no change ============ -->
+  <section class="stage card" id="stage-nochange" hidden aria-labelledby="nc-title">
+    <div class="card__body stack" style="--stack:20px">
+      <h2 id="nc-title" tabindex="-1" style="font-size:var(--dga-fs-2xl);line-height:var(--dga-lh-2xl)">سنرسل آخر تحديث كما هو</h2>
+      <dl class="dl">
+        <dt>الإنجاز الفعلي</dt><dd class="num">38%</dd>
+        <dt>الإنجاز المخطط</dt><dd class="num">50%</dd>
+        <dt>العوائق</dt><dd>لا يوجد</dd>
+        <dt>تاريخ التحديث</dt><dd>اليوم، 23 نوفمبر 2026 <span class="hj">13 جمادى الآخرة 1448</span></dd>
+      </dl>
+      <div class="alert alert--warning">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg>
+        <div class="alert__body"><p class="alert__title">المخطط لهذا الشهر ارتفع إلى 56%</p><p>إن بقي المنجز 38% فستصبح الحالة «متأخر جدًا» (18 نقطة). إن تقدّم العمل فاختر «نعم» وحدّث النسبة.</p></div>
+      </div>
+      <div class="flow-foot">
+        <button class="btn btn--primary" type="button" data-send>إرسال للمراجعة</button>
+        <button class="btn btn--secondary" type="button" data-to="q">رجوع</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Stage C: 4 steps ============ -->
+  <section class="stage card flow-card" id="stage-steps" hidden aria-label="خطوات التحديث">
+    <div class="card__head">
+      <nav class="steps" aria-label="خطوات التحديث" style="inline-size:100%">
+        <p class="steps__count" id="steps-count" aria-live="polite">الخطوة 1 من 4: النسب</p>
+        <ol class="steps__list" style="--steps:4" id="steps-list"></ol>
+      </nav>
+    </div>
+    <form class="card__body" id="steps-form" novalidate>
+      <div class="alert alert--error err-summary" role="alert" tabindex="-1" id="s-err" hidden>
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>
+        <div class="alert__body"><p class="alert__title">راجع ما يلي قبل المتابعة</p><ul id="s-err-list"></ul></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="panel" data-step="1">
+        <h2 tabindex="-1">النسب</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label class="field__label" for="planned">الإنجاز المخطط حتى نهاية نوفمبر</label>
+            <div class="input-affix"><input class="input input--num" id="planned" value="56" readonly aria-describedby="planned-hint"><span class="input-affix__suffix">%</span></div>
+            <p class="field__hint" id="planned-hint">من الخطة المعتمدة. لتغييره تواصل مع مكتب البرنامج.</p>
+          </div>
+          <div class="field" id="f-actual">
+            <label class="field__label" for="actual">الإنجاز الفعلي حتى اليوم <span class="req" aria-hidden="true">*</span></label>
+            <div class="input-affix"><input class="input input--num" id="actual" inputmode="numeric" autocomplete="off" aria-describedby="actual-hint actual-err" required><span class="input-affix__suffix">%</span></div>
+            <p class="field__hint" id="actual-hint">آخر قيمة منشورة 38%.</p>
+            <p class="field__error" id="actual-err"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span>اكتب نسبة الإنجاز، رقمًا من 0 إلى 100.</span></p>
+          </div>
+        </div>
+        <div class="result" aria-live="polite">
+          <div class="kpi"><span class="kpi__label">الإنجاز الفعلي</span><span class="kpi__value num" id="r-actual">—</span><span class="kpi__note">آخر منشور: <span class="num">38%</span></span></div>
+          <div class="kpi"><span class="kpi__label">الانحراف عن الخطة</span><span class="kpi__value num" id="r-gap">—</span><span class="kpi__note">نقطة</span></div>
+          <div class="kpi"><span class="kpi__label">الحالة بعد هذا التحديث</span><span class="kpi__value" id="r-status" style="font-size:var(--dga-fs-md)"><span class="t-muted">تظهر بعد كتابة الإنجاز الفعلي</span></span><span class="kpi__note">تُحسب تلقائيًا: حتى 5 نقاط على المسار، أكثر من 15 متأخر جدًا</span></div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="panel" data-step="2" hidden>
+        <h2 tabindex="-1">ما تم من خطوات الشهر الماضي</h2>
+        <p class="t-secondary">هذه الخطوات كتبتها في تحديث أكتوبر. حدّد ما حدث لكل واحدة.</p>
+        <div>
+          <fieldset class="step-row" id="sr-1"><legend>اعتماد إطار إدارة المواهب من اللجنة التوجيهية</legend>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="s1" value="done"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تمت</span></label>
+              <label class="pill"><input type="radio" name="s1" value="ongoing"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>جارية</span></label>
+              <label class="pill"><input type="radio" name="s1" value="moved"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M11 6l-6 6 6 6"/></svg>رُحّلت للشهر القادم</span></label>
+            </div></fieldset>
+          <fieldset class="step-row" id="sr-2"><legend>إعداد مسودة إطار إدارة الأداء</legend>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="s2" value="done"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تمت</span></label>
+              <label class="pill"><input type="radio" name="s2" value="ongoing"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>جارية</span></label>
+              <label class="pill"><input type="radio" name="s2" value="moved"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M11 6l-6 6 6 6"/></svg>رُحّلت للشهر القادم</span></label>
+            </div></fieldset>
+          <fieldset class="step-row" id="sr-3"><legend>ورشة المسارات المهنية مع ممثلي الإدارات</legend>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="s3" value="done"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تمت</span></label>
+              <label class="pill"><input type="radio" name="s3" value="ongoing"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>جارية</span></label>
+              <label class="pill"><input type="radio" name="s3" value="moved"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M11 6l-6 6 6 6"/></svg>رُحّلت للشهر القادم</span></label>
+            </div></fieldset>
+        </div>
+        <div class="field">
+          <label class="field__label" for="extra">خطوات أخرى أُنجزت <span class="opt">(اختياري)</span></label>
+          <textarea class="textarea" id="extra" rows="3" placeholder="مثال: اكتمل حصر الوظائف القيادية في الإدارات الخمس."></textarea>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="panel" data-step="3" hidden>
+        <h2 tabindex="-1">القادم والعوائق</h2>
+        <div class="field" id="f-next">
+          <span class="field__label" id="next-label">ما الخطوات القادمة في ديسمبر؟ <span class="req" aria-hidden="true">*</span></span>
+          <p class="field__hint">تظهر لك في تحديث ديسمبر.</p>
+          <ul class="next-list" id="next-list" aria-labelledby="next-label"></ul>
+          <p class="field__error" id="next-err"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span>اكتب خطوة قادمة واحدة على الأقل.</span></p>
+          <div><button class="btn btn--tertiary" type="button" id="add-next"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة خطوة</button></div>
+        </div>
+        <fieldset class="field" id="f-block">
+          <legend class="field__label" style="margin-block-end:8px">هل يوجد عائق يؤخر المبادرة؟ <span class="req" aria-hidden="true">*</span></legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="block" value="no" id="block-no"><span>لا</span></label>
+            <label class="pill"><input type="radio" name="block" value="yes"><span>نعم</span></label>
+          </div>
+          <p class="field__error"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span>اختر «لا» أو «نعم».</span></p>
+        </fieldset>
+        <div id="block-detail" hidden class="stack" style="--stack:20px">
+          <div class="field" id="f-block-text">
+            <label class="field__label" for="block-text">صف العائق في جملة أو جملتين <span class="req" aria-hidden="true">*</span></label>
+            <textarea class="textarea" id="block-text" rows="3" aria-describedby="block-err"></textarea>
+            <p class="field__error" id="block-err"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span>صف العائق ليعرف مكتب البرنامج كيف يساعد.</span></p>
+          </div>
+          <div class="choices choices--row">
+            <label class="choice"><input type="checkbox" id="need-support"><span class="choice__body"><span class="choice__title">أحتاج دعمًا من مكتب البرنامج</span><span class="choice__desc">يصل الطلب لقائد المسار مع هذا التحديث.</span></span></label>
+            <label class="choice"><input type="checkbox" id="need-leader"><span class="choice__body"><span class="choice__title">يحتاج قرار القيادة</span><span class="choice__desc">بعد النشر يظهر لرئيس الجهة ضمن «قرارات تنتظركم».</span></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="panel" data-step="4" hidden>
+        <h2 tabindex="-1">راجع تحديثك قبل الإرسال</h2>
+        <div id="summary" class="stack" style="--stack:16px"></div>
+        <div class="alert">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+          <div class="alert__body"><p>بعد الإرسال يراجعه مكتب البرنامج ثم ينشره أو يعيده إليك بملاحظة. لا يمكن تعديله أثناء المراجعة.</p></div>
+        </div>
+      </div>
+
+      <div class="flow-foot">
+        <button class="btn btn--secondary" type="button" id="btn-prev">السابق</button>
+        <button class="btn btn--tertiary" type="button" id="btn-draft">حفظ كمسودة</button>
+        <span class="spacer"></span>
+        <button class="btn btn--primary" type="submit" id="btn-next">التالي</button>
+        <button class="btn btn--primary" type="button" id="btn-send" data-send hidden>إرسال للمراجعة</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ Stage D: sent ============ -->
+  <section class="stage card" id="stage-sent" hidden aria-labelledby="sent-title">
+    <div class="card__body sent">
+      <span class="sent__icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10"/></svg></span>
+      <div class="stack" style="--stack:8px" role="status">
+        <h2 id="sent-title" tabindex="-1" style="font-size:var(--dga-fs-2xl);line-height:var(--dga-lh-2xl)">أُرسل تحديثك للمراجعة</h2>
+        <p class="t-secondary" id="sent-sub">وصل إلى مكتب البرنامج اليوم 23 نوفمبر. ستصلك رسالة عند نشره أو إعادته.</p>
+      </div>
+      <ol class="timeline" aria-label="ما الذي يحدث بعد الإرسال">
+        <li class="is-done"><span class="dot"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg></span><span><b>أرسلت التحديث</b><br><span class="t-sm t-muted">اليوم</span></span></li>
+        <li class="is-now"><span class="dot"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>يراجعه مكتب البرنامج</b><br><span class="t-sm t-muted">عادة خلال يومي عمل</span></span></li>
+        <li><span class="dot"><span class="num t-xs">3</span></span><span><b>يُنشر ويظهر للقيادة</b><br><span class="t-sm t-muted">أو يُعاد إليك بملاحظة واضحة</span></span></li>
+      </ol>
+      <div class="flow-foot">
+        <a class="btn btn--primary" href="quick-update.html">التحديث التالي: التعاقب الوظيفي</a>
+        <a class="btn btn--secondary" href="my-tasks.html">العودة إلى مهامي</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const STEPS = ["النسب", "ما تم من خطوات الشهر الماضي", "القادم والعوائق", "مراجعة وإرسال"];
+  const PLANNED = 56;
+  let step = 1, maxReached = 1;
+
+  const show = (id) => {
+    $$(".stage").forEach(s => s.hidden = s.id !== "stage-" + id);
+    const h = $("#stage-" + id + " [tabindex='-1']:not(.err-summary)") || $("#stage-" + id + " h2");
+    if (h && id !== "q") h.focus();
+    window.scrollTo({ top: 0 });
+  };
+  document.addEventListener("click", e => { const t = e.target.closest("[data-to]"); if (t) show(t.dataset.to); });
+
+  /* ---- Stage A ---- */
+  $("#q-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const v = $("input[name=changed]:checked");
+    $("#q-err").hidden = !!v;
+    if (!v) { $("#q-err").focus(); return; }
+    if (v.value === "no") show("nochange");
+    else { show("steps"); go(1); }
+  });
+
+  /* ---- Steps indicator ---- */
+  function renderSteps() {
+    $("#steps-count").textContent = `الخطوة ${step} من ${STEPS.length}: ${STEPS[step - 1]}`;
+    $("#steps-list").innerHTML = STEPS.map((n, i) => {
+      const k = i + 1;
+      const done = k < step || (k <= maxReached && k !== step);
+      const cls = k === step ? "" : (k < step ? "is-done" : "");
+      const state = k === step ? "الحالية" : (k < step ? "مكتملة" : "لم تبدأ");
+      const marker = k < step ? '<svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>' : k;
+      const inner = `<span class="steps__bar"></span><span class="steps__label"><span class="steps__marker">${marker}</span><span><span class="steps__name">${n}</span><span class="steps__state">${state}</span></span></span>`;
+      const clickable = k < step;
+      return `<li class="steps__item ${cls}"${k === step ? ' aria-current="step"' : ""}>${clickable ? `<button type="button" class="steps__link" data-go="${k}" aria-label="الخطوة ${k}: ${n} (مكتملة) — رجوع إليها">${inner}</button>` : inner}</li>`;
+    }).join("");
+  }
+  $("#steps-list").addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(+b.dataset.go); });
+
+  function go(n) {
+    step = n; maxReached = Math.max(maxReached, n);
+    $$(".panel").forEach(p => p.hidden = +p.dataset.step !== n);
+    $("#btn-prev").hidden = n === 1;
+    $("#btn-next").hidden = n === 4;
+    $("#btn-send").hidden = n !== 4;
+    $("#s-err").hidden = true;
+    if (n === 4) buildSummary();
+    renderSteps();
+    const h = $(`.panel[data-step="${n}"] h2`); h && h.focus();
+  }
+
+  /* ---- Step 1: live status ---- */
+  const actual = $("#actual");
+  function statusFor(a) {
+    const gap = PLANNED - a;
+    if (a >= 100) return "complete";
+    if (gap <= 5) return "ontrack";
+    if (gap <= 15) return "behind";
+    return "wellbehind";
+  }
+  function upd() {
+    const v = actual.value.trim().replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+    const a = Number(v);
+    const ok = v !== "" && Number.isFinite(a) && a >= 0 && a <= 100;
+    $("#r-actual").textContent = ok ? a + "%" : "—";
+    $("#r-gap").textContent = ok ? Math.max(0, PLANNED - a) : "—";
+    $("#r-status").innerHTML = ok ? VBadge(statusFor(a)) : '<span class="t-muted t-sm">تظهر بعد كتابة الإنجاز الفعلي</span>';
+    return ok ? a : null;
+  }
+  actual.addEventListener("input", () => { upd(); $("#s-err").hidden = true; $("#f-actual").classList.remove("is-invalid"); actual.removeAttribute("aria-invalid"); });
+
+  /* ---- Step 3: dynamic list + obstacle ---- */
+  const nextList = $("#next-list");
+  function addNext(val = "") {
+    const i = nextList.children.length + 1;
+    const li = document.createElement("li");
+    li.innerHTML = `<label class="visually-hidden" for="nx-${i}">الخطوة القادمة ${i}</label><input class="input" id="nx-${i}" value="${val}" placeholder="مثال: عرض إطار الأداء على اللجنة التوجيهية"><button class="btn icon-btn btn--tertiary" type="button" aria-label="حذف الخطوة ${i}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    li.querySelector("button").onclick = () => { li.remove(); if (!nextList.children.length) addNext(); };
+    nextList.appendChild(li);
+    return li.querySelector("input");
+  }
+  addNext();
+  $("#add-next").onclick = () => addNext().focus();
+  $$("input[name=block]").forEach(r => r.addEventListener("change", () => {
+    $("#block-detail").hidden = r.value !== "yes" || !r.checked;
+    $("#f-block").classList.remove("is-invalid");
+  }));
+  // Rolled-over steps from step 2 pre-fill the next steps (so nothing is typed twice)
+  $$("input[name^=s]").forEach(r => r.addEventListener("change", () => {
+    r.closest(".step-row").classList.remove("is-invalid");
+    if (r.value === "moved" && r.checked) {
+      const txt = r.closest(".step-row").querySelector("legend").textContent;
+      const exists = $$("#next-list input").some(i => i.value === txt);
+      if (!exists) { const empty = $$("#next-list input").find(i => !i.value); empty ? (empty.value = txt) : addNext(txt); }
+    }
+  }));
+
+  /* ---- Validation per step ---- */
+  function validate(n) {
+    const errs = [];
+    if (n === 1) {
+      const a = upd();
+      const bad = a === null;
+      $("#f-actual").classList.toggle("is-invalid", bad);
+      bad ? actual.setAttribute("aria-invalid", "true") : actual.removeAttribute("aria-invalid");
+      if (bad) errs.push(["#actual", "اكتب نسبة الإنجاز الفعلي (من 0 إلى 100)"]);
+    }
+    if (n === 2) {
+      [1, 2, 3].forEach(k => {
+        const ok = $(`input[name=s${k}]:checked`);
+        $("#sr-" + k).classList.toggle("is-invalid", !ok);
+        if (!ok) errs.push([`#sr-${k} input`, "حدّد ما حدث في: " + $(`#sr-${k} legend`).textContent]);
+      });
+    }
+    if (n === 3) {
+      const anyNext = $$("#next-list input").some(i => i.value.trim());
+      $("#f-next").classList.toggle("is-invalid", !anyNext);
+      if (!anyNext) errs.push(["#next-list input", "اكتب خطوة قادمة واحدة على الأقل"]);
+      const b = $("input[name=block]:checked");
+      $("#f-block").classList.toggle("is-invalid", !b);
+      if (!b) errs.push(["#block-no", "أجب: هل يوجد عائق؟"]);
+      if (b && b.value === "yes") {
+        const t = $("#block-text").value.trim();
+        $("#f-block-text").classList.toggle("is-invalid", !t);
+        t ? $("#block-text").removeAttribute("aria-invalid") : $("#block-text").setAttribute("aria-invalid", "true");
+        if (!t) errs.push(["#block-text", "صف العائق"]);
+      }
+    }
+    const box = $("#s-err");
+    if (errs.length) {
+      $("#s-err-list").innerHTML = errs.map(([sel, msg]) => `<li><a href="#" data-focus="${sel}">${msg}</a></li>`).join("");
+      box.hidden = false; box.focus();
+    } else box.hidden = true;
+    return !errs.length;
+  }
+  $("#s-err").addEventListener("click", e => { const a = e.target.closest("[data-focus]"); if (a) { e.preventDefault(); $(a.dataset.focus).focus(); } });
+
+  $("#steps-form").addEventListener("submit", e => { e.preventDefault(); if (validate(step)) go(step + 1); });
+  $("#btn-prev").onclick = () => go(step - 1);   // going back keeps every answer (panels stay in the DOM)
+  $("#btn-draft").onclick = () => notify({ title: "تم حفظ المسودة", text: "تجدها في «مهامي» وتكمل منها متى ما أردت." });
+
+  /* ---- Step 4: summary ---- */
+  function buildSummary() {
+    const a = upd();
+    const label = { done: "تمت", ongoing: "جارية", moved: "رُحّلت للشهر القادم" };
+    const rows = [1, 2, 3].map(k => {
+      const v = $(`input[name=s${k}]:checked`);
+      return `<dt>${$(`#sr-${k} legend`).textContent}</dt><dd>${v ? label[v.value] : "—"}</dd>`;
+    }).join("");
+    const extra = $("#extra").value.trim();
+    const next = $$("#next-list input").map(i => i.value.trim()).filter(Boolean);
+    const b = $("input[name=block]:checked");
+    const blk = b && b.value === "yes";
+    const flags = [];
+    if (blk && $("#need-support").checked) flags.push("طلب دعم من مكتب البرنامج");
+    if (blk && $("#need-leader").checked) flags.push(VBadge("leader"));
+    const sec = (title, n, html) => `<section class="sum-section"><div class="sum-section__head"><h3>${title}</h3><button type="button" class="btn btn--tertiary btn--sm" data-go-edit="${n}">تعديل<span class="visually-hidden"> ${title}</span></button></div><div class="sum-section__body"><dl class="dl">${html}</dl></div></section>`;
+    $("#summary").innerHTML =
+      sec("النسب", 1, `<dt>الإنجاز الفعلي</dt><dd class="num">${a}%</dd><dt>الإنجاز المخطط</dt><dd class="num">${PLANNED}%</dd><dt>الحالة</dt><dd>${VBadge(statusFor(a))}</dd>`) +
+      sec("ما تم من خطوات الشهر الماضي", 2, rows + (extra ? `<dt>خطوات أخرى</dt><dd>${extra.replace(/</g, "&lt;")}</dd>` : "")) +
+      sec("القادم والعوائق", 3, `<dt>القادم في ديسمبر</dt><dd>${next.map(x => x.replace(/</g, "&lt;")).join("<br>")}</dd><dt>العوائق</dt><dd>${blk ? $("#block-text").value.replace(/</g, "&lt;") : "لا يوجد"}</dd>${flags.length ? `<dt>طلبات</dt><dd class="cluster" style="--gap:8px">${flags.join(" ")}</dd>` : ""}`);
+  }
+  $("#summary").addEventListener("click", e => { const b = e.target.closest("[data-go-edit]"); if (b) go(+b.dataset.goEdit); });
+
+  /* ---- Send ---- */
+  $$("[data-send]").forEach(btn => btn.addEventListener("click", () => {
+    btn.setAttribute("aria-busy", "true");
+    setTimeout(() => {
+      btn.removeAttribute("aria-busy");
+      if (btn.closest("#stage-nochange")) $("#sent-sub").textContent = "أُرسلت نسخة من آخر تحديث بتاريخ اليوم إلى مكتب البرنامج. ستصلك رسالة عند نشره أو إعادته.";
+      show("sent");
+      notify({ title: "تم إرسال التحديث بنجاح", text: "وصل إلى مكتب البرنامج للمراجعة." });
+    }, 600);
+  }));
+
+  // Deep link for previews/screenshots: #step-2, #nochange, #sent
+  const h = location.hash;
+  if (h.startsWith("#step-")) { $("#q-yes").checked = true; actual.value = "45"; upd(); show("steps"); const n = +h.slice(6); if (n >= 2) { ["s1","s2","s3"].forEach((s, i) => { $(`input[name=${s}][value=${["done","ongoing","moved"][i]}]`).checked = true; $(`input[name=${s}][value=${["done","ongoing","moved"][i]}]`).dispatchEvent(new Event("change")); }); } if (n >= 4) { $("input[name=block][value=yes]").checked = true; $("#block-detail").hidden = false; $("#block-text").value = "تأخر اعتماد السياسات المحدثة يؤخر بدء إطار المواهب."; $("#need-leader").checked = true; } go(1); for (let k = 2; k <= n; k++) go(k); }
+  else if (h === "#nochange") show("nochange");
+  else if (h === "#sent") show("sent");
+})();
+</script>
+</body>
+</html>

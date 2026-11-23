@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>خلاصة القيادة · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .hero { background: var(--dga-sa-950); color: var(--dga-gray-0); }
+  .hero__in { padding: var(--dga-space-6) var(--dga-space-6) 0; max-inline-size: calc(var(--dga-content-max) + 2 * var(--dga-space-6)); display: grid; gap: var(--dga-space-3); }
+  .hero__eyebrow { color: var(--dga-sa-200); font-size: var(--dga-fs-sm); font-weight: var(--dga-fw-medium); display: flex; flex-wrap: wrap; gap: var(--dga-space-2) var(--dga-space-4); align-items: center; }
+  .meet { display: inline-flex; align-items: center; gap: var(--dga-space-2); padding: 0 var(--dga-space-3); min-block-size: 28px; border: 1px solid var(--dga-gold-400); color: var(--dga-gold-300); border-radius: var(--dga-radius-sm); font-weight: var(--dga-fw-semibold); }
+  .hero h1 { font-size: var(--dga-fs-4xl); line-height: var(--dga-lh-4xl); }
+  .hero__lede { color: var(--dga-sa-100); font-size: var(--dga-fs-lg); line-height: var(--dga-lh-lg); max-inline-size: 70ch; }
+  .hero__lede b { color: var(--dga-gray-0); }
+  .hero .kpis { margin-block-start: var(--dga-space-4); border-block-start: 1px solid var(--dga-sa-800); margin-inline: calc(-1 * var(--dga-space-5)); }
+  .hero .kpi { border-color: var(--dga-sa-800); padding-block: var(--dga-space-5); }
+  .hero .kpi__label { color: var(--dga-sa-200); }
+  .hero .kpi__value small, .hero .kpi__note { color: var(--dga-sa-200); }
+  .hero .kpi__note b { color: var(--dga-gray-0); font-weight: var(--dga-fw-semibold); }
+
+  .dec { list-style: none; display: grid; gap: var(--dga-space-4); counter-reset: d; }
+  .dec__item { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: var(--dga-space-3) var(--dga-space-5); padding: var(--dga-space-5); align-items: start; }
+  .dec__n { inline-size: 40px; block-size: 40px; border-radius: var(--dga-radius-md); background: var(--dga-gray-950); color: var(--dga-gray-0); display: grid; place-items: center; font-weight: var(--dga-fw-bold); font-size: var(--dga-fs-lg); }
+  .dec__title { font-size: var(--dga-fs-xl); line-height: var(--dga-lh-xl); font-weight: var(--dga-fw-bold); }
+  .dec__body { display: grid; gap: var(--dga-space-3); }
+  .dec__why { color: var(--dga-text-secondary); }
+  .moves { display: grid; gap: var(--dga-space-2); }
+  .moves__label { font-size: var(--dga-fs-sm); font-weight: var(--dga-fw-semibold); }
+  .moves ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--dga-space-2); }
+  .moves li { display: inline-flex; align-items: center; gap: var(--dga-space-2); padding: var(--dga-space-1) var(--dga-space-3); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-sm); font-size: var(--dga-fs-sm); background: var(--dga-surface-sunken); }
+  .dec__act { display: grid; gap: var(--dga-space-2); justify-items: end; }
+  .dec__act .btn[aria-pressed="true"] { --btn-bg: var(--dga-sa-50); --btn-fg: var(--dga-sa-800); --btn-bd: var(--dga-sa-600); }
+  .dec__src { font-size: var(--dga-fs-xs); line-height: var(--dga-lh-xs); color: var(--dga-text-muted); }
+
+  /* Status-by-package chart */
+  .chart { display: grid; gap: var(--dga-space-4); }
+  .chart__row { display: grid; grid-template-columns: 200px minmax(0, 1fr) 96px; gap: var(--dga-space-4); align-items: center; }
+  .chart__name { font-weight: var(--dga-fw-semibold); line-height: var(--dga-lh-sm); }
+  .chart__name small { display: block; color: var(--dga-text-muted); font-weight: var(--dga-fw-regular); }
+  .chart__bar { display: flex; gap: 2px; block-size: 32px; }
+  .seg-s { display: grid; place-items: center; font-size: var(--dga-fs-xs); font-weight: var(--dga-fw-semibold); color: var(--dga-gray-0); min-inline-size: 0; outline-offset: 2px; cursor: default; }
+  .seg-s:first-child { border-start-start-radius: 4px; border-end-start-radius: 4px; }
+  .seg-s:last-child { border-start-end-radius: 4px; border-end-end-radius: 4px; }
+  .seg-s:hover, .seg-s:focus-visible { filter: brightness(0.92); }
+  .c-wellbehind { background: var(--dga-error-600); }
+  .c-behind { background: var(--dga-warning-600); color: var(--dga-gray-950); }
+  .c-ontrack { background: var(--dga-success-700); }
+  .c-complete { background: var(--dga-info-700); }
+  .c-planned { background: var(--dga-gray-300); color: var(--dga-gray-950); }
+  .c-nofig { background: var(--dga-gray-500); }
+  .c-noupd { background: repeating-linear-gradient(135deg, var(--dga-gray-400) 0 2px, var(--dga-surface) 2px 6px); color: var(--dga-gray-950); box-shadow: inset 0 0 0 1px var(--dga-gray-400); }
+  .c-noupd .seg-lbl { background: var(--dga-surface); padding: 0 4px; border-radius: 2px; line-height: 18px; }
+  .chart__late { font-size: var(--dga-fs-sm); color: var(--dga-text-secondary); text-align: end; }
+  .chart__late b { color: var(--dga-text-primary); }
+  .legend { list-style: none; display: flex; flex-wrap: wrap; gap: var(--dga-space-2) var(--dga-space-5); font-size: var(--dga-fs-sm); color: var(--dga-text-secondary); }
+  .legend li { display: inline-flex; align-items: center; gap: var(--dga-space-2); }
+  .legend i { inline-size: 12px; block-size: 12px; border-radius: 2px; display: inline-block; }
+  .legend b { color: var(--dga-text-primary); }
+  .tip { position: fixed; z-index: 70; pointer-events: none; background: var(--dga-gray-950); color: var(--dga-gray-0); padding: var(--dga-space-2) var(--dga-space-3); border-radius: var(--dga-radius-sm); font-size: var(--dga-fs-sm); line-height: var(--dga-lh-sm); box-shadow: var(--dga-shadow-md); }
+  .src-note { display: flex; flex-wrap: wrap; gap: var(--dga-space-2) var(--dga-space-5); align-items: center; color: var(--dga-text-muted); font-size: var(--dga-fs-sm); }
+
+  @media (max-width: 1080px) { .hero__in { padding-inline: var(--dga-space-4); } .hero .kpis { margin-inline: calc(-1 * var(--dga-space-4)); } }
+  @media (max-width: 720px) {
+    .hero h1 { font-size: var(--dga-fs-3xl); line-height: var(--dga-lh-3xl); }
+    .hero__lede { font-size: var(--dga-fs-md); line-height: var(--dga-lh-md); }
+    .hero .kpi { border-color: var(--dga-sa-800); }
+    .dec__item { grid-template-columns: 40px minmax(0, 1fr); padding: var(--dga-space-4); }
+    .dec__act { grid-column: 1 / -1; justify-items: stretch; }
+    .chart__row { grid-template-columns: minmax(0, 1fr) auto; }
+    .chart__bar { grid-column: 1 / -1; grid-row: 2; }
+  }
+</style>
+</head>
+<body data-ws="intel" data-page="brief" data-roles="head pmo" data-crumb="خلاصة القيادة">
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero__in">
+      <p class="hero__eyebrow"><span>بيانات منشورة حتى 20 نوفمبر <span class="hj">10 جمادى الآخرة</span></span><span class="meet"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>اجتماع القيادة: 25 نوفمبر <span class="hj">15 جمادى الآخرة</span></span></p>
+      <h1 id="hero-h">3 قرارات معلّقة تؤثر على 7 مبادرات</h1>
+      <p class="hero__lede">17 مبادرة من 33 على المسار. معظم التأخير مرتبط بقرار واحد: <b>نطاق دمج الإدارات</b>، معلّق منذ 128 يومًا، ويوقف الهيكل التنظيمي وثلاث مبادرات تعتمد عليه.</p>
+      <div class="kpis">
+        <div class="kpi"><span class="kpi__label">على المسار</span><span class="kpi__value num">17</span><span class="kpi__note">من <b class="num">33</b> مبادرة</span></div>
+        <div class="kpi"><span class="kpi__label">متأخرة</span><span class="kpi__value num">6</span><span class="kpi__note">منها <b>2</b> متأخرة جدًا</span></div>
+        <div class="kpi"><span class="kpi__label">قرارات تنتظركم</span><span class="kpi__value num">3</span><span class="kpi__note">تحرّك <b>7</b> مبادرات</span></div>
+        <div class="kpi"><span class="kpi__label">الإنجاز الفعلي لخطة 2026</span><span class="kpi__value num">61.4%</span><span class="kpi__note">المخطط <b class="num">67.9%</b>، انحراف <b class="num">6.5</b> نقطة</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page">
+    <section id="decisions" aria-labelledby="dec-h">
+      <div class="section-head"><h2 id="dec-h">القرارات المطلوبة منكم</h2><p>مرتبة حسب عدد المبادرات التي تتحرك بها</p></div>
+      <ol class="dec">
+        <li class="card dec__item">
+          <span class="dec__n" aria-hidden="true">1</span>
+          <div class="dec__body">
+            <div class="cluster" style="--gap:8px"><span class="badge badge--wellbehind"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>معلّق منذ 128 يومًا</span></div>
+            <h3 class="dec__title">اعتماد نطاق دمج الإدارات</h3>
+            <p class="dec__why">لم تحدد اللجنة التوجيهية بعد أي الإدارات تُدمج. بدون هذا القرار لا يمكن اعتماد الهيكل التنظيمي، فتبقى مبادرات إعادة الهيكلة الثلاث في التخطيط.</p>
+            <div class="moves"><span class="moves__label">يتحرك بقراركم 4 مبادرات</span>
+              <ul><li>الهيكل التنظيمي التفصيلي للقطاع <span class="t-muted" style="white-space:nowrap"><bdi>42%</bdi> من <bdi>65%</bdi></span></li><li>إعادة هيكلة العمليات التشغيلية</li><li>إعادة هيكلة الخدمات المساندة</li><li>إعادة هيكلة الخدمات الأخرى</li></ul></div>
+          </div>
+          <div class="dec__act">
+            <button class="btn btn--secondary" type="button" aria-pressed="false" data-agenda>إدراج في اجتماع 25 نوفمبر</button>
+            <span class="dec__src">رفعه مكتب البرنامج، وأكّده في 20 نوفمبر</span>
+          </div>
+        </li>
+        <li class="card dec__item">
+          <span class="dec__n" aria-hidden="true">2</span>
+          <div class="dec__body">
+            <div class="cluster" style="--gap:8px"><span class="badge badge--behind"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>معلّق منذ 82 يومًا</span></div>
+            <h3 class="dec__title">تحديد مواعيد مبادرتي الإجراءات ودليل الخدمات</h3>
+            <p class="dec__why">المبادرتان بلا جدول زمني حتى الآن، وتعتمد عليهما مبادرتان في الخدمات.</p>
+            <div class="moves"><span class="moves__label">يتحرك بقراركم مبادرتان</span>
+              <ul><li>رقمنة تجربة المستفيد وتيسيرها</li><li>إنشاء مراكز خدمات شاملة</li></ul></div>
+          </div>
+          <div class="dec__act">
+            <button class="btn btn--secondary" type="button" aria-pressed="false" data-agenda>إدراج في اجتماع 25 نوفمبر</button>
+            <span class="dec__src">رفعه مكتب البرنامج، وأكّده في 18 نوفمبر</span>
+          </div>
+        </li>
+        <li class="card dec__item">
+          <span class="dec__n" aria-hidden="true">3</span>
+          <div class="dec__body">
+            <div class="cluster" style="--gap:8px"><span class="badge badge--behind"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>معلّق منذ 40 يومًا</span></div>
+            <h3 class="dec__title">بدء آلية الأداء قبل اكتمال نموذجي العمليات</h3>
+            <p class="dec__why">الخطة تربط بدء آلية الأداء باكتمال نموذجي العمليات. إن بقي الربط كما هو تتأجل لوحات الأداء إلى ما بعد 2027.</p>
+            <div class="moves"><span class="moves__label">يتحرك بقراركم مبادرة واحدة</span>
+              <ul><li>استحداث آلية جديدة لإدارة الأداء</li></ul></div>
+          </div>
+          <div class="dec__act">
+            <button class="btn btn--secondary" type="button" aria-pressed="false" data-agenda>إدراج في اجتماع 25 نوفمبر</button>
+            <span class="dec__src">رفعه مكتب البرنامج، وأكّده في 12 نوفمبر</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card" id="packages" aria-labelledby="pk-h">
+      <div class="card__head">
+        <h2 id="pk-h">حالة المبادرات في كل حزمة</h2>
+        <span class="t-sm t-muted">33 مبادرة حسب حالتها</span>
+        <button class="btn btn--tertiary btn--sm end" type="button" aria-expanded="false" aria-controls="pk-table" id="pk-toggle">عرض كجدول</button>
+      </div>
+      <div class="card__body chart" id="chart"></div>
+      <div class="card__body" style="padding-block-start:0"><ul class="legend" id="legend" aria-label="مفتاح الألوان"></ul></div>
+      <div class="table-wrap" id="pk-table" hidden style="border-block-start:1px solid var(--dga-border)"></div>
+    </section>
+
+    <p class="src-note"><span><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-3px"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> للقراءة فقط: الأرقام من 30 بطاقة نشرها مكتب البرنامج، ولا تشمل المسودات.</span><a href="#" data-soon="1">اسأل المساعد عن هذه الخلاصة</a></p>
+  </div>
+</main>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+(function () {
+  const S = [
+    ["wellbehind", "متأخر جدًا"], ["behind", "متأخر عن المسار"], ["ontrack", "على المسار"], ["complete", "مكتمل"],
+    ["planned", "مخطط"], ["nofig", "تحديث بلا نسب"], ["noupd", "بلا تحديث"]
+  ];
+  const PK = [
+    ["التحول المؤسسي",   [1, 1, 3, 0, 3, 0, 1]],
+    ["الخدمات والعمليات", [0, 1, 6, 1, 1, 0, 0]],
+    ["رأس المال البشري",  [0, 2, 5, 1, 0, 1, 0]],
+    ["الأداء والتواصل",   [1, 0, 3, 0, 1, 0, 1]]
+  ];
+  const MAX = 9;
+  const chart = document.getElementById("chart");
+  chart.innerHTML = PK.map(([name, c]) => {
+    const total = c.reduce((a, b) => a + b, 0), late = c[0] + c[1];
+    const segs = c.map((n, i) => n ? `<span class="seg-s c-${S[i][0]}" style="flex:${n}" tabindex="0" role="img" aria-label="${name}: ${n} ${S[i][1]}" data-tip="<b>${S[i][1]}</b>: ${n} من ${total}"><span class="seg-lbl">${n}</span></span>` : "").join("");
+    return `<div class="chart__row"><span class="chart__name">${name}<small>${total} مبادرات</small></span><div class="chart__bar" style="inline-size:${total / MAX * 100}%">${segs}</div><span class="chart__late">${late ? `<b>${late}</b> ${late === 1 ? "متأخرة" : "متأخرتان"}` : "لا تأخر"}</span></div>`;
+  }).join("");
+  const tot = S.map((_, i) => PK.reduce((a, p) => a + p[1][i], 0));
+  document.getElementById("legend").innerHTML = S.map(([k, l], i) => `<li><i class="c-${k}"></i>${l} <b class="num">${tot[i]}</b></li>`).join("");
+  document.getElementById("pk-table").innerHTML = `<table class="table table--reflow"><caption class="visually-hidden">عدد المبادرات حسب الحالة في كل حزمة</caption><thead><tr><th scope="col">الحزمة</th>${S.map(s => `<th scope="col" class="is-num">${s[1]}</th>`).join("")}</tr></thead><tbody>${PK.map(([n, c]) => `<tr><td class="cell-main"><span class="cell-title">${n}</span></td>${c.map((v, i) => `<td class="is-num" data-label="${S[i][1]}">${v}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const tg = document.getElementById("pk-toggle");
+  tg.onclick = () => { const o = tg.getAttribute("aria-expanded") === "true"; tg.setAttribute("aria-expanded", String(!o)); document.getElementById("pk-table").hidden = o; tg.textContent = o ? "عرض كجدول" : "إخفاء الجدول"; };
+
+  // Hover / focus tooltip
+  const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; tip.setAttribute("aria-hidden", "true"); document.body.appendChild(tip);
+  const showTip = (el, x, y) => { tip.innerHTML = el.dataset.tip; tip.hidden = false; const r = tip.getBoundingClientRect(); tip.style.left = Math.min(window.innerWidth - r.width - 8, Math.max(8, x - r.width / 2)) + "px"; tip.style.top = (y - r.height - 10) + "px"; };
+  chart.addEventListener("mousemove", e => { const s = e.target.closest(".seg-s"); s ? showTip(s, e.clientX, e.clientY) : (tip.hidden = true); });
+  chart.addEventListener("mouseleave", () => tip.hidden = true);
+  chart.addEventListener("focusin", e => { const s = e.target.closest(".seg-s"); if (s) { const r = s.getBoundingClientRect(); showTip(s, r.left + r.width / 2, r.top); } });
+  chart.addEventListener("focusout", () => tip.hidden = true);
+
+  // Agenda toggles
+  let n = 0;
+  document.querySelectorAll("[data-agenda]").forEach(b => b.addEventListener("click", () => {
+    const on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", String(on));
+    b.innerHTML = on ? `${VIcon("check")}مُدرج في اجتماع 25 نوفمبر` : "إدراج في اجتماع 25 نوفمبر";
+    n += on ? 1 : -1;
+    notify(on ? { title: "تمت إضافة القرار إلى جدول الاجتماع", text: `في اجتماع 25 نوفمبر، ${n} من 3 قرارات.` } : { type: "info", title: "تمت إزالة القرار من جدول الاجتماع" });
+  }));
+})();
+</script>
+</body>
+</html>

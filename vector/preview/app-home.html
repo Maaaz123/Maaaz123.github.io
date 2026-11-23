@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الرئيسية · مكتب البرنامج · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .cycle-bar { display: flex; gap: 2px; block-size: 12px; margin: var(--dga-space-2) var(--dga-space-5) 0; }
+  .cycle-bar span { display: block; block-size: 100%; }
+  .cycle-bar span:first-child { border-start-start-radius: 4px; border-end-start-radius: 4px; }
+  .cycle-bar span:last-child { border-start-end-radius: 4px; border-end-end-radius: 4px; }
+  .k-pub { background: var(--dga-success-600); }
+  .k-rev { background: var(--dga-info-600); }
+  .k-ret { background: var(--dga-warning-600); }
+  .k-dra { background: var(--dga-gray-500); }
+  .k-not { background: repeating-linear-gradient(135deg, var(--dga-gray-300) 0 3px, var(--dga-gray-100) 3px 6px); outline: 1px solid var(--dga-gray-400); outline-offset: -1px; }
+  .key { inline-size: 10px; block-size: 10px; border-radius: 2px; display: inline-block; flex: none; }
+  .kpi__label { display: flex; align-items: center; gap: var(--dga-space-2); }
+  .cycle-card .kpis { --kpi-cols: 5; }
+</style>
+</head>
+<body data-ws="app" data-page="home" data-roles="pmo" data-crumb="الرئيسية">
+<main id="main" class="page">
+
+  <header class="page-head">
+    <p class="page-head__eyebrow">الاثنين 23 نوفمبر 2026 <span class="hj">13 جمادى الآخرة 1448</span></p>
+    <h1>عندك 4 مهام اليوم</h1>
+  </header>
+
+  <section aria-labelledby="tasks-h">
+    <h2 id="tasks-h" class="visually-hidden">مهام اليوم</h2>
+    <ol class="tasks">
+      <li class="task">
+        <span class="task__n" aria-hidden="true">1</span>
+        <div class="task__body">
+          <p class="task__title">5 تحديثات تنتظر مراجعتك</p>
+          <p class="task__meta"><span>أقدمها منذ 19 نوفمبر</span><span data-badge="leader">أحدها فيه طلب يحتاج قرار القيادة</span></p>
+        </div>
+        <a class="btn btn--primary" href="review.html">ابدأ المراجعة</a>
+      </li>
+      <li class="task">
+        <span class="task__n" aria-hidden="true">2</span>
+        <div class="task__body">
+          <p class="task__title">بطاقتان لم يبدأ تحديثهما</p>
+          <p class="task__meta"><span>إدارة المواهب والأداء الوظيفي</span><span>قياس مستوى رضا المستفيدين</span><span>الدورة تُغلق بعد 7 أيام</span></p>
+        </div>
+        <button class="btn btn--secondary" type="button" id="remind">إرسال تذكير</button>
+      </li>
+      <li class="task">
+        <span class="task__n" aria-hidden="true">3</span>
+        <div class="task__body">
+          <p class="task__title">إعداد «برنامج التحول الرقمي 2027» لم يكتمل</p>
+          <p class="task__meta"><span data-badge="draft"></span><span>وصلت إلى الخطوة 3 من 5: المبادرات</span></p>
+        </div>
+        <a class="btn btn--secondary" href="setup-wizard.html#step-3">متابعة الإعداد</a>
+      </li>
+      <li class="task">
+        <span class="task__n" aria-hidden="true">4</span>
+        <div class="task__body">
+          <p class="task__title">3 قرارات تنتظر القيادة</p>
+          <p class="task__meta">للعلم فقط: تظهر لرئيس الجهة في خلاصة القيادة قبل اجتماع 25 نوفمبر.</p>
+        </div>
+        <a class="btn btn--tertiary" href="leadership-brief.html#decisions">عرض القرارات</a>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card cycle-card" aria-labelledby="cycle-h">
+    <div class="card__head">
+      <h2 id="cycle-h">دورة نوفمبر 2026</h2>
+      <span class="t-sm t-muted">1–30 نوفمبر، تُغلق بعد 7 أيام</span>
+      <span class="end t-sm"><b class="num">18</b> من <span class="num">30</span> بطاقة منشورة</span>
+    </div>
+    <div class="cycle-bar" role="img" aria-label="توزيع 30 بطاقة: 18 منشورة، 5 بانتظار المراجعة، 2 أُعيدت للتصحيح، 3 مسودة، 2 لم تبدأ">
+      <span class="k-pub" style="flex:18"></span><span class="k-rev" style="flex:5"></span><span class="k-ret" style="flex:2"></span><span class="k-dra" style="flex:3"></span><span class="k-not" style="flex:2"></span>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span class="kpi__label"><i class="key k-pub"></i>منشورة</span><span class="kpi__value num">18</span><span class="kpi__note">لا تُعدَّل بعد النشر</span></div>
+      <div class="kpi"><span class="kpi__label"><i class="key k-rev"></i>بانتظار المراجعة</span><span class="kpi__value num">5</span><span class="kpi__note"><a href="review.html">راجعها الآن</a></span></div>
+      <div class="kpi"><span class="kpi__label"><i class="key k-ret"></i>أُعيدت للتصحيح</span><span class="kpi__value num">2</span><span class="kpi__note">عند مديري المبادرات</span></div>
+      <div class="kpi"><span class="kpi__label"><i class="key k-dra"></i>مسودة</span><span class="kpi__value num">3</span><span class="kpi__note">بدأت ولم تُرسل</span></div>
+      <div class="kpi"><span class="kpi__label"><i class="key k-not"></i>لم تبدأ</span><span class="kpi__value num">2</span><span class="kpi__note">تحتاج تذكيرًا</span></div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="open-h">
+    <div class="card__head">
+      <h2 id="open-h">بطاقات لم تصلك بعد</h2>
+      <span class="t-sm t-muted">7 بطاقات عند مديري المبادرات</span>
+    </div>
+    <div class="table-wrap">
+      <table class="table table--reflow">
+        <thead><tr><th scope="col">المبادرة</th><th scope="col">الجهة المسؤولة</th><th scope="col">الحالة</th><th scope="col">آخر نشاط</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-main"><div class="cell-title">إعداد خطة القوى العاملة</div><div class="cell-sub">حزمة رأس المال البشري</div></td><td data-label="الجهة المسؤولة">الإدارة العامة للموارد البشرية</td><td data-label="الحالة"><span data-badge="returned"></span></td><td data-label="آخر نشاط">أُعيد 21 نوفمبر</td></tr>
+          <tr><td class="cell-main"><div class="cell-title">مراجعة شراكات تقديم الخدمات</div><div class="cell-sub">حزمة الأداء والتواصل</div></td><td data-label="الجهة المسؤولة">الإدارة العامة للاتصال المؤسسي</td><td data-label="الحالة"><span data-badge="returned"></span></td><td data-label="آخر نشاط">أُعيد 20 نوفمبر</td></tr>
+          <tr><td class="cell-main"><div class="cell-title">إعداد برنامج التعاقب الوظيفي للوظائف الحرجة</div><div class="cell-sub">حزمة رأس المال البشري</div></td><td data-label="الجهة المسؤولة">الإدارة العامة للموارد البشرية</td><td data-label="الحالة"><span data-badge="draft"></span></td><td data-label="آخر نشاط">حُفظ أمس</td></tr>
+          <tr><td class="cell-main"><div class="cell-title">رقمنة تجربة المستفيد وتيسيرها</div><div class="cell-sub">حزمة الخدمات والعمليات</div></td><td data-label="الجهة المسؤولة">وكالة الخدمات والعمليات</td><td data-label="الحالة"><span data-badge="draft"></span></td><td data-label="آخر نشاط">حُفظ 19 نوفمبر</td></tr>
+          <tr><td class="cell-main"><div class="cell-title">إعادة تصميم الهوية المؤسسية للقطاع</div><div class="cell-sub">حزمة الأداء والتواصل</div></td><td data-label="الجهة المسؤولة">الإدارة العامة للاتصال المؤسسي</td><td data-label="الحالة"><span data-badge="draft"></span></td><td data-label="آخر نشاط">حُفظ 18 نوفمبر</td></tr>
+          <tr><td class="cell-main"><div class="cell-title">تصميم وتنفيذ برامج إدارة المواهب وإدارة الأداء الوظيفي</div><div class="cell-sub">حزمة رأس المال البشري</div></td><td data-label="الجهة المسؤولة">الإدارة العامة للموارد البشرية</td><td data-label="الحالة"><span data-badge="notstarted"></span></td><td data-label="آخر نشاط">لم يفتح البطاقة</td></tr>
+          <tr><td class="cell-main"><div class="cell-title">قياس مستوى رضا المستفيدين</div><div class="cell-sub">حزمة الأداء والتواصل</div></td><td data-label="الجهة المسؤولة">الإدارة العامة للتخطيط الاستراتيجي وقياس الأداء المؤسسي</td><td data-label="الحالة"><span data-badge="notstarted"></span></td><td data-label="آخر نشاط">آخر تحديث قبل 41 يومًا</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+  document.getElementById("remind").addEventListener("click", function () {
+    this.setAttribute("aria-busy", "true");
+    setTimeout(() => { this.removeAttribute("aria-busy"); this.disabled = true; this.textContent = "أُرسل التذكير"; notify({ title: "تم إرسال التذكير بنجاح", text: "وصل التذكير إلى مديرَي المبادرتين." }); }, 700);
+  });
+</script>
+</body>
+</html>

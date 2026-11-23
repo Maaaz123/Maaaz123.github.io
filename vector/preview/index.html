@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اختر دورك · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .w-head { background: var(--dga-surface); border-block-end: 1px solid var(--dga-border); }
+  .w-head__in { max-inline-size: 1200px; margin-inline: auto; padding: var(--dga-space-3) var(--dga-space-6); display: flex; align-items: center; gap: var(--dga-space-4); }
+  .w-head .brand { padding: 0; }
+  .w-head .seg { margin-inline-start: auto; }
+  .w-hero { background: var(--dga-sa-950); color: var(--dga-gray-0); }
+  .w-hero__in { max-inline-size: 1200px; margin-inline: auto; padding: var(--dga-space-7) var(--dga-space-6) var(--dga-space-6); display: grid; gap: var(--dga-space-4); }
+  .w-hero__eyebrow { color: var(--dga-sa-200); font-weight: var(--dga-fw-medium); display: flex; align-items: center; gap: var(--dga-space-2); }
+  .w-hero__eyebrow::before { content: ""; inline-size: 24px; block-size: 3px; background: var(--dga-gold-400); border-radius: 2px; }
+  .w-hero h1 { font-size: var(--dga-fs-4xl); line-height: var(--dga-lh-4xl); max-inline-size: 30ch; }
+  .w-hero p { color: var(--dga-sa-100); font-size: var(--dga-fs-lg); line-height: var(--dga-lh-lg); max-inline-size: 60ch; }
+  .flow { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: var(--dga-space-5); border-block-start: 1px solid var(--dga-sa-800); counter-reset: f; }
+  .flow li { padding: var(--dga-space-5) 0 0; padding-inline-end: var(--dga-space-5); display: grid; gap: var(--dga-space-1); counter-increment: f; position: relative; }
+  .flow li::before { content: counter(f); position: absolute; inset-block-start: -14px; inset-inline-start: 0; inline-size: 28px; block-size: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--dga-sa-950); border: 1px solid var(--dga-sa-400); color: var(--dga-gray-0); font-size: var(--dga-fs-sm); font-weight: var(--dga-fw-semibold); }
+  .flow b { font-size: var(--dga-fs-md); }
+  .flow span { color: var(--dga-sa-200); font-size: var(--dga-fs-sm); line-height: var(--dga-lh-sm); }
+  .w-body { max-inline-size: 1200px; margin-inline: auto; padding: var(--dga-space-7) var(--dga-space-6); display: grid; gap: var(--dga-space-5); }
+  .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--dga-space-4); }
+  .role { padding: var(--dga-space-5); flex-direction: column; gap: var(--dga-space-4); }
+  .role input { position: absolute; inset-block-start: var(--dga-space-5); inset-inline-end: var(--dga-space-5); margin: 0; }
+  .role .choice__body > .tag, .role .choice__body > .cluster { justify-self: start; }
+  .role__name { font-size: var(--dga-fs-xl); line-height: var(--dga-lh-xl); font-weight: var(--dga-fw-bold); }
+  .role ul { list-style: none; display: grid; gap: var(--dga-space-2); font-size: var(--dga-fs-sm); line-height: var(--dga-lh-sm); color: var(--dga-text-secondary); }
+  .role li { display: flex; gap: var(--dga-space-2); }
+  .role li svg { color: var(--dga-sa-600); margin-block-start: 2px; }
+  .role__start { margin-block-start: auto; padding-block-start: var(--dga-space-3); border-block-start: 1px solid var(--dga-border); font-size: var(--dga-fs-sm); color: var(--dga-text-muted); inline-size: 100%; }
+  .role__start b { color: var(--dga-text-primary); font-weight: var(--dga-fw-semibold); }
+  .go { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dga-space-4); }
+  @media (max-width: 900px) {
+    .roles { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; border: 0; gap: var(--dga-space-4); margin-block-start: var(--dga-space-3); }
+    .flow li { padding: 0; padding-inline-start: 44px; }
+    .flow li::before { inset-block-start: 0; }
+  }
+  @media (max-width: 720px) {
+    .w-head__in, .w-hero__in, .w-body { padding-inline: var(--dga-space-4); }
+    .w-hero__in { padding-block: var(--dga-space-6) var(--dga-space-5); }
+    .w-hero h1 { font-size: var(--dga-fs-3xl); line-height: var(--dga-lh-3xl); }
+    .w-body { padding-block: var(--dga-space-6); }
+    .go .btn { inline-size: 100%; }
+  }
+</style>
+</head>
+<body>
+<header class="w-head">
+  <div class="w-head__in">
+    <a class="brand" href="welcome.html" aria-label="The Vector — الصفحة الأولى">
+      <span class="brand__mark" id="logo"></span>
+      <span><span class="brand__name">The Vector</span><br><span class="brand__entity">هيئة الرواد للتطوير <span class="demo-tag">اسم تجريبي</span></span></span>
+    </a>
+    <div class="seg" role="group" aria-label="اللغة">
+      <button type="button" aria-pressed="true" lang="ar">ع</button>
+      <button type="button" aria-pressed="false" lang="en" data-soon="1">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="w-hero" aria-labelledby="hero-title">
+    <div class="w-hero__in">
+      <p class="w-hero__eyebrow">منصة متابعة المبادرات التطويرية</p>
+      <h1 id="hero-title">متابعة مبادرات البرنامج شهرًا بشهر</h1>
+      <p>مدير المبادرة يرفع التحديث، ومكتب البرنامج يراجعه وينشره، والقيادة تطّلع على المنشور وتتخذ القرار.</p>
+      <ol class="flow" aria-label="كيف تعمل المنصة">
+        <li><b>مدير المبادرة يحدّث</b><span>في التطبيق: إن لم يتغير شيء يكفي سؤال واحد، وإن تغير فأربع خطوات.</span></li>
+        <li><b>مكتب البرنامج يراجع وينشر</b><span>في التطبيق: يقارن بتحديث الشهر الماضي، ثم ينشر أو يعيد التحديث بملاحظة.</span></li>
+        <li><b>القيادة تقرأ وتقرر</b><span>في الطبقة الذكية: تظهر التحديثات المنشورة فقط، وتأتي القرارات المعلّقة في أعلى الصفحة.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <form class="w-body" action="app-home.html" id="role-form" novalidate>
+    <fieldset class="stack" style="--stack:20px">
+      <legend class="section-head" style="display:block;margin:0">
+        <h2 style="font-size:var(--dga-fs-2xl);line-height:var(--dga-lh-2xl)">اختر دورك</h2>
+        <p class="t-muted" style="margin-block-start:4px">تختلف الصفحة الأولى حسب الدور.</p>
+      </legend>
+      <div class="roles">
+        <label class="choice role">
+          <input type="radio" name="role" value="manager" data-href="my-tasks.html">
+          <span class="choice__body">
+            <span class="tag">التطبيق</span>
+            <span class="role__name">مدير المبادرة</span>
+            <span class="choice__desc">تحدّث مبادراتك مرة في الشهر.</span>
+          </span>
+          <ul>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>ترى التحديثات المطلوبة منك فقط</li>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>التحديث الشهري لا يتجاوز دقائق</li>
+          </ul>
+          <span class="role__start">تبدأ من: <b>مهامي</b></span>
+        </label>
+        <label class="choice role">
+          <input type="radio" name="role" value="pmo" data-href="app-home.html" checked>
+          <span class="choice__body">
+            <span class="cluster" style="--gap:6px"><span class="tag">التطبيق</span><span class="tag">الطبقة الذكية</span></span>
+            <span class="role__name">مكتب البرنامج</span>
+            <span class="choice__desc">تراجع التحديثات وتنشرها، وتُعدّ البرامج.</span>
+          </span>
+          <ul>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>مهام اليوم مرتبة حسب الأولوية</li>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تغلق الدورة الشهرية بعد اكتمال النشر</li>
+          </ul>
+          <span class="role__start">تبدأ من: <b>الرئيسية</b></span>
+        </label>
+        <label class="choice role">
+          <input type="radio" name="role" value="head" data-href="leadership-brief.html">
+          <span class="choice__body">
+            <span class="tag">الطبقة الذكية</span>
+            <span class="role__name">رئيس الجهة</span>
+            <span class="choice__desc">وضع البرنامج والقرارات المطلوبة منك في صفحة واحدة.</span>
+          </span>
+          <ul>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تقرأ ما نُشر فقط، بلا مسودات</li>
+            <li><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10"/></svg>تُدرج القرار في اجتماع القيادة بضغطة</li>
+          </ul>
+          <span class="role__start">تبدأ من: <b>خلاصة القيادة</b></span>
+        </label>
+      </div>
+    </fieldset>
+    <div class="go">
+      <button class="btn btn--primary" type="submit" id="go-btn">الدخول بدور مكتب البرنامج</button>
+      <p class="t-sm t-muted">في النسخة الفعلية يُحدَّد دورك تلقائيًا من حسابك في الجهة عبر النفاذ الوطني الموحد.</p>
+    </div>
+  </form>
+</main>
+<footer class="foot">
+  <span>© 2026 هيئة الرواد للتطوير</span>
+  <a href="#" data-soon="1">سياسة الخصوصية</a>
+  <a href="#" data-soon="1">إمكانية الوصول</a>
+  <a href="#" data-soon="1">تواصل معنا</a>
+</footer>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+  document.getElementById("logo").innerHTML = window.VLogo();
+  const form = document.getElementById("role-form");
+  const go = document.getElementById("go-btn");
+  const names = { manager: "مدير المبادرة", pmo: "مكتب البرنامج", head: "رئيس الجهة" };
+  form.addEventListener("change", e => { if (e.target.name === "role") go.textContent = "الدخول بدور " + names[e.target.value]; });
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const r = form.querySelector("input[name=role]:checked");
+    try { localStorage.setItem("tv-role", r.value); } catch (err) {}
+    location.href = r.dataset.href;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المراجعة والنشر · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .queue { list-style: none; }
+  .queue li + li { border-block-start: 1px solid var(--dga-border); }
+  .q-item { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: var(--dga-space-3); align-items: center; inline-size: 100%; padding: var(--dga-space-3) var(--dga-space-5); cursor: pointer; min-block-size: 64px; position: relative; }
+  .q-item:hover { background: var(--dga-gray-50); }
+  .q-item:focus-visible { outline: 3px solid var(--dga-focus); outline-offset: -3px; }
+  .q-item[aria-current="true"] { background: var(--dga-sa-50); }
+  .q-item[aria-current="true"]::before { content: ""; position: absolute; inset-block: 0; inset-inline-start: 0; inline-size: 4px; background: var(--dga-sa-600); }
+  .q-item__radio { inline-size: 18px; block-size: 18px; border-radius: 50%; border: 2px solid var(--dga-gray-400); }
+  .q-item[aria-current="true"] .q-item__radio { border-color: var(--dga-sa-600); box-shadow: inset 0 0 0 3px var(--dga-surface); background: var(--dga-sa-600); }
+  .q-item__title { font-weight: var(--dga-fw-semibold); }
+  .q-item__meta { font-size: var(--dga-fs-sm); color: var(--dga-text-muted); display: flex; flex-wrap: wrap; gap: var(--dga-space-1) var(--dga-space-3); align-items: center; }
+  .q-item__flags { display: flex; gap: var(--dga-space-2); flex-wrap: wrap; justify-content: flex-end; }
+  .detail-head { display: grid; gap: var(--dga-space-2); }
+  .detail-head h2 { font-size: var(--dga-fs-2xl); line-height: var(--dga-lh-2xl); }
+  .cmp th[scope="row"] { font-weight: var(--dga-fw-medium); color: var(--dga-text-primary); background: transparent; white-space: normal; }
+  .cmp tr.is-new td, .cmp tr.is-new th { background: var(--dga-sa-25); font-weight: var(--dga-fw-semibold); }
+  .cmp tr.delta td, .cmp tr.delta th { color: var(--dga-text-muted); font-size: var(--dga-fs-xs); }
+  .changes { list-style: none; display: grid; gap: 0; }
+  .changes li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: var(--dga-space-4); padding: var(--dga-space-3) 0; border-block-end: 1px solid var(--dga-border); }
+  .changes li:last-child { border-block-end: 0; }
+  .changes .k { color: var(--dga-text-muted); font-size: var(--dga-fs-sm); }
+  .changes ul { list-style: none; display: grid; gap: var(--dga-space-1); }
+  .changes ul li { display: flex; gap: var(--dga-space-2); align-items: flex-start; padding: 0; border: 0; grid-template-columns: none; }
+  .decide .card__body { display: grid; gap: var(--dga-space-4); }
+  .sent__icon { inline-size: 56px; block-size: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--dga-success-50); color: var(--dga-success-700); border: 1px solid var(--dga-success-200); }
+  .empty { text-align: center; padding: var(--dga-space-7) var(--dga-space-5); display: grid; gap: var(--dga-space-2); justify-items: center; }
+  @media (max-width: 720px) {
+    .q-item { grid-template-columns: 20px minmax(0, 1fr); padding-inline: var(--dga-space-4); }
+    .q-item__flags { grid-column: 2; justify-content: flex-start; }
+    .changes li { grid-template-columns: 1fr; gap: var(--dga-space-1); }
+    .cmp-wrap { overflow-x: auto; }
+    .decide .btn-row .btn { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body data-ws="app" data-page="review" data-roles="pmo" data-crumb="المراجعة والنشر">
+<main id="main" class="page">
+
+  <header class="page-head">
+    <p class="page-head__eyebrow">دورة نوفمبر 2026: نُشر <span class="num">18</span> من <span class="num">30</span></p>
+    <div class="split" style="align-items:flex-end">
+      <h1 id="page-h1">5 تحديثات بانتظار مراجعتك</h1>
+      <button class="btn btn--secondary" type="button" disabled aria-describedby="close-hint">إغلاق الدورة</button>
+    </div>
+    <p class="page-head__lede"><span class="t-sm t-muted" id="close-hint">تُغلق الدورة بعد نشر جميع البطاقات.</span></p>
+  </header>
+
+  <section class="card" aria-labelledby="q-h">
+    <div class="card__head"><h2 id="q-h">قائمة المراجعة</h2><span class="t-sm t-muted">المعلَّمة للقيادة أولًا، ثم الأقدم</span></div>
+    <ul class="queue" id="queue"></ul>
+  </section>
+
+  <section class="card" id="detail" aria-live="polite" aria-labelledby="d-title"></section>
+
+  <section class="card decide" id="decide" aria-labelledby="decide-h">
+    <div class="card__head"><h2 id="decide-h">قرارك</h2></div>
+    <div class="card__body">
+      <div class="field" id="f-notes">
+        <label class="field__label" for="notes">ملاحظات مكتب البرنامج <span class="opt">(مطلوبة عند الإرجاع)</span></label>
+        <textarea class="textarea" id="notes" rows="3" aria-describedby="notes-hint notes-err" placeholder="مثال: وضّح سبب تغيّر المخطط، وأرفق محضر اللجنة."></textarea>
+        <p class="field__hint" id="notes-hint">تظهر لمدير المبادرة كما كتبتها، وتُحفظ مع سجل التحديث.</p>
+        <p class="field__error" id="notes-err"><svg class="i i--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg><span>اكتب سبب الإرجاع ليعرف مدير المبادرة ما المطلوب منه.</span></p>
+      </div>
+      <div class="alert alert--neutral" role="note">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <div class="alert__body"><p>بعد النشر لا يمكن تعديل التحديث ولا أيٍّ من عناصره. أي تصحيح يكون بتحديث جديد في الدورة القادمة.</p></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn--primary" type="button" id="btn-publish">نشر التحديث</button>
+        <button class="btn btn--secondary" type="button" id="btn-return">إرجاع للتصحيح</button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="dialog" id="confirm" aria-labelledby="cf-title" aria-describedby="cf-body">
+    <div class="dialog__body">
+      <h2 id="cf-title" style="font-size:var(--dga-fs-xl)">نشر هذا التحديث؟</h2>
+      <p id="cf-body" class="t-secondary"></p>
+    </div>
+    <div class="dialog__foot">
+      <button class="btn btn--secondary" type="button" value="cancel" id="cf-cancel">إلغاء</button>
+      <button class="btn btn--primary" type="button" id="cf-ok">نعم، انشر</button>
+    </div>
+  </dialog>
+
+</main>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const ITEMS = [
+    { id: "a", name: "تصميم الهيكل التنظيمي التفصيلي للقطاع", pkg: "التحول المؤسسي", by: "مدير المبادرة في وكالة التطوير المؤسسي", at: "21 نوفمبر، 10:12", src: "نموذج التحديث",
+      prev: [40, 58, "17 أكتوبر"], now: [42, 65], leader: "اعتماد نطاق دمج الإدارات",
+      steps: [["done", "مقابلات قادة الإدارات الخمس"], ["moved", "عرض بدائل الهيكل على اللجنة التوجيهية — بانتظار قرار النطاق"]],
+      next: ["إعداد بطاقات الوصف للإدارات غير المتأثرة بالدمج"],
+      block: "قرار اللجنة التوجيهية بنطاق دمج الإدارات معلّق منذ 18 يوليو (128 يومًا). يوقف اعتماد الهيكل وثلاث مبادرات إعادة هيكلة تعتمد عليه." },
+    { id: "b", name: "تصميم وتنفيذ خطة التواصل وحملات التوعية", pkg: "الأداء والتواصل", by: "مدير المبادرة في الإدارة العامة للاتصال المؤسسي", at: "19 نوفمبر، 11:30", src: "لا تغيير",
+      prev: [20, 20, "16 أكتوبر"], now: [20, 24], nochange: true, steps: [], next: [], block: "" },
+    { id: "c", name: "تصميم إطار لتصنيف الفئات المستهدفة", pkg: "الخدمات والعمليات", by: "مدير المبادرة في وكالة الخدمات والعمليات", at: "19 نوفمبر، 16:22", src: "نموذج التحديث",
+      prev: [35, 40, "18 أكتوبر"], now: [41, 50],
+      steps: [["done", "دراسة المقارنة المعيارية لأطر التصنيف"], ["ongoing", "مسودة إطار التصنيف"]],
+      next: ["ورشة مراجعة المسودة مع الإدارات المعنية"], block: "تأخر توفير بيانات الفئات من نظام التشغيل الحالي." },
+    { id: "d", name: "وضع استراتيجية برنامج لتطوير الفئات المستهدفة وتمكينها", pkg: "التحول المؤسسي", by: "مدير المبادرة في وكالة التطوير المؤسسي", at: "20 نوفمبر، 09:05", src: "قالب Excel",
+      prev: [31, 30, "15 أكتوبر"], now: [36, 38],
+      steps: [["done", "تقرير الاحتياجات"], ["done", "دراسة المقارنة المعيارية"]], next: ["مسودة استراتيجية النموذج التشغيلي"], block: "" },
+    { id: "e", name: "تصميم نموذجي العمليات: المحلية والدولية، والوطنية", pkg: "الخدمات والعمليات", by: "مدير المبادرة في وكالة الخدمات والعمليات", at: "20 نوفمبر، 14:40", src: "نموذج التحديث", covers: 2,
+      prev: [22, 25, "17 أكتوبر"], now: [30, 33],
+      steps: [["done", "تقييم الوضع الراهن للعمليات المحلية والدولية"], ["done", "تقييم الوضع الراهن للعمليات الوطنية"]], next: ["مسودة نموذج التشغيل الوطني"], block: "" }
+  ];
+  let queue = ITEMS.slice(), cur = queue[0];
+  const status = (a, p) => a >= 100 ? "complete" : (p - a) <= 5 ? "ontrack" : (p - a) <= 15 ? "behind" : "wellbehind";
+  const sign = n => `<bdi dir="ltr">${n > 0 ? "+" + n : n < 0 ? "−" + Math.abs(n) : "0"}</bdi>`;
+  const STEP = { done: ["check", "تمت"], ongoing: ["clock", "جارية"], moved: ["back", "رُحّلت"] };
+
+  function renderQueue() {
+    $("#queue").innerHTML = queue.map(it => `<li><button class="q-item" type="button" data-id="${it.id}"${it === cur ? ' aria-current="true"' : ""}>
+      <span class="q-item__radio" aria-hidden="true"></span>
+      <span><span class="q-item__title">${it.name}</span><span class="q-item__meta"><span>${it.pkg}</span><span>${it.by}</span><span>${it.at}</span></span></span>
+      <span class="q-item__flags">${it.leader ? VBadge("leader") : ""}${it.nochange ? '<span class="tag">لا تغيير</span>' : ""}${status(...it.prev) !== status(...it.now) ? '<span class="tag">تغيّرت الحالة</span>' : ""}</span>
+    </button></li>`).join("");
+    const n = queue.length;
+    $("#page-h1").textContent = n ? (n === 1 ? "تحديث واحد بانتظار مراجعتك" : n === 2 ? "تحديثان بانتظار مراجعتك" : `${n} تحديثات بانتظار مراجعتك`) : "لا تحديثات بانتظار مراجعتك";
+    const c = document.querySelector('.nav a[href="review.html"] .count'); if (c) { c.textContent = n; c.setAttribute("aria-label", n + " بانتظار المراجعة"); }
+  }
+  $("#queue").addEventListener("click", e => { const b = e.target.closest(".q-item"); if (!b) return; cur = queue.find(x => x.id === b.dataset.id); render(); $("#d-title").focus(); });
+
+  function renderDetail() {
+    if (!cur) {
+      $("#detail").innerHTML = VState({ title: "انتهت المراجعة", text: "لا تحديثات بانتظارك الآن. سيصلك تنبيه عند وصول تحديث جديد.", action: '<a class="btn btn--secondary" href="app-home.html">العودة إلى الرئيسية</a>' }).replace('class="state__title"', 'class="state__title" id="d-title"');
+      $("#decide").hidden = true; return;
+    }
+    const [pa, pp, pd] = cur.prev, [na, np] = cur.now;
+    const sPrev = status(pa, pp), sNow = status(na, np);
+    const stepsHTML = cur.steps.length ? `<ul>${cur.steps.map(([k, t]) => `<li>${VIcon(STEP[k][0], "i--sm")}<span><b>${STEP[k][1]}:</b> ${t}</span></li>`).join("")}</ul>` : `<span class="t-muted">لم تُذكر خطوات — أرسل «لا تغيير»</span>`;
+    $("#detail").innerHTML = `
+      <div class="card__body detail-head">
+        <p class="page-head__eyebrow">حزمة ${cur.pkg}${cur.covers ? `، بطاقة تغطي ${cur.covers === 2 ? "مبادرتين" : cur.covers + " مبادرات"}` : ""}</p>
+        <h2 id="d-title" tabindex="-1">${cur.name}</h2>
+        <p class="q-item__meta"><span>أرسله ${cur.by}، مدير المبادرة</span><span>${cur.at}</span><span>المصدر: ${cur.src}</span></p>
+      </div>
+      <div class="cmp-wrap" style="border-block:1px solid var(--dga-border)">
+        <table class="table cmp">
+          <caption class="visually-hidden">مقارنة آخر تحديث منشور بالتحديث المُرسل</caption>
+          <thead><tr><th scope="col">التحديث</th><th scope="col" class="is-num">الفعلي</th><th scope="col" class="is-num">المخطط</th><th scope="col" class="is-num">الانحراف</th><th scope="col">الحالة</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">آخر منشور (${pd})</th><td class="is-num">${pa}%</td><td class="is-num">${pp}%</td><td class="is-num">${Math.max(0, pp - pa)} نقطة</td><td>${VBadge(sPrev)}</td></tr>
+            <tr class="is-new"><th scope="row">المُرسل الآن</th><td class="is-num">${na}%</td><td class="is-num">${np}%</td><td class="is-num">${Math.max(0, np - na)} نقطة</td><td>${VBadge(sNow)}</td></tr>
+            <tr class="delta"><th scope="row">التغيّر</th><td class="is-num">${sign(na - pa)}</td><td class="is-num">${sign(np - pp)}</td><td class="is-num">${sign(Math.max(0, np - na) - Math.max(0, pp - pa))}</td><td>${sPrev === sNow ? "بلا تغيير" : "تغيّرت"}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card__body stack" style="--stack:16px">
+        <div class="alert alert--success">${VIcon("checkCircle")}<div class="alert__body"><p>المخطط <b class="num">${np}%</b> يطابق الخطة المعتمدة لشهر نوفمبر.</p></div></div>
+        <ul class="changes" aria-label="ما تغيّر في هذا التحديث">
+          <li><span class="k">خطوات الشهر الماضي</span><div>${stepsHTML}</div></li>
+          <li><span class="k">القادم</span><div>${cur.next.length ? cur.next.join("<br>") : '<span class="t-muted">كما في التحديث السابق</span>'}</div></li>
+          <li><span class="k">العوائق</span><div>${cur.block ? cur.block : '<span class="t-muted">لا يوجد</span>'}</div></li>
+          ${cur.leader ? `<li><span class="k">طلبات</span><div class="stack" style="--stack:8px">${VBadge("leader")}<p>${cur.leader}. بعد النشر يظهر لرئيس الجهة ضمن «قرارات تنتظركم».</p></div></li>` : ""}
+        </ul>
+      </div>`;
+    $("#decide").hidden = false;
+  }
+  function render() { renderQueue(); renderDetail(); $("#notes").value = ""; $("#f-notes").classList.remove("is-invalid"); $("#notes").removeAttribute("aria-invalid"); }
+
+  function finish(msg) {
+    const i = queue.indexOf(cur);
+    queue.splice(i, 1);
+    cur = queue[Math.min(i, queue.length - 1)] || null;
+    render(); notify(msg);
+    $("#d-title").focus();
+  }
+  const dlg = $("#confirm");
+  $("#btn-publish").onclick = () => {
+    $("#cf-body").textContent = `سيُنشر تحديث «${cur.name}» ويظهر للقيادة في الطبقة الذكية${cur.leader ? "، ويُضاف طلب القرار إلى «قرارات تنتظركم»" : ""}. لا يمكن تعديله بعد النشر.`;
+    dlg.showModal(); $("#cf-cancel").focus();
+  };
+  $("#cf-cancel").onclick = () => dlg.close();
+  $("#cf-ok").onclick = () => { dlg.close(); finish({ title: "تم نشر التحديث بنجاح", text: `«${cur.name}» ظاهر الآن للقيادة.` }); };
+  $("#btn-return").onclick = () => {
+    const n = $("#notes").value.trim();
+    $("#f-notes").classList.toggle("is-invalid", !n);
+    if (!n) { $("#notes").setAttribute("aria-invalid", "true"); $("#notes").focus(); return; }
+    finish({ type: "info", title: "تمت إعادة التحديث", text: `أُرسل إلى ${cur.by} مع ملاحظتك.` });
+  };
+  $("#notes").addEventListener("input", () => { $("#f-notes").classList.remove("is-invalid"); $("#notes").removeAttribute("aria-invalid"); });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إعداد برنامج جديد · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .wiz { display: grid; gap: var(--dga-space-5); }
+  .wiz-panel { display: grid; gap: var(--dga-space-5); }
+  .wiz-panel > .card .card__body { display: grid; gap: var(--dga-space-5); }
+  .wiz-panel h2.step-title { font-size: var(--dga-fs-2xl); line-height: var(--dga-lh-2xl); }
+  .wiz-foot { display: flex; flex-wrap: wrap; gap: var(--dga-space-3); align-items: center; padding: var(--dga-space-4) var(--dga-space-5); background: var(--dga-surface); border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); }
+  .wiz-foot .spacer { flex: 1; }
+  .table td .input { min-block-size: 44px; }
+  .table .col-n { inline-size: 48px; color: var(--dga-text-muted); }
+  .table .col-act { inline-size: 56px; }
+  .phase-table td { padding-block: var(--dga-space-2); }
+  .added-row.is-new { background: var(--dga-sa-25); }
+  .check-list { list-style: none; display: grid; }
+  .check-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: var(--dga-space-3); align-items: center; padding: var(--dga-space-4) 0; border-block-end: 1px solid var(--dga-border); }
+  .check-list li:last-child { border-block-end: 0; }
+  .check-list .ok { color: var(--dga-success-700); }
+  .check-list .warn { color: var(--dga-warning-700); }
+  .mini-list { list-style: none; display: grid; gap: var(--dga-space-2); }
+  .mini-list li { display: flex; gap: var(--dga-space-2); align-items: center; }
+  .mini-list .input { flex: 1; }
+  .pkg { border: 1px solid var(--dga-border); border-radius: var(--dga-radius-md); padding: var(--dga-space-5); display: grid; gap: var(--dga-space-4); }
+  .pkg__head { display: flex; align-items: center; gap: var(--dga-space-3); }
+  .pkg__order { inline-size: 32px; block-size: 32px; border-radius: var(--dga-radius-sm); background: var(--dga-gray-950); color: var(--dga-gray-0); display: grid; place-items: center; font-weight: var(--dga-fw-semibold); }
+  .summary-kpis { --kpi-cols: 4; }
+  @media (max-width: 720px) {
+    .wiz-foot .btn { flex: 1 1 auto; }
+    .wiz-foot .spacer { display: none; }
+    .wiz-foot #w-next, .wiz-foot #w-send { order: -1; flex-basis: 100%; }
+    .table--reflow td .input { inline-size: 100%; }
+    .table--reflow.phase-table td { display: grid; gap: var(--dga-space-1); }
+    .table--reflow.phase-table td.col-n { display: block; font-weight: var(--dga-fw-semibold); color: var(--dga-text-primary); }
+    .table--reflow.phase-table td.col-n::before { content: "المرحلة "; }
+    .table--reflow.phase-table td.col-act { display: flex; justify-content: flex-end; }
+    .table--reflow.phase-table td.col-act::before { content: none; }
+  }
+</style>
+</head>
+<body data-ws="app" data-page="setup" data-roles="pmo" data-crumb="البرامج|إعداد برنامج جديد">
+<main id="main" class="page">
+
+  <header class="page-head">
+    <p class="page-head__eyebrow">مسودة، آخر حفظ قبل دقيقتين</p>
+    <h1>برنامج التحول الرقمي 2027</h1>
+  </header>
+
+  <section class="card" aria-label="ملخص المسودة">
+    <div class="kpis summary-kpis">
+      <div class="kpi"><span class="kpi__label">المراحل</span><span class="kpi__value num" id="k-phases">3</span><span class="kpi__note">2027 كاملًا</span></div>
+      <div class="kpi"><span class="kpi__label">الحزم</span><span class="kpi__value num">2</span><span class="kpi__note">لكل حزمة فريق</span></div>
+      <div class="kpi"><span class="kpi__label">المبادرات</span><span class="kpi__value num" id="k-inits">4</span><span class="kpi__note">3 تأسيسية و1 تمكينية</span></div>
+      <div class="kpi"><span class="kpi__label">مجموع الميزانيات</span><span class="kpi__value num"><span id="k-budget">46</span><small>مليون ريال</small></span><span class="kpi__note">أرقام توضيحية</span></div>
+    </div>
+  </section>
+
+  <div class="wiz">
+    <div class="card"><div class="card__body" style="padding-block:16px">
+      <nav class="steps" aria-label="خطوات إعداد البرنامج">
+        <p class="steps__count" id="w-count" aria-live="polite"></p>
+        <ol class="steps__list" style="--steps:5" id="w-steps"></ol>
+      </nav>
+    </div></div>
+
+    <form id="wiz-form" novalidate>
+    <!-- ================= Step 1 ================= -->
+    <div class="wiz-panel" data-step="1">
+      <section class="card" aria-labelledby="s1-h">
+        <div class="card__head"><h2 id="s1-h" tabindex="-1">بيانات البرنامج</h2></div>
+        <div class="card__body">
+          <div class="form-grid">
+            <div class="field" id="f-pname">
+              <label class="field__label" for="pname">اسم البرنامج <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="pname" value="برنامج التحول الرقمي 2027" required aria-describedby="pname-err">
+              <p class="field__error" id="pname-err">اكتب اسم البرنامج.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="pname-en">الاسم بالإنجليزية <span class="opt">(اختياري)</span></label>
+              <input class="input" id="pname-en" dir="ltr" lang="en" value="Digital Transformation Programme 2027">
+            </div>
+            <div class="field">
+              <label class="field__label" for="owner">الجهة المالكة <span class="req" aria-hidden="true">*</span></label>
+              <div class="combo" data-id="owner" data-label="الجهات" data-required="1" data-selected="الإدارة العامة للتحول الرقمي" data-describedby="owner-hint"
+                data-options="الإدارة العامة للتحول الرقمي::وكالة التطوير المؤسسي|وكالة التطوير المؤسسي|وكالة الخدمات المشتركة|الإدارة العامة للموارد البشرية::وكالة الخدمات المشتركة|إدارة الاستراتيجية والأداء|الإدارة العامة للتواصل المؤسسي|مكتب إدارة البرامج والمشاريع|الإدارة العامة لتقنية المعلومات::وكالة الخدمات المشتركة|الإدارة العامة للشؤون القانونية|إدارة تجربة المستفيد|إدارة المراكز الميدانية::وكالة العمليات|الإدارة العامة للشراكات"></div>
+              <p class="field__hint" id="owner-hint">مثل «تقنية» أو «الموارد».</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="src">مرجع البرنامج <span class="opt">(اختياري)</span></label>
+              <input class="input" id="src" value="قرار اللجنة التنفيذية رقم 14، صفحة 3" aria-describedby="src-hint">
+              <p class="field__hint" id="src-hint">الوثيقة والصفحة التي اعتُمد فيها البرنامج.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="h-from">بداية البرنامج <span class="req" aria-hidden="true">*</span></label>
+              <input class="input input--date" id="h-from" value="يناير 2027" placeholder="مثال: يناير 2027">
+            </div>
+            <div class="field">
+              <label class="field__label" for="h-to">نهاية البرنامج <span class="req" aria-hidden="true">*</span></label>
+              <input class="input input--date" id="h-to" value="ديسمبر 2027" placeholder="مثال: يناير 2027">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="ph-h">
+        <div class="card__head"><h2 id="ph-h">المراحل</h2><span class="t-sm t-muted">تصبح المرحلة «حالية» تلقائيًا حين يقع تاريخ اليوم بين بدايتها ونهايتها.</span></div>
+        <div class="table-wrap">
+          <table class="table table--reflow phase-table">
+            <thead><tr><th scope="col" class="col-n">#</th><th scope="col">اسم المرحلة</th><th scope="col">من</th><th scope="col">إلى</th><th scope="col" class="col-act"><span class="visually-hidden">حذف</span></th></tr></thead>
+            <tbody id="phases"></tbody>
+          </table>
+        </div>
+        <div class="card__foot"><button class="btn btn--secondary btn--sm" type="button" id="add-phase"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة مرحلة</button></div>
+      </section>
+    </div>
+
+    <!-- ================= Step 2 ================= -->
+    <div class="wiz-panel" data-step="2" hidden>
+      <section class="card" aria-labelledby="s2-h">
+        <div class="card__head"><h2 id="s2-h" tabindex="-1">الحزم</h2><span class="t-sm t-muted">الحزمة مجموعة مبادرات يديرها فريق واحد في فترة محددة.</span></div>
+        <div class="card__body">
+          <div class="pkg">
+            <div class="pkg__head"><span class="pkg__order" aria-label="الترتيب 1">1</span><h3>البنية الرقمية</h3></div>
+            <div class="form-grid">
+              <div class="field"><label class="field__label" for="pk1-team">الفريق المسؤول</label>
+                <div class="combo" data-id="pk1-team" data-label="الفرق" data-selected="فريق البنية والبيانات" data-options="فريق البنية والبيانات::5 أعضاء|فريق الخدمات الرقمية::4 أعضاء|فريق الحوكمة والامتثال::3 أعضاء|فريق إدارة التغيير::3 أعضاء"></div></div>
+              <div class="field"><label class="field__label" for="pk1-from">من</label><input class="input input--date" id="pk1-from" value="يناير 2027" placeholder="مثال: يناير 2027"></div>
+              <div class="field"><label class="field__label" for="pk1-to">إلى</label><input class="input input--date" id="pk1-to" value="سبتمبر 2027" placeholder="مثال: يناير 2027"></div>
+            </div>
+          </div>
+          <div class="pkg">
+            <div class="pkg__head"><span class="pkg__order" aria-label="الترتيب 2">2</span><h3>الخدمات الرقمية</h3></div>
+            <div class="form-grid">
+              <div class="field"><label class="field__label" for="pk2-team">الفريق المسؤول</label>
+                <div class="combo" data-id="pk2-team" data-label="الفرق" data-selected="فريق الخدمات الرقمية" data-options="فريق البنية والبيانات::5 أعضاء|فريق الخدمات الرقمية::4 أعضاء|فريق الحوكمة والامتثال::3 أعضاء|فريق إدارة التغيير::3 أعضاء"></div></div>
+              <div class="field"><label class="field__label" for="pk2-from">من</label><input class="input input--date" id="pk2-from" value="أبريل 2027" placeholder="مثال: يناير 2027"></div>
+              <div class="field"><label class="field__label" for="pk2-to">إلى</label><input class="input input--date" id="pk2-to" value="ديسمبر 2027" placeholder="مثال: يناير 2027"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= Step 3 ================= -->
+    <div class="wiz-panel" data-step="3" hidden>
+      <section class="card" aria-labelledby="s3-h">
+        <div class="card__head"><h2 id="s3-h" tabindex="-1">المبادرات المضافة</h2><span class="end t-sm t-muted" id="init-count">4 مبادرات</span></div>
+        <div class="table-wrap">
+          <table class="table table--reflow">
+            <thead><tr><th scope="col">المبادرة</th><th scope="col">الحزمة</th><th scope="col">النوع</th><th scope="col">الموجة</th><th scope="col" class="is-num">الميزانية (مليون ريال)</th><th scope="col">المدة المخططة</th></tr></thead>
+            <tbody id="inits">
+              <tr class="added-row"><td class="cell-main"><div class="cell-title">بناء منصة البيانات الموحدة</div><div class="cell-sub">الإدارة العامة لتقنية المعلومات</div></td><td data-label="الحزمة">البنية الرقمية</td><td data-label="النوع">تأسيسية</td><td data-label="الموجة">الأولى</td><td data-label="الميزانية" class="is-num">18</td><td data-label="المدة">يناير – سبتمبر 2027</td></tr>
+              <tr class="added-row"><td class="cell-main"><div class="cell-title">إطار حوكمة البيانات</div><div class="cell-sub">مكتب إدارة البرامج والمشاريع</div></td><td data-label="الحزمة">البنية الرقمية</td><td data-label="النوع">تأسيسية</td><td data-label="الموجة">الأولى</td><td data-label="الميزانية" class="is-num">7</td><td data-label="المدة">يناير – يونيو 2027</td></tr>
+              <tr class="added-row"><td class="cell-main"><div class="cell-title">تحديث البنية السحابية للأنظمة</div><div class="cell-sub">الإدارة العامة لتقنية المعلومات</div></td><td data-label="الحزمة">البنية الرقمية</td><td data-label="النوع">تأسيسية</td><td data-label="الموجة">الثانية</td><td data-label="الميزانية" class="is-num">12</td><td data-label="المدة">أبريل – سبتمبر 2027</td></tr>
+              <tr class="added-row"><td class="cell-main"><div class="cell-title">رقمنة الخدمات الأكثر طلبًا</div><div class="cell-sub">إدارة تجربة المستفيد</div></td><td data-label="الحزمة">الخدمات الرقمية</td><td data-label="النوع">تمكينية</td><td data-label="الموجة">الثانية</td><td data-label="الميزانية" class="is-num">9</td><td data-label="المدة">مايو – ديسمبر 2027</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="add-h" id="add-card">
+        <div class="card__head"><h2 id="add-h">إضافة مبادرة</h2></div>
+        <div class="card__body">
+          <div class="alert alert--error err-summary" role="alert" tabindex="-1" id="i-err" hidden>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.01"/></svg>
+            <div class="alert__body"><p class="alert__title">أكمل الحقول المطلوبة</p><ul id="i-err-list" style="list-style:none"></ul></div>
+          </div>
+          <div class="form-grid">
+            <div class="field span-all" id="f-iname">
+              <label class="field__label" for="iname">اسم المبادرة <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="iname" placeholder="مثال: تطوير بوابة الخدمات الإلكترونية" aria-describedby="iname-err">
+              <p class="field__error" id="iname-err">اكتب اسم المبادرة.</p>
+            </div>
+            <div class="field" id="f-ipkg">
+              <label class="field__label" for="ipkg">الحزمة <span class="req" aria-hidden="true">*</span></label>
+              <div class="combo" data-id="ipkg" data-label="الحزم" data-placeholder="اختر الحزمة" data-options="البنية الرقمية::يناير – سبتمبر|الخدمات الرقمية::أبريل – ديسمبر"></div>
+              <p class="field__error">اختر الحزمة.</p>
+            </div>
+            <div class="field" id="f-ient">
+              <label class="field__label" for="ient">الجهة المنفذة <span class="req" aria-hidden="true">*</span></label>
+              <div class="combo" data-id="ient" data-label="الجهات" data-options="الإدارة العامة للتحول الرقمي|وكالة التطوير المؤسسي|وكالة الخدمات المشتركة|الإدارة العامة للموارد البشرية|إدارة الاستراتيجية والأداء|الإدارة العامة للتواصل المؤسسي|مكتب إدارة البرامج والمشاريع|الإدارة العامة لتقنية المعلومات|الإدارة العامة للشؤون القانونية|إدارة تجربة المستفيد|إدارة المراكز الميدانية|الإدارة العامة للشراكات"></div>
+              <p class="field__error">اختر الجهة المنفذة.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="itheme">المحور</label>
+              <div class="combo" data-id="itheme" data-label="المحاور" data-options="الحوكمة والتنظيم|العمليات والخدمات|الاستراتيجية والأداء|رأس المال البشري|التواصل والشراكات|البيانات والتقنية"></div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="ibudget">الميزانية <span class="opt">(مليون ريال)</span></label>
+              <input class="input input--num" id="ibudget" inputmode="decimal" placeholder="0">
+            </div>
+            <fieldset class="field span-all" id="f-itype">
+              <legend class="field__label" style="margin-block-end:8px">نوع المبادرة <span class="req" aria-hidden="true">*</span></legend>
+              <div class="choices choices--row">
+                <label class="choice"><input type="radio" name="itype" value="تأسيسية"><span class="choice__body"><span class="choice__title">تأسيسية</span><span class="choice__desc">تبني الأطر والسياسات والنماذج والمعايير.</span></span></label>
+                <label class="choice"><input type="radio" name="itype" value="تمكينية"><span class="choice__body"><span class="choice__title">تمكينية</span><span class="choice__desc">تطبّق الأطر وتفعّلها عبر البرامج والخدمات.</span></span></label>
+              </div>
+              <p class="field__error">اختر نوع المبادرة.</p>
+            </fieldset>
+            <fieldset class="field" id="f-iwave">
+              <legend class="field__label" style="margin-block-end:8px">الموجة <span class="req" aria-hidden="true">*</span></legend>
+              <div class="pills">
+                <label class="pill"><input type="radio" name="iwave" value="الأولى"><span>الأولى</span></label>
+                <label class="pill"><input type="radio" name="iwave" value="الثانية"><span>الثانية</span></label>
+                <label class="pill"><input type="radio" name="iwave" value="الثالثة"><span>الثالثة</span></label>
+              </div>
+              <p class="field__error">اختر الموجة.</p>
+            </fieldset>
+            <div class="field">
+              <label class="field__label" for="ifrom">البداية المخططة</label>
+              <input class="input input--date" id="ifrom" value="يناير 2027" placeholder="مثال: يناير 2027">
+            </div>
+            <div class="field">
+              <label class="field__label" for="ito">النهاية المخططة</label>
+              <input class="input input--date" id="ito" value="يونيو 2027" placeholder="مثال: يناير 2027">
+            </div>
+          </div>
+          <div class="btn-row"><button class="btn btn--secondary" type="button" id="add-init"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة المبادرة إلى القائمة</button></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= Step 4 ================= -->
+    <div class="wiz-panel" data-step="4" hidden>
+      <section class="card" aria-labelledby="s4-h">
+        <div class="card__head"><h2 id="s4-h" tabindex="-1">المخرجات والمعالم والاعتماديات</h2></div>
+        <div class="card__body">
+          <div class="field" style="max-inline-size:560px">
+            <label class="field__label" for="s4-init">المبادرة</label>
+            <div class="combo" data-id="s4-init" data-label="المبادرات" data-selected="بناء منصة البيانات الموحدة" data-options="بناء منصة البيانات الموحدة::البنية الرقمية|إطار حوكمة البيانات::البنية الرقمية|تحديث البنية السحابية للأنظمة::البنية الرقمية|رقمنة الخدمات الأكثر طلبًا::الخدمات الرقمية"></div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <span class="field__label" id="out-l">المخرجات</span>
+              <ul class="mini-list" aria-labelledby="out-l">
+                <li><label class="visually-hidden" for="o1">المخرج 1</label><input class="input" id="o1" value="تقرير تقييم الوضع الراهن للبيانات"></li>
+                <li><label class="visually-hidden" for="o2">المخرج 2</label><input class="input" id="o2" value="نموذج البيانات الموحد"></li>
+                <li><label class="visually-hidden" for="o3">المخرج 3</label><input class="input" id="o3" value="المنصة في بيئة التشغيل"></li>
+              </ul>
+            </div>
+            <div class="field">
+              <span class="field__label" id="ms-l">المعالم</span>
+              <ul class="mini-list" aria-labelledby="ms-l">
+                <li><label class="visually-hidden" for="m1">المعلم 1</label><input class="input" id="m1" value="اعتماد نموذج البيانات"><label class="visually-hidden" for="m1d">تاريخ المعلم 1</label><input class="input input--date" id="m1d" value="مارس 2027" placeholder="مثال: يناير 2027" style="flex:0 0 170px"></li>
+                <li><label class="visually-hidden" for="m2">المعلم 2</label><input class="input" id="m2" value="إطلاق تجريبي"><label class="visually-hidden" for="m2d">تاريخ المعلم 2</label><input class="input input--date" id="m2d" value="يونيو 2027" placeholder="مثال: يناير 2027" style="flex:0 0 170px"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="field" style="max-inline-size:560px">
+            <label class="field__label" for="dep">تعتمد على</label>
+            <div class="combo" data-id="dep" data-label="المبادرات" data-selected="إطار حوكمة البيانات" data-options="إطار حوكمة البيانات::البنية الرقمية|تحديث البنية السحابية للأنظمة::البنية الرقمية|رقمنة الخدمات الأكثر طلبًا::الخدمات الرقمية"></div>
+            <p class="field__hint">إن تأخرت المبادرة التي تعتمد عليها، تظهر هذه المبادرة للقيادة ضمن «ما يوقفه التأخر».</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= Step 5 ================= -->
+    <div class="wiz-panel" data-step="5" hidden>
+      <section class="card" aria-labelledby="s5-h">
+        <div class="card__head"><h2 id="s5-h" tabindex="-1">المراجعة والاعتماد</h2></div>
+        <div class="card__body">
+          <ul class="check-list">
+            <li><svg class="i ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span><b>البرنامج والمراحل</b><br><span class="t-sm t-muted">3 مراحل تغطي يناير – ديسمبر 2027 بلا فجوات</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="1">مراجعة</button></li>
+            <li><svg class="i ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span><b>الحزم</b><br><span class="t-sm t-muted">حزمتان، لكل منهما فريق مسؤول</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="2">مراجعة</button></li>
+            <li><svg class="i ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg><span><b>المبادرات</b><br><span class="t-sm t-muted" id="s5-inits">4 مبادرات بميزانية 46 مليون ريال</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="3">مراجعة</button></li>
+            <li><svg class="i warn" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg><span><b>المعالم</b> <span class="badge badge--behind">تنبيه</span><br><span class="t-sm t-muted">«رقمنة الخدمات الأكثر طلبًا» بلا معالم. يمكن الإرسال، لكن المتابعة الشهرية ستكون أضعف.</span></span><button class="btn btn--tertiary btn--sm" type="button" data-goto="4">إكمال</button></li>
+          </ul>
+          <div class="alert">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+            <div class="alert__body"><p>يُرسل البرنامج إلى صاحب الصلاحية للاعتماد. بعد الاعتماد تبدأ أول دورة تحديث شهرية تلقائيًا في بداية الشهر التالي.</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="wiz-foot" style="margin-block-start:24px">
+      <button class="btn btn--secondary" type="button" id="w-prev">السابق</button>
+      <button class="btn btn--tertiary" type="button" id="w-draft">حفظ كمسودة</button>
+      <span class="spacer"></span>
+      <button class="btn btn--primary" type="submit" id="w-next">التالي</button>
+      <button class="btn btn--primary" type="button" id="w-send" hidden>إرسال للاعتماد</button>
+    </div>
+    </form>
+  </div>
+</main>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const STEPS = ["البرنامج والمراحل", "الحزم", "المبادرات", "المخرجات والمعالم والاعتماديات", "المراجعة والاعتماد"];
+  let step = 1;
+
+  function renderSteps() {
+    $("#w-count").textContent = `الخطوة ${step} من ${STEPS.length}: ${STEPS[step - 1]}`;
+    $("#w-steps").innerHTML = STEPS.map((n, i) => {
+      const k = i + 1, cur = k === step, done = k < step;
+      const marker = done ? VIcon("check", "i--sm") : k;
+      const state = cur ? "الحالية" : done ? "مكتملة" : "لم تبدأ";
+      const inner = `<span class="steps__bar"></span><span class="steps__label"><span class="steps__marker">${marker}</span><span><span class="steps__name">${n}</span><span class="steps__state">${state}</span></span></span>`;
+      return `<li class="steps__item ${done ? "is-done" : ""}"${cur ? ' aria-current="step"' : ""}>${done ? `<button type="button" class="steps__link" data-goto="${k}">${inner}</button>` : inner}</li>`;
+    }).join("");
+  }
+  function go(n, focus = true) {
+    step = n;
+    $$(".wiz-panel").forEach(p => p.hidden = +p.dataset.step !== n);
+    $("#w-prev").hidden = n === 1;
+    $("#w-next").hidden = n === 5;
+    $("#w-send").hidden = n !== 5;
+    renderSteps();
+    if (focus) { const h = $(`.wiz-panel[data-step="${n}"] h2`); h.focus({ preventScroll: true }); h.scrollIntoView({ block: "center" }); }
+    history.replaceState(null, "", "#step-" + n);
+  }
+  document.addEventListener("click", e => { const b = e.target.closest("[data-goto]"); if (b) go(+b.dataset.goto); });
+  $("#wiz-form").addEventListener("submit", e => {
+    e.preventDefault();
+    if (step === 1) {
+      const ok = $("#pname").value.trim();
+      $("#f-pname").classList.toggle("is-invalid", !ok);
+      if (!ok) { $("#pname").setAttribute("aria-invalid", "true"); $("#pname").focus(); return; }
+    }
+    go(step + 1);
+  });
+  $("#w-prev").onclick = () => go(step - 1);
+  $("#w-draft").onclick = () => notify({ title: "تم حفظ المسودة", text: "البرنامج محفوظ كمسودة ولا يظهر في المتابعة قبل اعتماده." });
+  $("#w-send").onclick = function () { this.setAttribute("aria-busy", "true"); setTimeout(() => { this.removeAttribute("aria-busy"); this.disabled = true; this.textContent = "أُرسل للاعتماد"; successSheet({ title: "تمت إضافة البرنامج بنجاح", text: "أُرسل البرنامج إلى صاحب الصلاحية للاعتماد، وتبدأ أول دورة تحديث بعد اعتماده.", rows: [["البرنامج", "برنامج التحول الرقمي 2027"], ["المراحل", "3"], ["الحزم", "2"], ["المبادرات", "4"], ["الحالة", "بانتظار الاعتماد"]], primary: { label: "الذهاب إلى الرئيسية", href: "app-home.html" }, secondary: { label: "إغلاق" } }); }, 700); };
+
+  /* Phases (editable rows) */
+  const phases = [["التأسيس", "يناير 2027", "أبريل 2027"], ["التنفيذ", "مايو 2027", "أكتوبر 2027"], ["الاستدامة", "نوفمبر 2027", "ديسمبر 2027"]];
+  function phaseRow(p, i) {
+    return `<tr><td class="col-n num">${i + 1}</td>
+      <td data-label="اسم المرحلة"><label class="visually-hidden" for="ph-n${i}">اسم المرحلة ${i + 1}</label><input class="input" id="ph-n${i}" value="${p[0]}" placeholder="اسم المرحلة"></td>
+      <td data-label="من"><label class="visually-hidden" for="ph-f${i}">بداية المرحلة ${i + 1}</label><input class="input input--date" id="ph-f${i}" value="${p[1]}" placeholder="مثال: يناير 2027"></td>
+      <td data-label="إلى"><label class="visually-hidden" for="ph-t${i}">نهاية المرحلة ${i + 1}</label><input class="input input--date" id="ph-t${i}" value="${p[2]}" placeholder="مثال: يناير 2027"></td>
+      <td class="col-act"><button class="btn btn--tertiary icon-btn" type="button" data-del="${i}" aria-label="حذف المرحلة ${i + 1}">${VIcon("x")}</button></td></tr>`;
+  }
+  function renderPhases() { $("#phases").innerHTML = phases.map(phaseRow).join(""); $("#k-phases").textContent = phases.length; }
+  renderPhases();
+  $("#add-phase").onclick = () => { $$("#phases tr").forEach((tr, i) => { phases[i] = [ $("#ph-n" + i).value, $("#ph-f" + i).value, $("#ph-t" + i).value ]; }); phases.push(["", "", ""]); renderPhases(); $("#ph-n" + (phases.length - 1)).focus(); };
+  $("#phases").addEventListener("click", e => { const b = e.target.closest("[data-del]"); if (!b) return; const i = +b.dataset.del, gone = phases.splice(i, 1)[0]; renderPhases(); notify({ type: "info", title: "تم حذف المرحلة", text: "يمكنك التراجع خلال ثوانٍ.", undo: () => { phases.splice(i, 0, gone); renderPhases(); notify({ title: "تمت استعادة المرحلة" }); } }); });
+
+  /* Add initiative */
+  let budget = 46, count = 4;
+  $("#add-init").onclick = () => {
+    const errs = [];
+    const need = (fid, ok, msg, focusSel) => { $(fid).classList.toggle("is-invalid", !ok); if (!ok) errs.push([focusSel, msg]); };
+    need("#f-iname", $("#iname").value.trim(), "اسم المبادرة", "#iname");
+    need("#f-ipkg", $("input[name=ipkg]").value, "الحزمة", "#ipkg");
+    need("#f-ient", $("input[name=ient]").value, "الجهة المنفذة", "#ient");
+    need("#f-itype", $("input[name=itype]:checked"), "نوع المبادرة", "input[name=itype]");
+    need("#f-iwave", $("input[name=iwave]:checked"), "الموجة", "input[name=iwave]");
+    if (errs.length) {
+      $("#i-err-list").innerHTML = errs.map(([s, m]) => `<li><a href="#" data-f="${s}">${m}</a></li>`).join("");
+      $("#i-err").hidden = false; $("#i-err").focus(); return;
+    }
+    $("#i-err").hidden = true;
+    const esc = s => s.replace(/</g, "&lt;");
+    const b = parseFloat($("#ibudget").value) || 0;
+    const month = v => esc(v || "—");
+    const tr = document.createElement("tr");
+    tr.className = "added-row is-new";
+    tr.innerHTML = `<td class="cell-main"><div class="cell-title">${esc($("#iname").value)}</div><div class="cell-sub">${esc($("input[name=ient]").value)}</div></td><td data-label="الحزمة">${$("input[name=ipkg]").value}</td><td data-label="النوع">${$("input[name=itype]:checked").value}</td><td data-label="الموجة">${$("input[name=iwave]:checked").value}</td><td data-label="الميزانية" class="is-num">${b || "—"}</td><td data-label="المدة">${month($("#ifrom").value)} – ${month($("#ito").value)}</td>`;
+    $("#inits").appendChild(tr);
+    budget += b; count++;
+    $("#k-budget").textContent = budget; $("#k-inits").textContent = count;
+    $("#init-count").textContent = count + " مبادرات"; $("#s5-inits").textContent = `${count} مبادرات بميزانية ${budget} مليون ريال`;
+    notify({ title: "تمت إضافة المبادرة بنجاح", text: "تظهر الآن في قائمة المبادرات المضافة." });
+    $("#iname").value = ""; $("#ibudget").value = ""; $("#iname").focus();
+  };
+  $("#i-err").addEventListener("click", e => { const a = e.target.closest("[data-f]"); if (a) { e.preventDefault(); $(a.dataset.f).focus(); } });
+  ["#iname"].forEach(s => $(s).addEventListener("input", () => $("#f-iname").classList.remove("is-invalid")));
+  document.addEventListener("combo:change", e => e.target.closest(".field")?.classList.remove("is-invalid"));
+  $$("input[name=itype],input[name=iwave]").forEach(r => r.addEventListener("change", () => r.closest(".field").classList.remove("is-invalid")));
+
+  const m = location.hash.match(/^#step-(\d)/);
+  go(m ? +m[1] : 1, false);
+})();
+</script>
+</body>
+</html>

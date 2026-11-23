@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مهامي · مدير المبادرة · The Vector</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  .progress-cell { display: flex; align-items: center; gap: var(--dga-space-3); min-inline-size: 180px; }
+  .progress-cell .meter { flex: 1; }
+  .rule { display: flex; flex-wrap: wrap; gap: var(--dga-space-2) var(--dga-space-4); align-items: center; font-size: var(--dga-fs-sm); color: var(--dga-text-secondary); }
+</style>
+</head>
+<body data-ws="app" data-page="tasks" data-roles="manager" data-crumb="مهامي">
+<main id="main" class="page">
+
+  <header class="page-head">
+    <p class="page-head__eyebrow">حزمة رأس المال البشري</p>
+    <h1>3 تحديثات مطلوبة منك هذا الشهر</h1>
+    <p class="page-head__lede">آخر موعد للإرسال 30 نوفمبر <span class="hj">20 جمادى الآخرة</span>، باقي 7 أيام.</p>
+  </header>
+
+  <section aria-labelledby="due-h">
+    <h2 id="due-h" class="visually-hidden">التحديثات المطلوبة</h2>
+    <ol class="tasks">
+      <li class="task">
+        <span class="task__n" aria-hidden="true">1</span>
+        <div class="task__body">
+          <p class="task__title">تصميم وتنفيذ برامج إدارة المواهب وإدارة الأداء الوظيفي</p>
+          <p class="task__meta"><span data-badge="notstarted"></span><span>آخر تحديث منشور في 17 أكتوبر: <b class="num">38%</b> فعلي مقابل <span class="num">50%</span> مخطط</span></p>
+        </div>
+        <a class="btn btn--primary" href="quick-update.html">حدّث الآن</a>
+      </li>
+      <li class="task">
+        <span class="task__n" aria-hidden="true">2</span>
+        <div class="task__body">
+          <p class="task__title">إعداد برنامج التعاقب الوظيفي للوظائف الحرجة</p>
+          <p class="task__meta"><span data-badge="draft">مسودة محفوظة أمس</span><span>آخر تحديث منشور: <b class="num">34%</b> فعلي مقابل <span class="num">42%</span> مخطط</span></p>
+        </div>
+        <a class="btn btn--secondary" href="quick-update.html">أكمل المسودة</a>
+      </li>
+      <li class="task">
+        <span class="task__n" aria-hidden="true">3</span>
+        <div class="task__body">
+          <p class="task__title">إعداد خطة القوى العاملة</p>
+          <p class="task__meta"><span data-badge="returned"></span><span>آخر تحديث منشور: <b class="num">58%</b> فعلي مقابل <span class="num">61%</span> مخطط</span></p>
+          <p class="task__note"><b>ملاحظة مكتب البرنامج:</b> وضّح سبب تغيّر المخطط من 61% إلى 72%.</p>
+        </div>
+        <a class="btn btn--secondary" href="quick-update.html">صحّح وأعد الإرسال</a>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card" aria-labelledby="mine-h">
+    <div class="card__head">
+      <h2 id="mine-h">مبادراتي</h2>
+      <span class="t-sm t-muted">حسب آخر تحديث منشور</span>
+    </div>
+    <div class="table-wrap">
+      <table class="table table--reflow">
+        <thead><tr>
+          <th scope="col">المبادرة</th>
+          <th scope="col" class="is-num">الإنجاز الفعلي</th>
+          <th scope="col" class="is-num">الإنجاز المخطط</th>
+          <th scope="col">الانحراف عن الخطة</th>
+          <th scope="col">الحالة</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="cell-main"><div class="cell-title">مراجعة وتحديث سياسات الموارد البشرية</div></td>
+            <td data-label="الإنجاز الفعلي" class="is-num">100%</td><td data-label="الإنجاز المخطط" class="is-num">100%</td>
+            <td data-label="الانحراف عن الخطة"><div class="progress-cell"><div class="meter meter--complete" role="img" aria-label="منجز 100% والمخطط 100%"><span class="meter__fill" style="inline-size:100%"></span><span class="meter__plan" style="inset-inline-start:100%"></span></div></div></td>
+            <td data-label="الحالة"><span data-badge="complete"></span></td></tr>
+          <tr><td class="cell-main"><div class="cell-title">إعادة تقييم المسميات والدرجات الوظيفية والمزايا والتعويضات</div></td>
+            <td data-label="الإنجاز الفعلي" class="is-num">63%</td><td data-label="الإنجاز المخطط" class="is-num">67%</td>
+            <td data-label="الانحراف عن الخطة"><div class="progress-cell"><div class="meter meter--ontrack" role="img" aria-label="فعلي 63% والمخطط 67%"><span class="meter__fill" style="inline-size:63%"></span><span class="meter__plan" style="inset-inline-start:67%"></span></div></div></td>
+            <td data-label="الحالة"><span data-badge="ontrack"></span></td></tr>
+          <tr><td class="cell-main"><div class="cell-title">إعداد خطة القوى العاملة</div></td>
+            <td data-label="الإنجاز الفعلي" class="is-num">58%</td><td data-label="الإنجاز المخطط" class="is-num">61%</td>
+            <td data-label="الانحراف عن الخطة"><div class="progress-cell"><div class="meter meter--ontrack" role="img" aria-label="فعلي 58% والمخطط 61%"><span class="meter__fill" style="inline-size:58%"></span><span class="meter__plan" style="inset-inline-start:61%"></span></div></div></td>
+            <td data-label="الحالة"><span data-badge="ontrack"></span></td></tr>
+          <tr><td class="cell-main"><div class="cell-title">تصميم وتنفيذ برامج إدارة المواهب وإدارة الأداء الوظيفي</div></td>
+            <td data-label="الإنجاز الفعلي" class="is-num">38%</td><td data-label="الإنجاز المخطط" class="is-num">50%</td>
+            <td data-label="الانحراف عن الخطة"><div class="progress-cell"><div class="meter meter--behind" role="img" aria-label="منجز 38% والمخطط 50%"><span class="meter__fill" style="inline-size:38%"></span><span class="meter__plan" style="inset-inline-start:50%"></span></div></div></td>
+            <td data-label="الحالة"><span data-badge="behind"></span></td></tr>
+          <tr><td class="cell-main"><div class="cell-title">إعداد برنامج التعاقب الوظيفي للوظائف الحرجة</div></td>
+            <td data-label="الإنجاز الفعلي" class="is-num">34%</td><td data-label="الإنجاز المخطط" class="is-num">42%</td>
+            <td data-label="الانحراف عن الخطة"><div class="progress-cell"><div class="meter meter--behind" role="img" aria-label="منجز 34% والمخطط 42%"><span class="meter__fill" style="inline-size:34%"></span><span class="meter__plan" style="inset-inline-start:42%"></span></div></div></td>
+            <td data-label="الحالة"><span data-badge="behind"></span></td></tr>
+          <tr><td class="cell-main"><div class="cell-title">تطوير منصة التعلم الإلكتروني للموظفين</div><div class="cell-sub">بدأت هذا الشهر، ولم تُعتمد خطتها الشهرية بعد</div></td>
+            <td data-label="الإنجاز الفعلي" class="is-num">—</td><td data-label="الإنجاز المخطط" class="is-num">—</td>
+            <td data-label="الانحراف عن الخطة"><span class="t-sm t-muted">يظهر بعد اعتماد الخطة</span></td>
+            <td data-label="الحالة"><span data-badge="nofig"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card__foot">
+      <p class="rule"><b>كيف تُحسب الحالة؟</b> الانحراف عن الخطة: حتى 5 نقاط <span data-badge="ontrack"></span> من 5 إلى 15 <span data-badge="behind"></span> أكثر من 15 <span data-badge="wellbehind"></span>. الخط الأسود في الشريط يمثل المخطط.</p>
+    </div>
+  </section>
+
+</main>
+<script src="shell.js"></script>
+<script src="motion.js"></script>
+<script>
+/* Preview of other states: my-tasks.html#loading · #empty · #offline */
+(function () {
+  const h = location.hash, list = document.querySelector(".tasks"), title = document.querySelector(".page-head h1"), lede = document.querySelector(".page-head__lede");
+  if (h === "#empty") {
+    title.textContent = "لا تحديثات مطلوبة منك هذا الشهر";
+    lede.innerHTML = 'الدورة القادمة تبدأ 1 ديسمبر <span class="hj">21 جمادى الآخرة</span>.';
+    list.outerHTML = VState({ title: "أرسلت كل تحديثات نوفمبر", text: "مكتب البرنامج نشر تحديثاتك الثلاثة. سيصلك تنبيه عند فتح دورة ديسمبر.", action: '<a class="btn btn--secondary" href="#">عرض آخر تحديثاتي</a>' });
+  }
+  if (h === "#loading") {
+    const real = list.innerHTML;
+    list.innerHTML = [0, 1, 2].map(() => '<li class="skel-task" aria-hidden="true"><span class="skel" style="block-size:18px;inline-size:70%"></span><span class="skel" style="block-size:40px;inline-size:110px;grid-row:span 2"></span><span class="skel" style="block-size:12px;inline-size:45%"></span></li>').join("");
+    list.setAttribute("aria-busy", "true");
+    setTimeout(() => { list.innerHTML = real; list.removeAttribute("aria-busy"); }, 2200);
+  }
+  if (h === "#offline") {
+    title.textContent = "مهامي"; lede.textContent = "";
+    list.outerHTML = VState({ type: "error", title: "تعذّر تحميل مهامك", text: "انقطع الاتصال بالخادم. تحديثاتك المحفوظة كمسودات لم تتأثر.", action: '<button class="btn btn--primary" type="button" onclick="location.hash=\'\';location.reload()">إعادة المحاولة</button>' });
+    setTimeout(() => notify({ type: "error", title: "تعذّر الاتصال", text: "تحقق من الشبكة ثم أعد المحاولة." }), 400);
+  }
+})();
+</script>
+</body>
+</html>
