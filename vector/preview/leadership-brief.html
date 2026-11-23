@@ -73,6 +73,20 @@
     .chart__row { grid-template-columns: minmax(0, 1fr) auto; }
     .chart__bar { grid-column: 1 / -1; grid-row: 2; }
   }
+  /* light mint hero (replaces the dark green band) */
+  .hero { background: linear-gradient(165deg, #E2EEE6 0%, #ECF3EE 55%, #F4F8F5 100%) !important; color: var(--dga-text-primary); border-block-end: 1px solid #D5E6DB; }
+  .hero::before { filter: invert(1) hue-rotate(180deg); opacity: .3; }
+  .hero h1 { color: var(--dga-sa-950); }
+  .hero__eyebrow { color: var(--dga-sa-800); }
+  .hero .hj { color: var(--dga-text-muted); }
+  .meet { color: var(--dga-gold-700); border-color: var(--dga-gold-400); background: rgb(255 255 255 / .7); }
+  .hero__lede { color: var(--dga-text-secondary); }
+  .hero__lede b { color: var(--dga-sa-900); }
+  .hero .kpis { border-color: #D5E6DB; }
+  .hero .kpi { background: rgb(255 255 255 / .75) !important; border-color: #D5E6DB !important; }
+  .hero .kpi__label, .hero .kpi__value small, .hero .kpi__note { color: var(--dga-text-muted); }
+  .hero .kpi__value { color: var(--dga-sa-900); }
+  .hero .kpi__note b { color: var(--dga-text-primary); }
 </style>
 </head>
 <body data-ws="intel" data-page="brief" data-roles="head pmo" data-crumb="خلاصة القيادة">
