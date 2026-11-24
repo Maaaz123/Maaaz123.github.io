@@ -153,3 +153,20 @@ font-family:'Readex Pro',system-ui,sans-serif;color:var(--ink);background:var(--
 .mx.navmin>.side .nv .bd{position:absolute;top:4px;inset-inline-start:4px;min-width:16px;height:16px;font-size:9.5px;margin:0}
 .mx.navmin>.side .sfoot>div{flex-direction:column}
 @media (max-width:900px){.scol{display:none}}
+
+.side nav>*{animation:navin .5s cubic-bezier(.2,.8,.2,1) both}
+.side nav>*:nth-child(1){animation-delay:0.072s}.side nav>*:nth-child(2){animation-delay:0.094s}.side nav>*:nth-child(3){animation-delay:0.116s}.side nav>*:nth-child(4){animation-delay:0.138s}.side nav>*:nth-child(5){animation-delay:0.160s}.side nav>*:nth-child(6){animation-delay:0.182s}.side nav>*:nth-child(7){animation-delay:0.204s}.side nav>*:nth-child(8){animation-delay:0.226s}.side nav>*:nth-child(9){animation-delay:0.248s}.side nav>*:nth-child(10){animation-delay:0.270s}.side nav>*:nth-child(11){animation-delay:0.292s}.side nav>*:nth-child(12){animation-delay:0.314s}.side nav>*:nth-child(13){animation-delay:0.336s}.side nav>*:nth-child(14){animation-delay:0.358s}.side nav>*:nth-child(15){animation-delay:0.380s}.side nav>*:nth-child(16){animation-delay:0.402s}.side nav>*:nth-child(17){animation-delay:0.424s}.side nav>*:nth-child(18){animation-delay:0.446s}.side nav>*:nth-child(19){animation-delay:0.468s}.side nav>*:nth-child(20){animation-delay:0.490s}.side nav>*:nth-child(21){animation-delay:0.512s}.side nav>*:nth-child(22){animation-delay:0.534s}.side nav>*:nth-child(23){animation-delay:0.556s}.side nav>*:nth-child(24){animation-delay:0.578s}.side nav>*:nth-child(25){animation-delay:0.600s}.side nav>*:nth-child(26){animation-delay:0.622s}.side nav>*:nth-child(27){animation-delay:0.644s}.side nav>*:nth-child(28){animation-delay:0.666s}.side nav>*:nth-child(29){animation-delay:0.688s}.side nav>*:nth-child(30){animation-delay:0.710s}.side nav>*:nth-child(31){animation-delay:0.732s}.side nav>*:nth-child(32){animation-delay:0.754s}.side nav>*:nth-child(33){animation-delay:0.776s}
+.side .shead{animation:navin .5s cubic-bezier(.2,.8,.2,1) both}
+.side .sfoot{animation:fade .6s ease .5s both}
+.nv{position:relative;transition:background-color .25s,color .25s,transform .25s cubic-bezier(.2,.8,.2,1)}
+.nv svg{transition:transform .3s cubic-bezier(.2,1.4,.4,1)}
+.nv:hover{transform:translateX(-3px)}
+.nv:hover svg{transform:scale(1.15) rotate(-6deg)}
+.nv.on{box-shadow:0 10px 24px -12px rgba(227,154,94,.75);background-image:linear-gradient(110deg,transparent 30%,rgba(255,246,236,.45) 50%,transparent 70%);background-size:250% 100%;background-repeat:no-repeat;animation:navin .5s cubic-bezier(.2,.8,.2,1) both,shine 1.4s ease .7s both}
+.nv .bd.hot{animation:hotp 2.4s ease-in-out 1.2s infinite}
+.slogo svg{transition:transform .4s cubic-bezier(.2,1.4,.4,1)}
+.slogo:hover svg{transform:rotate(-8deg) scale(1.06)}
+@keyframes navin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+@keyframes shine{from{background-position:120% 0}to{background-position:-120% 0}}
+@keyframes hotp{0%,100%{box-shadow:0 0 0 0 rgba(184,57,44,.6)}50%{box-shadow:0 0 0 5px rgba(184,57,44,0)}}
+@media (prefers-reduced-motion:reduce){.side *{animation:none!important;transition:none!important}}

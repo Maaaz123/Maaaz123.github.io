@@ -20,7 +20,59 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&amp;family=Readex+Pro:wght@300;400;500;600&amp;display=swap">
-<style>body{margin:0;background:#F4EEE4}</style>
+<style>body{margin:0;background:#F4EEE4}.askbar{display:none!important}
+.stage.nok{padding:clamp(14px,2vw,24px) 0}
+.askx{--page:#110D0B;--card:#1A1411;--line:#33291F;--line2:#251E19;--ink:#F4ECE0;--ink2:#D3C6B7;--muted:#9D8F81;--cu3:#3A2619;--cg:#7DBE97;--co:#E8915A;--cr:#EE8A7E;--cb:#8FB3D6;--mint:#3A2619;position:relative;overflow:hidden;isolation:isolate;border-radius:28px;border:1px solid #2A201A;background:#140E0B;min-height:clamp(600px,calc(100vh - 48px),940px);display:flex;flex-direction:column;color:#F4ECE0}
+.askx::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,240,225,.08) 1.2px,transparent 1.6px);background-size:24px 24px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 42%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 42%,#000 20%,transparent 75%);animation:drift 40s linear infinite}
+.glow{position:absolute;border-radius:50%;filter:blur(70px);z-index:-1;pointer-events:none}
+.g1{width:520px;height:520px;background:rgba(227,154,94,.30);top:-220px;inset-inline-start:-160px;animation:float1 16s ease-in-out infinite alternate}
+.g2{width:460px;height:460px;background:rgba(62,122,87,.26);bottom:-220px;inset-inline-end:-140px;animation:float2 18s ease-in-out infinite alternate}
+.g3{width:260px;height:260px;background:rgba(227,154,94,.16);top:22%;left:50%;margin-left:-130px;animation:breathe2 6s ease-in-out infinite}
+.ahero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:48px 20px 24px}
+.amark{position:relative;width:92px;height:92px;margin-bottom:10px;animation:pop .7s cubic-bezier(.2,1.4,.4,1) both}
+.amark svg{position:relative;display:block;filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
+.amark .halo{position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(circle,rgba(227,154,94,.35),transparent 65%);animation:breathe2 3.2s ease-in-out infinite}
+.amark .ring{position:absolute;inset:-12px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 62%,rgba(227,154,94,.9) 78%,transparent 92%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));animation:spin 3.6s linear infinite}
+.amark .mp{stroke-dasharray:100;stroke-dashoffset:100;animation:mdraw 1.1s cubic-bezier(.65,0,.35,1) .25s forwards}
+.amark .mb{transform-origin:47px 47px;transform:scaleY(0);animation:mgrow .5s cubic-bezier(.2,1.3,.4,1) 1.2s forwards}
+.ah{margin:0;font-size:clamp(26px,3.4vw,42px);font-weight:700;line-height:1.3;letter-spacing:-.01em;max-width:780px;animation:rise .7s cubic-bezier(.2,.8,.2,1) .35s both}
+.as{margin:0;font-size:clamp(14.5px,1.3vw,17px);color:#BCAB98;animation:rise .7s cubic-bezier(.2,.8,.2,1) .5s both}
+.achips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(820px,100%);margin-top:14px}
+.achip{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:start;min-height:56px;padding:12px 18px;border-radius:18px;border:1px solid rgba(255,240,225,.13);background:rgba(255,240,225,.04);color:#F4ECE0;font:inherit;font-size:14.5px;line-height:1.55;cursor:pointer;backdrop-filter:blur(6px);animation:rise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.7s + var(--d,0s));transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,background-color .25s,box-shadow .25s}
+.achip svg{flex:none;color:#E39A5E;opacity:0;transform:translateX(8px);transition:opacity .25s,transform .25s}
+.achip:hover,.achip:focus-visible{transform:translateY(-3px);border-color:rgba(227,154,94,.7);background:rgba(227,154,94,.1);box-shadow:0 18px 36px -22px rgba(227,154,94,.7);outline:none}
+.achip:hover svg,.achip:focus-visible svg{opacity:1;transform:none}
+.achip:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 6px)}
+.athread{flex:1;width:min(880px,100%);margin:0 auto;padding:36px 20px 18px;display:flex;flex-direction:column;gap:14px}
+.aq{align-self:flex-end;max-width:80%;margin:0;background:linear-gradient(135deg,#E39A5E,#C9773F);color:#140E0B;font-weight:500;border-radius:18px 18px 4px 18px;padding:11px 16px;font-size:14.5px;animation:msgin .4s cubic-bezier(.2,.8,.2,1) both}
+.aold{align-self:flex-start;width:100%;background:rgba(255,240,225,.04);border:1px solid rgba(255,240,225,.1);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.abar{position:sticky;bottom:0;padding:14px 20px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;background:linear-gradient(to top,#140E0B 55%,transparent)}
+.amini{display:flex;gap:8px;overflow-x:auto;width:min(880px,100%);scrollbar-width:none;padding-bottom:2px}
+.amchip{flex:none;border-radius:99px;border:1px solid rgba(255,240,225,.14);background:rgba(255,240,225,.04);color:#D3C6B7;font:inherit;font-size:13px;padding:7px 14px;cursor:pointer;white-space:nowrap;animation:rise .4s ease both;transition:border-color .2s,color .2s}
+.amchip:hover{border-color:#E39A5E;color:#fff}
+.ain{display:flex;align-items:center;gap:10px;width:min(820px,100%);background:#FBF6EF;border-radius:20px;padding:8px 8px 8px 8px;padding-inline-start:18px;box-shadow:0 24px 50px -24px rgba(0,0,0,.8),0 0 0 1px rgba(255,240,225,.1);transition:box-shadow .25s;animation:rise .7s cubic-bezier(.2,.8,.2,1) .9s both}
+.ain:focus-within{box-shadow:0 24px 50px -24px rgba(0,0,0,.8),0 0 0 3px rgba(227,154,94,.45)}
+.ain input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:15.5px;color:#140E0B;min-height:44px;outline:none}
+.ain input::placeholder{color:#9D8F81}
+.asend{width:46px;height:46px;flex:none;border-radius:14px;border:0;background:#D9CBBB;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color .25s,transform .25s}
+.asend.on{background:#E39A5E;color:#140E0B;animation:nudge 1.6s ease-in-out infinite}
+.asend:hover{transform:scale(1.06)}
+.saved{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.svd{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:16px;padding:14px;transition:transform .25s,border-color .25s}
+.svd:hover{transform:translateY(-2px);border-color:var(--cu)}
+.svi{width:40px;height:40px;flex:none;border-radius:12px;background:var(--cu3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--cu)}
+@keyframes mdraw{to{stroke-dashoffset:0}}
+@keyframes mgrow{to{transform:scaleY(1)}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes breathe2{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes float1{to{transform:translate(90px,70px)}}
+@keyframes float2{to{transform:translate(-80px,-60px)}}
+@keyframes drift{to{background-position:240px 240px}}
+@keyframes msgin{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes nudge{0%,100%{transform:none}50%{transform:translateX(-3px)}}
+@media (max-width:900px){.achips{grid-template-columns:minmax(0,1fr)}.achip:last-child:nth-child(odd){width:100%}.saved{grid-template-columns:repeat(2,minmax(0,1fr))}.askx{min-height:calc(100vh - 150px);border-radius:22px}.abar{padding-bottom:16px}}
+@media (max-width:520px){.saved{grid-template-columns:minmax(0,1fr)}.ahero{padding-top:32px}}
+@media (prefers-reduced-motion:reduce){.askx *,.askx::before{animation:none!important}.amark .mp{stroke-dashoffset:0}.amark .mb{transform:none}}</style>
 </helmet>
 <div class="mx {{themeClass}}" dir="rtl" lang="ar">
 <aside class="side" aria-label="القائمة الرئيسية">
@@ -61,41 +113,37 @@
 </aside>
 <div class="colm">
 <section class="stage nok"><div class="wrap"><div class="mtop"><a href="M07Profit.dc.html" style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="32" height="32" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#1F1712"></rect><path d="M15 47V25l14 13 18-22" fill="none" stroke="#FFF6EC" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M47 16v31" fill="none" stroke="#E39A5E" stroke-width="6.5" stroke-linecap="round"></path></svg><span class="T" style="font-size:18px;font-weight:700;color:#fff">marjn</span></a><button onClick="{{toggle}}" aria-label="الوضع الليلي" style="width:40px;height:40px;border-radius:99px;border:1px solid #3A2D25;background:transparent;color:#E3D3C0;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"></path></svg></button></div>
-<div class="shero solo"><div class="sl"><p class="meta rv"><span>يقرأ Odoo (نقاط البيع، المحاسبة، المخزون، الحضور) وتطبيقات التوصيل والبنك</span><span class="gold">بالعربي، بأرقامكم</span></p>
-<h1 class="h1 rv" style="--d:.05s">اسأل أي سؤال عن الشركة، والجواب بالأرقام والرسم والمصدر</h1>
-<p class="lead rv" style="--d:.1s">المحلل ما يخمّن: كل رقم يطلع معه <b>من وين جاء</b>، وكل جواب معه <b>خطوة تقدر تسويها</b> مباشرة.</p></div></div>
-</div></section>
-<main class="wrap mainc">
-
-<div class="grid2" style="grid-template-columns:minmax(0,1.6fr) minmax(0,0.8fr)">
-<section class="card rv" style="--d:.12s;min-height:620px">
-<div class="cb" style="gap:14px;background:var(--page);border-radius:12px 12px 0 0">
+<div class="askx">
+<span class="glow g1"></span><span class="glow g2"></span><span class="glow g3"></span>
 <template data-sc="if" value="{{empty}}" hint-placeholder-val="{{ true }}">
-<div style="display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:40px 10px">
-<span style="width:56px;height:56px;border-radius:99px;background:linear-gradient(135deg,#0A3F2A,#13704A);display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5D46B" stroke-width="2" stroke-linecap="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"></path></svg></span>
-<strong style="font-size:18px">وش تبي تعرف اليوم؟</strong>
-<span style="font-size:14px;color:var(--muted)">جرّب واحد من هذي الأسئلة</span>
+<div class="ahero">
+<div class="amark"><span class="halo"></span><span class="ring"></span>
+<svg aria-hidden="true" width="92" height="92" viewBox="0 0 64 64"><defs><linearGradient id="amg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E231B"></stop><stop offset="1" stop-color="#140E0B"></stop></linearGradient></defs><rect x=".5" y=".5" width="63" height="63" rx="18" fill="url(#amg)" stroke="#3E2F25"></rect><path class="mp" pathLength="100" d="M15 47V25l14 13 18-22" fill="none" stroke="#FFF6EC" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"></path><path class="mb" d="M47 16v31" fill="none" stroke="#E39A5E" stroke-width="6.5" stroke-linecap="round"></path></svg></div>
+<h1 class="ah">اسأل عن أي فرع أو منتج، وخذ الجواب بالأرقام</h1>
+<p class="as">يقرأ فودكس وأودو ويحسب منها، ويقول لك من وين جاب كل رقم.</p>
+<div class="achips"><template data-sc="for" list="{{chips}}" as="c" hint-placeholder-count="4"><button onClick="{{c.go}}" class="achip" style="--d:{{c.d}}"><span>{{c.q}}</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button></template></div>
 </div>
 </template>
-<template data-sc="for" list="{{done}}" as="d" hint-placeholder-count="1">
-<p style="align-self:flex-end;max-width:80%;margin:0;background:var(--mint);border-radius:12px 12px 4px 12px;padding:10px 14px;font-size:14.5px">{{d.q}}</p>
-<div style="align-self:flex-start;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px"><p style="margin:0;font-size:14.5px;line-height:1.9">{{d.a}}</p><span style="font-size:12px;color:var(--muted)">المصدر: {{d.src}}</span></div>
-</template>
 <template data-sc="if" value="{{active}}" hint-placeholder-val="{{ false }}">
-<p style="align-self:flex-end;max-width:80%;margin:0;background:var(--mint);border-radius:12px 12px 4px 12px;padding:10px 14px;font-size:14.5px;animation:msg .3s ease both">{{cur.q}}</p>
-<div style="display:flex;flex-direction:column;gap:7px;padding:2px">
+<div class="athread">
+<template data-sc="for" list="{{done}}" as="d" hint-placeholder-count="1">
+<p class="aq">{{d.q}}</p>
+<div class="aold"><p style="margin:0;font-size:14.5px;line-height:1.9">{{d.a}}</p><span style="font-size:12px;color:var(--muted)">المصدر: {{d.src}}</span></div>
+</template>
+<p class="aq">{{cur.q}}</p>
+<div style="display:flex;flex-direction:column;gap:8px;padding:2px">
 <template data-sc="for" list="{{steps}}" as="s" hint-placeholder-count="4"><div class="step {{s.cls}}"><span class="dot"></span>{{s.t}}</div></template>
 </div>
 <template data-sc="if" value="{{showAns}}" hint-placeholder-val="{{ false }}">
-<div class="ai" style="width:100%"><div class="in">
+<div class="ai" style="width:100%;animation:msg .4s ease both"><div class="in">
 <span class="aitag">الجواب</span>
 <p class="{{caret}}" style="margin:0;font-size:15.5px;line-height:1.95">{{typed}}</p>
 <template data-sc="if" value="{{showViz}}" hint-placeholder-val="{{ false }}">
 <div style="display:flex;flex-direction:column;gap:12px;animation:msg .4s ease both">
-<div style="border:1px solid var(--line2);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px">
+<div style="border:1px solid var(--line2);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px">
 <span style="font-size:13px;font-weight:700">{{cur.ct}}</span>
 <div style="display:flex;align-items:flex-end;gap:8px;height:150px;direction:ltr">
-<template data-sc="for" list="{{bars}}" as="b" hint-placeholder-count="6"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><span class="num" style="font-size:11.5px;font-weight:700">{{b.v}}</span><div class="vb" style="--d:{{b.dl}};width:100%;flex:none;height:{{b.h}};background:{{b.c}}"></div><span style="font-size:11.5px;color:var(--ink2);text-align:center">{{b.l}}</span></div></template>
+<template data-sc="for" list="{{bars}}" as="b" hint-placeholder-count="5"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end"><span class="num" style="font-size:11.5px;font-weight:700">{{b.v}}</span><div class="vb" style="--d:{{b.dl}};width:100%;flex:none;height:{{b.h}};background:{{b.c}}"></div><span style="font-size:11.5px;color:var(--ink2);text-align:center">{{b.l}}</span></div></template>
 </div>
 </div>
 <div class="tw"><table class="tbl"><thead><tr><template data-sc="for" list="{{cur.th}}" as="h" hint-placeholder-count="3"><th>{{h}}</th></template></tr></thead><tbody><template data-sc="for" list="{{cur.rows}}" as="r" hint-placeholder-count="3"><tr><template data-sc="for" list="{{r}}" as="c" hint-placeholder-count="3"><td class="num">{{c}}</td></template></tr></template></tbody></table></div>
@@ -105,28 +153,20 @@
 </template>
 </div></div>
 </template>
+</div>
 </template>
+<div class="abar">
+<template data-sc="if" value="{{active}}" hint-placeholder-val="{{ false }}"><div class="amini"><template data-sc="for" list="{{chips}}" as="c" hint-placeholder-count="4"><button onClick="{{c.go}}" class="amchip">{{c.q}}</button></template></div></template>
+<div class="ain"><label style="flex:1;display:flex"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">اكتب سؤالك</span><input value="{{txt}}" onChange="{{onTxt}}" onKeyDown="{{onKey}}" placeholder="اكتب سؤالك بالعربي…"></label><button onClick="{{send}}" class="asend {{sendOn}}" aria-label="اسأل"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button></div>
 </div>
-<div style="padding:12px 16px;border-top:1px solid var(--line2);display:flex;gap:10px;align-items:center">
-<label style="flex:1"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">اكتب سؤالك</span><input class="field" placeholder="اكتب سؤالك بالعربي…" style="width:100%;min-height:48px;font-size:15px;border-radius:12px"></label>
-<button onClick="{{next}}" class="btn" style="min-height:48px;border-radius:12px">اسأل</button>
 </div>
+</div></section>
+<main class="wrap mainc">
+
+<section class="card rv" style="--d:.1s">
+<div class="ch"><h2>تقارير محفوظة</h2><span class="sub">أسئلة تتكرر، تتحدث تلقائيًا كل صباح</span></div>
+<div class="cb"><div class="saved"><template data-sc="for" list="{{saved}}" as="v" hint-placeholder-count="4"><div class="svd"><span class="svi">{{v.i}}</span><span style="display:flex;flex-direction:column;gap:2px;min-width:0"><strong style="font-size:14.5px;font-weight:600">{{v.n}}</strong><span style="font-size:12.5px;color:var(--muted)">{{v.w}}</span></span></div></template></div></div>
 </section>
-<div style="display:flex;flex-direction:column;gap:18px">
-<section class="card rv" style="--d:.18s">
-<div class="ch"><h2>أسئلة جاهزة</h2></div>
-<div class="cb" style="gap:8px">
-<template data-sc="for" list="{{chips}}" as="c" hint-placeholder-count="5"><button onClick="{{c.go}}" class="btn3" style="text-align:start;min-height:44px;line-height:1.5;white-space:normal;padding:8px 12px">{{c.q}}</button></template>
-</div>
-</section>
-<section class="card rv" style="--d:.24s">
-<div class="ch"><h2>تقارير محفوظة</h2><span class="sub">تتحدث كل صباح</span></div>
-<div class="cb" style="gap:0">
-<template data-sc="for" list="{{saved}}" as="v" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2)"><span style="font-size:14px">{{v.n}}</span><span style="font-size:12px;color:var(--muted)">{{v.w}}</span></div></template>
-</div>
-</section>
-</div>
-</div>
 </main>
 </div>
 <nav class="bnav" aria-label="القائمة السفلية"><a href="M01Home.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"></path></svg><span>اليوم</span></a><a href="M07Profit.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V9zM14 3v6h6M8 13h8M8 17h5"></path></svg><span>الخلاصة</span></a><a href="M10Branches.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"></path></svg><span>الفروع</span></a><a href="M06Alerts.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"></path></svg><span>التنبيهات</span></a><button onClick="{{openMenu}}" class="bn" aria-label="كل الأقسام"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg><span>المزيد</span></button></nav>
@@ -183,7 +223,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
 class Component extends DCLogic {
-  state = Object.assign({ dark: false, navMin: false, menu: false, askOpen: false, aq: -1, ap: 0, an: 0, adn: {} }, { qi: -1, phase: 0, n: 0, hist: [], dn: {} });
+  state = Object.assign({ dark: false, navMin: false, menu: false, askOpen: false, aq: -1, ap: 0, an: 0, adn: {} }, { qi: -1, phase: 0, n: 0, hist: [], dn: {}, txt: '' });
   componentDidMount() { try { this.setState({ dark: window.localStorage.getItem('marjn.theme') === 'dark', navMin: window.localStorage.getItem('marjn.nav') === 'min' }); } catch (e) {}  }
   componentWillUnmount() { (this.att || []).forEach(clearTimeout); clearInterval(this.aiv); (this.tt || []).forEach(clearTimeout); clearInterval(this.iv); }
   askData() { const G = '#3E7A57', O = '#C0692C', R = '#B8392C', B = '#3D5F80';
@@ -214,7 +254,7 @@ class Component extends DCLogic {
     const k = 'ask'; const c = D[k] || D[map[k]] || D.general;
     return { label: c.label, qs: c.qs.concat(c === D.general ? [] : [D.general.qs[0]]) }; }
   runAsk(i) { (this.att || []).forEach(clearTimeout); clearInterval(this.aiv); this.att = []; const d = this.askData().qs[i]; this.setState({ askOpen: true, aq: i, ap: 1, an: 0, adn: {} }); [[650, 2], [1300, 3], [1950, 4]].forEach(p => this.att.push(setTimeout(() => this.setState({ ap: p[1] }), p[0]))); this.att.push(setTimeout(() => { this.aiv = setInterval(() => this.setState(st => { const n = st.an + 3; if (n >= d.a.length) { clearInterval(this.aiv); return { an: d.a.length, ap: 5 }; } return { an: n }; }), 20); }, 2050)); }
-  Q() { const G = 'var(--cg)', O = 'var(--co)', R = 'var(--cr)', B = 'var(--cb)'; return [
+  Q() { const G = '#7DBE97', O = '#E8915A', R = '#EE8A7E', B = '#8FB3D6'; return [
  { q: 'وش أكثر 5 فروع زاد ربحها هذا الشهر وليش؟', a: 'الملقا والياسمين والتحلية والنخيل وحطين. القاسم المشترك: كلها نقلت عروضها من جاهز لكيتا في أكتوبر، والتوصيل عندها أقل من 35% من الطلبات. الملقا لحاله زاد 6,100 ريال بفضل تمديد الإغلاق لـ1 صباحًا.', ct: 'الزيادة في صافي الربح عن أكتوبر · ألف ريال', bars: [['الملقا', 6.1, G], ['الياسمين', 4.8, G], ['التحلية', 3.9, G], ['النخيل', 3.1, G], ['حطين', 2.7, G]], th: ['الفرع', 'الربح أكتوبر', 'الربح نوفمبر', 'السبب'], rows: [['الملقا', '32,100', '38,200', 'تمديد الإغلاق'], ['الياسمين', '27,100', '31,900', 'العروض لكيتا'], ['التحلية', '26,500', '30,400', 'هدر أقل']], act: ['طبّق تمديد الإغلاق على 12 فرعًا', 'احفظ كتقرير'], src: 'Odoo المحاسبة حسب مركز التكلفة + نقاط البيع' },
  { q: 'كم نخسر من الحليب المهدر في كل منطقة؟', a: 'هدر الحليب هذا الشهر 41,300 ريال. الشرقية أعلى نسبة (8.9% زيادة عن الوصفة)، والرياض أعلى قيمة لأن فروعها أكثر. 41% من الهدر في آخر ساعة قبل الإغلاق.', ct: 'هدر الحليب · ألف ريال', bars: [['الرياض', 17.2, O], ['الشرقية', 11.8, R], ['جدة', 8.4, O], ['القصيم', 2.1, G], ['المدينة', 1.8, G]], th: ['المنطقة', 'لتر', 'ريال', 'زيادة عن الوصفة'], rows: [['الرياض', '2,770', '17,200', '5.9%'], ['الشرقية', '1,900', '11,800', '8.9%'], ['جدة', '1,350', '8,400', '6.4%']], act: ['أرسل لمديري المناطق', 'افتح المخزون والهدر'], src: 'Odoo المخزون + الوصفات (BOM)' },
  { q: 'لو أغلقنا فرع الصحافة، كم يرجع لنا؟', a: 'الفرع يخسر 3,900 ريال شهريًا. لو أُغلق، المحلل يتوقع 55% من عملائه المسجلين يروحون للنخيل والملقا (أقل من 3 كم)، فيرجع لكم نحو 6,000 ريال ربح شهريًا من فروع ثانية. المجموع: +9,900 ريال شهريًا، لكن تكلفة الإخلاء والعقد تحتاج تُحسب.', ct: 'الأثر الشهري للإغلاق · ألف ريال', bars: [['وقف الخسارة', 3.9, G], ['انتقال العملاء', 6.0, G], ['خسارة عملاء', -2.4, R]], th: ['البند', 'القيمة الشهرية'], rows: [['وقف خسارة الفرع', '+3,900'], ['ربح من العملاء المنتقلين', '+6,000'], ['عملاء ما ينتقلون', 'محسوب']], act: ['جرّبها في ماذا لو', 'جهّز مذكرة للإدارة'], src: 'برنامج الولاء + Odoo المحاسبة + نموذج انتقال العملاء' },
@@ -233,9 +273,11 @@ const mx = Math.max(...cur.bars.map(b => Math.abs(b[1])));
 const bars = cur.bars.map((b, i) => ({ l: b[0], v: b[1], h: (Math.abs(b[1]) / mx * 100) + '%', c: b[2], dl: (i * .08) + 's' }));
 const acts = cur.act.map((t, i) => ({ t: s.dn[i] ? '✓ تم' : t, cls: s.dn[i] ? 'done' : '', go: () => this.setState(x => ({ dn: Object.assign({}, x.dn, { [i]: true }) })) }));
 const done = s.hist.map(h => ({ q: Q[h].q, a: Q[h].a, src: Q[h].src }));
-const chips = Q.map((q, i) => ({ q: q.q, go: () => this.run(i) }));
-const saved = [{ n: 'ربحية الفروع الأسبوعية', w: 'كل أحد 7:00' }, { n: 'هدر الحليب حسب المنطقة', w: 'يوميًا' }, { n: 'عمولات التوصيل الفعلية', w: 'شهريًا' }, { n: 'الفروع المرشحة للخسارة', w: 'يوميًا' }];
-return { empty: s.qi < 0, active: s.qi >= 0, cur, steps, showAns: s.phase >= 5, showViz: s.phase >= 6, typed: cur.a.slice(0, s.n), caret: s.phase === 5 ? 'caret' : '', bars, acts, done, chips, saved, next: () => this.run(s.qi < 0 ? 0 : (s.qi + 1) % Q.length) };
+const chips = Q.slice(0, 4).map((q, i) => ({ q: q.q, d: (i * .09) + 's', go: () => this.run(i) }));
+const pick = t => { const r = [[/حليب|هدر/, 1], [/اغلق|أغلق|إغلاق|الصحافة|فرع خاسر/, 2], [/سعر|اسعار|أسعار|نرفع/, 3], [/اسبوع|أسبوع|لخص|لخّص|اجتماع/, 4]]; for (const x of r) if (x[0].test(t)) return x[1]; return 0; };
+const send = () => { const t = (s.txt || '').trim(); const i = t ? pick(t) : (s.qi < 0 ? 0 : (s.qi + 1) % Q.length); this.setState({ txt: '' }); this.run(i); };
+const saved = [{ i: 'أسبوعي', n: 'ربحية الفروع الأسبوعية', w: 'كل أحد 7:00 صباحًا' }, { i: 'يومي', n: 'هدر الحليب حسب المنطقة', w: 'كل يوم 6:30 صباحًا' }, { i: 'شهري', n: 'عمولات التوصيل الفعلية', w: 'أول كل شهر' }, { i: 'يومي', n: 'الفروع المرشحة للخسارة', w: 'كل يوم 7:00 صباحًا' }];
+return { empty: s.qi < 0, active: s.qi >= 0, cur, steps, showAns: s.phase >= 5, showViz: s.phase >= 6, typed: cur.a.slice(0, s.n), caret: s.phase === 5 ? 'caret' : '', bars, acts, done, chips, saved, txt: s.txt, sendOn: (s.txt || '').trim() ? 'on' : '', onTxt: e => this.setState({ txt: e.target.value }), onKey: e => { if (e.key === 'Enter') send(); }, send, next: () => this.run(s.qi < 0 ? 0 : (s.qi + 1) % Q.length) };
  })() || {};
     const AD = this.askData(); const cur = s.aq >= 0 ? AD.qs[s.aq] : AD.qs[0];
     const mx = Math.max.apply(null, cur.bars.map(b => Math.abs(b[1])));
