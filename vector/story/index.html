@@ -219,6 +219,37 @@ h2{font-size:clamp(28px,3.6vw,58px);line-height:1.2;font-weight:700;letter-spaci
 .follow{display:flex;flex-wrap:wrap;gap:10px}
 .follow span{font-size:clamp(12px,1vw,15px);padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink)}
 .on .follow .f0{animation:chipIn .6s var(--spring) 6.5s both} .on .follow .f1{animation:chipIn .6s var(--spring) 6.7s both}
+/* problem / solution / value / offer */
+.problem .grid4 .card{background:rgba(20,52,38,.72)}
+.cost{display:flex;align-items:center;gap:12px;margin-top:4vh;font-size:clamp(15px,1.5vw,23px);font-weight:600;color:#FFD9D4;background:rgba(217,45,32,.14);border:1px solid rgba(240,120,105,.35);padding:14px 22px;border-radius:16px;justify-self:start}
+.cost .ic{color:#F97066;transform:scaleY(-1)}
+.ba{display:grid;gap:1.6vh}
+.ba__h,.ba li{display:grid;grid-template-columns:minmax(0,1fr) 90px minmax(0,1.25fr);align-items:center;gap:1vw}
+.ba__h{margin:0;font-size:clamp(13px,1.1vw,16px);font-weight:700;color:var(--mute)} .ba__h span:last-child{color:var(--g)}
+.ba ol{list-style:none;margin:0;padding:0;display:grid;gap:2.2vh}
+.was{font-size:clamp(14px,1.35vw,21px);color:#8A6A66;background:#FBEDEB;border:1px solid #F4D3CE;border-radius:16px;padding:2.4vh 1.4vw;text-decoration:line-through 2px;text-decoration-color:transparent}
+.now{display:flex;align-items:center;gap:12px;font-size:clamp(14px,1.35vw,21px);font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:16px;padding:2.4vh 1.4vw;box-shadow:0 20px 40px -30px rgba(15,42,30,.5)} .now .ic{color:var(--g);width:22px;height:22px}
+.arrow{height:3px;background:linear-gradient(270deg,#E9B4AE,var(--g));border-radius:3px;position:relative;transform-origin:100% 50%}
+.arrow:after{content:"";position:absolute;left:-2px;top:50%;width:12px;height:12px;border-left:3px solid var(--g);border-bottom:3px solid var(--g);transform:translateY(-50%) rotate(45deg)}
+.slide:not(.on) .ba li>*{opacity:0}
+.on .ba .was{animation:rise .7s var(--e) both,strike .5s var(--e) forwards;animation-delay:calc(var(--k)*600ms + 300ms),calc(var(--k)*600ms + 900ms)}
+.on .ba .arrow{animation:grow .5s var(--e) both;animation-delay:calc(var(--k)*600ms + 800ms)}
+.on .ba .now{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--k)*600ms + 1100ms)}
+@keyframes strike{to{text-decoration-color:#D9827A;color:#A88480}}
+.val ul{list-style:none;margin:0;padding:0;display:grid;gap:1.4vh}
+.val li{position:relative;padding-inline-start:26px;font-size:clamp(14px,1.25vw,19px);line-height:1.65;color:var(--soft)}
+.val li:before{content:"";position:absolute;inset-inline-start:0;top:.5em;width:14px;height:14px;border-radius:50%;background:#D6F2E3;box-shadow:inset 0 0 0 4px var(--g)}
+.band{display:flex;align-items:center;gap:12px;justify-self:center;margin-top:4vh;font-size:clamp(16px,1.6vw,25px);font-weight:700;color:#fff;background:linear-gradient(90deg,var(--gd),var(--g));padding:14px 28px;border-radius:999px;box-shadow:0 24px 50px -24px rgba(22,106,69,.8)}
+.band .ic{color:var(--gold)}
+.tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.2vw}
+.tile{display:grid;gap:8px;align-content:start;background:#fff;border:1px solid var(--line);border-radius:20px;padding:2.6vh 1.2vw;box-shadow:0 24px 50px -36px rgba(15,42,30,.5);transition:transform .3s var(--e)}
+.tile:hover{transform:translateY(-4px)}
+.tile .ic{width:30px;height:30px;color:var(--g);padding:9px;box-sizing:content-box;background:#DFF6E7;border-radius:12px}
+.tile b{font-size:clamp(15px,1.4vw,21px)} .tile small{font-size:clamp(12px,1.05vw,16px);color:var(--soft);line-height:1.5}
+.slide:not(.on) .tile{opacity:0}
+.on .tile{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--d)*80ms)}
+.on .tile:nth-child(8){animation:popIn .7s var(--spring) both,ring 3s ease-in-out 2s infinite;animation-delay:calc(var(--d)*80ms),2s;border-color:#F4B2AB}
+.tile:nth-child(8) .ic{color:#D92D20;background:#FDECEA}
 /* chrome */
 .progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:10;background:rgba(127,181,154,.18)}
 .progress i{position:absolute;inset-block:0;right:0;background:linear-gradient(270deg,var(--g),var(--gold));transition:width .8s var(--e)}
@@ -237,7 +268,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
  .slide{padding:9vh 6vw 13vh;align-content:start;overflow-y:auto}
  .cover,.shot,.ai{grid-template-columns:1fr;gap:3vh} .typed{white-space:normal}
  .cover .stage3d,.shot .stage3d{order:2}
- .grid3,.grid4,.flowmap,.tl ol{grid-template-columns:1fr}
+ .grid3,.grid4,.flowmap,.tl ol{grid-template-columns:1fr} .tiles{grid-template-columns:1fr 1fr} .ba__h{display:none} .ba li{grid-template-columns:1fr;gap:8px} .arrow{display:none}
  .steps{grid-template-columns:repeat(3,1fr);row-gap:3vh} .rail{display:none}
  .pair{grid-template-columns:1fr} .chip{display:none}
  .devs{height:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3vw} .devs .laptop{position:static;width:auto;grid-column:1/-1} .phone{position:static;width:auto;transform:none}
@@ -263,13 +294,19 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/welcome.jpg" alt="الصفحة الرئيسية لمنصة The Vector"></figure>
 </div>
 </section>
-<section class="slide cards3 light" data-n="2" aria-label="لماذا The Vector">
-<div class="head"><p class="eye r" style="--d:0">لماذا The Vector</p><h2 class="r" style="--d:1">متابعة المبادرات تتعثر في ثلاثة أماكن</h2></div>
-<div class="grid3">
-<article class="card flip" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/></svg><h3>الأرقام متفرقة</h3><p>ملفات وإيميلات من كل جهة، ومكتب البرنامج يجمعها يدويًا كل شهر.</p></article>
-<article class="card flip" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>القيادة ترى متأخرًا</h3><p>الصورة تصل بعد أسابيع، وأحيانًا قبل أن يراجعها أحد.</p></article>
-<article class="card flip" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><h3>القرارات تضيع</h3><p>ما تحتاجه المبادرة من القيادة يبقى في محضر أو رسالة، فلا يُتابع.</p></article>
+<section class="slide problem dark" data-n="2" aria-label="المشكلة">
+<div class="head"><p class="eye r" style="--d:0">المشكلة</p><h2 class="r" style="--d:1">التعثر يُكتشف بعد أن يقع</h2><p class="lede r" style="--d:2">في كثير من الجهات تُتابع المبادرات بملفات Excel وعروض ورسائل، ويتكرر المشهد نفسه كل شهر:</p></div>
+<div class="grid4">
+<article class="card flip" style="--d:4"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/></svg><h3>الأرقام متفرقة</h3><p>ملف من كل جهة بصيغة مختلفة، ومكتب البرنامج يجمعها وينسقها يدويًا.</p></article>
+<article class="card flip" style="--d:6"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg><h3>لا أحد يراجعها</h3><p>الرقم يصل القيادة كما كتبه صاحبه، بلا مقارنة بالشهر الماضي.</p></article>
+<article class="card flip" style="--d:8"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>القيادة ترى متأخرًا</h3><p>الصورة تصل بعد أسابيع، فيظهر التأخر فيها بعد أن صار واقعًا.</p></article>
+<article class="card flip" style="--d:10"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><h3>القرارات تضيع</h3><p>ما تحتاجه المبادرة من القيادة يبقى في محضر أو رسالة، ولا يتابعه أحد.</p></article>
 </div>
+<p class="cost r" style="--d:13"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>والنتيجة: وقت يضيع في الجمع، وقرارات تتأخر، ومبادرات تتعثر دون أن يراها أحد في وقتها.</p>
+</section>
+<section class="slide solve light" data-n="3" aria-label="الحل">
+<div class="head"><p class="eye r" style="--d:0">الحل</p><h2 class="r" style="--d:1">مكان واحد للمتابعة، من التحديث إلى القرار</h2></div>
+<div class="ba"><p class="ba__h"><span>اليوم</span><span></span><span>مع The Vector</span></p><ol><li style="--k:0"><span class="was">ملفات من كل جهة بصيغ مختلفة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>تحديث شهري واحد في المنصة، بنفس الخطوات لكل مبادرة</span></li><li style="--k:1"><span class="was">رقم يصل القيادة بلا مراجعة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>بوابة نشر: مكتب البرنامج يراجع، ومن أدخل التحديث لا يراجعه</span></li><li style="--k:2"><span class="was">القيادة ترى التأخر بعد أسابيع</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>خلاصة القيادة تتحدث لحظة النشر، والإنذار المبكر يرى التعثر قبل أن يقع</span></li><li style="--k:3"><span class="was">طلبات القرار تضيع في المحاضر</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>طلب القرار جزء من التحديث، ويُدرج في اجتماع القيادة بضغطة</span></li></ol></div>
 </section>
 <section class="slide idea mint" data-n="3" aria-label="الفكرة">
 <div class="head"><p class="eye r" style="--d:0">الفكرة</p><h2 class="r" style="--d:1">ثلاثة أدوار، وبوابة نشر واحدة</h2><p class="lede r" style="--d:2">لا يصل القيادة إلا ما راجعه مكتب البرنامج ونشره، فكل رقم في الطبقة الذكية رقم معتمد.</p></div>
@@ -511,6 +548,15 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <figure class="phone p3" style="--d:10"><img src="img/m3.jpg" alt="صفحة المبادرة على الجوال" loading="lazy"></figure>
 </div>
 </section>
+<section class="slide value light" data-n="v" aria-label="القيمة">
+<div class="head"><p class="eye r" style="--d:0">القيمة</p><h2 class="r" style="--d:1">وقت أقل في الجمع، وقرار في وقته</h2></div>
+<div class="grid3"><article class="card flip val" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><h3>للقيادة</h3><ul><li>صورة واحدة موثوقة كل شهر، كل رقم فيها مُراجع</li><li>تعرف ما ينتظر قرارها، وكم مبادرة تتوقف عليه</li><li>ترى المبادرة المتعثرة قبل أن تتأخر</li></ul></article><article class="card flip val" style="--d:6"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><h3>لمكتب البرنامج</h3><ul><li>لا جمع يدوي ولا تنسيق ملفات</li><li>يراجع ما تغيّر عن الشهر الماضي فقط</li><li>يذكّر المتأخرين بضغطة، ويعرف من بقي</li></ul></article><article class="card flip val" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><h3>لمدير المبادرة</h3><ul><li>قائمة واحدة بما عليه هذا الشهر</li><li>تحديث بأربع خطوات واضحة</li><li>يعرف أن طلبه وصل القيادة ومتى أُدرج</li></ul></article></div>
+<p class="band r" style="--d:13"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10l7 3 3 7z"/><path d="m10 13 4-4"/></svg>الأرقام تصل القيادة يوم نشرها، لا بعد أسابيع من جمعها.</p>
+</section>
+<section class="slide offer mint" data-n="o" aria-label="ما يقدمه The Vector">
+<div class="head"><p class="eye r" style="--d:0">ما يقدمه The Vector</p><h2 class="r" style="--d:1">منصة واحدة تغطي الدورة كاملة</h2><p class="lede r" style="--d:2">من إعداد البرنامج إلى قرار القيادة، في مكان واحد.</p></div>
+<ol class="tiles"><li class="tile" style="--d:3"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><b>إعداد البرنامج</b><small>خطوة بخطوة أو من Excel</small></li><li class="tile" style="--d:4"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><b>الاعتماد</b><small>مبدأ الشخصين</small></li><li class="tile" style="--d:5"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>دورات شهرية</b><small>بطاقة لكل مبادرة</small></li><li class="tile" style="--d:6"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><b>التحديث</b><small>النسب والخطوات والعوائق</small></li><li class="tile" style="--d:7"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><b>المراجعة والنشر</b><small>قبل أن ترى القيادة</small></li><li class="tile" style="--d:8"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><b>خلاصة القيادة</b><small>والقرارات المطلوبة</small></li><li class="tile" style="--d:9"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><b>الملخص التنفيذي</b><small>توقع نهاية السنة</small></li><li class="tile" style="--d:10"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg><b>الإنذار المبكر</b><small>قبل أن تتأخر</small></li><li class="tile" style="--d:11"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><b>محاكاة الميزانية</b><small>ماذا لو خُفّضت؟</small></li><li class="tile" style="--d:12"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><b>المساعد الذكي</b><small>يجاوب بالأرقام ومصدرها</small></li></ol>
+</section>
 <section class="slide cards4 dark" data-n="20" aria-label="الثقة">
 <div class="head"><p class="eye r" style="--d:0">الثقة</p><h2 class="r" style="--d:1">ضوابط مبنية في النظام، لا في التعليمات</h2></div>
 <div class="grid4"><article class="card flip" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h3>الدخول</h3><p>Amazon Cognito بصفحة دخول خاصة بالمنصة، واتصال مشفّر</p></article><article class="card flip" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><h3>مبدأ الشخصين</h3><p>من يُنشئ لا يعتمد، ومن يُدخل لا يراجع</p></article><article class="card flip" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><h3>سجل تدقيق</h3><p>كل إجراء وكل سؤال للمساعد مسجّل</p></article><article class="card flip" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg><h3>على AWS</h3><p>خادم وقاعدة بيانات وذكاء اصطناعي في حساب واحد</p></article></div>
@@ -530,7 +576,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 </main>
 <nav class="ctrl" aria-label="التنقل بين الشرائح">
 <button id="prev" aria-label="السابق"><svg class="ic" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-<span class="count" id="count" aria-live="polite">1 / 25</span>
+<span class="count" id="count" aria-live="polite">1 / 28</span>
 <button id="next" aria-label="التالي"><svg class="ic" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
 <button id="fs" aria-label="ملء الشاشة"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
 </nav>

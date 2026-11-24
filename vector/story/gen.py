@@ -30,13 +30,21 @@ S.append(f'''<section class="slide cover dark" data-n="1" aria-label="The Vector
 <figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/welcome.jpg" alt="الصفحة الرئيسية لمنصة The Vector"></figure>
 </div>
 </section>''')
-S.append(f'''<section class="slide cards3 light" data-n="2" aria-label="لماذا The Vector">
-<div class="head"><p class="eye r" style="--d:0">لماذا The Vector</p><h2 class="r" style="--d:1">متابعة المبادرات تتعثر في ثلاثة أماكن</h2></div>
-<div class="grid3">
-<article class="card flip" style="--d:3">{ic("inbox","ic lg")}<h3>الأرقام متفرقة</h3><p>ملفات وإيميلات من كل جهة، ومكتب البرنامج يجمعها يدويًا كل شهر.</p></article>
-<article class="card flip" style="--d:5">{ic("clock","ic lg")}<h3>القيادة ترى متأخرًا</h3><p>الصورة تصل بعد أسابيع، وأحيانًا قبل أن يراجعها أحد.</p></article>
-<article class="card flip" style="--d:7">{ic("decision","ic lg")}<h3>القرارات تضيع</h3><p>ما تحتاجه المبادرة من القيادة يبقى في محضر أو رسالة، فلا يُتابع.</p></article>
+S.append(f'''<section class="slide problem dark" data-n="2" aria-label="المشكلة">
+<div class="head"><p class="eye r" style="--d:0">المشكلة</p><h2 class="r" style="--d:1">التعثر يُكتشف بعد أن يقع</h2><p class="lede r" style="--d:2">في كثير من الجهات تُتابع المبادرات بملفات Excel وعروض ورسائل، ويتكرر المشهد نفسه كل شهر:</p></div>
+<div class="grid4">
+<article class="card flip" style="--d:4">{ic("inbox","ic lg")}<h3>الأرقام متفرقة</h3><p>ملف من كل جهة بصيغة مختلفة، ومكتب البرنامج يجمعها وينسقها يدويًا.</p></article>
+<article class="card flip" style="--d:6">{ic("alert","ic lg")}<h3>لا أحد يراجعها</h3><p>الرقم يصل القيادة كما كتبه صاحبه، بلا مقارنة بالشهر الماضي.</p></article>
+<article class="card flip" style="--d:8">{ic("clock","ic lg")}<h3>القيادة ترى متأخرًا</h3><p>الصورة تصل بعد أسابيع، فيظهر التأخر فيها بعد أن صار واقعًا.</p></article>
+<article class="card flip" style="--d:10">{ic("decision","ic lg")}<h3>القرارات تضيع</h3><p>ما تحتاجه المبادرة من القيادة يبقى في محضر أو رسالة، ولا يتابعه أحد.</p></article>
 </div>
+<p class="cost r" style="--d:13">{ic("trend","ic sm")}والنتيجة: وقت يضيع في الجمع، وقرارات تتأخر، ومبادرات تتعثر دون أن يراها أحد في وقتها.</p>
+</section>''')
+rows=[('ملفات من كل جهة بصيغ مختلفة','تحديث شهري واحد في المنصة، بنفس الخطوات لكل مبادرة'),('رقم يصل القيادة بلا مراجعة','بوابة نشر: مكتب البرنامج يراجع، ومن أدخل التحديث لا يراجعه'),('القيادة ترى التأخر بعد أسابيع','خلاصة القيادة تتحدث لحظة النشر، والإنذار المبكر يرى التعثر قبل أن يقع'),('طلبات القرار تضيع في المحاضر','طلب القرار جزء من التحديث، ويُدرج في اجتماع القيادة بضغطة')]
+ba=''.join(f'<li style="--k:{k}"><span class="was">{a}</span><span class="arrow" aria-hidden="true"></span><span class="now">{ic("checkCircle","ic sm")}{b}</span></li>' for k,(a,b) in enumerate(rows))
+S.append(f'''<section class="slide solve light" data-n="3" aria-label="الحل">
+<div class="head"><p class="eye r" style="--d:0">الحل</p><h2 class="r" style="--d:1">مكان واحد للمتابعة، من التحديث إلى القرار</h2></div>
+<div class="ba"><p class="ba__h"><span>اليوم</span><span></span><span>مع The Vector</span></p><ol>{ba}</ol></div>
 </section>''')
 S.append(f'''<section class="slide idea mint" data-n="3" aria-label="الفكرة">
 <div class="head"><p class="eye r" style="--d:0">الفكرة</p><h2 class="r" style="--d:1">ثلاثة أدوار، وبوابة نشر واحدة</h2><p class="lede r" style="--d:2">لا يصل القيادة إلا ما راجعه مكتب البرنامج ونشره، فكل رقم في الطبقة الذكية رقم معتمد.</p></div>
@@ -151,6 +159,22 @@ S.append('''<section class="slide devices mint" data-n="19" aria-label="في ك�
 <figure class="phone p2" style="--d:8"><img src="img/m2.jpg" alt="مهام المدير على الجوال" loading="lazy"></figure>
 <figure class="phone p3" style="--d:10"><img src="img/m3.jpg" alt="صفحة المبادرة على الجوال" loading="lazy"></figure>
 </div>
+</section>''')
+vals=[('brief','للقيادة',['صورة واحدة موثوقة كل شهر، كل رقم فيها مُراجع','تعرف ما ينتظر قرارها، وكم مبادرة تتوقف عليه','ترى المبادرة المتعثرة قبل أن تتأخر']),
+('review','لمكتب البرنامج',['لا جمع يدوي ولا تنسيق ملفات','يراجع ما تغيّر عن الشهر الماضي فقط','يذكّر المتأخرين بضغطة، ويعرف من بقي']),
+('edit','لمدير المبادرة',['قائمة واحدة بما عليه هذا الشهر','تحديث بأربع خطوات واضحة','يعرف أن طلبه وصل القيادة ومتى أُدرج'])]
+vc=''.join(f'<article class="card flip val" style="--d:{3+i*3}">{ic(a,"ic lg")}<h3>{b}</h3><ul>'+''.join(f'<li>{x}</li>' for x in xs)+'</ul></article>' for i,(a,b,xs) in enumerate(vals))
+S.append(f'''<section class="slide value light" data-n="v" aria-label="القيمة">
+<div class="head"><p class="eye r" style="--d:0">القيمة</p><h2 class="r" style="--d:1">وقت أقل في الجمع، وقرار في وقته</h2></div>
+<div class="grid3">{vc}</div>
+<p class="band r" style="--d:13">{ic("send","ic sm")}الأرقام تصل القيادة يوم نشرها، لا بعد أسابيع من جمعها.</p>
+</section>''')
+offer=[('folder','إعداد البرنامج','خطوة بخطوة أو من Excel'),('shield','الاعتماد','مبدأ الشخصين'),('calendar','دورات شهرية','بطاقة لكل مبادرة'),('edit','التحديث','النسب والخطوات والعوائق'),('review','المراجعة والنشر','قبل أن ترى القيادة'),
+('brief','خلاصة القيادة','والقرارات المطلوبة'),('trend','الملخص التنفيذي','توقع نهاية السنة'),('alert','الإنذار المبكر','قبل أن تتأخر'),('settings','محاكاة الميزانية','ماذا لو خُفّضت؟'),('chat','المساعد الذكي','يجاوب بالأرقام ومصدرها')]
+oc=''.join(f'<li class="tile" style="--d:{3+i}">{ic(a,"ic")}<b>{b}</b><small>{c}</small></li>' for i,(a,b,c) in enumerate(offer))
+S.append(f'''<section class="slide offer mint" data-n="o" aria-label="ما يقدمه The Vector">
+<div class="head"><p class="eye r" style="--d:0">ما يقدمه The Vector</p><h2 class="r" style="--d:1">منصة واحدة تغطي الدورة كاملة</h2><p class="lede r" style="--d:2">من إعداد البرنامج إلى قرار القيادة، في مكان واحد.</p></div>
+<ol class="tiles">{oc}</ol>
 </section>''')
 trust=[('lock','الدخول','Amazon Cognito بصفحة دخول خاصة بالمنصة، واتصال مشفّر'),('shield','مبدأ الشخصين','من يُنشئ لا يعتمد، ومن يُدخل لا يراجع'),('summary','سجل تدقيق','كل إجراء وكل سؤال للمساعد مسجّل'),('layers','على AWS','خادم وقاعدة بيانات وذكاء اصطناعي في حساب واحد')]
 tc=''.join(f'<article class="card flip" style="--d:{3+i*2}">{ic(a,"ic lg")}<h3>{b}</h3><p>{c}</p></article>' for i,(a,b,c) in enumerate(trust))
