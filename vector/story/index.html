@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Vector · قصة المنصة</title>
+<meta name="description" content="The Vector: منصة متابعة المبادرات، من تحديث مدير المبادرة إلى قرار القيادة.">
+<meta property="og:title" content="The Vector · قصة المنصة">
+<meta property="og:description" content="من تحديث مدير المبادرة إلى قرار القيادة، في دورة واحدة واضحة كل شهر.">
+<meta property="og:image" content="https://maazmajid.com/vector/story/img/welcome.jpg">
+<meta name="theme-color" content="#0B1F16">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F2A1E;--soft:#3F5E50;--mute:#6B877A;--bg:#F4FAF6;--mint:#E4F4EA;--line:#CDE8D8;--g:#1F9E64;--g2:#27B874;--gd:#166A45;--gold:#F5BD02;--dark:#0A1D15;--e:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.45,.64,1)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--dark);overflow:hidden}
+body{font-family:'IBM Plex Sans Arabic',Tahoma,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.sky{position:fixed;inset:0;transition:background .9s var(--e);background:var(--bg);overflow:hidden}
+body[data-tone=mint] .sky{background:var(--mint)} body[data-tone=dark] .sky{background:var(--dark)}
+.sky i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;transition:background 1s var(--e)}
+.sky i:nth-child(1){width:46vw;height:46vw;top:-14vw;right:-10vw;background:#BDEBD0;animation:drift 22s ease-in-out infinite}
+.sky i:nth-child(2){width:38vw;height:38vw;bottom:-16vw;left:-8vw;background:#FFF1B8;animation:drift 26s ease-in-out -8s infinite reverse}
+.sky i:nth-child(3){width:28vw;height:28vw;top:30%;left:34%;background:#CFF2E0;opacity:.35;animation:drift 30s ease-in-out -14s infinite}
+body[data-tone=dark] .sky i:nth-child(1){background:#145C3B} body[data-tone=dark] .sky i:nth-child(2){background:#3B3305} body[data-tone=dark] .sky i:nth-child(3){background:#0F4A30}
+.sky:after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(15,42,30,.07) 1px,transparent 1.4px);background-size:26px 26px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
+body[data-tone=dark] .sky:after{background-image:radial-gradient(rgba(220,255,235,.06) 1px,transparent 1.4px)}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(4vw,3vw) scale(1.08)}66%{transform:translate(-3vw,2vw) scale(.95)}}
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;padding:8vh 6vw 12vh;display:grid;align-content:center;visibility:hidden;opacity:0;transform:scale(.985);filter:blur(6px);transition:opacity .7s var(--e),transform .9s var(--e),filter .7s var(--e),visibility 0s .9s}
+.slide.on{visibility:visible;opacity:1;transform:none;filter:none;transition:opacity .7s var(--e) .12s,transform .9s var(--e) .12s,filter .7s var(--e) .12s,visibility 0s}
+.slide.out-back{transform:translateX(-3%) scale(.985)} .slide.out-fwd{transform:translateX(3%) scale(.985)}
+.dark{color:#EAF6EF}
+/* type */
+h1,h2,h3,p{margin:0}
+.eye{font-size:clamp(14px,1.5vw,22px);font-weight:600;color:var(--g);letter-spacing:.01em}
+.dark .eye{color:var(--gold)}
+h2{font-size:clamp(28px,3.6vw,58px);line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.lede{font-size:clamp(16px,1.6vw,25px);line-height:1.75;color:var(--soft)}
+.dark .lede{color:#B9D9C8}
+.tag{display:inline-block;justify-self:start;font-size:clamp(12px,1.1vw,16px);font-weight:600;color:var(--gd);background:#D6F2E3;padding:5px 14px;border-radius:999px}
+.dark .tag{background:var(--gold);color:var(--dark)}
+.head{display:grid;gap:1.4vh;margin-bottom:5vh;max-width:70vw}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.sm{width:18px;height:18px} .ic.lg{width:40px;height:40px;color:var(--g);padding:10px;box-sizing:content-box;background:#DFF6E7;border-radius:16px}
+.dark .ic.lg{background:#163D2B;color:var(--gold)}
+/* reveal */
+.slide:not(.on) .r,.slide:not(.on) .flip,.slide:not(.on) .pop,.slide:not(.on) .chip{opacity:0}
+.on .r{animation:rise .9s var(--e) both;animation-delay:calc(var(--d,0)*90ms)}
+@keyframes rise{from{opacity:0;transform:translateY(26px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* cover */
+.cover{grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:5vw;align-items:center}
+.cover .txt{display:grid;gap:2.2vh}
+.title{font-size:clamp(54px,8.4vw,140px);line-height:1;font-weight:700;color:#F4FAF6;direction:ltr;text-align:right;letter-spacing:-.02em}
+.title span{display:inline-block}
+.on .title span{animation:titleIn 1.1s var(--e) both;animation-delay:calc(var(--d)*110ms)}
+@keyframes titleIn{from{opacity:0;transform:translateY(40px) rotate(4deg);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+.title span:last-child{background:linear-gradient(90deg,#7BE3AC,#F5BD02);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mark{width:clamp(54px,5vw,84px);height:auto}
+.mark.big{width:clamp(80px,8vw,120px);margin-bottom:2vh}
+.mk-bg{fill:#14462F;stroke:#2A7A52;stroke-width:1.5}
+.mk-line{fill:none;stroke:#9FF0C4;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:70;stroke-dashoffset:70}
+.mk-dot{fill:var(--gold);transform-origin:50px 22px;transform:scale(0)}
+.on .mk-line{animation:draw 1.2s var(--e) .3s forwards} .on .mk-dot{animation:dot .6s var(--spring) 1.3s forwards,glow 2.6s ease-in-out 2s infinite}
+@keyframes draw{to{stroke-dashoffset:0}} @keyframes dot{to{transform:scale(1)}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 0 rgba(245,189,2,0))}50%{filter:drop-shadow(0 0 8px rgba(245,189,2,.9))}}
+.hint{font-size:14px;color:#6E9682} kbd{font-family:inherit;border:1px solid #2E5A45;border-radius:6px;padding:1px 7px;margin-inline:2px;color:#CFE9DA}
+/* browser frames */
+.stage3d{position:relative;perspective:1800px}
+.frame{margin:0;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(15,42,30,.06),0 40px 80px -36px rgba(15,42,30,.5);transform:rotateY(var(--ry,6deg)) rotateX(var(--rx,2deg));transform-style:preserve-3d;transition:transform .5s var(--e)}
+.dark .frame{border-color:#24533D;box-shadow:0 40px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(120,230,170,.06)}
+.frame .bar{display:flex;align-items:center;gap:6px;height:34px;padding-inline:14px;background:#F1F6F3;border-bottom:1px solid #E2EEE7;font-size:12px;color:#7A968A;direction:ltr}
+.frame .bar i{width:10px;height:10px;border-radius:50%;background:#E4E9E6} .frame .bar i:nth-child(1){background:#F47467} .frame .bar i:nth-child(2){background:#F5C451} .frame .bar i:nth-child(3){background:#5BC98A}
+.frame .bar span{margin-inline-start:10px;background:#fff;border-radius:8px;padding:3px 12px;flex:1;max-width:60%;text-align:left}
+.frame img{display:block;width:100%;height:auto}
+.slide:not(.on) .stage3d .frame{opacity:0}
+.on .stage3d .frame{animation:frameIn 1.3s var(--e) .25s both}
+@keyframes frameIn{from{opacity:0;transform:translateX(-80px) rotateY(28deg) rotateX(6deg) scale(.92)}to{opacity:1;transform:rotateY(6deg) rotateX(2deg)}}
+.float .frame{animation:frameIn 1.3s var(--e) .25s both,bob 7s ease-in-out 1.6s infinite!important}
+@keyframes bob{0%,100%{transform:rotateY(6deg) rotateX(2deg) translateY(0)}50%{transform:rotateY(3deg) rotateX(1deg) translateY(-14px)}}
+/* screenshot slides */
+.shot{grid-template-columns:minmax(0,.82fr) minmax(0,1.38fr);gap:5vw;align-items:center}
+.shot .txt{display:grid;gap:2vh;align-content:center}
+.pts{list-style:none;margin:1vh 0 0;padding:0;display:grid;gap:1.3vh}
+.pts li{position:relative;padding-inline-start:30px;font-size:clamp(14px,1.3vw,20px);color:var(--soft);line-height:1.6}
+.dark .pts li{color:#B9D9C8}
+.pts li:before{content:"";position:absolute;inset-inline-start:0;top:.55em;width:16px;height:16px;border-radius:6px;background:var(--g);box-shadow:0 0 0 4px #D6F2E3;transform:scale(.8)}
+.dark .pts li:before{background:var(--gold);box-shadow:0 0 0 4px #2A3A12}
+.slide:not(.on) .pts li{opacity:0}
+.on .pts li{animation:slideIn .8s var(--e) both;animation-delay:calc(var(--d)*90ms)}
+@keyframes slideIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.chip{position:absolute;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);box-shadow:0 18px 40px -20px rgba(15,42,30,.55);font-size:clamp(12px,1.05vw,16px);font-weight:600;color:var(--gd);white-space:nowrap}
+.chip .ic{color:var(--g)}
+.chip.c0{top:14%;right:-3%} .chip.c1{bottom:10%;left:-3%}
+.chip.alert{color:#B42318;border-color:#F8C9C3;bottom:-4%;right:30%} .chip.alert .ic{color:#D92D20}
+.dark .chip{background:rgba(14,40,28,.9);border-color:#2E5A45;color:#CFF2DF} .dark .chip .ic{color:var(--gold)}
+.on .chip{animation:chipIn .7s var(--spring) both,hover 5s ease-in-out infinite;animation-delay:calc(var(--d)*90ms),calc(var(--d)*90ms + .8s)}
+@keyframes chipIn{from{opacity:0;transform:translateY(18px) scale(.8)}to{opacity:1;transform:none}}
+@keyframes hover{0%,100%{translate:0 0}50%{translate:0 -8px}}
+/* cards */
+.grid3,.grid4{display:grid;gap:2vw;perspective:1400px}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))} .grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:26px;padding:4vh 2.2vw;display:grid;gap:1.6vh;align-content:start;box-shadow:0 30px 60px -40px rgba(15,42,30,.45)}
+.card h3{font-size:clamp(20px,2vw,32px);font-weight:700} .card p{font-size:clamp(14px,1.3vw,20px);line-height:1.7;color:var(--soft)}
+.dark .card{background:rgba(20,52,38,.72);border-color:#2A5B43} .dark .card h3{color:#F4FAF6} .dark .card p{color:#B9D9C8}
+.on .flip{animation:flip 1s var(--e) both;animation-delay:calc(var(--d)*100ms);transform-origin:50% 0}
+@keyframes flip{from{opacity:0;transform:rotateX(-70deg) translateY(30px)}to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-6px);transition:transform .4s var(--e)}
+/* idea */
+.flowmap{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5vw;align-items:center}
+.wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.wires path{fill:none;stroke:#9CCFB3;stroke-width:2;stroke-dasharray:8 10;animation:dash 1.4s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-36}}
+.pulse{fill:var(--gold);filter:drop-shadow(0 0 6px rgba(245,189,2,.9))}
+.node{position:relative;z-index:1;background:#fff;border:1px solid var(--line);border-radius:26px;padding:4vh 2vw;display:grid;gap:1.4vh;justify-items:start;box-shadow:0 30px 60px -36px rgba(15,42,30,.45)}
+.node h3{font-size:clamp(20px,2vw,30px)} .node p{font-size:clamp(14px,1.25vw,19px);line-height:1.7;color:var(--soft)}
+.node.gate{border:2px solid var(--g);box-shadow:0 0 0 8px rgba(31,158,100,.1),0 30px 60px -30px rgba(15,42,30,.5)}
+.gatebadge{position:absolute;top:-16px;inset-inline-end:20px;background:var(--gold);color:var(--dark);font-size:13px;font-weight:700;padding:5px 14px;border-radius:999px}
+.on .pop{animation:popIn .9s var(--spring) both;animation-delay:calc(var(--d)*100ms)}
+.on .node.gate{animation:popIn .9s var(--spring) both,ring 3s ease-in-out 1.8s infinite;animation-delay:calc(var(--d)*100ms),1.8s}
+@keyframes popIn{from{opacity:0;transform:scale(.8) translateY(30px)}to{opacity:1;transform:none}}
+@keyframes ring{0%,100%{box-shadow:0 0 0 8px rgba(31,158,100,.1),0 30px 60px -30px rgba(15,42,30,.5)}50%{box-shadow:0 0 0 18px rgba(31,158,100,.06),0 30px 60px -30px rgba(15,42,30,.5)}}
+/* journey */
+.track{position:relative;padding-top:6vh}
+.rail{position:absolute;top:calc(6vh + 26px);right:6%;left:6%;height:4px;border-radius:4px;background:linear-gradient(270deg,#BFE6CF,#E7F3EB)}
+.runner{position:absolute;top:-8px;right:0;width:20px;height:20px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(245,189,2,.25),0 0 22px rgba(245,189,2,.9)}
+.on .runner{animation:run 7.2s cubic-bezier(.6,0,.4,1) 1s infinite}
+@keyframes run{0%{right:0;opacity:0}5%{opacity:1}95%{opacity:1}100%{right:calc(100% - 20px);opacity:0}}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.2vw}
+.step{display:grid;justify-items:center;text-align:center;gap:1.2vh;padding:0 .4vw}
+.dotn{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:20px;color:#fff;background:var(--g);box-shadow:0 0 0 8px var(--bg);position:relative;z-index:1}
+.step .ic{width:30px;height:30px;color:var(--g);margin-top:1vh} .step b{font-size:clamp(15px,1.45vw,23px)} .step small{font-size:clamp(12px,1.05vw,16px);line-height:1.6;color:var(--soft)}
+.slide:not(.on) .step{opacity:0}
+.on .step{animation:rise .8s var(--e) both,lit 7.2s ease-in-out infinite;animation-delay:calc(var(--k)*120ms + 200ms),calc(var(--k)*1.15s + 1s)}
+@keyframes lit{0%,4%,22%,100%{filter:none}8%,16%{filter:drop-shadow(0 0 14px rgba(245,189,2,.55))}}
+/* duo */
+.duo{align-content:center}
+.pair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:3vw;perspective:1800px}
+.pair .frame{transform:none}
+.slide:not(.on) .pair .frame{opacity:0}
+.on .tiltR{animation:inR 1.2s var(--e) both;animation-delay:calc(var(--d)*90ms)} .on .tiltL{animation:inL 1.2s var(--e) both;animation-delay:calc(var(--d)*90ms)}
+@keyframes inR{from{opacity:0;transform:rotateY(-24deg) translateX(60px)}to{opacity:1;transform:rotateY(-4deg)}}
+@keyframes inL{from{opacity:0;transform:rotateY(24deg) translateX(-60px)}to{opacity:1;transform:rotateY(4deg)}}
+.tiltR{transform:rotateY(-4deg)!important} .tiltL{transform:rotateY(4deg)!important}
+/* gate */
+.gate .center,.close .center{display:grid;justify-items:center;text-align:center;gap:3vh;position:relative;z-index:1}
+.big{font-size:clamp(40px,6.4vw,110px);line-height:1.15;font-weight:700;color:#F4FAF6;max-width:16ch}
+.under{background:linear-gradient(90deg,var(--gold),var(--gold)) no-repeat 100% 92%/0% 8px;padding-bottom:6px}
+.on .under{animation:under 1.2s var(--e) 1s forwards}
+@keyframes under{to{background-size:100% 8px}}
+.gatefx{position:absolute;inset:0;overflow:hidden}
+.gatefx i{position:absolute;top:-20%;width:2px;height:40%;background:linear-gradient(180deg,transparent,rgba(124,227,172,.7),transparent);left:calc(var(--x)*1%);animation:beam 4s linear infinite;animation-delay:calc(var(--x)*-.09s)}
+.gatefx i:nth-child(1){--x:8}.gatefx i:nth-child(2){--x:20}.gatefx i:nth-child(3){--x:33}.gatefx i:nth-child(4){--x:46}.gatefx i:nth-child(5){--x:58}.gatefx i:nth-child(6){--x:71}.gatefx i:nth-child(7){--x:83}.gatefx i:nth-child(8){--x:94}
+@keyframes beam{to{transform:translateY(320%)}}
+/* stats */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;margin-top:1vh}
+.kpi{border-radius:20px;padding:2vh 1.2vw;display:grid;gap:4px;border:1px solid var(--line);background:#fff}
+.kpi b{font-size:clamp(28px,3.2vw,52px);line-height:1;font-weight:700;font-variant-numeric:tabular-nums}
+.kpi span{font-size:clamp(12px,1vw,15px);color:var(--soft)}
+.kpi.good{background:#E3F6EA;border-color:#BFE6CF} .kpi.good b{color:var(--gd)}
+.kpi.bad{background:#FDECEA;border-color:#F8C9C3} .kpi.bad b{color:#B42318}
+.kpi.info{background:#E8F1FD;border-color:#C6DAF7} .kpi.info b{color:#175CD3}
+/* devices */
+.devs{position:relative;height:62vh}
+.devs .laptop{position:absolute;right:0;top:0;width:62%;transform:none}
+.phone{position:absolute;margin:0;width:14%;border-radius:26px;overflow:hidden;border:6px solid #0F2A1E;box-shadow:0 40px 70px -30px rgba(15,42,30,.6);background:#0F2A1E}
+.phone img{display:block;width:100%}
+.p1{left:28%;top:8%;z-index:3} .p2{left:13%;top:16%;z-index:2} .p3{left:0;top:24%;z-index:1}
+.slide:not(.on) .devs figure{opacity:0}
+.on .laptop{animation:rise 1.1s var(--e) both;animation-delay:calc(var(--d)*90ms)}
+.on .phone{animation:fan 1.1s var(--spring) both;animation-delay:calc(var(--d)*90ms)}
+.p1{--rot:-4deg}.p2{--rot:-8deg}.p3{--rot:-12deg}
+.phone{transform:rotate(var(--rot))}
+@keyframes fan{from{opacity:0;transform:translateY(80px) rotate(0)}to{opacity:1;transform:rotate(var(--rot))}}
+/* plan */
+.tl{position:relative;padding-top:2vh}
+.tlrail{position:absolute;top:calc(2vh + 15px);right:0;left:0;height:4px;background:#D9EEE1;border-radius:4px;overflow:hidden}
+.tlrail i{position:absolute;inset:0;background:linear-gradient(270deg,var(--g),var(--gold));transform-origin:100% 50%;transform:scaleX(0)}
+.on .tlrail i{animation:grow 2.2s var(--e) .5s forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+.tl ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2vw}
+.tl li{position:relative;padding-top:56px;display:grid;gap:1.2vh}
+.tl li:before{content:"";position:absolute;top:4px;inset-inline-start:0;width:26px;height:26px;border-radius:50%;background:#fff;border:5px solid var(--g);box-sizing:border-box}
+.tl li:last-child:before{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 8px rgba(245,189,2,.2)}
+.when{justify-self:start;font-size:clamp(12px,1vw,15px);font-weight:600;color:var(--gd);background:#D6F2E3;padding:4px 12px;border-radius:999px}
+.tl b{font-size:clamp(18px,1.8vw,28px)} .tl small{font-size:clamp(13px,1.15vw,18px);line-height:1.7;color:var(--soft)}
+.slide:not(.on) .tl li{opacity:0}
+.on .tl li{animation:rise .8s var(--e) both;animation-delay:calc(var(--k)*420ms + 500ms)}
+/* close */
+.cta{display:inline-block;direction:ltr;font-size:clamp(18px,1.8vw,28px);font-weight:700;color:var(--dark);background:linear-gradient(90deg,#7BE3AC,var(--gold));padding:16px 34px;border-radius:999px;text-decoration:none;box-shadow:0 20px 50px -20px rgba(245,189,2,.7);transition:transform .3s var(--e)}
+.cta:hover{transform:translateY(-3px) scale(1.03)}
+.by{font-size:14px;color:#6E9682} .by a{color:#9FE3BF}
+/* chrome */
+.progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:10;background:rgba(127,181,154,.18)}
+.progress i{position:absolute;inset-block:0;right:0;background:linear-gradient(270deg,var(--g),var(--gold));transition:width .8s var(--e)}
+.ctrl{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:8px;padding:6px;border-radius:999px;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border:1px solid rgba(205,232,216,.9);box-shadow:0 14px 40px -18px rgba(15,42,30,.45)}
+body[data-tone=dark] .ctrl{background:rgba(14,40,28,.8);border-color:#24533D}
+.ctrl button{all:unset;cursor:pointer;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--gd);transition:background .2s}
+.ctrl button:hover{background:rgba(31,158,100,.12)} .ctrl button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+body[data-tone=dark] .ctrl button{color:#CFF2DF}
+.ctrl .count{min-width:70px;text-align:center;font-size:14px;font-weight:600;color:var(--soft);font-variant-numeric:tabular-nums;direction:ltr}
+body[data-tone=dark] .ctrl .count{color:#9FC7B2}
+.brand{position:fixed;top:18px;right:24px;z-index:10;display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--gd);text-decoration:none}
+body[data-tone=dark] .brand{color:#CFF2DF}
+.brand svg{width:30px;height:30px}
+/* responsive */
+@media (max-width: 900px){
+ .slide{padding:9vh 6vw 13vh;align-content:start;overflow-y:auto}
+ .cover,.shot{grid-template-columns:1fr;gap:3vh}
+ .cover .stage3d,.shot .stage3d{order:2}
+ .grid3,.grid4,.flowmap,.tl ol{grid-template-columns:1fr}
+ .steps{grid-template-columns:repeat(3,1fr);row-gap:3vh} .rail{display:none}
+ .pair{grid-template-columns:1fr} .chip{display:none}
+ .devs{height:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3vw} .devs .laptop{position:static;width:auto;grid-column:1/-1} .phone{position:static;width:auto;transform:none}
+ .head{max-width:none} .wires{display:none} .tlrail{display:none}
+}
+@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation:none!important;transition:none!important} .slide:not(.on) *{opacity:1!important} .mk-line{stroke-dashoffset:0} .mk-dot{transform:none} .under{background-size:100% 8px}}
+</style>
+</head>
+<body data-tone="dark">
+<div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+<a class="brand" href="https://vector.datavital.io" aria-label="The Vector"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="16" fill="#14462F"/><path d="M14 46 L27 33 L35 41 L50 22" fill="none" stroke="#9FF0C4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="22" r="5.5" fill="#F5BD02"/></svg>The Vector</a>
+<main class="deck" id="deck">
+<section class="slide cover dark" data-n="1" aria-label="The Vector">
+<div class="txt">
+<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="16" class="mk-bg"/><path d="M14 46 L27 33 L35 41 L50 22" class="mk-line"/><circle cx="50" cy="22" r="5.5" class="mk-dot"/></svg>
+<p class="eye r" style="--d:2">منصة متابعة المبادرات</p>
+<h1 class="title"><span style="--d:3">The</span> <span style="--d:4">Vector</span></h1>
+<p class="lede r" style="--d:7">من تحديث مدير المبادرة إلى قرار القيادة، في دورة واحدة واضحة كل شهر.</p>
+<p class="hint r" style="--d:10"><kbd>←</kbd> أو المسافة للتالي</p>
+</div>
+<div class="stage3d float">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/welcome.jpg" alt="الصفحة الرئيسية لمنصة The Vector"></figure>
+</div>
+</section>
+<section class="slide cards3 light" data-n="2" aria-label="لماذا The Vector">
+<div class="head"><p class="eye r" style="--d:0">لماذا The Vector</p><h2 class="r" style="--d:1">متابعة المبادرات تتعثر في ثلاثة أماكن</h2></div>
+<div class="grid3">
+<article class="card flip" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/></svg><h3>الأرقام متفرقة</h3><p>ملفات وإيميلات من كل جهة، ومكتب البرنامج يجمعها يدويًا كل شهر.</p></article>
+<article class="card flip" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>القيادة ترى متأخرًا</h3><p>الصورة تصل بعد أسابيع، وأحيانًا قبل أن يراجعها أحد.</p></article>
+<article class="card flip" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><h3>القرارات تضيع</h3><p>ما تحتاجه المبادرة من القيادة يبقى في محضر أو رسالة، فلا يُتابع.</p></article>
+</div>
+</section>
+<section class="slide idea mint" data-n="3" aria-label="الفكرة">
+<div class="head"><p class="eye r" style="--d:0">الفكرة</p><h2 class="r" style="--d:1">ثلاثة أدوار، وبوابة نشر واحدة</h2><p class="lede r" style="--d:2">لا يصل القيادة إلا ما راجعه مكتب البرنامج ونشره، فكل رقم في الطبقة الذكية رقم معتمد.</p></div>
+<div class="flowmap">
+<svg class="wires" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+<path id="w1" d="M1080 150 C 960 150 900 150 780 150"/><path id="w2" d="M600 150 C 500 150 420 150 320 150"/>
+<circle r="7" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#w1"/></animateMotion></circle>
+<circle r="7" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" begin="2.4s"><mpath href="#w2"/></animateMotion></circle>
+</svg>
+<article class="node n1 pop" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><h3>مدير المبادرة</h3><p>يحدّث مبادرته كل شهر: النسب، ما تم، القادم، والعوائق.</p></article>
+<article class="node n2 pop gate" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><h3>مكتب البرنامج</h3><p>يراجع كل تحديث، ثم ينشره أو يُرجعه بملاحظة.</p><span class="gatebadge">بوابة النشر</span></article>
+<article class="node n3 pop" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><h3>رئيس الجهة</h3><p>يقرأ الخلاصة والتوقعات، ويقرر فيما ينتظره.</p></article>
+</div>
+</section>
+<section class="slide journey light" data-n="4" aria-label="الرحلة">
+<div class="head"><p class="eye r" style="--d:0">الرحلة</p><h2 class="r" style="--d:1">دورة شهرية في ست خطوات</h2></div>
+<div class="track"><div class="rail"><i class="runner"></i></div><ol class="steps"><li class="step" style="--k:0"><span class="dotn">1</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><b>الإعداد والاعتماد</b><small>مكتب البرنامج يُدخل البرنامج وزميله يعتمد</small></li><li class="step" style="--k:1"><span class="dotn">2</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>فتح الدورة</b><small>بطاقة لكل مبادرة والمخطط يُحسب تلقائيًا</small></li><li class="step" style="--k:2"><span class="dotn">3</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><b>تحديث المدير</b><small>النسب والخطوات والعوائق وطلب القرار</small></li><li class="step" style="--k:3"><span class="dotn">4</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><b>المراجعة</b><small>مكتب البرنامج يدقق قبل النشر</small></li><li class="step" style="--k:4"><span class="dotn">5</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10l7 3 3 7z"/><path d="m10 13 4-4"/></svg><b>النشر</b><small>يصل الطبقة الذكية فورًا</small></li><li class="step" style="--k:5"><span class="dotn">6</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><b>القيادة تقرر</b><small>القرار يُدرج في اجتماع القيادة</small></li></ol></div>
+</section>
+<section class="slide shot light" data-n="5" aria-label="دخول واحد، وكل شخص يرى دوره">
+<div class="txt">
+<p class="tag r" style="--d:0">كل الأدوار</p>
+<p class="eye r" style="--d:1">البداية</p>
+<h2 class="r" style="--d:2">دخول واحد، وكل شخص يرى دوره</h2>
+<p class="lede r" style="--d:4">صفحة دخول بهوية المنصة. بعد الدخول يفتح كل مستخدم على الصفحة التي تخصه.</p>
+<ul class="pts"><li style="--d:6">الدور والصلاحيات من الحساب تلقائيًا</li><li style="--d:7">عربي وإنجليزي، فاتح وداكن</li><li style="--d:8">خروج تلقائي عند انتهاء الجلسة</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/login.jpg" alt="صفحة تسجيل الدخول" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>اتصال مشفّر</span><span class="chip c1" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>عربي · English</span>
+</div>
+</section>
+<section class="slide shot light" data-n="6" aria-label="يومه يبدأ بما يحتاج انتباهه">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوة 1</p>
+<p class="eye r" style="--d:1">مكتب البرنامج</p>
+<h2 class="r" style="--d:2">يومه يبدأ بما يحتاج انتباهه</h2>
+<p class="lede r" style="--d:4">الرئيسية ترتب المهام: ما ينتظر المراجعة، والبطاقات التي لم تبدأ، والقرارات المعلّقة.</p>
+<ul class="pts"><li style="--d:6">حالة الدورة بالأرقام</li><li style="--d:7">تذكير بضغطة للمتأخرين</li><li style="--d:8">كل رقم يفتح ما خلفه</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/home.jpg" alt="الرئيسية لمكتب البرنامج" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11M3.5 18l1.5 1.5L7.5 17"/></svg>3 مهام اليوم</span><span class="chip c1" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>قراران ينتظران القيادة</span>
+</div>
+</section>
+<section class="slide shot mint" data-n="7" aria-label="البرنامج والحزم والمبادرات في ثلاث خطوات">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوة 1</p>
+<p class="eye r" style="--d:1">إعداد البرنامج</p>
+<h2 class="r" style="--d:2">البرنامج والحزم والمبادرات في ثلاث خطوات</h2>
+<p class="lede r" style="--d:4">خطوة بخطوة أو من Excel، ولكل مبادرة جهتها ومديرها.</p>
+<ul class="pts"><li style="--d:6">تُحفظ المسودة تلقائيًا</li><li style="--d:7">مراجعة أخيرة تنبّه لأي نقص</li><li style="--d:8">المدير يصله الوصول بعد الاعتماد</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/setup.jpg" alt="شاشة الحزم والمبادرات" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>مدير لكل مبادرة</span><span class="chip c1" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>حفظ تلقائي</span>
+</div>
+</section>
+<section class="slide shot light" data-n="8" aria-label="من يُنشئ البرنامج لا يعتمده">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوة 2</p>
+<p class="eye r" style="--d:1">الاعتماد</p>
+<h2 class="r" style="--d:2">من يُنشئ البرنامج لا يعتمده</h2>
+<p class="lede r" style="--d:4">يعتمده زميل آخر. عند الاعتماد تُنشأ بطاقة متابعة لكل مبادرة وتُفتح أول دورة.</p>
+<ul class="pts"><li style="--d:6">مبدأ الشخصين داخل النظام</li><li style="--d:7">أول دورة مع أول شهر في البرنامج</li><li style="--d:8">الإعادة للتعديل بملاحظة</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/approve.jpg" alt="نافذة اعتماد البرنامج" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>مبدأ الشخصين</span>
+</div>
+</section>
+<section class="slide shot light" data-n="9" aria-label="قائمة واحدة بما عليه هذا الشهر">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوة 3</p>
+<p class="eye r" style="--d:1">مدير المبادرة</p>
+<h2 class="r" style="--d:2">قائمة واحدة بما عليه هذا الشهر</h2>
+<p class="lede r" style="--d:4">ما أُعيد له بملاحظة أولًا، ثم ما لم يبدأ. وتحت كل بطاقة آخر أرقام منشورة.</p>
+<ul class="pts"><li style="--d:6">الموعد والأيام المتبقية واضحة</li><li style="--d:7">ملاحظة المكتب على البطاقة نفسها</li><li style="--d:8">مبادراته فقط</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/tasks.jpg" alt="قائمة مهام المدير" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>7 أيام متبقية</span>
+</div>
+</section>
+<section class="slide duo mint" data-n="10" aria-label="التحديث الشهري">
+<div class="head"><p class="tag r" style="--d:0">الخطوة 3</p><p class="eye r" style="--d:1">التحديث الشهري</p><h2 class="r" style="--d:2">أربع خطوات، وكل رقم يُقرأ في لحظته</h2><p class="lede r" style="--d:3">يكتب المدير الإنجاز فيرى الانحراف والحالة فورًا. وإذا احتاج قرارًا كتبه بصيغة تقرؤها القيادة.</p></div>
+<div class="pair">
+<figure class="frame tiltR" style="--d:5"><div class="bar"><i></i><i></i><i></i><span>النسب</span></div><img src="img/figures.jpg" alt="خطوة النسب" loading="lazy"></figure>
+<figure class="frame tiltL" style="--d:8"><div class="bar"><i></i><i></i><i></i><span>القادم والعوائق</span></div><img src="img/blocker.jpg" alt="خطوة العوائق وطلب القرار" loading="lazy"></figure>
+<span class="chip alert" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg>80% والموعد نهاية الشهر: متأخرة جدًا</span>
+</div>
+</section>
+<section class="slide shot light" data-n="11" aria-label="مكتب البرنامج يدقق قبل أن ترى القيادة">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوات 4 و5</p>
+<p class="eye r" style="--d:1">المراجعة والنشر</p>
+<h2 class="r" style="--d:2">مكتب البرنامج يدقق قبل أن ترى القيادة</h2>
+<p class="lede r" style="--d:4">يقارن التحديث بآخر رقم منشور، ويقرأ الخطوات والعوائق، ثم ينشر أو يُرجع بملاحظة.</p>
+<ul class="pts"><li style="--d:6">طلبات القيادة أولًا</li><li style="--d:7">لا تعديل بعد النشر</li><li style="--d:8">من أدخل التحديث لا يراجعه</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/review.jpg" alt="شاشة المراجعة" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg>+6 نقاط عن الشهر الماضي</span>
+</div>
+</section>
+<section class="slide gate dark" data-n="12" aria-label="الطبقة الذكية">
+<div class="gatefx" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="center">
+<p class="eye r" style="--d:0">الطبقة الذكية</p>
+<h1 class="big r" style="--d:2">كل رقم تراه القيادة <span class="under">منشور ومُراجع</span></h1>
+<p class="lede r" style="--d:5">من هنا تبدأ الشاشات التي يقرأ منها رئيس الجهة.</p>
+</div>
+</section>
+<section class="slide shot light stats" data-n="13" aria-label="خلاصة القيادة">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوة 6</p><p class="eye r" style="--d:1">رئيس الجهة</p>
+<h2 class="r" style="--d:2">خلاصة القيادة في صفحة واحدة</h2>
+<p class="lede r" style="--d:3">أول جملة تقول ما يحتاج قراره، ثم الأرقام، ثم القرارات وأين التأخر.</p>
+<div class="kpis">
+<div class="kpi good r" style="--d:5"><b data-count="53" data-suf="%">0%</b><span>الإنجاز حتى اليوم</span></div>
+<div class="kpi good r" style="--d:6"><b data-count="16">0</b><span>على المسار</span></div>
+<div class="kpi bad r" style="--d:7"><b data-count="7">0</b><span>تحتاج تدخلًا</span></div>
+<div class="kpi info r" style="--d:8"><b data-count="45" data-suf="%">0%</b><span>المصروف</span></div>
+</div>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io/intel</span></div><img src="img/leader.jpg" alt="خلاصة القيادة" loading="lazy"></figure></div>
+</section>
+<section class="slide shot mint" data-n="14" aria-label="القرار يُدرج في الاجتماع بضغطة">
+<div class="txt">
+<p class="tag r" style="--d:0">الخطوة 6</p>
+<p class="eye r" style="--d:1">قرارات القيادة</p>
+<h2 class="r" style="--d:2">القرار يُدرج في الاجتماع بضغطة</h2>
+<p class="lede r" style="--d:4">مرتبة حسب أثرها: كم مبادرة تتوقف عليها ومنذ متى.</p>
+<ul class="pts"><li style="--d:6">من طلب القرار ولأي مبادرة</li><li style="--d:7">المبادرات المتوقفة عليه</li><li style="--d:8">يظهر فور نشر التحديث</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/decision.jpg" alt="إدراج قرار في الاجتماع" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>أُدرج في اجتماع 25 نوفمبر</span>
+</div>
+</section>
+<section class="slide shot light" data-n="15" aria-label="أين ينتهي البرنامج بنهاية السنة؟">
+<div class="txt">
+<p class="tag r" style="--d:0">للقيادة</p>
+<p class="eye r" style="--d:1">الملخص التنفيذي</p>
+<h2 class="r" style="--d:2">أين ينتهي البرنامج بنهاية السنة؟</h2>
+<p class="lede r" style="--d:4">بوتيرة آخر ثلاثة أشهر نحسب التوقع ومداه، لكل حزمة وللبرنامج كله.</p>
+<ul class="pts"><li style="--d:6">المخطط والفعلي والمتوقع على شريط واحد</li><li style="--d:7">لكل حزمة سبب الفجوة</li><li style="--d:8">التوقع تقدير بمدى</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/brief.jpg" alt="الملخص التنفيذي" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>توقع نهاية السنة</span>
+</div>
+</section>
+<section class="slide shot light" data-n="16" aria-label="كل مبادرة بقصتها وأرقامها">
+<div class="txt">
+<p class="tag r" style="--d:0">للقيادة</p>
+<p class="eye r" style="--d:1">صفحة المبادرة</p>
+<h2 class="r" style="--d:2">كل مبادرة بقصتها وأرقامها</h2>
+<p class="lede r" style="--d:4">الإنجاز والمتوقع والموعد والمصروف والوتيرة، وما تحتاجه الآن مرتبًا حسب أثره.</p>
+<ul class="pts"><li style="--d:6">ما تعتمد عليه وما ينتظرها</li><li style="--d:7">المناطق التي تُنفّذ فيها</li><li style="--d:8">سؤال المساعد عنها بضغطة</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/initiative.jpg" alt="صفحة المبادرة" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg>الاعتماديات</span>
+</div>
+</section>
+<section class="slide shot mint" data-n="17" aria-label="ماذا لو خُفّضت الميزانية المتبقية؟">
+<div class="txt">
+<p class="tag r" style="--d:0">للقيادة</p>
+<p class="eye r" style="--d:1">محاكاة الميزانية</p>
+<h2 class="r" style="--d:2">ماذا لو خُفّضت الميزانية المتبقية؟</h2>
+<p class="lede r" style="--d:4">اختر نسبة الخفض وما تحميه، فتقترح المحاكاة ما يستمر وما يُقلّص وما يُؤجّل.</p>
+<ul class="pts"><li style="--d:6">لا تغيّر شيئًا في البيانات</li><li style="--d:7">تنبّه للآثار الجانبية</li><li style="--d:8">تجاوب فورًا أثناء النقاش</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/budget.jpg" alt="محاكاة الميزانية" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>أثر الخفض على التوقع</span>
+</div>
+</section>
+<section class="slide shot dark" data-n="18" aria-label="مساعد يجاوب بالأرقام ويذكر مصدرها">
+<div class="txt">
+<p class="tag r" style="--d:0">للقيادة</p>
+<p class="eye r" style="--d:1">اسأل The Vector</p>
+<h2 class="r" style="--d:2">مساعد يجاوب بالأرقام ويذكر مصدرها</h2>
+<p class="lede r" style="--d:4">يجاوب من البيانات المنشورة فقط، ويقول من أين أخذ كل رقم.</p>
+<ul class="pts"><li style="--d:6">عربي وإنجليزي</li><li style="--d:7">يقرأ المنشور ولا يعدّل</li><li style="--d:8">كل سؤال في سجل تدقيق</li></ul>
+</div>
+<div class="stage3d">
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/assistant.jpg" alt="إجابة المساعد" loading="lazy"></figure>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>Claude على Amazon Bedrock</span>
+</div>
+</section>
+<section class="slide devices mint" data-n="19" aria-label="في كل مكان">
+<div class="head"><p class="eye r" style="--d:0">في كل مكان</p><h2 class="r" style="--d:1">لغتان، ووضعان، وكل الشاشات</h2></div>
+<div class="devs">
+<figure class="frame laptop" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>English · Dark</span></div><img src="img/endark.jpg" alt="المنصة بالإنجليزي والوضع الداكن" loading="lazy"></figure>
+<figure class="phone p1" style="--d:6"><img src="img/m1.jpg" alt="خلاصة القيادة على الجوال" loading="lazy"></figure>
+<figure class="phone p2" style="--d:8"><img src="img/m2.jpg" alt="مهام المدير على الجوال" loading="lazy"></figure>
+<figure class="phone p3" style="--d:10"><img src="img/m3.jpg" alt="صفحة المبادرة على الجوال" loading="lazy"></figure>
+</div>
+</section>
+<section class="slide cards4 dark" data-n="20" aria-label="الثقة">
+<div class="head"><p class="eye r" style="--d:0">الثقة</p><h2 class="r" style="--d:1">ضوابط مبنية في النظام، لا في التعليمات</h2></div>
+<div class="grid4"><article class="card flip" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h3>الدخول</h3><p>Amazon Cognito بصفحة دخول خاصة بالمنصة، واتصال مشفّر</p></article><article class="card flip" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><h3>مبدأ الشخصين</h3><p>من يُنشئ لا يعتمد، ومن يُدخل لا يراجع</p></article><article class="card flip" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><h3>سجل تدقيق</h3><p>كل إجراء وكل سؤال للمساعد مسجّل</p></article><article class="card flip" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg><h3>على AWS</h3><p>خادم وقاعدة بيانات وذكاء اصطناعي في حساب واحد</p></article></div>
+</section>
+<section class="slide plan light" data-n="21" aria-label="الخطوات القادمة">
+<div class="head"><p class="eye r" style="--d:0">الخطوات القادمة</p><h2 class="r" style="--d:1">من التجربة إلى التشغيل الرسمي في 31 ديسمبر</h2></div>
+<div class="tl"><div class="tlrail"><i></i></div><ol><li style="--k:0"><span class="when">حتى 30 نوفمبر</span><b>تجربة المنصة</b><small>حسابات للتجربة وبيئة نظيفة لبياناتكم</small></li><li style="--k:1"><span class="when">1 إلى 14 ديسمبر</span><b>التشغيل الذاتي</b><small>فتح الدورات وإدارة المستخدمين والإشعارات بالإيميل</small></li><li style="--k:2"><span class="when">15 إلى 21 ديسمبر</span><b>دائرة القرار</b><small>تسجيل قرار القيادة، وخلاصة الاجتماع PDF، والمرفقات</small></li><li style="--k:3"><span class="when">22 إلى 31 ديسمبر</span><b>دورة ديسمبر</b><small>تشغيل الدورة كاملة معكم، ثم التشغيل الرسمي</small></li></ol></div>
+</section>
+<section class="slide close dark" data-n="22" aria-label="شكرًا">
+<div class="center">
+<svg class="mark big" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="16" class="mk-bg"/><path d="M14 46 L27 33 L35 41 L50 22" class="mk-line"/><circle cx="50" cy="22" r="5.5" class="mk-dot"/></svg>
+<h1 class="big r" style="--d:2">شكرًا</h1>
+<p class="lede r" style="--d:4">جرّبوا المنصة</p>
+<a class="cta r" style="--d:6" href="https://vector.datavital.io" rel="noopener">vector.datavital.io</a>
+<p class="by r" style="--d:8">The Vector · إعداد <a href="https://maazmajid.com">معاذ ماجد</a></p>
+</div>
+</section>
+</main>
+<nav class="ctrl" aria-label="التنقل بين الشرائح">
+<button id="prev" aria-label="السابق"><svg class="ic" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+<span class="count" id="count" aria-live="polite">1 / 22</span>
+<button id="next" aria-label="التالي"><svg class="ic" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+<button id="fs" aria-label="ملء الشاشة"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')], N = slides.length;
+  const bar = document.getElementById('bar'), count = document.getElementById('count');
+  let i = 0;
+  const tone = s => s.classList.contains('dark') ? 'dark' : s.classList.contains('mint') ? 'mint' : 'light';
+  function countUp(s) {
+    s.querySelectorAll('[data-count]').forEach(el => {
+      const to = +el.dataset.count, suf = el.dataset.suf || '', t0 = performance.now(), d = 1400;
+      const step = t => { const p = Math.min(1, (t - t0 - 500) / d), e = 1 - Math.pow(1 - Math.max(0, p), 3); el.textContent = Math.round(to * e) + suf; if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+  }
+  function go(n, dir) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n === i && slides[i].classList.contains('on')) return;
+    const old = slides[i];
+    old.classList.remove('on'); old.classList.add(dir > 0 ? 'out-back' : 'out-fwd');
+    setTimeout(() => old.classList.remove('out-back', 'out-fwd'), 900);
+    i = n; const s = slides[i];
+    // restart animations
+    s.classList.remove('on'); void s.offsetWidth; s.classList.add('on');
+    document.body.dataset.tone = tone(s);
+    bar.style.width = ((i + 1) / N * 100) + '%';
+    count.textContent = (i + 1) + ' / ' + N;
+    history.replaceState(null, '', '#' + (i + 1));
+    countUp(s);
+    const nx = slides[i + 1]; if (nx) nx.querySelectorAll('img[loading=lazy]').forEach(im => im.loading = 'eager');
+  }
+  const next = () => go(i + 1, 1), prev = () => go(i - 1, -1);
+  document.getElementById('next').onclick = next; document.getElementById('prev').onclick = prev;
+  document.getElementById('fs').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+  addEventListener('keydown', e => {
+    if (['ArrowLeft', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowRight', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') go(0, -1); else if (e.key === 'End') go(N - 1, 1);
+    else if (e.key === 'f') document.getElementById('fs').click();
+  });
+  let x0 = null;
+  addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) (dx > 0 ? next : prev)(); x0 = null; });
+  // gentle tilt that follows the pointer
+  addEventListener('pointermove', e => {
+    const f = slides[i].querySelector('.stage3d .frame'); if (!f || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rx = (0.5 - e.clientY / innerHeight) * 6, ry = 6 + (e.clientX / innerWidth - 0.5) * 8;
+    f.style.setProperty('--rx', rx.toFixed(2) + 'deg'); f.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+  });
+  const start = parseInt(location.hash.slice(1), 10);
+  i = start >= 1 && start <= N ? start - 1 : 0;
+  go(i, 1);
+})();
+</script>
+</body>
+</html>
