@@ -6,7 +6,7 @@
 <title>The Vector · قصة المنصة</title>
 <meta name="description" content="The Vector: منصة متابعة المبادرات، من تحديث مدير المبادرة إلى قرار القيادة.">
 <meta property="og:title" content="The Vector · قصة المنصة">
-<meta property="og:description" content="من تحديث مدير المبادرة إلى قرار القيادة، في دورة واحدة واضحة كل شهر.">
+<meta property="og:description" content="من تحديث مدير المبادرة إلى قرار القيادة، لحظة بلحظة.">
 <meta property="og:image" content="https://maazmajid.com/vector/story/img/welcome.jpg">
 <meta name="theme-color" content="#0B1F16">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -251,6 +251,8 @@ h2{font-size:clamp(28px,3.6vw,58px);line-height:1.2;font-weight:700;letter-spaci
 .on .tile{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--d)*80ms)}
 .on .tile:nth-child(8){animation:popIn .7s var(--spring) both,ring 3s ease-in-out 2s infinite;animation-delay:calc(var(--d)*80ms),2s;border-color:#F4B2AB}
 .tile:nth-child(8) .ic{color:#D92D20;background:#FDECEA}
+.chip.live{color:#067647}.dotlive{width:9px;height:9px;border-radius:50%;background:#17B26A;box-shadow:0 0 0 0 rgba(23,178,106,.5);animation:livep 1.8s ease-out infinite}
+@keyframes livep{70%,100%{box-shadow:0 0 0 8px rgba(23,178,106,0)}}
 /* chrome */
 .progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:10;background:rgba(127,181,154,.18)}
 .progress i{position:absolute;inset-block:0;right:0;background:linear-gradient(270deg,var(--g),var(--gold));transition:width .8s var(--e)}
@@ -288,7 +290,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="16" class="mk-bg"/><path d="M14 46 L27 33 L35 41 L50 22" class="mk-line"/><circle cx="50" cy="22" r="5.5" class="mk-dot"/></svg>
 <p class="eye r" style="--d:2">منصة متابعة المبادرات</p>
 <h1 class="title"><span style="--d:3">The</span> <span style="--d:4">Vector</span></h1>
-<p class="lede r" style="--d:7">من تحديث مدير المبادرة إلى قرار القيادة، في دورة واحدة واضحة كل شهر.</p>
+<p class="lede r" style="--d:7">من تحديث مدير المبادرة إلى قرار القيادة، لحظة بلحظة.</p>
 <p class="hint r" style="--d:10"><kbd>←</kbd> أو المسافة للتالي</p>
 </div>
 <div class="stage3d float">
@@ -307,7 +309,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 </section>
 <section class="slide solve light" data-n="3" aria-label="الحل">
 <div class="head"><p class="eye r" style="--d:0">الحل</p><h2 class="r" style="--d:1">مكان واحد للمتابعة، من التحديث إلى القرار</h2></div>
-<div class="ba"><p class="ba__h"><span>اليوم</span><span></span><span>مع The Vector</span></p><ol><li style="--k:0"><span class="was">ملفات من كل جهة بصيغ مختلفة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>تحديث شهري واحد في المنصة، بنفس الخطوات لكل مبادرة</span></li><li style="--k:1"><span class="was">رقم يصل القيادة بلا مراجعة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>بوابة نشر: مكتب البرنامج يراجع، ومن أدخل التحديث لا يراجعه</span></li><li style="--k:2"><span class="was">القيادة ترى التأخر بعد أسابيع</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>خلاصة القيادة تتحدث لحظة النشر، والإنذار المبكر يرى التعثر قبل أن يقع</span></li><li style="--k:3"><span class="was">طلبات القرار تضيع في المحاضر</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>طلب القرار جزء من التحديث، ويُدرج في اجتماع القيادة بضغطة</span></li></ol></div>
+<div class="ba"><p class="ba__h"><span>اليوم</span><span></span><span>مع The Vector</span></p><ol><li style="--k:0"><span class="was">ملفات من كل جهة بصيغ مختلفة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>تحديث في المنصة متى ما تغيّر شيء، بنفس الخطوات لكل مبادرة</span></li><li style="--k:1"><span class="was">رقم يصل القيادة بلا مراجعة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>بوابة نشر: مكتب البرنامج يراجع، ومن أدخل التحديث لا يراجعه</span></li><li style="--k:2"><span class="was">القيادة ترى التأخر بعد أسابيع</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>خلاصة القيادة تتحدث لحظة النشر، والإنذار المبكر يرى التعثر قبل أن يقع</span></li><li style="--k:3"><span class="was">طلبات القرار تضيع في المحاضر</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></svg>طلب القرار جزء من التحديث، ويُدرج في اجتماع القيادة بضغطة</span></li></ol></div>
 </section>
 <section class="slide idea mint" data-n="3" aria-label="الفكرة">
 <div class="head"><p class="eye r" style="--d:0">الفكرة</p><h2 class="r" style="--d:1">ثلاثة أدوار، وبوابة نشر واحدة</h2><p class="lede r" style="--d:2">لا يصل القيادة إلا ما راجعه مكتب البرنامج ونشره، فكل رقم في الطبقة الذكية رقم معتمد.</p></div>
@@ -317,14 +319,14 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <circle r="7" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#w1"/></animateMotion></circle>
 <circle r="7" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" begin="2.4s"><mpath href="#w2"/></animateMotion></circle>
 </svg>
-<article class="node n1 pop" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><h3>مدير المبادرة</h3><p>يحدّث مبادرته كل شهر: النسب، ما تم، القادم، والعوائق.</p></article>
+<article class="node n1 pop" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><h3>مدير المبادرة</h3><p>يحدّث مبادرته متى ما تغيّر شيء: النسب، ما تم، القادم، والعوائق.</p></article>
 <article class="node n2 pop gate" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><h3>مكتب البرنامج</h3><p>يراجع كل تحديث، ثم ينشره أو يُرجعه بملاحظة.</p><span class="gatebadge">بوابة النشر</span></article>
 <article class="node n3 pop" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><h3>رئيس الجهة</h3><p>يقرأ الخلاصة والتوقعات، ويقرر فيما ينتظره.</p></article>
 </div>
 </section>
 <section class="slide journey light" data-n="4" aria-label="الرحلة">
-<div class="head"><p class="eye r" style="--d:0">الرحلة</p><h2 class="r" style="--d:1">دورة شهرية في ست خطوات</h2></div>
-<div class="track"><div class="rail"><i class="runner"></i></div><ol class="steps"><li class="step" style="--k:0"><span class="dotn">1</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><b>الإعداد والاعتماد</b><small>مكتب البرنامج يُدخل البرنامج وزميله يعتمد</small></li><li class="step" style="--k:1"><span class="dotn">2</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>فتح الدورة</b><small>بطاقة لكل مبادرة والمخطط يُحسب تلقائيًا</small></li><li class="step" style="--k:2"><span class="dotn">3</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><b>تحديث المدير</b><small>النسب والخطوات والعوائق وطلب القرار</small></li><li class="step" style="--k:3"><span class="dotn">4</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><b>المراجعة</b><small>مكتب البرنامج يدقق قبل النشر</small></li><li class="step" style="--k:4"><span class="dotn">5</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10l7 3 3 7z"/><path d="m10 13 4-4"/></svg><b>النشر</b><small>يصل الطبقة الذكية فورًا</small></li><li class="step" style="--k:5"><span class="dotn">6</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><b>القيادة تقرر</b><small>القرار يُدرج في اجتماع القيادة</small></li></ol></div>
+<div class="head"><p class="eye r" style="--d:0">الرحلة</p><h2 class="r" style="--d:1">من التحديث إلى القرار، لحظة بلحظة</h2></div>
+<div class="track"><div class="rail"><i class="runner"></i></div><ol class="steps"><li class="step" style="--k:0"><span class="dotn">1</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><b>الإعداد والاعتماد</b><small>مكتب البرنامج يُدخل البرنامج وزميله يعتمد</small></li><li class="step" style="--k:1"><span class="dotn">2</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>بطاقة لكل مبادرة</b><small>تُنشأ عند الاعتماد، والمخطط يُحسب تلقائيًا</small></li><li class="step" style="--k:2"><span class="dotn">3</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><b>تحديث المدير</b><small>متى ما تغيّر شيء، مع طلب القرار</small></li><li class="step" style="--k:3"><span class="dotn">4</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><b>المراجعة</b><small>مكتب البرنامج يدقق أول بأول</small></li><li class="step" style="--k:4"><span class="dotn">5</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10l7 3 3 7z"/><path d="m10 13 4-4"/></svg><b>النشر</b><small>يصل القيادة في اللحظة نفسها</small></li><li class="step" style="--k:5"><span class="dotn">6</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg><b>القيادة تقرر</b><small>القرار يُدرج في اجتماع القيادة</small></li></ol></div>
 </section>
 <section class="slide shot light" data-n="5" aria-label="دخول واحد، وكل شخص يرى دوره">
 <div class="txt">
@@ -344,8 +346,8 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <p class="tag r" style="--d:0">الخطوة 1</p>
 <p class="eye r" style="--d:1">مكتب البرنامج</p>
 <h2 class="r" style="--d:2">يومه يبدأ بما يحتاج انتباهه</h2>
-<p class="lede r" style="--d:4">الرئيسية ترتب المهام: ما ينتظر المراجعة، والبطاقات التي لم تبدأ، والقرارات المعلّقة.</p>
-<ul class="pts"><li style="--d:6">حالة الدورة بالأرقام</li><li style="--d:7">تذكير بضغطة للمتأخرين</li><li style="--d:8">كل رقم يفتح ما خلفه</li></ul>
+<p class="lede r" style="--d:4">الرئيسية ترتب المهام: ما ينتظر المراجعة، والبطاقات التي لم تُحدَّث منذ أسبوعين، والقرارات المعلّقة.</p>
+<ul class="pts"><li style="--d:6">أين تقف كل بطاقة الآن</li><li style="--d:7">تذكير بضغطة لمن تأخر تحديثه</li><li style="--d:8">كل رقم يفتح ما خلفه</li></ul>
 </div>
 <div class="stage3d">
 <figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/home.jpg" alt="الرئيسية لمكتب البرنامج" loading="lazy"></figure>
@@ -370,33 +372,33 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <p class="tag r" style="--d:0">الخطوة 2</p>
 <p class="eye r" style="--d:1">الاعتماد</p>
 <h2 class="r" style="--d:2">من يُنشئ البرنامج لا يعتمده</h2>
-<p class="lede r" style="--d:4">يعتمده زميل آخر. عند الاعتماد تُنشأ بطاقة متابعة لكل مبادرة وتُفتح أول دورة.</p>
-<ul class="pts"><li style="--d:6">مبدأ الشخصين داخل النظام</li><li style="--d:7">أول دورة مع أول شهر في البرنامج</li><li style="--d:8">الإعادة للتعديل بملاحظة</li></ul>
+<p class="lede r" style="--d:4">يعتمده زميل آخر. عند الاعتماد تُنشأ بطاقة متابعة لكل مبادرة، ويبدأ التحديث من اللحظة نفسها.</p>
+<ul class="pts"><li style="--d:6">مبدأ الشخصين داخل النظام</li><li style="--d:7">لا انتظار لموعد: التحديث يبدأ فورًا</li><li style="--d:8">الإعادة للتعديل بملاحظة</li></ul>
 </div>
 <div class="stage3d">
 <figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/approve.jpg" alt="نافذة اعتماد البرنامج" loading="lazy"></figure>
 <span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>مبدأ الشخصين</span>
 </div>
 </section>
-<section class="slide shot light" data-n="9" aria-label="قائمة واحدة بما عليه هذا الشهر">
+<section class="slide shot light" data-n="9" aria-label="يحدّث متى ما صار جديد">
 <div class="txt">
 <p class="tag r" style="--d:0">الخطوة 3</p>
 <p class="eye r" style="--d:1">مدير المبادرة</p>
-<h2 class="r" style="--d:2">قائمة واحدة بما عليه هذا الشهر</h2>
-<p class="lede r" style="--d:4">ما أُعيد له بملاحظة أولًا، ثم ما لم يبدأ. وتحت كل بطاقة آخر أرقام منشورة.</p>
-<ul class="pts"><li style="--d:6">الموعد والأيام المتبقية واضحة</li><li style="--d:7">ملاحظة المكتب على البطاقة نفسها</li><li style="--d:8">مبادراته فقط</li></ul>
+<h2 class="r" style="--d:2">يحدّث متى ما صار جديد</h2>
+<p class="lede r" style="--d:4">ما أُعيد له بملاحظة أولًا، ثم المسودات، ثم ما لم يُحدَّث منذ أسبوعين. وكل مبادرة يقدر يحدّثها في أي وقت.</p>
+<ul class="pts"><li style="--d:6">لا موعد ينتظره</li><li style="--d:7">ملاحظة المكتب على البطاقة نفسها</li><li style="--d:8">تنبيه مبكر على مبادراته</li></ul>
 </div>
 <div class="stage3d">
 <figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/tasks.jpg" alt="قائمة مهام المدير" loading="lazy"></figure>
-<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>7 أيام متبقية</span>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>لم تُحدَّث منذ 14 يومًا</span>
 </div>
 </section>
-<section class="slide duo mint" data-n="10" aria-label="التحديث الشهري">
-<div class="head"><p class="tag r" style="--d:0">الخطوة 3</p><p class="eye r" style="--d:1">التحديث الشهري</p><h2 class="r" style="--d:2">أربع خطوات، وكل رقم يُقرأ في لحظته</h2><p class="lede r" style="--d:3">يكتب المدير الإنجاز فيرى الانحراف والحالة فورًا. وإذا احتاج قرارًا كتبه بصيغة تقرؤها القيادة.</p></div>
+<section class="slide duo mint" data-n="10" aria-label="التحديث">
+<div class="head"><p class="tag r" style="--d:0">الخطوة 3</p><p class="eye r" style="--d:1">التحديث</p><h2 class="r" style="--d:2">أربع خطوات، وكل رقم يُقرأ في لحظته</h2><p class="lede r" style="--d:3">يكتب المدير الإنجاز فيرى الانحراف والحالة فورًا. وإذا احتاج قرارًا كتبه بصيغة تقرؤها القيادة.</p></div>
 <div class="pair">
 <figure class="frame tiltR" style="--d:5"><div class="bar"><i></i><i></i><i></i><span>النسب</span></div><img src="img/figures.jpg" alt="خطوة النسب" loading="lazy"></figure>
 <figure class="frame tiltL" style="--d:8"><div class="bar"><i></i><i></i><i></i><span>القادم والعوائق</span></div><img src="img/blocker.jpg" alt="خطوة العوائق وطلب القرار" loading="lazy"></figure>
-<span class="chip alert" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg>80% والموعد نهاية الشهر: متأخرة جدًا</span>
+<span class="chip alert" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg>80% والمخطط 100%: متأخرة جدًا</span>
 </div>
 </section>
 <section class="slide shot light" data-n="11" aria-label="مكتب البرنامج يدقق قبل أن ترى القيادة">
@@ -409,7 +411,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 </div>
 <div class="stage3d">
 <figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/review.jpg" alt="شاشة المراجعة" loading="lazy"></figure>
-<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg>+6 نقاط عن الشهر الماضي</span>
+<span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg>+6 نقاط عن آخر تحديث</span>
 </div>
 </section>
 <section class="slide gate dark" data-n="12" aria-label="الطبقة الذكية">
@@ -424,7 +426,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <div class="txt">
 <p class="tag r" style="--d:0">الخطوة 6</p><p class="eye r" style="--d:1">رئيس الجهة</p>
 <h2 class="r" style="--d:2">خلاصة القيادة في صفحة واحدة</h2>
-<p class="lede r" style="--d:3">أول جملة تقول ما يحتاج قراره، ثم الأرقام، ثم القرارات وأين التأخر.</p>
+<p class="lede r" style="--d:3">أول جملة تقول ما يحتاج قراره، ثم الأرقام، ثم القرارات وأين التأخر. والصفحة تتحدّث بنفسها لحظة نشر أي تحديث.</p>
 <div class="kpis">
 <div class="kpi good r" style="--d:5"><b data-count="53" data-suf="%">0%</b><span>الإنجاز حتى اليوم</span></div>
 <div class="kpi good r" style="--d:6"><b data-count="16">0</b><span>على المسار</span></div>
@@ -432,7 +434,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 <div class="kpi info r" style="--d:8"><b data-count="45" data-suf="%">0%</b><span>المصروف</span></div>
 </div>
 </div>
-<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io/intel</span></div><img src="img/leader.jpg" alt="خلاصة القيادة" loading="lazy"></figure></div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io/intel</span></div><img src="img/leader.jpg" alt="خلاصة القيادة" loading="lazy"></figure><span class="chip c0 live" style="--d:10"><i class="dotlive"></i>مباشر · نُشر تحديث قبل لحظات</span></div>
 </section>
 <section class="slide shot mint" data-n="14" aria-label="القرار يُدرج في الاجتماع بضغطة">
 <div class="txt">
@@ -551,12 +553,12 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 </section>
 <section class="slide value light" data-n="v" aria-label="القيمة">
 <div class="head"><p class="eye r" style="--d:0">القيمة</p><h2 class="r" style="--d:1">وقت أقل في الجمع، وقرار في وقته</h2></div>
-<div class="grid3"><article class="card flip val" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><h3>للقيادة</h3><ul><li>صورة واحدة موثوقة كل شهر، كل رقم فيها مُراجع</li><li>تعرف ما ينتظر قرارها، وكم مبادرة تتوقف عليه</li><li>ترى المبادرة المتعثرة قبل أن تتأخر</li></ul></article><article class="card flip val" style="--d:6"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><h3>لمكتب البرنامج</h3><ul><li>لا جمع يدوي ولا تنسيق ملفات</li><li>يراجع ما تغيّر عن الشهر الماضي فقط</li><li>يذكّر المتأخرين بضغطة، ويعرف من بقي</li></ul></article><article class="card flip val" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><h3>لمدير المبادرة</h3><ul><li>قائمة واحدة بما عليه هذا الشهر</li><li>تحديث بأربع خطوات واضحة</li><li>يعرف أن طلبه وصل القيادة ومتى أُدرج</li></ul></article></div>
+<div class="grid3"><article class="card flip val" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><h3>للقيادة</h3><ul><li>صورة واحدة موثوقة تتحدّث لحظة النشر، وكل رقم فيها مُراجع</li><li>تعرف ما ينتظر قرارها، وكم مبادرة تتوقف عليه</li><li>ترى المبادرة المتعثرة قبل أن تتأخر</li></ul></article><article class="card flip val" style="--d:6"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><h3>لمكتب البرنامج</h3><ul><li>لا جمع يدوي ولا تنسيق ملفات</li><li>يراجع ما تغيّر عن آخر تحديث فقط</li><li>يذكّر المتأخرين بضغطة، ويعرف من بقي</li></ul></article><article class="card flip val" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><h3>لمدير المبادرة</h3><ul><li>قائمة واحدة بما يحتاج تحديثه الآن</li><li>تحديث بأربع خطوات واضحة</li><li>يعرف أن طلبه وصل القيادة ومتى أُدرج</li></ul></article></div>
 <p class="band r" style="--d:13"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 3 10l7 3 3 7z"/><path d="m10 13 4-4"/></svg>الأرقام تصل القيادة يوم نشرها، لا بعد أسابيع من جمعها.</p>
 </section>
 <section class="slide offer mint" data-n="o" aria-label="ما يقدمه The Vector">
-<div class="head"><p class="eye r" style="--d:0">ما يقدمه The Vector</p><h2 class="r" style="--d:1">منصة واحدة تغطي الدورة كاملة</h2><p class="lede r" style="--d:2">من إعداد البرنامج إلى قرار القيادة، في مكان واحد.</p></div>
-<ol class="tiles"><li class="tile" style="--d:3"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><b>إعداد البرنامج</b><small>خطوة بخطوة أو من Excel</small></li><li class="tile" style="--d:4"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><b>الاعتماد</b><small>مبدأ الشخصين</small></li><li class="tile" style="--d:5"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>دورات شهرية</b><small>بطاقة لكل مبادرة</small></li><li class="tile" style="--d:6"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><b>التحديث</b><small>النسب والخطوات والعوائق</small></li><li class="tile" style="--d:7"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><b>المراجعة والنشر</b><small>قبل أن ترى القيادة</small></li><li class="tile" style="--d:8"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><b>خلاصة القيادة</b><small>والقرارات المطلوبة</small></li><li class="tile" style="--d:9"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><b>الملخص التنفيذي</b><small>توقع نهاية السنة</small></li><li class="tile" style="--d:10"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg><b>الإنذار المبكر</b><small>قبل أن تتأخر</small></li><li class="tile" style="--d:11"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><b>محاكاة الميزانية</b><small>ماذا لو خُفّضت؟</small></li><li class="tile" style="--d:12"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><b>المساعد الذكي</b><small>يجاوب بالأرقام ومصدرها</small></li></ol>
+<div class="head"><p class="eye r" style="--d:0">ما يقدمه The Vector</p><h2 class="r" style="--d:1">منصة واحدة من التحديث إلى القرار</h2><p class="lede r" style="--d:2">من إعداد البرنامج إلى قرار القيادة، في مكان واحد.</p></div>
+<ol class="tiles"><li class="tile" style="--d:3"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg><b>إعداد البرنامج</b><small>خطوة بخطوة أو من Excel</small></li><li class="tile" style="--d:4"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><b>الاعتماد</b><small>مبدأ الشخصين</small></li><li class="tile" style="--d:5"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>تحديث مستمر</b><small>متى ما تغيّر شيء</small></li><li class="tile" style="--d:6"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m14 6 4 4"/></svg><b>التحديث</b><small>النسب والخطوات والعوائق</small></li><li class="tile" style="--d:7"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="m9 13 2 2 4-4"/></svg><b>المراجعة والنشر</b><small>قبل أن ترى القيادة</small></li><li class="tile" style="--d:8"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h5"/></svg><b>خلاصة القيادة</b><small>والقرارات المطلوبة</small></li><li class="tile" style="--d:9"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><b>الملخص التنفيذي</b><small>توقع نهاية السنة</small></li><li class="tile" style="--d:10"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.01"/></svg><b>الإنذار المبكر</b><small>قبل أن تتأخر</small></li><li class="tile" style="--d:11"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><b>محاكاة الميزانية</b><small>ماذا لو خُفّضت؟</small></li><li class="tile" style="--d:12"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><b>المساعد الذكي</b><small>يجاوب بالأرقام ومصدرها</small></li></ol>
 </section>
 <section class="slide cards4 dark" data-n="20" aria-label="الثقة">
 <div class="head"><p class="eye r" style="--d:0">الثقة</p><h2 class="r" style="--d:1">ضوابط مبنية في النظام، لا في التعليمات</h2></div>
@@ -564,7 +566,7 @@ body[data-tone=dark] .brand{color:#CFF2DF}
 </section>
 <section class="slide plan light" data-n="21" aria-label="الخطوات القادمة">
 <div class="head"><p class="eye r" style="--d:0">الخطوات القادمة</p><h2 class="r" style="--d:1">من التجربة إلى التشغيل الرسمي في 31 ديسمبر</h2></div>
-<div class="tl"><div class="tlrail"><i></i></div><ol><li style="--k:0"><span class="when">حتى 30 نوفمبر</span><b>تجربة المنصة</b><small>حسابات للتجربة وبيئة نظيفة لبياناتكم</small></li><li style="--k:1"><span class="when">1 إلى 14 ديسمبر</span><b>التشغيل الذاتي</b><small>فتح الدورات وإدارة المستخدمين والإشعارات بالإيميل</small></li><li style="--k:2"><span class="when">15 إلى 21 ديسمبر</span><b>دائرة القرار</b><small>تسجيل قرار القيادة، وخلاصة الاجتماع PDF، والمرفقات</small></li><li style="--k:3"><span class="when">22 إلى 31 ديسمبر</span><b>دورة ديسمبر</b><small>تشغيل الدورة كاملة معكم، ثم التشغيل الرسمي</small></li></ol></div>
+<div class="tl"><div class="tlrail"><i></i></div><ol><li style="--k:0"><span class="when">حتى 30 نوفمبر</span><b>تجربة المنصة</b><small>حسابات للتجربة وبيئة نظيفة لبياناتكم</small></li><li style="--k:1"><span class="when">1 إلى 14 ديسمبر</span><b>التشغيل الذاتي</b><small>إدارة المستخدمين والإشعارات بالإيميل</small></li><li style="--k:2"><span class="when">15 إلى 21 ديسمبر</span><b>دائرة القرار</b><small>تسجيل قرار القيادة، وخلاصة الاجتماع PDF، والمرفقات</small></li><li style="--k:3"><span class="when">22 إلى 31 ديسمبر</span><b>التشغيل معكم</b><small>متابعة حيّة على مبادراتكم، ثم التشغيل الرسمي</small></li></ol></div>
 </section>
 <section class="slide close dark" data-n="22" aria-label="شكرًا">
 <div class="center">

@@ -6,7 +6,7 @@
 <title>The Vector · قصة المنصة</title>
 <meta name="description" content="The Vector: منصة متابعة المبادرات، من تحديث مدير المبادرة إلى قرار القيادة.">
 <meta property="og:title" content="The Vector · قصة المنصة">
-<meta property="og:description" content="من تحديث مدير المبادرة إلى قرار القيادة، في دورة واحدة واضحة كل شهر.">
+<meta property="og:description" content="من تحديث مدير المبادرة إلى قرار القيادة، لحظة بلحظة.">
 <meta property="og:image" content="https://maazmajid.com/vector/story/img/welcome.jpg">
 <meta name="theme-color" content="#0B1F16">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -251,6 +251,8 @@ h2{font-size:clamp(28px,3.6vw,58px);line-height:1.2;font-weight:700;letter-spaci
 .on .tile{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--d)*80ms)}
 .on .tile:nth-child(8){animation:popIn .7s var(--spring) both,ring 3s ease-in-out 2s infinite;animation-delay:calc(var(--d)*80ms),2s;border-color:#F4B2AB}
 .tile:nth-child(8) .ic{color:#D92D20;background:#FDECEA}
+.chip.live{color:#067647}.dotlive{width:9px;height:9px;border-radius:50%;background:#17B26A;box-shadow:0 0 0 0 rgba(23,178,106,.5);animation:livep 1.8s ease-out infinite}
+@keyframes livep{70%,100%{box-shadow:0 0 0 8px rgba(23,178,106,0)}}
 /* chrome */
 .progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:10;background:rgba(127,181,154,.18)}
 .progress i{position:absolute;inset-block:0;right:0;background:linear-gradient(270deg,var(--g),var(--gold));transition:width .8s var(--e)}
