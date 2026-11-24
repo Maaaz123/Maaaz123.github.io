@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="./assets/marjn-icon.svg">
+<meta name="theme-color" content="#140E0B">
+<meta name="description" content="Marjn — منصة الربحية للمقاهي والمطاعم والمحلات. نسخة عرض ببيانات توضيحية.">
+<style>html{overflow-x:clip}x-dc:not(.dc-on){visibility:hidden}#boot{position:fixed;inset:0;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#F4EEE4;transition:opacity .4s ease,visibility .4s}.dc-ready #boot{opacity:0;visibility:hidden}#boot .bp{stroke-dasharray:90;stroke-dashoffset:90;animation:bdraw 1s cubic-bezier(.65,0,.35,1) .1s forwards}#boot .bd{transform-origin:48px 16px;animation:bpulse 1.3s ease-in-out infinite}#boot .bt{font:700 16px/1 Alexandria,system-ui,sans-serif;color:#140E0B;letter-spacing:.3px}#boot .bb{width:120px;height:3px;border-radius:9px;background:#E6DACB;overflow:hidden;position:relative}#boot .bb::after{content:"";position:absolute;inset:0 auto 0 0;width:40%;border-radius:9px;background:#C0692C;animation:bslide 1.1s cubic-bezier(.65,0,.35,1) infinite}@keyframes bdraw{to{stroke-dashoffset:0}}@keyframes bpulse{50%{transform:scale(1.3)}}@keyframes bslide{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}.boot-dark #boot{background:#140E0B}.boot-dark #boot .bt{color:#F7F1E8}.boot-dark #boot .bb{background:#2A1F18}@media (prefers-reduced-motion: reduce){#boot *{animation:none!important;stroke-dashoffset:0!important}}</style>
+<script>try{if(localStorage.getItem("marjn.theme")==="dark")document.documentElement.classList.add("boot-dark")}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&amp;family=Readex+Pro:wght@300;400;500;600&amp;display=swap">
+<title>الطلبيات المقترحة · Marjn</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./assets/marjn.css">
+</head>
+<body>
+<div id="boot" aria-hidden="true"><svg width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#C0692C"/><path class="bp" pathLength="90" d="M16 46V24l16 13 16-21v30" fill="none" stroke="#FFF6EC" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><circle class="bd" cx="48" cy="16" r="5.2" fill="#140E0B"/></svg><span class="bt">Marjn</span><span class="bb"></span></div>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&amp;family=Readex+Pro:wght@300;400;500;600&amp;display=swap">
+<style>body{margin:0;background:#F4EEE4}</style>
+</helmet>
+<div class="mx {{themeClass}}" dir="rtl" lang="ar">
+<aside class="side" aria-label="القائمة الرئيسية">
+<a href="M07Profit.dc.html" style="display:flex;align-items:center;gap:12px;padding:0 8px 4px"><svg aria-hidden="true" width="38" height="38" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#1F1712"></rect><path d="M15 47V25l14 13 18-22" fill="none" stroke="#FFF6EC" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M47 16v31" fill="none" stroke="#E39A5E" stroke-width="6.5" stroke-linecap="round"></path></svg><span style="display:flex;flex-direction:column;line-height:1.25"><span class="T" style="font-size:20px;font-weight:700;letter-spacing:-.01em">marjn</span><span style="font-size:11.5px;color:#9D8F81">مارجن · 71 فرعًا</span></span></a>
+<nav style="display:flex;flex-direction:column;gap:2px">
+<span class="gh">التشغيل اليومي</span>
+<a href="M01Home.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"></path></svg><span>مهام اليوم</span><span class="bd">5</span></a>
+<a href="M02Branch.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"></path></svg><span>فرعي اليوم</span></a>
+<a href="M03Shift.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v10H3zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6"></path></svg><span>إقفال الوردية</span><span class="bd">2</span></a>
+<a href="M04Orders.dc.html" class="nv on" aria-current="page"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"></path></svg><span>الطلبيات المقترحة</span></a>
+<a href="M05Rota.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v16H3zM3 10h18M8 3v4M16 3v4"></path></svg><span>جدول الورديات</span></a>
+<a href="M06Alerts.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"></path></svg><span>التنبيهات</span><span class="bd hot">9</span></a>
+<span class="gh">التحليل</span>
+<a href="M07Profit.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V9zM14 3v6h6M8 13h8M8 17h5"></path></svg><span>الخلاصة</span></a>
+<a href="M08Monthly.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg><span>تقرير الشهر</span></a>
+<a href="M09Sales.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"></path></svg><span>المبيعات</span></a>
+<a href="M10Branches.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"></path></svg><span>الفروع</span></a>
+<a href="M11BranchPL.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg><span>قائمة دخل الفرع</span></a>
+<a href="M12Menu.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"></path></svg><span>هندسة القائمة</span></a>
+<a href="M13CupCost.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16"></path></svg><span>التكلفة والموردين</span></a>
+<a href="M14Channels.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h13l-3-3M17 17H4l3 3"></path></svg><span>القنوات والتوصيل</span></a>
+<a href="M15Settlements.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8M20 12v7H4V5h11"></path></svg><span>مطابقة التسويات</span><span class="bd">3</span></a>
+<a href="M16Inventory.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"></path></svg><span>المخزون والهدر</span></a>
+<a href="M17Staff.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M2 21a7 7 0 0 1 14 0M17 11a3 3 0 1 0 0-6M22 21a5 5 0 0 0-5-5"></path></svg><span>الموظفين</span></a>
+<a href="M18Control.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path></svg><span>الرقابة</span><span class="bd hot">7</span></a>
+<a href="M19Loyalty.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 6-8 11-8 11"></path></svg><span>العملاء والولاء</span></a>
+<a href="M20Budget.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path></svg><span>الميزانية</span></a>
+<span class="gh">القرار</span>
+<a href="M21WhatIf.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l5-6 4 3 7-9M15 8h5v5"></path></svg><span>ماذا لو؟</span></a>
+<a href="M22Risk.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17h-19zM12 10v4M12 17h.01"></path></svg><span>الإنذار المبكر</span><span class="bd hot">4</span></a>
+<a href="M23Ask.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg><span>اسأل المحلل</span></a>
+<span class="gh">الإدارة</span>
+<a href="M24Users.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21a8 8 0 0 1 16 0"></path></svg><span>المستخدمين</span></a>
+<a href="M25Settings.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6M19 12h2M3 12h2M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"></path></svg><span>الإعدادات والربط</span></a>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:8px"><div style="border:1px solid #2E231C;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:6px"><span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#D3C6B7"><span class="live" style="background:#82C29C"></span>متصل بـ Odoo · قبل 12 دقيقة</span><span style="font-size:11.5px;color:#8D7D6E">نقاط البيع والمحاسبة والمخزون</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:99px;background:#E39A5E;color:#140E0B;font-weight:600;display:flex;align-items:center;justify-content:center;font-size:13px">س</span><span style="display:flex;flex-direction:column;flex:1;line-height:1.3"><span style="font-size:13.5px;color:#fff">سارة القحطاني</span><span style="font-size:11.5px;color:#9D8F81">المدير المالي</span></span><button onClick="{{toggle}}" aria-label="الوضع الليلي" style="width:38px;height:38px;border-radius:99px;border:1px solid #3A2D25;background:transparent;color:#E3D3C0;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"></path></svg></button></div></div>
+</aside>
+<div class="colm">
+<section class="stage"><div class="wrap"><div class="mtop"><a href="M07Profit.dc.html" style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="32" height="32" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#1F1712"></rect><path d="M15 47V25l14 13 18-22" fill="none" stroke="#FFF6EC" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M47 16v31" fill="none" stroke="#E39A5E" stroke-width="6.5" stroke-linecap="round"></path></svg><span class="T" style="font-size:18px;font-weight:700;color:#fff">marjn</span></a><button onClick="{{toggle}}" aria-label="الوضع الليلي" style="width:40px;height:40px;border-radius:99px;border:1px solid #3A2D25;background:transparent;color:#E3D3C0;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"></path></svg></button></div>
+<div class="shero"><div class="sl"><p class="meta rv"><span>طلبيات الخميس والجمعة · من المستودع المركزي</span><span class="gold">آخر موعد للاعتماد: 2:00 ظهرًا</span></p>
+<h1 class="h1 rv" style="--d:.05s">طلبيات الجمعة جاهزة: أعلى بـ18% من المعتاد، وأقل هدر</h1>
+<p class="lead rv" style="--d:.1s">حسبها المحلل لكل فرع ومادة من نمط آخر 14 شهر، والطقس، و<b>نزول الرواتب يوم 27</b>. دقة توقعاته الشهر الماضي <b>94%</b>.</p>
+</div><div class="sr rv" style="--d:.15s"><span class="sl1">فروع طلبياتها جاهزة</span><strong class="sv">71</strong><span class="ss">من 71 فرعًا</span><span class="sd">جاهزة للاعتماد</span><svg class="spk" viewBox="0 0 296 46" preserveAspectRatio="none" aria-hidden="true"><polyline points="4,34 30,26 56,21 82,21 108,22 134,18 160,17 186,19 212,14 238,14 264,6 290,11" fill="none" stroke="#E39A5E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline></svg></div></div>
+</div></section>
+<main class="wrap mainc">
+<div class="kpis k3">
+<div class="kpi kb rv" style="--d:.18s"><span class="l">قيمة الطلبيات</span><strong class="v num">412K</strong><span class="s">ريال · 38 مادة</span><span class="d mu">▲ 15% عن الأسبوع الماضي</span></div>
+<div class="kpi ko rv" style="--d:.24s"><span class="l">هدر متوقع نتجنبه</span><strong class="v num">17K</strong><span class="s">ريال · مقارنة بالطلب اليدوي</span><span class="d up">أقل كميات حلويات بـ22%</span></div>
+<div class="kpi kg rv" style="--d:.3s"><span class="l">دقة التوقع الشهر الماضي</span><strong class="v num">94%</strong><span class="s">الفرق بين المتوقع والفعلي</span><span class="d up">▲ 3 نقاط عن أكتوبر</span></div>
+</div>
+<div class="ai rv" style="--d:.15s"><div class="in">
+<span class="aitag">ليش الكميات أعلى هذا الأسبوع؟</span>
+<div class="grid3" style="gap:12px">
+<template data-sc="for" list="{{drivers}}" as="d" hint-placeholder-count="4"><div style="background:var(--seg);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px"><strong class="num" style="font-size:22px;color:{{d.c}}">{{d.v}}</strong><span style="font-size:14px;font-weight:600">{{d.t}}</span><span style="font-size:12.5px;color:var(--muted)">{{d.x}}</span></div></template>
+</div>
+</div></div>
+<section class="card rv" style="--d:.2s">
+<div class="ch"><h2>الكميات المقترحة لكل الفروع</h2><div style="display:flex;gap:8px;align-items:center"><span class="sub">تقدر تعدل أي كمية قبل الاعتماد</span><button onClick="{{approve}}" class="btn {{apCls}}">{{apT}}</button></div></div>
+<div class="tw"><table class="tbl" style="min-width:860px"><thead><tr><th>المادة</th><th>المتوفر الآن</th><th>الاستهلاك المتوقع (يومين)</th><th>مقترح المحلل</th><th>الكمية المعتمدة</th><th>الثقة</th></tr></thead><tbody>
+<template data-sc="for" list="{{items}}" as="i" hint-placeholder-count="7"><tr><td><strong>{{i.n}}</strong><span class="sm">{{i.u}}</span></td><td class="num">{{i.have}}</td><td class="num">{{i.need}}</td><td class="num" style="font-weight:700;color:var(--gi)">{{i.sug}}</td><td><input class="field num" value="{{i.sug}}" style="width:110px;min-height:36px" aria-label="الكمية المعتمدة"></td><td><span style="display:flex;align-items:center;gap:8px"><span class="track" style="width:70px"><span style="width:{{i.conf}};background:var(--cg)"></span></span><span class="num" style="font-size:12px">{{i.conf}}</span></span></td></tr></template>
+</tbody></table></div>
+</section>
+<section class="card rv" style="--d:.25s">
+<div class="ch"><h2>دقة التوقع: آخر 4 أسابيع</h2><span class="sub">حليب كامل الدسم · كل الفروع · لتر يوميًا</span></div>
+<div class="cb">
+<div style="display:flex;align-items:flex-end;gap:10px;min-height:170px;border-bottom:1px solid var(--line);direction:ltr">
+<template data-sc="for" list="{{acc}}" as="a" hint-placeholder-count="14"><div style="flex:1;height:170px;display:flex;align-items:flex-end;gap:2px"><div class="vb" style="--d:{{a.dl}};height:{{a.f}};background:var(--mintln)"></div><div class="vb" style="--d:{{a.dl}};height:{{a.r}};background:var(--cg)"></div></div></template>
+</div>
+<div class="legend"><span><i class="sw" style="background:var(--mintln)"></i>المتوقع</span><span><i class="sw" style="background:var(--cg)"></i>الفعلي</span><span>متوسط الفرق 6%</span></div>
+</div>
+</section>
+</main>
+</div>
+<nav class="bnav" aria-label="القائمة السفلية"><a href="M01Home.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"></path></svg><span>اليوم</span></a><a href="M07Profit.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V9zM14 3v6h6M8 13h8M8 17h5"></path></svg><span>الخلاصة</span></a><a href="M10Branches.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"></path></svg><span>الفروع</span></a><a href="M06Alerts.dc.html" class="bn"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"></path></svg><span>التنبيهات</span></a><button onClick="{{openMenu}}" class="bn" aria-label="كل الأقسام"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg><span>المزيد</span></button></nav>
+<template data-sc="if" value="{{menuOpen}}" hint-placeholder-val="{{ false }}"><div class="drawer" onClick="{{closeMenu}}"><aside class="side" aria-label="القائمة الرئيسية">
+<a href="M07Profit.dc.html" style="display:flex;align-items:center;gap:12px;padding:0 8px 4px"><svg aria-hidden="true" width="38" height="38" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#1F1712"></rect><path d="M15 47V25l14 13 18-22" fill="none" stroke="#FFF6EC" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M47 16v31" fill="none" stroke="#E39A5E" stroke-width="6.5" stroke-linecap="round"></path></svg><span style="display:flex;flex-direction:column;line-height:1.25"><span class="T" style="font-size:20px;font-weight:700;letter-spacing:-.01em">marjn</span><span style="font-size:11.5px;color:#9D8F81">مارجن · 71 فرعًا</span></span></a>
+<nav style="display:flex;flex-direction:column;gap:2px">
+<span class="gh">التشغيل اليومي</span>
+<a href="M01Home.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"></path></svg><span>مهام اليوم</span><span class="bd">5</span></a>
+<a href="M02Branch.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"></path></svg><span>فرعي اليوم</span></a>
+<a href="M03Shift.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v10H3zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6"></path></svg><span>إقفال الوردية</span><span class="bd">2</span></a>
+<a href="M04Orders.dc.html" class="nv on" aria-current="page"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"></path></svg><span>الطلبيات المقترحة</span></a>
+<a href="M05Rota.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v16H3zM3 10h18M8 3v4M16 3v4"></path></svg><span>جدول الورديات</span></a>
+<a href="M06Alerts.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"></path></svg><span>التنبيهات</span><span class="bd hot">9</span></a>
+<span class="gh">التحليل</span>
+<a href="M07Profit.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V9zM14 3v6h6M8 13h8M8 17h5"></path></svg><span>الخلاصة</span></a>
+<a href="M08Monthly.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg><span>تقرير الشهر</span></a>
+<a href="M09Sales.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"></path></svg><span>المبيعات</span></a>
+<a href="M10Branches.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"></path></svg><span>الفروع</span></a>
+<a href="M11BranchPL.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg><span>قائمة دخل الفرع</span></a>
+<a href="M12Menu.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"></path></svg><span>هندسة القائمة</span></a>
+<a href="M13CupCost.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16"></path></svg><span>التكلفة والموردين</span></a>
+<a href="M14Channels.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h13l-3-3M17 17H4l3 3"></path></svg><span>القنوات والتوصيل</span></a>
+<a href="M15Settlements.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8M20 12v7H4V5h11"></path></svg><span>مطابقة التسويات</span><span class="bd">3</span></a>
+<a href="M16Inventory.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"></path></svg><span>المخزون والهدر</span></a>
+<a href="M17Staff.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M2 21a7 7 0 0 1 14 0M17 11a3 3 0 1 0 0-6M22 21a5 5 0 0 0-5-5"></path></svg><span>الموظفين</span></a>
+<a href="M18Control.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path></svg><span>الرقابة</span><span class="bd hot">7</span></a>
+<a href="M19Loyalty.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 6-8 11-8 11"></path></svg><span>العملاء والولاء</span></a>
+<a href="M20Budget.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path></svg><span>الميزانية</span></a>
+<span class="gh">القرار</span>
+<a href="M21WhatIf.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l5-6 4 3 7-9M15 8h5v5"></path></svg><span>ماذا لو؟</span></a>
+<a href="M22Risk.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17h-19zM12 10v4M12 17h.01"></path></svg><span>الإنذار المبكر</span><span class="bd hot">4</span></a>
+<a href="M23Ask.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg><span>اسأل المحلل</span></a>
+<span class="gh">الإدارة</span>
+<a href="M24Users.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21a8 8 0 0 1 16 0"></path></svg><span>المستخدمين</span></a>
+<a href="M25Settings.dc.html" class="nv"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6M19 12h2M3 12h2M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"></path></svg><span>الإعدادات والربط</span></a>
+</nav>
+<div style="margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:8px"><div style="border:1px solid #2E231C;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:6px"><span style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#D3C6B7"><span class="live" style="background:#82C29C"></span>متصل بـ Odoo · قبل 12 دقيقة</span><span style="font-size:11.5px;color:#8D7D6E">نقاط البيع والمحاسبة والمخزون</span></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:99px;background:#E39A5E;color:#140E0B;font-weight:600;display:flex;align-items:center;justify-content:center;font-size:13px">س</span><span style="display:flex;flex-direction:column;flex:1;line-height:1.3"><span style="font-size:13.5px;color:#fff">سارة القحطاني</span><span style="font-size:11.5px;color:#9D8F81">المدير المالي</span></span><button onClick="{{toggle}}" aria-label="الوضع الليلي" style="width:38px;height:38px;border-radius:99px;border:1px solid #3A2D25;background:transparent;color:#E3D3C0;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"></path></svg></button></div></div>
+</aside></div></template>
+<template data-sc="if" value="{{askOpen}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="اسأل المحلل" class="askd">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;flex-direction:column"><span class="T" style="font-size:17px;font-weight:600">اسأل المحلل</span><span style="font-size:12.5px;color:var(--muted)">{{askCtx}} · يقرأ من Odoo والتطبيقات</span></span><button onClick="{{closeAsk}}" aria-label="إغلاق" style="width:40px;height:40px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer;font-size:18px">×</button></div>
+<template data-sc="if" value="{{askIdle}}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:8px"><template data-sc="for" list="{{askChips}}" as="c" hint-placeholder-count="2"><button onClick="{{c.go}}" class="chip">{{c.q}}</button></template></div></template>
+<template data-sc="if" value="{{askBusy}}" hint-placeholder-val="{{ false }}">
+<p style="margin:0;align-self:flex-end;max-width:90%;background:var(--cu3);border-radius:16px 16px 4px 16px;padding:10px 14px;font-size:14px">{{askCur.q}}</p>
+<div style="display:flex;flex-direction:column;gap:6px"><template data-sc="for" list="{{askSteps}}" as="s" hint-placeholder-count="3"><div class="step {{s.cls}}"><span class="dot"></span>{{s.t}}</div></template></div>
+<template data-sc="if" value="{{askShow}}" hint-placeholder-val="{{ false }}"><p class="{{askCaret}}" style="margin:0;font-size:15px;line-height:2;color:var(--ink)">{{askTyped}}</p></template>
+<template data-sc="if" value="{{askViz}}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line2);padding-top:12px;animation:msg .4s ease both"><span style="font-size:12.5px;color:var(--muted)">{{askCur.unit}}</span><template data-sc="for" list="{{askBars}}" as="b" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(80px,110px) minmax(0,1fr);gap:10px;align-items:center"><span style="font-size:13px;color:var(--ink2)">{{b.l}}</span><span class="hb" style="--d:{{b.dl}};width:{{b.w}};min-width:44px;background:{{b.c}}"><span class="num">{{b.v}}</span></span></div></template><div style="display:flex;flex-wrap:wrap;gap:8px"><template data-sc="for" list="{{askActs}}" as="x" hint-placeholder-count="2"><button onClick="{{x.go}}" class="btn2 {{x.cls}}">{{x.t}}</button></template><button onClick="{{askReset}}" class="btn3">سؤال ثاني</button></div><span style="font-size:12px;color:var(--muted)">المصدر: {{askCur.src}}</span></div></template>
+</template>
+</div>
+</template>
+<button onClick="{{toggleAsk}}" class="askbar" aria-expanded="{{askAttr}}"><span style="color:#BCAB98;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">اسأل المحلل عن أي رقم هنا…</span><span style="width:38px;height:38px;flex:none;border-radius:99px;background:#E39A5E;color:#140E0B;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></span></button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1650}}'>
+class Component extends DCLogic {
+  state = Object.assign({ dark: false, menu: false, askOpen: false, aq: -1, ap: 0, an: 0, adn: {} }, { ok: false });
+  componentDidMount() { try { this.setState({ dark: window.localStorage.getItem('marjn.theme') === 'dark' }); } catch (e) {}  }
+  componentWillUnmount() { (this.att || []).forEach(clearTimeout); clearInterval(this.aiv);  }
+  askData() { const G = '#3E7A57', O = '#C0692C', R = '#B8392C', B = '#3D5F80';
+    const D = {
+      general: { label: 'عام', qs: [
+        { q: 'وش أكثر شي يضيع علينا فلوس هذا الشهر؟', a: 'أكبر تسرب هو فرق عمولات التوصيل: 214 ألف ريال، بعده الهدر 186 ألف، ثم الخصومات اليدوية 41 ألف. الثلاثة مع بعض 4.2% من المبيعات.', unit: 'ألف ريال · نوفمبر حتى اليوم', bars: [['عمولات التوصيل', 214, O], ['الهدر', 186, R], ['الخصومات اليدوية', 41, R], ['فروقات الكاش', 9, B]], act: ['أنشئ خطة تقليل', 'أرسل للمدير المالي'], src: 'Odoo نقاط البيع والمخزون + تسويات التطبيقات' },
+        { q: 'قارن الرياض بجدة هذا الشهر', a: 'الرياض أعلى ربحًا بالفرع: 15,800 ريال مقابل 11,200 في جدة. الفرق أغلبه من التوصيل: جدة 46% من طلباتها توصيل والرياض 34%.', unit: 'متوسط صافي ربح الفرع · ألف ريال', bars: [['الرياض', 15.8, G], ['الشرقية', 12.4, G], ['جدة', 11.2, O]], act: ['افتح شاشة الفروع', 'حفظ المقارنة'], src: 'Odoo المحاسبة حسب مركز التكلفة' } ] },
+      profit: { label: 'خلاصة الربحية', qs: [
+        { q: 'ليش الهامش نزل مع إن الربح زاد؟', a: 'المبيعات زادت 4.2%، لكن طلبات التوصيل ارتفعت من 31% إلى 38%. ربح كوب التوصيل 2.30 ريال مقابل 6.60 داخل الفرع، فكل طلب ينتقل للتوصيل يخفض الهامش. رفع سعر التوصيل ريالين على أعلى 5 مشروبات يرجع الهامش لنحو 14.4%.', unit: 'ربح الكوب حسب القناة · ريال', bars: [['داخل الفرع', 6.6, G], ['السيارة', 5.9, G], ['التوصيل', 2.3, O]], act: ['جرّب السعر في ماذا لو', 'أرسل للإدارة'], src: 'Odoo نقاط البيع + تقارير تسوية التطبيقات' } ] },
+      home: { label: 'مهام اليوم', qs: [
+        { q: 'لخّص لي يومي في 3 أسطر', a: 'عندك 5 مهام، أهمها خصومات العليا (2,400 ريال أمس). فرعان ما أقفلوا الوردية. والجمعة متوقع طلب أعلى بـ18%، فالطلبيات المقترحة جاهزة للاعتماد.', unit: 'أثر المهام · ريال', bars: [['خصومات العليا', 2400, R], ['حليب النرجس', 570, O], ['إلغاءات الروضة', 1300, O]], act: ['ابدأ بالأولى', 'ذكّرني 2 الظهر'], src: 'كل المصادر' } ] },
+      branch: { label: 'فرعي اليوم', qs: [
+        { q: 'هل بنحقق هدف اليوم؟', a: 'إلى الآن 8,640 ريال من هدف 13,500. بناءً على نمط أيام الثلاثاء آخر 8 أسابيع، المتوقع تنهي اليوم على 13,900 ريال، يعني فوق الهدف بـ3%.', unit: 'مبيعات اليوم · ريال', bars: [['حتى الآن', 8640, G], ['المتوقع', 13900, G], ['الهدف', 13500, B]], act: ['أرسل للمشرف', 'شوف ساعة الذروة'], src: 'Odoo نقاط البيع · فرع العليا' } ] },
+      menu: { label: 'هندسة القائمة', qs: [
+        { q: 'وش المنتجات اللي أشيلها من القائمة؟', a: 'ثلاثة منتجات تبيع قليل وتربح قليل: موكا البندق، كيكة الجزر، وآيس تي الخوخ. مع بعض 1.8% من المبيعات، وشيلها يقلل الهدر 23 ألف ريال شهريًا ويسرّع التحضير.', unit: 'ربح الشهر لكل منتج · ألف ريال', bars: [['موكا البندق', 3.1, R], ['كيكة الجزر', 2.4, R], ['آيس تي الخوخ', 1.9, R]], act: ['أنشئ مقترح للإدارة', 'جرّب في ماذا لو'], src: 'Odoo نقاط البيع + الوصفات' } ] },
+      channels: { label: 'قنوات البيع', qs: [
+        { q: 'أي تطبيق توصيل يكلفنا أكثر؟', a: 'جاهز أعلى عمولة فعلية 24.6% بعد الرسوم والخصومات المشتركة، وكيتا الأقل 18.9%. نقل العروض من جاهز لكيتا يوفر نحو 19 ألف ريال شهريًا.', unit: 'العمولة الفعلية من قيمة الطلب · %', bars: [['جاهز', 24.6, R], ['هنقرستيشن', 22.1, O], ['ذا شفز', 20.4, O], ['كيتا', 18.9, G]], act: ['جهّز مقارنة للتفاوض', 'افتح المطابقة'], src: 'تقارير تسوية التطبيقات' } ] },
+      inventory: { label: 'المخزون والهدر', qs: [
+        { q: 'وين يضيع الحليب؟', a: 'الاستهلاك الفعلي للحليب أعلى من المفترض بـ6.8% في 9 فروع، أعلاها النرجس 14%. النمط يتكرر في وردية المساء، وغالبًا السبب تجهيز زيادة قبل الإغلاق.', unit: 'زيادة استهلاك الحليب عن الوصفة · %', bars: [['النرجس', 14, R], ['الشاطئ', 11, R], ['الروضة', 8, O], ['المتوسط', 6.8, B]], act: ['أنشئ جرد يومي', 'أرسل لمديري المناطق'], src: 'Odoo المخزون + الوصفات (BOM)' } ] },
+      control: { label: 'الرقابة', qs: [
+        { q: 'اشرح لي ليش هذي العملية مشبوهة', a: 'الكاشير رقم 14 في العليا سوّى 23 خصم يدوي 100% بعد الساعة 10 مساءً خلال 6 أيام، والمعتاد للفرع 2 بالأسبوع. 19 منها على نفس 3 أصناف، وكلها بدون عميل مسجل.', unit: 'خصومات يدوية بعد 10 مساءً · عدد', bars: [['كاشير 14', 23, R], ['كاشير 9', 3, B], ['كاشير 21', 2, B]], act: ['أوقف الخصم اليدوي', 'بلّغ مدير المنطقة'], src: 'Odoo نقاط البيع: سجل الخصومات' } ] },
+      whatif: { label: 'ماذا لو', qs: [
+        { q: 'وش أفضل سعر للتوصيل؟', a: 'جربت 12 سيناريو. أفضلها رفع سعر التوصيل 2 ريال على المشروبات فقط: الطلبات تنزل 4% تقريبًا، لكن الربح الشهري يزيد 61 ألف ريال. أكثر من 3 ريال تبدأ الطلبات تنزل بسرعة.', unit: 'زيادة الربح الشهري · ألف ريال', bars: [['+1 ريال', 34, G], ['+2 ريال', 61, G], ['+3 ريال', 52, O], ['+4 ريال', 28, R]], act: ['طبّق +2 ريال في المحاكي', 'أرسل للإدارة'], src: 'نموذج مرونة الأسعار من بيانات 14 شهر' } ] },
+      risk: { label: 'الإنذار المبكر', qs: [
+        { q: 'ليش فرع الشاطئ مرشح للخسارة؟', a: 'ثلاثة أسباب: الهدر 5.2% ويزيد كل أسبوع، والإيجار يرتفع 12% في يناير، والمبيعات نازلة 3% شهريًا من سبتمبر. إذا ما تغير شي، يخسر من ديسمبر بنحو 1,800 ريال شهريًا.', unit: 'أثر كل سبب على ربح ديسمبر · ألف ريال', bars: [['الهدر', 2.1, R], ['الإيجار', 1.6, O], ['نزول المبيعات', 1.4, O]], act: ['أنشئ خطة إنقاذ', 'جدول زيارة للفرع'], src: 'نموذج التنبؤ + Odoo المحاسبة' } ] }
+    };
+    const map = { sales: 'general', branches: 'general', pl: 'profit', monthly: 'profit', cup: 'menu', settle: 'channels', staff: 'general', loyalty: 'general', budget: 'profit', ask: 'general', alerts: 'home', shift: 'control', orders: 'inventory', rota: 'branch', users: 'general', settings: 'general' };
+    const k = 'orders'; const c = D[k] || D[map[k]] || D.general;
+    return { label: c.label, qs: c.qs.concat(c === D.general ? [] : [D.general.qs[0]]) }; }
+  runAsk(i) { (this.att || []).forEach(clearTimeout); clearInterval(this.aiv); this.att = []; const d = this.askData().qs[i]; this.setState({ askOpen: true, aq: i, ap: 1, an: 0, adn: {} }); [[650, 2], [1300, 3], [1950, 4]].forEach(p => this.att.push(setTimeout(() => this.setState({ ap: p[1] }), p[0]))); this.att.push(setTimeout(() => { this.aiv = setInterval(() => this.setState(st => { const n = st.an + 3; if (n >= d.a.length) { clearInterval(this.aiv); return { an: d.a.length, ap: 5 }; } return { an: n }; }), 20); }, 2050)); }
+  
+  renderVals() {
+    const s = this.state;
+    const ask = () => this.setState({ askOpen: true });
+    const extra = (() => { 
+const drivers = [{ v: '+11%', t: 'نهاية الأسبوع', x: 'الخميس والجمعة أعلى دائمًا', c: 'var(--gi)' }, { v: '+5%', t: 'نزول الرواتب 27', x: 'أول 3 أيام بعد الراتب', c: 'var(--gi)' }, { v: '+2%', t: 'الطقس', x: 'برودة: الساخن يرتفع', c: 'var(--gi)' }, { v: '-22%', t: 'حلويات أقل', x: 'هدرها 9% الأسبوع الماضي', c: 'var(--ri)' }];
+const I = [['حليب كامل الدسم', 'لتر', '2,140', '6,380', '4,600', '96%'], ['حبوب إسبريسو', 'كجم', '410', '590', '220', '95%'], ['حليب الشوفان', 'لتر', '380', '720', '380', '88%'], ['صوص كراميل', 'علبة', '96', '210', '130', '91%'], ['كرواسون', 'حبة', '0', '3,900', '3,700', '84%'], ['كيك الشوكولاتة', 'قطعة', '120', '640', '470', '79%'], ['أكواب 12oz', 'كوب', '18,000', '24,500', '8,000', '97%']];
+const items = I.map(i => ({ n: i[0], u: i[1], have: i[2], need: i[3], sug: i[4], conf: i[5] }));
+const F = [6100, 6300, 6900, 7400, 6000, 5800, 6200, 6300, 6500, 7100, 7600, 6100, 5900, 6400], Rr = [6250, 6180, 7120, 7350, 5700, 5900, 6050, 6420, 6300, 7400, 7900, 5800, 6100, 6300];
+const acc = F.map((f, i) => ({ f: (f / 8200 * 100) + '%', r: (Rr[i] / 8200 * 100) + '%', dl: (i * .03) + 's' }));
+return { drivers, items, acc, approve: () => this.setState({ ok: true }), apT: s.ok ? '✓ اعتُمدت وأُرسلت لـOdoo' : 'اعتماد الكل وإرسال لـOdoo', apCls: s.ok ? 'done' : '' };
+ })() || {};
+    const AD = this.askData(); const cur = s.aq >= 0 ? AD.qs[s.aq] : AD.qs[0];
+    const mx = Math.max.apply(null, cur.bars.map(b => Math.abs(b[1])));
+    const ST = ['يقرأ نقاط البيع والمحاسبة من Odoo…', 'يطابق مع تقارير التطبيقات والبنك…', 'يرتب الأسباب حسب أثرها بالريال…'];
+    const askv = {
+      askOpen: s.askOpen, askAttr: s.askOpen ? 'true' : 'false', askCtx: AD.label, askIdle: s.aq < 0, askBusy: s.aq >= 0, askShow: s.ap >= 4, askViz: s.ap >= 5,
+      askCur: cur, askTyped: cur.a.slice(0, s.an), askCaret: s.ap === 4 ? 'caret' : '',
+      askSteps: ST.map((t, i) => ({ t, cls: s.ap > i + 1 ? 'ok' : '' })).slice(0, Math.min(3, Math.max(1, s.ap))),
+      askBars: cur.bars.map((b, i) => ({ l: b[0], v: b[1].toLocaleString('en-US'), w: (Math.abs(b[1]) / mx * 100) + '%', c: b[2], dl: (i * .08) + 's' })),
+      askActs: cur.act.map((t, i) => ({ t: s.adn[i] ? '✓ تم' : t, cls: s.adn[i] ? 'done' : '', go: () => this.setState(x => ({ adn: Object.assign({}, x.adn, { [i]: true }) })) })),
+      askChips: AD.qs.map((q, i) => ({ q: q.q, go: () => this.runAsk(i) })),
+      toggleAsk: () => this.setState({ askOpen: !s.askOpen }), closeAsk: () => this.setState({ askOpen: false }),
+      askReset: () => { (this.att || []).forEach(clearTimeout); clearInterval(this.aiv); this.setState({ aq: -1, ap: 0, an: 0 }); }
+    };
+    return Object.assign({
+      themeClass: s.dark ? 'dark' : '', ask,
+      toggle: () => { const d = !s.dark; try { window.localStorage.setItem('marjn.theme', d ? 'dark' : 'light'); } catch (e) {} this.setState({ dark: d }); },
+      menuOpen: s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false })
+    }, askv, extra);
+  }
+}
+</script>
+</body>
+</html>
