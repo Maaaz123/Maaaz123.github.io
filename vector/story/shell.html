@@ -233,8 +233,9 @@ h2{font-size:clamp(28px,3.6vw,58px);line-height:1.2;font-weight:700;letter-spaci
 .arrow:after{content:"";position:absolute;left:-2px;top:50%;width:12px;height:12px;border-left:3px solid var(--g);border-bottom:3px solid var(--g);transform:translateY(-50%) rotate(45deg)}
 .slide:not(.on) .ba li>*{opacity:0}
 .on .ba .was{animation:rise .7s var(--e) both,strike .5s var(--e) forwards;animation-delay:calc(var(--k)*600ms + 300ms),calc(var(--k)*600ms + 900ms)}
-.on .ba .arrow{animation:grow .5s var(--e) both;animation-delay:calc(var(--k)*600ms + 800ms)}
+.on .ba .arrow{animation:arrowIn .5s var(--e) both;animation-delay:calc(var(--k)*600ms + 800ms)}
 .on .ba .now{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--k)*600ms + 1100ms)}
+@keyframes arrowIn{from{transform:scaleX(0);opacity:0}to{transform:none;opacity:1}}
 @keyframes strike{to{text-decoration-color:#D9827A;color:#A88480}}
 .val ul{list-style:none;margin:0;padding:0;display:grid;gap:1.4vh}
 .val li{position:relative;padding-inline-start:26px;font-size:clamp(14px,1.25vw,19px);line-height:1.65;color:var(--soft)}
