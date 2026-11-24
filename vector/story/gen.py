@@ -13,10 +13,11 @@ def shot_slide(n,tone,step,role,title,lede,points,img,alt,chips):
 <ul class="pts">{lis}</ul>
 </div>
 <div class="stage3d">
-<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/{img}.jpg" alt="{alt}" loading="lazy"></figure>
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/{img}.jpg?v={IMGV}" alt="{alt}" loading="lazy"></figure>
 {ch}
 </div>
 </section>'''
+IMGV='202611240041'
 S=[]
 S.append(f'''<section class="slide cover dark" data-n="1" aria-label="The Vector">
 <div class="txt">
@@ -27,7 +28,7 @@ S.append(f'''<section class="slide cover dark" data-n="1" aria-label="The Vector
 <p class="hint r" style="--d:10"><kbd>←</kbd> أو المسافة للتالي</p>
 </div>
 <div class="stage3d float">
-<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/welcome.jpg" alt="الصفحة الرئيسية لمنصة The Vector"></figure>
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/welcome.jpg?v={IMGV}" alt="الصفحة الرئيسية لمنصة The Vector"></figure>
 </div>
 </section>''')
 S.append(f'''<section class="slide problem dark" data-n="2" aria-label="المشكلة">
@@ -73,8 +74,8 @@ S.append(shot_slide(9,'light','الخطوة 3','مدير المبادرة','يح
 S.append(f'''<section class="slide duo mint" data-n="10" aria-label="التحديث">
 <div class="head"><p class="tag r" style="--d:0">الخطوة 3</p><p class="eye r" style="--d:1">التحديث</p><h2 class="r" style="--d:2">أربع خطوات، وكل رقم يُقرأ في لحظته</h2><p class="lede r" style="--d:3">يكتب المدير الإنجاز فيرى الانحراف والحالة فورًا. وإذا احتاج قرارًا كتبه بصيغة تقرؤها القيادة.</p></div>
 <div class="pair">
-<figure class="frame tiltR" style="--d:5"><div class="bar"><i></i><i></i><i></i><span>النسب</span></div><img src="img/figures.jpg" alt="خطوة النسب" loading="lazy"></figure>
-<figure class="frame tiltL" style="--d:8"><div class="bar"><i></i><i></i><i></i><span>القادم والعوائق</span></div><img src="img/blocker.jpg" alt="خطوة العوائق وطلب القرار" loading="lazy"></figure>
+<figure class="frame tiltR" style="--d:5"><div class="bar"><i></i><i></i><i></i><span>النسب</span></div><img src="img/figures.jpg?v={IMGV}" alt="خطوة النسب" loading="lazy"></figure>
+<figure class="frame tiltL" style="--d:8"><div class="bar"><i></i><i></i><i></i><span>القادم والعوائق</span></div><img src="img/blocker.jpg?v={IMGV}" alt="خطوة العوائق وطلب القرار" loading="lazy"></figure>
 <span class="chip alert" style="--d:12">{ic("alert","ic sm")}80% والمخطط 100%: متأخرة جدًا</span>
 </div>
 </section>''')
@@ -99,7 +100,7 @@ S.append(f'''<section class="slide shot light stats" data-n="13" aria-label="خ�
 <div class="kpi info r" style="--d:8"><b data-count="45" data-suf="%">0%</b><span>المصروف</span></div>
 </div>
 </div>
-<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io/intel</span></div><img src="img/leader.jpg" alt="خلاصة القيادة" loading="lazy"></figure><span class="chip c0 live" style="--d:10"><i class="dotlive"></i>مباشر · نُشر تحديث قبل لحظات</span></div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io/intel</span></div><img src="img/leader.jpg?v={IMGV}" alt="خلاصة القيادة" loading="lazy"></figure><span class="chip c0 live" style="--d:10"><i class="dotlive"></i>مباشر · نُشر تحديث قبل لحظات</span></div>
 </section>''')
 S.append(shot_slide(14,'mint','الخطوة 6','قرارات القيادة','القرار يُدرج في الاجتماع بضغطة','مرتبة حسب أثرها: كم مبادرة تتوقف عليها ومنذ متى.',['من طلب القرار ولأي مبادرة','المبادرات المتوقفة عليه','يظهر فور نشر التحديث'],'decision','إدراج قرار في الاجتماع',[('checkCircle','أُدرج في اجتماع 25 نوفمبر')]))
 S.append(shot_slide(15,'light','للقيادة','الملخص التنفيذي','أين ينتهي البرنامج بنهاية السنة؟','بوتيرة آخر ثلاثة أشهر نحسب التوقع ومداه، لكل حزمة وللبرنامج كله.',['المخطط والفعلي والمتوقع على شريط واحد','لكل حزمة سبب الفجوة','التوقع تقدير بمدى'],'brief','الملخص التنفيذي',[('trend','توقع نهاية السنة')]))
@@ -114,7 +115,7 @@ S.append(f'''<section class="slide shot light" data-n="18" aria-label="الإن�
 <ul class="pts"><li style="--d:6">كل تنبيه يقول السبب بجملة واحدة</li><li style="--d:7">يصل القيادة في خلاصتها، والمدير على بطاقته</li><li style="--d:8">«لماذا؟ وماذا نفعل؟» يسأل المساعد بضغطة</li></ul>
 </div>
 <div class="stage3d">
-<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/risks.jpg" alt="صفحة الإنذار المبكر" loading="lazy"></figure>
+<figure class="frame"><div class="bar"><i></i><i></i><i></i><span>vector.datavital.io</span></div><img src="img/risks.jpg?v={IMGV}" alt="صفحة الإنذار المبكر" loading="lazy"></figure>
 <span class="chip c0" style="--d:10">{ic("trend","ic sm")}على المسار اليوم، لكنها في خطر</span>
 <span class="chip alert" style="--d:12">{ic("alert","ic sm")}بوتيرتها الحالية تصل إلى 37%، والمخطط 54%</span>
 </div>
@@ -154,10 +155,10 @@ S.append(f'''<section class="slide cards4 light" data-n="20" aria-label="الم�
 S.append('''<section class="slide devices mint" data-n="19" aria-label="في كل مكان">
 <div class="head"><p class="eye r" style="--d:0">في كل مكان</p><h2 class="r" style="--d:1">لغتان، ووضعان، وكل الشاشات</h2></div>
 <div class="devs">
-<figure class="frame laptop" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>English · Dark</span></div><img src="img/endark.jpg" alt="المنصة بالإنجليزي والوضع الداكن" loading="lazy"></figure>
-<figure class="phone p1" style="--d:6"><img src="img/m1.jpg" alt="خلاصة القيادة على الجوال" loading="lazy"></figure>
-<figure class="phone p2" style="--d:8"><img src="img/m2.jpg" alt="مهام المدير على الجوال" loading="lazy"></figure>
-<figure class="phone p3" style="--d:10"><img src="img/m3.jpg" alt="صفحة المبادرة على الجوال" loading="lazy"></figure>
+<figure class="frame laptop" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>English · Dark</span></div><img src="img/endark.jpg?v={IMGV}" alt="المنصة بالإنجليزي والوضع الداكن" loading="lazy"></figure>
+<figure class="phone p1" style="--d:6"><img src="img/m1.jpg?v={IMGV}" alt="خلاصة القيادة على الجوال" loading="lazy"></figure>
+<figure class="phone p2" style="--d:8"><img src="img/m2.jpg?v={IMGV}" alt="مهام المدير على الجوال" loading="lazy"></figure>
+<figure class="phone p3" style="--d:10"><img src="img/m3.jpg?v={IMGV}" alt="صفحة المبادرة على الجوال" loading="lazy"></figure>
 </div>
 </section>''')
 vals=[('brief','للقيادة',['صورة واحدة موثوقة تتحدّث لحظة النشر، وكل رقم فيها مُراجع','تعرف ما ينتظر قرارها، وكم مبادرة تتوقف عليه','ترى المبادرة المتعثرة قبل أن تتأخر']),
@@ -197,5 +198,5 @@ S.append('''<section class="slide close dark" data-n="22" aria-label="شكرًا
 </div>
 </section>''')
 html=open('/home/claude/maaaz123.github.io/vector/story/shell.html').read().replace('<!--SLIDES-->','\n'.join(S)).replace('__TOTAL__',str(len(S)))
-open('/home/claude/maaaz123.github.io/vector/story/index.html','w').write(html)
+open('/home/claude/maaaz123.github.io/vector/story/index.html','w').write(html.replace('{IMGV}', IMGV))
 print(len(S), len(html))
