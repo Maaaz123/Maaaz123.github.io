@@ -125,7 +125,6 @@ S.append('''<section class="slide close dark" data-n="22" aria-label="شكرًا
 <h1 class="big r" style="--d:2">شكرًا</h1>
 <p class="lede r" style="--d:4">جرّبوا المنصة</p>
 <a class="cta r" style="--d:6" href="https://vector.datavital.io" rel="noopener">vector.datavital.io</a>
-<p class="by r" style="--d:8">The Vector · إعداد <a href="https://maazmajid.com">معاذ ماجد</a></p>
 </div>
 </section>''')
 html=open('/home/claude/maaaz123.github.io/vector/story/shell.html').read().replace('<!--SLIDES-->','\n'.join(S)).replace('__TOTAL__',str(len(S)))
