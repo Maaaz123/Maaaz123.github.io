@@ -439,7 +439,8 @@ nav:hover .ng-edit,.ng-edit:focus-visible,.ng-edit[data-on=true],.ng-edit:has(i)
 .br-viz{min-width:0;border-top:1px solid #f1eaed;padding-top:18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:'vh vh' 'sub sub' 'cur dv' 'leg dv' 'st st';column-gap:32px;align-items:start}
 .br-viz>.br-vh{grid-area:vh}.br-viz>.sd-sub{grid-area:sub}.br-viz>.sd-curve{grid-area:cur}.br-viz>.sd-leg{grid-area:leg}.br-viz>.sd-dv{grid-area:dv;margin-top:14px}.br-viz>.sd-start{grid-area:st}
 .br-vh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}.br-vh b{font-size:14px;color:#22131a}
-.br-viz .sd-curve{margin-top:28px}.br-viz .sd-curve svg{height:96px}
+.br-viz .sd-curve{margin-top:34px}.br-viz .sd-curve svg{height:96px}
+@media (min-width:1101px){.br-viz .sd-curve svg{height:158px}.br-viz>.sd-dv{margin-top:14px}}
 @media (max-width:1100px){.br-viz{grid-template-columns:1fr;grid-template-areas:'vh' 'sub' 'cur' 'leg' 'dv' 'st'}}
 .dark .brief{background:#21151a}.dark .br-viz{border-color:#2f1e25}.dark .br-vh b{color:#f4e9ed}
 .kc-gap.kc-g2{display:none;margin-inline-start:auto;align-self:center}
