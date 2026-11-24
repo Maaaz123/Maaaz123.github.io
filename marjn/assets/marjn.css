@@ -254,3 +254,8 @@ font-family:'Readex Pro',system-ui,sans-serif;color:var(--ink);background:var(--
 @keyframes navinl{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
 @keyframes slidel{from{transform:translateX(-40px);opacity:0}to{transform:none;opacity:1}}
 @keyframes nudgel{0%,100%{transform:none}50%{transform:translateX(3px)}}
+
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:90;background:#140E0B;color:#F4ECE0;border:1px solid #E39A5E;border-radius:99px;padding:10px 18px;font-size:13.5px;font-weight:500;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);animation:toastin .3s cubic-bezier(.2,.8,.2,1) both;white-space:nowrap}
+.mx.dark .toast{background:#F4ECE0;color:#140E0B}
+@keyframes toastin{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (max-width:900px){.toast{top:72px}}
