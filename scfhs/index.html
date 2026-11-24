@@ -142,13 +142,33 @@ td.old{color:var(--soft)}
 .effkey{display:flex;gap:20px;font-size:14px;color:var(--soft);margin-bottom:14px;flex-wrap:wrap}
 .effkey i{display:inline-block;width:22px;height:10px;border-radius:5px;margin-right:8px}
 @media(max-width:640px){.er{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.er .rp{grid-column:1/-1;margin-top:-6px}}
-.todo{list-style:none;padding:0;margin:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22em),1fr))}
-.todo li{display:grid}
-.todo li:last-child:nth-child(odd){grid-column:1/-1}
-.conf-r{display:flex;align-items:center;gap:20px}.conf-r p{color:var(--soft)}
-.todo label{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;font-size:15px}
-.todo input{width:20px;height:20px;margin-top:2px;accent-color:var(--teal);flex:none}
-.todo input:checked+span{color:var(--soft);text-decoration:line-through}
+.conf-r{display:flex;align-items:center;gap:20px}
+.conf-r .prog{flex:none}.conf-r p{color:var(--soft)}
+.qbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.qf{font:500 15px "Barlow",sans-serif;min-height:44px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--soft);cursor:pointer}
+.qf[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:#002033}
+.qf:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+.qg{margin-bottom:32px}
+.qg:last-child{margin-bottom:0}
+.qg-h{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+.qg-h h3{font-size:22px}
+.qg-h span{color:var(--soft);font-size:14px}
+.ql{list-style:none;padding:0;margin:0;display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:820px){.ql{grid-template-columns:minmax(0,1fr)}}
+.q{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;height:100%;cursor:pointer;transition:border-color .2s}
+.q:hover{border-color:var(--soft)}
+.q.first{border-color:var(--gold)}
+.q input{width:20px;height:20px;margin-top:3px;accent-color:var(--teal);flex:none}
+.q-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
+.q-id{font-family:"Barlow Semi Condensed",sans-serif;font-weight:600;color:var(--gold);font-size:15px}
+.q-t{font-weight:600}
+.badge{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.badge.f{background:var(--gold);color:#002033}
+.badge.h{border:1px solid var(--hi);color:var(--hi)}
+.q-q{font-size:15px;margin:0;max-width:none}
+.q-w{font-size:14px;color:var(--soft);margin-top:6px}
+.q.done .q-q,.q.done .q-t{color:var(--soft);text-decoration:line-through}
+.q.hide,.qg.hide{display:none}
 .prog{font-family:"Barlow Semi Condensed",sans-serif;font-size:64px;font-weight:600;color:var(--gold);line-height:1;white-space:nowrap}
 .src{font-size:14px;color:var(--soft);padding-left:18px;margin:12px 0 0}
 .src li{margin-bottom:6px}
@@ -183,7 +203,7 @@ td.old{color:var(--soft)}
 </header>
 
 <nav class="nav" aria-label="Sections"><div class="wrap">
-  <a href="#changes">What changes</a><a href="#ingestion">Ingestion</a><a href="#as-code">As code</a><a href="#exit">Exit plan</a><a href="#confirm">To confirm</a>
+  <a href="#changes">What changes</a><a href="#ingestion">Ingestion</a><a href="#as-code">As code</a><a href="#exit">Exit plan</a><a href="#confirm">Questions</a>
 </div></nav>
 
 <section class="band" id="changes">
@@ -251,8 +271,13 @@ td.old{color:var(--soft)}
 
 <section class="band" id="confirm">
   <div class="wrap">
-    <div class="head"><h2>Open questions</h2><div class="conf-r"><div class="prog" id="prog">0 / 7</div><p>These need answers before D2 is approved. Ticks are saved in this browser only.</p></div></div>
-    <ul class="todo" id="todo"></ul>
+    <div class="head"><h2>Questions for the D2 team</h2><div class="conf-r"><div class="prog" id="prog">0 / 25</div><p>25 questions, grouped by topic. The four marked "Ask first" could change the design. Ticks are saved in this browser only.</p></div></div>
+    <div class="qbar" role="group" aria-label="Filter questions">
+      <button type="button" class="qf" data-f="all" aria-pressed="true">All</button>
+      <button type="button" class="qf" data-f="first" aria-pressed="false">Ask first</button>
+      <button type="button" class="qf" data-f="open" aria-pressed="false">Not answered</button>
+    </div>
+    <div id="qgroups"></div>
   </div>
 </section>
 
@@ -366,12 +391,49 @@ pipe.innerHTML=p+`</svg>`;
 const ex=[["SQL engine","BigQuery → Trino or Spark","h"],["Data models","dbt-bigquery → dbt-trino","m"],["Change data capture","Datastream → Debezium (none with Fivetran)","m"],["Encryption keys","Cloud KMS → HSM or Vault","m"],["Event streams","Pub/Sub → Kafka","m"],["Infrastructure code","Terraform modules for the new target","m"],["Table files","Same Iceberg files on S3-compatible storage","l"],["Table catalog","Any Iceberg REST catalog","l"],["Scheduling","Same DAGs on Kubernetes","l"],["Connectors","Same containers, or Fivetran retargeted","l"],["Data catalog","OpenMetadata or DataHub, same feeds","l"],["Vector search","pgvector, rebuilt from Gold","l"]];
 document.getElementById("eff").innerHTML=ex.map((r,i)=>`<div class="er ${r[2]}"><span class="nm">${esc(r[0])}</span><span class="tr"><i style="animation-delay:${i*60}ms"></i></span><span class="rp">${esc(r[1])}</span></div>`).join("");
 
-const todos=["Is the Iceberg REST catalog available in Dammam, and when will BigQuery writes there reach GA?","Is every service on the default path live in Dammam under SCFHS’s contract through CNTXT?","What RPO and RTO does SCFHS need, and can its data centre host the nightly copy?","Which BI tool does SCFHS already license?","Do all sources carry the SCFHS registration number or national ID?","Which Fivetran plan pins processing to Dammam, and where are its control plane, logs and metadata?","What freshness does any SCFHS use case really need: seconds, one minute or 15 minutes?"];
-let done={};try{done=JSON.parse(localStorage.getItem("scfhs-todo2")||"{}")}catch(e){done={}}
-const td=document.getElementById("todo"),pg=document.getElementById("prog");
-td.innerHTML=todos.map((t,i)=>`<li><label for="q${i}"><input type="checkbox" id="q${i}" ${done[i]?"checked":""}><span>${esc(t)}</span></label></li>`).join("");
-const count=()=>{pg.textContent=`${td.querySelectorAll("input:checked").length} / ${todos.length}`};count();
-td.addEventListener("change",e=>{done[e.target.id.slice(1)]=e.target.checked;count();try{localStorage.setItem("scfhs-todo2",JSON.stringify(done))}catch(err){}});
+const groups=[
+ ["Location and recovery","Where the platform runs and how it recovers",[
+  ["H1","Service availability in Dammam","Are all the services in the design live in me-central2 (Dammam) under SCFHS’s contract through CNTXT? This includes Datastream, Dataflow, Knowledge Catalog, Vector Search and the OCR and vision models. If any are not, how will data and processing stay inside the Kingdom?","In-Kingdom processing is a core requirement of the design.","first"],
+  ["H2","Disaster recovery","The design only covers multiple zones within Dammam. What are the RPO and RTO targets, and what happens if the whole region is unavailable? Can the SCFHS data centre host a nightly copy of Bronze?","No recovery targets or regional failover are stated.","high"],
+  ["H6","Capacity and cost","How was the 15 TB initial capacity estimated? What yearly growth is expected, and what is the estimated monthly running cost?","Sizing and budget drive many later design choices.",""]]],
+ ["Storage and processing","How tables are written, kept and published",[
+  ["L1","Spark and BigQuery as the only writer","The document says only BigQuery writes to the tables, but Spark is also used for processing. How does Spark write its results without breaking this rule? Is the Iceberg REST catalog available in Dammam, and when will BigQuery writes to it be GA?","The two statements in D2 appear to conflict.","first"],
+  ["H3","Vendor lock-in","Iceberg is an open format, but BigQuery is the only writer. If SCFHS moved away from Google Cloud, what exactly would that involve?","An open format only helps if the data can actually be moved.",""],
+  ["L4","dbt and MERGE","Which tool owns the Silver layer, dbt or BigQuery MERGE? If a load is re-run, does it give the same result without duplicates?","One layer needs one owner, and re-runs must be safe.",""],
+  ["L5","Data retention","Time travel covers only seven days. How long is Bronze history kept, and what are the rules for partitioning, compaction and snapshot expiry?","Replay and audit depend on how much history is kept.",""],
+  ["L6","Gold release gate","If a Gold check fails, the last published version stays in service. How is this done, for example by switching views or pinning a snapshot?","Users must never see half-published data.",""],
+  ["L7","Quarantine and replay","Which tool defines and runs the data quality rules? Once a failed record is fixed, how is it replayed into the pipeline?","Records left in quarantine become lost data.",""]]],
+ ["Ingestion","How data enters the platform",[
+  ["L2","Change data capture","How will the design handle schema changes in source databases, late or out-of-order events, and deleted records in Bronze?","These are the most common causes of wrong numbers in CDC pipelines.",""],
+  ["L3","Cursor-based loading","Where is the last-loaded position (watermark) stored? What happens if a record changes in a source that is meant to be append-only?","An update in an append-only source would be missed without warning.",""],
+  ["F1","Fivetran data residency","If Fivetran is used, which plan keeps processing in Dammam, and where are its control plane, logs and metadata stored? Are all SCFHS sources supported?","Fivetran is an option for loading only if residency is confirmed.",""],
+  ["F2","Required data freshness","What freshness does any SCFHS use case actually need: seconds, one minute or 15 minutes?","This decides whether real-time loading is worth its cost.",""]]],
+ ["Data and entities","How records are linked and documents indexed",[
+  ["H4","Master data without MDM","MDM is proposed for deferral. How will the same practitioner or entity be matched across source systems in Silver? Do all sources carry the SCFHS registration number or national ID?","Silver cannot link practitioner records reliably without it.","first"],
+  ["H5","Ontology graph","The graph sits outside the lakehouse. What technology will it use, who owns it, and how is it kept in sync with Gold?","A component outside the platform with no clear owner is a common failure point.",""],
+  ["L11","Documents and embeddings","If a document is changed or deleted at the source, how does that reach the embeddings and the Vector Search index? Which embedding model will be used?","Deleted documents must not keep appearing in AI answers.",""]]],
+ ["Security and access","Who can see what, and how it is protected",[
+  ["L8","Column-level security","Do policy tags and data masking work on the Iceberg tables, and do they still apply when users query through Metabase?","Personal data could be exposed through a tool that bypasses the controls.","first"],
+  ["L9","Customer-managed encryption keys","Do customer-managed keys cover every service, including Datastream, Dataflow, Pub/Sub and Vector Search?","One service without CMEK breaks the encryption requirement.","high"],
+  ["L10","Perimeter and external sources","OneDrive, SharePoint and WSO2 sit outside the VPC Service Controls perimeter. How will these connections be allowed without weakening it?","Each exception to the perimeter is a possible data-leak path.","high"],
+  ["H7","Two BI tools","Why use both Tableau and Metabase, and which does SCFHS already license? Who may explore Bronze and Silver, given they hold raw personal data?","Two tools mean two licences and two access models to secure.",""]]],
+ ["Delivery and operations","How changes ship and who runs the platform",[
+  ["H8","No staging at the start","Only production will exist at first. How will changes be tested safely before staging is set up?","Early changes would go straight to production.",""],
+  ["L12","Deployment pipeline","Where is the Terraform state stored? Does each pipeline have its own service account? Who approves releases to production?","Shared accounts and unclear approvals weaken audit and control.",""],
+  ["L13","Monitoring and alerts","What are the target run times and success rates for each pipeline? Who receives alerts, and through which tools?","Failures nobody is alerted to show up as stale dashboards.",""],
+  ["H9","AI agents","Which use cases will the AI agents handle, and who reviews their outputs before they enter governed data?","Agents can write back, so review and accountability must be clear.",""],
+  ["H10","Operating model","Who runs and supports the platform after handover, SCFHS or the vendor? What service levels are agreed?","D2 describes the build, not who runs it day to day.",""]]]
+];
+const total=groups.reduce((n,g)=>n+g[2].length,0);
+let done={};try{done=JSON.parse(localStorage.getItem("scfhs-q3")||"{}")}catch(e){done={}}
+const qg=document.getElementById("qgroups"),pg=document.getElementById("prog");
+const badge=t=>t==="first"?'<span class="badge f">Ask first</span>':t==="high"?'<span class="badge h">High</span>':"";
+qg.innerHTML=groups.map(g=>`<div class="qg"><div class="qg-h"><h3>${esc(g[0])}</h3><span>${esc(g[1])}</span></div><ul class="ql">${g[2].map(q=>`<li><label class="q ${q[4]==="first"?"first":""} ${done[q[0]]?"done":""}" for="q-${q[0]}" data-p="${q[4]}"><input type="checkbox" id="q-${q[0]}" ${done[q[0]]?"checked":""}><div><div class="q-top"><span class="q-id">${q[0]}</span><span class="q-t">${esc(q[1])}</span>${badge(q[4])}</div><p class="q-q">${esc(q[2])}</p><div class="q-w">Why it matters: ${esc(q[3])}</div></div></label></li>`).join("")}</ul></div>`).join("");
+let filt="all";
+const apply=()=>{qg.querySelectorAll(".q").forEach(l=>{const c=l.querySelector("input").checked;const show=filt==="all"||(filt==="first"&&l.dataset.p==="first")||(filt==="open"&&!c);l.parentElement.classList.toggle("hide",!show)});qg.querySelectorAll(".qg").forEach(g=>g.classList.toggle("hide",!g.querySelector("li:not(.hide)")));qg.querySelectorAll(".ql").forEach(u=>{const v=[...u.children].filter(li=>!li.classList.contains("hide"));u.children.length&&[...u.children].forEach(li=>li.style.gridColumn="");if(v.length%2)v[v.length-1].style.gridColumn="1/-1"})};
+const count=()=>{pg.textContent=`${qg.querySelectorAll("input:checked").length} / ${total}`};count();apply();
+qg.addEventListener("change",e=>{const id=e.target.id.slice(2);done[id]=e.target.checked;e.target.closest(".q").classList.toggle("done",e.target.checked);count();apply();try{localStorage.setItem("scfhs-q3",JSON.stringify(done))}catch(err){}});
+document.querySelectorAll(".qf").forEach(b=>b.addEventListener("click",()=>{filt=b.dataset.f;document.querySelectorAll(".qf").forEach(x=>x.setAttribute("aria-pressed",x===b));apply()}));
 }
 </script>
 </body>
