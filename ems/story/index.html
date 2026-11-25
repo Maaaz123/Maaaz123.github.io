@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WaveTech EMS Intelligence · القصة</title>
+<meta name="description" content="WaveTech EMS Intelligence: طبقة تحليلية فوق Wave، من البلاغ حتى التسليم في المستشفى.">
+<meta property="og:title" content="WaveTech EMS Intelligence · القصة">
+<meta property="og:description" content="من البلاغ إلى المستشفى، كل دقيقة محسوبة.">
+<meta property="og:image" content="https://maazmajid.com/ems/story/img/cmd.jpg">
+<meta name="theme-color" content="#1C0509">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2A0F17;--soft:#5C4650;--mute:#8A7680;--bg:#FBF7F8;--mint:#F8EBF0;--line:#EFDBE3;--g:#A3164F;--g2:#F91495;--gd:#72000D;--gold:#F91495;--dark:#1C0509;--e:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.45,.64,1)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--dark);overflow:hidden}
+body{font-family:'IBM Plex Sans Arabic',Tahoma,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.sky{position:fixed;inset:0;transition:background .9s var(--e);background:var(--bg);overflow:hidden}
+body[data-tone=mint] .sky{background:var(--mint)} body[data-tone=dark] .sky{background:var(--dark)}
+.sky i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;transition:background 1s var(--e)}
+.sky i:nth-child(1){width:46vw;height:46vw;top:-14vw;right:-10vw;background:#F6C9DC;animation:drift 22s ease-in-out infinite}
+.sky i:nth-child(2){width:38vw;height:38vw;bottom:-16vw;left:-8vw;background:#FFD9EC;animation:drift 26s ease-in-out -8s infinite reverse}
+.sky i:nth-child(3){width:28vw;height:28vw;top:30%;left:34%;background:#F3D3DF;opacity:.35;animation:drift 30s ease-in-out -14s infinite}
+body[data-tone=dark] .sky i:nth-child(1){background:#5A0A1E} body[data-tone=dark] .sky i:nth-child(2){background:#4A0630} body[data-tone=dark] .sky i:nth-child(3){background:#3A0712}
+.sky:after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(52,0,6,.07) 1px,transparent 1.4px);background-size:26px 26px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
+body[data-tone=dark] .sky:after{background-image:radial-gradient(rgba(255,220,235,.06) 1px,transparent 1.4px)}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(4vw,3vw) scale(1.08)}66%{transform:translate(-3vw,2vw) scale(.95)}}
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;padding:8vh 6vw 12vh;display:grid;align-content:center;visibility:hidden;opacity:0;transform:scale(.985);filter:blur(6px);transition:opacity .7s var(--e),transform .9s var(--e),filter .7s var(--e),visibility 0s .9s}
+.slide.on{visibility:visible;opacity:1;transform:none;filter:none;transition:opacity .7s var(--e) .12s,transform .9s var(--e) .12s,filter .7s var(--e) .12s,visibility 0s}
+.slide.out-back{transform:translateX(-3%) scale(.985)} .slide.out-fwd{transform:translateX(3%) scale(.985)}
+.dark{color:#F8EAF0}
+/* type */
+h1,h2,h3,p{margin:0}
+.eye{font-size:clamp(14px,1.5vw,22px);font-weight:600;color:var(--g);letter-spacing:.01em}
+.dark .eye{color:var(--gold)}
+h2{font-size:clamp(28px,3.6vw,58px);line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.lede{font-size:clamp(16px,1.6vw,25px);line-height:1.75;color:var(--soft)}
+.dark .lede{color:#E2C3CF}
+.tag{display:inline-block;justify-self:start;font-size:clamp(12px,1.1vw,16px);font-weight:600;color:var(--gd);background:#FCE3EE;padding:5px 14px;border-radius:999px}
+.dark .tag{background:var(--gold);color:#fff}
+.head{display:grid;gap:1.4vh;margin-bottom:5vh;max-width:70vw}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.sm{width:18px;height:18px} .ic.lg{width:40px;height:40px;color:var(--g);padding:10px;box-sizing:content-box;background:#FCE6EF;border-radius:16px}
+.dark .ic.lg{background:#4A0B1C;color:var(--gold)}
+/* reveal */
+.slide:not(.on) .r,.slide:not(.on) .flip,.slide:not(.on) .pop,.slide:not(.on) .chip{opacity:0}
+.on .r{animation:rise .9s var(--e) both;animation-delay:calc(var(--d,0)*90ms)}
+@keyframes rise{from{opacity:0;transform:translateY(26px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* cover */
+.cover{grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr);gap:5vw;align-items:center}
+.cover .txt{display:grid;gap:2.2vh}
+.title{font-size:clamp(54px,8.4vw,140px);line-height:1;font-weight:700;color:#FDF5F8;direction:ltr;text-align:right;letter-spacing:-.02em}
+.title span{display:inline-block}
+.on .title span{animation:titleIn 1.1s var(--e) both;animation-delay:calc(var(--d)*110ms)}
+@keyframes titleIn{from{opacity:0;transform:translateY(40px) rotate(4deg);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+.title span:last-child{background:linear-gradient(90deg,#FF8CC6,#F91495);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mark{width:clamp(54px,5vw,84px);height:auto}
+.mark.big{width:clamp(80px,8vw,120px);margin-bottom:2vh}
+.mk-bg{fill:#3A0712;stroke:#72000D;stroke-width:1.5}
+.mk-line{fill:none;stroke:#FF9BCF;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:70;stroke-dashoffset:70}
+.mk-dot{fill:var(--gold);transform-origin:50px 22px;transform:scale(0)}
+.on .mk-line{animation:draw 1.2s var(--e) .3s forwards} .on .mk-dot{animation:dot .6s var(--spring) 1.3s forwards,glow 2.6s ease-in-out 2s infinite}
+@keyframes draw{to{stroke-dashoffset:0}} @keyframes dot{to{transform:scale(1)}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 0 rgba(249,20,149,0))}50%{filter:drop-shadow(0 0 8px rgba(249,20,149,.9))}}
+.hint{font-size:14px;color:#A9808F} kbd{font-family:inherit;border:1px solid #5A2232;border-radius:6px;padding:1px 7px;margin-inline:2px;color:#F4D7E2}
+/* browser frames */
+.stage3d{position:relative;perspective:1800px}
+.frame{margin:0;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 2px 6px rgba(52,0,6,.06),0 40px 80px -36px rgba(52,0,6,.5);transform:rotateY(var(--ry,6deg)) rotateX(var(--rx,2deg));transform-style:preserve-3d;transition:transform .5s var(--e)}
+.dark .frame{border-color:#4A1826;box-shadow:0 40px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,140,198,.06)}
+.frame .bar{display:flex;align-items:center;gap:6px;height:34px;padding-inline:14px;background:#F8F1F4;border-bottom:1px solid #EEDFE5;font-size:12px;color:#957C86;direction:ltr}
+.frame .bar i{width:10px;height:10px;border-radius:50%;background:#E4E9E6} .frame .bar i:nth-child(1){background:#F47467} .frame .bar i:nth-child(2){background:#F5C451} .frame .bar i:nth-child(3){background:#5BC98A}
+.frame .bar span{margin-inline-start:10px;background:#fff;border-radius:8px;padding:3px 12px;flex:1;max-width:60%;text-align:left}
+.frame img{display:block;width:100%;height:auto}
+.slide:not(.on) .stage3d .frame{opacity:0}
+.on .stage3d .frame{animation:frameIn 1.3s var(--e) .25s both}
+@keyframes frameIn{from{opacity:0;transform:translateX(-80px) rotateY(28deg) rotateX(6deg) scale(.92)}to{opacity:1;transform:rotateY(6deg) rotateX(2deg)}}
+.float .frame{animation:frameIn 1.3s var(--e) .25s both,bob 7s ease-in-out 1.6s infinite!important}
+@keyframes bob{0%,100%{transform:rotateY(6deg) rotateX(2deg) translateY(0)}50%{transform:rotateY(3deg) rotateX(1deg) translateY(-14px)}}
+/* screenshot slides */
+.shot{grid-template-columns:minmax(0,.82fr) minmax(0,1.38fr);gap:5vw;align-items:center}
+.shot .txt{display:grid;gap:2vh;align-content:center}
+.pts{list-style:none;margin:1vh 0 0;padding:0;display:grid;gap:1.3vh}
+.pts li{position:relative;padding-inline-start:30px;font-size:clamp(14px,1.3vw,20px);color:var(--soft);line-height:1.6}
+.dark .pts li{color:#E2C3CF}
+.pts li:before{content:"";position:absolute;inset-inline-start:0;top:.55em;width:16px;height:16px;border-radius:6px;background:var(--g);box-shadow:0 0 0 4px #FCE3EE;transform:scale(.8)}
+.dark .pts li:before{background:var(--gold);box-shadow:0 0 0 4px #4A0B2C}
+.slide:not(.on) .pts li{opacity:0}
+.on .pts li{animation:slideIn .8s var(--e) both;animation-delay:calc(var(--d)*90ms)}
+@keyframes slideIn{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.chip{position:absolute;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);box-shadow:0 18px 40px -20px rgba(52,0,6,.55);font-size:clamp(12px,1.05vw,16px);font-weight:600;color:var(--gd);white-space:nowrap}
+.chip .ic{color:var(--g)}
+.chip.c0{top:14%;right:-3%} .chip.c1{bottom:10%;left:-3%}
+.chip.alert{color:#B42318;border-color:#F8C9C3;bottom:-4%;right:30%} .chip.alert .ic{color:#D92D20}
+.dark .chip{background:rgba(40,8,16,.9);border-color:#5A2232;color:#F8DCE7} .dark .chip .ic{color:var(--gold)}
+.on .chip{animation:chipIn .7s var(--spring) both,hover 5s ease-in-out infinite;animation-delay:calc(var(--d)*90ms),calc(var(--d)*90ms + .8s)}
+@keyframes chipIn{from{opacity:0;transform:translateY(18px) scale(.8)}to{opacity:1;transform:none}}
+@keyframes hover{0%,100%{translate:0 0}50%{translate:0 -8px}}
+/* cards */
+.grid3,.grid4{display:grid;gap:2vw;perspective:1400px}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))} .grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:26px;padding:4vh 2.2vw;display:grid;gap:1.6vh;align-content:start;box-shadow:0 30px 60px -40px rgba(52,0,6,.45)}
+.card h3{font-size:clamp(20px,2vw,32px);font-weight:700} .card p{font-size:clamp(14px,1.3vw,20px);line-height:1.7;color:var(--soft)}
+.dark .card{background:rgba(58,10,22,.72);border-color:#5A1A2B} .dark .card h3{color:#FDF5F8} .dark .card p{color:#E2C3CF}
+.on .flip{animation:flip 1s var(--e) both;animation-delay:calc(var(--d)*100ms);transform-origin:50% 0}
+@keyframes flip{from{opacity:0;transform:rotateX(-70deg) translateY(30px)}to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-6px);transition:transform .4s var(--e)}
+/* idea */
+.flowmap{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5vw;align-items:center}
+.wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.wires path{fill:none;stroke:#E3A9BF;stroke-width:2;stroke-dasharray:8 10;animation:dash 1.4s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-36}}
+.pulse{fill:var(--gold);filter:drop-shadow(0 0 6px rgba(249,20,149,.9))}
+.node{position:relative;z-index:1;background:#fff;border:1px solid var(--line);border-radius:26px;padding:4vh 2vw;display:grid;gap:1.4vh;justify-items:start;box-shadow:0 30px 60px -36px rgba(52,0,6,.45)}
+.node h3{font-size:clamp(20px,2vw,30px)} .node p{font-size:clamp(14px,1.25vw,19px);line-height:1.7;color:var(--soft)}
+.node.gate{border:2px solid var(--g);box-shadow:0 0 0 8px rgba(163,22,79,.1),0 30px 60px -30px rgba(52,0,6,.5)}
+.gatebadge{position:absolute;top:-16px;inset-inline-end:20px;background:var(--gold);color:#fff;font-size:13px;font-weight:700;padding:5px 14px;border-radius:999px}
+.on .pop{animation:popIn .9s var(--spring) both;animation-delay:calc(var(--d)*100ms)}
+.on .node.gate{animation:popIn .9s var(--spring) both,ring 3s ease-in-out 1.8s infinite;animation-delay:calc(var(--d)*100ms),1.8s}
+@keyframes popIn{from{opacity:0;transform:scale(.8) translateY(30px)}to{opacity:1;transform:none}}
+@keyframes ring{0%,100%{box-shadow:0 0 0 8px rgba(163,22,79,.1),0 30px 60px -30px rgba(52,0,6,.5)}50%{box-shadow:0 0 0 18px rgba(163,22,79,.06),0 30px 60px -30px rgba(52,0,6,.5)}}
+/* journey */
+.track{position:relative;padding-top:6vh}
+.rail{position:absolute;top:calc(6vh + 26px);right:6%;left:6%;height:4px;border-radius:4px;background:linear-gradient(270deg,#F1C6D6,#F8ECF1)}
+.runner{position:absolute;top:-8px;right:0;width:20px;height:20px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(249,20,149,.25),0 0 22px rgba(249,20,149,.9)}
+.on .runner{animation:run 7.2s cubic-bezier(.6,0,.4,1) 1s infinite}
+@keyframes run{0%{right:0;opacity:0}5%{opacity:1}95%{opacity:1}100%{right:calc(100% - 20px);opacity:0}}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.2vw}
+.step{display:grid;justify-items:center;text-align:center;gap:1.2vh;padding:0 .4vw}
+.dotn{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:20px;color:#fff;background:var(--g);box-shadow:0 0 0 8px var(--bg);position:relative;z-index:1}
+.step .ic{width:30px;height:30px;color:var(--g);margin-top:1vh} .step b{font-size:clamp(15px,1.45vw,23px)} .step small{font-size:clamp(12px,1.05vw,16px);line-height:1.6;color:var(--soft)}
+.slide:not(.on) .step{opacity:0}
+.on .step{animation:rise .8s var(--e) both,lit 7.2s ease-in-out infinite;animation-delay:calc(var(--k)*120ms + 200ms),calc(var(--k)*1.15s + 1s)}
+@keyframes lit{0%,4%,22%,100%{filter:none}8%,16%{filter:drop-shadow(0 0 14px rgba(249,20,149,.55))}}
+/* duo */
+.duo{align-content:center}
+.pair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:3vw;perspective:1800px}
+.pair .frame{transform:none}
+.slide:not(.on) .pair .frame{opacity:0}
+.on .tiltR{animation:inR 1.2s var(--e) both;animation-delay:calc(var(--d)*90ms)} .on .tiltL{animation:inL 1.2s var(--e) both;animation-delay:calc(var(--d)*90ms)}
+@keyframes inR{from{opacity:0;transform:rotateY(-24deg) translateX(60px)}to{opacity:1;transform:rotateY(-4deg)}}
+@keyframes inL{from{opacity:0;transform:rotateY(24deg) translateX(-60px)}to{opacity:1;transform:rotateY(4deg)}}
+.tiltR{transform:rotateY(-4deg)!important} .tiltL{transform:rotateY(4deg)!important}
+/* gate */
+.gate .center,.close .center{display:grid;justify-items:center;text-align:center;gap:3vh;position:relative;z-index:1}
+.big{font-size:clamp(40px,6.4vw,110px);line-height:1.15;font-weight:700;color:#FDF5F8;max-width:16ch}
+.under{background:linear-gradient(90deg,var(--gold),var(--gold)) no-repeat 100% 92%/0% 8px;padding-bottom:6px}
+.on .under{animation:under 1.2s var(--e) 1s forwards}
+@keyframes under{to{background-size:100% 8px}}
+.gatefx{position:absolute;inset:0;overflow:hidden}
+.gatefx i{position:absolute;top:-20%;width:2px;height:40%;background:linear-gradient(180deg,transparent,rgba(255,120,190,.7),transparent);left:calc(var(--x)*1%);animation:beam 4s linear infinite;animation-delay:calc(var(--x)*-.09s)}
+.gatefx i:nth-child(1){--x:8}.gatefx i:nth-child(2){--x:20}.gatefx i:nth-child(3){--x:33}.gatefx i:nth-child(4){--x:46}.gatefx i:nth-child(5){--x:58}.gatefx i:nth-child(6){--x:71}.gatefx i:nth-child(7){--x:83}.gatefx i:nth-child(8){--x:94}
+@keyframes beam{to{transform:translateY(320%)}}
+/* stats */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:1.2vw;margin-top:1vh}
+.kpi{border-radius:20px;padding:2vh 1.2vw;display:grid;gap:4px;border:1px solid var(--line);background:#fff}
+.kpi b{font-size:clamp(28px,3.2vw,52px);line-height:1;font-weight:700;font-variant-numeric:tabular-nums}
+.kpi span{font-size:clamp(12px,1vw,15px);color:var(--soft)}
+.kpi.good{background:#E3F6EE;border-color:#BFE6D2} .kpi.good b{color:#067A56}
+.kpi.bad{background:#FDECEA;border-color:#F8C9C3} .kpi.bad b{color:#B42318}
+.kpi.info{background:#FCE6EF;border-color:#F1C6D6} .kpi.info b{color:#A3164F}
+/* devices */
+.devs{position:relative;height:62vh}
+.devs .laptop{position:absolute;right:0;top:0;width:62%;transform:none}
+.phone{position:absolute;margin:0;width:14%;border-radius:26px;overflow:hidden;border:6px solid #2A0F17;box-shadow:0 40px 70px -30px rgba(52,0,6,.6);background:#2A0F17}
+.phone img{display:block;width:100%}
+.p1{left:28%;top:8%;z-index:3} .p2{left:13%;top:16%;z-index:2} .p3{left:0;top:24%;z-index:1}
+.slide:not(.on) .devs figure{opacity:0}
+.on .laptop{animation:rise 1.1s var(--e) both;animation-delay:calc(var(--d)*90ms)}
+.on .phone{animation:fan 1.1s var(--spring) both;animation-delay:calc(var(--d)*90ms)}
+.p1{--rot:-4deg}.p2{--rot:-8deg}.p3{--rot:-12deg}
+.phone{transform:rotate(var(--rot))}
+@keyframes fan{from{opacity:0;transform:translateY(80px) rotate(0)}to{opacity:1;transform:rotate(var(--rot))}}
+/* plan */
+.tl{position:relative;padding-top:2vh}
+.tlrail{position:absolute;top:calc(2vh + 15px);right:0;left:0;height:4px;background:#F2DEE6;border-radius:4px;overflow:hidden}
+.tlrail i{position:absolute;inset:0;background:linear-gradient(270deg,var(--g),var(--gold));transform-origin:100% 50%;transform:scaleX(0)}
+.on .tlrail i{animation:grow 2.2s var(--e) .5s forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+.tl ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2vw}
+.tl li{position:relative;padding-top:56px;display:grid;gap:1.2vh}
+.tl li:before{content:"";position:absolute;top:4px;inset-inline-start:0;width:26px;height:26px;border-radius:50%;background:#fff;border:5px solid var(--g);box-sizing:border-box}
+.tl li:last-child:before{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 8px rgba(249,20,149,.2)}
+.when{justify-self:start;font-size:clamp(12px,1vw,15px);font-weight:600;color:var(--gd);background:#FCE3EE;padding:4px 12px;border-radius:999px}
+.tl b{font-size:clamp(18px,1.8vw,28px)} .tl small{font-size:clamp(13px,1.15vw,18px);line-height:1.7;color:var(--soft)}
+.slide:not(.on) .tl li{opacity:0}
+.on .tl li{animation:rise .8s var(--e) both;animation-delay:calc(var(--k)*420ms + 500ms)}
+/* close */
+.cta{display:inline-block;direction:ltr;font-size:clamp(18px,1.8vw,28px);font-weight:700;color:#fff;background:linear-gradient(90deg,#A3164F,var(--gold));padding:16px 34px;border-radius:999px;text-decoration:none;box-shadow:0 20px 50px -20px rgba(249,20,149,.7);transition:transform .3s var(--e)}
+.cta:hover{transform:translateY(-3px) scale(1.03)}
+.by{font-size:14px;color:#A9808F} .by a{color:#FF9BCF}
+/* ai chat */
+.ai{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:5vw;align-items:center}
+.ai .txt{display:grid;gap:2vh}
+.chat{position:relative;display:grid;gap:2vh;padding:3.4vh 2.2vw;border-radius:28px;background:linear-gradient(160deg,#FFF9FB,#F9E8EF);color:var(--ink);box-shadow:0 0 0 1px rgba(255,155,207,.25),0 50px 100px -40px rgba(0,0,0,.8),0 0 120px -30px rgba(163,22,79,.45)}
+.chat:before{content:"";position:absolute;inset:-1px;border-radius:29px;padding:1px;background:linear-gradient(120deg,rgba(255,155,207,.8),transparent 40%,rgba(249,20,149,.7));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.chat .q{justify-self:start;max-width:92%;background:var(--ink);color:#FDF5F8;border-radius:18px 18px 4px 18px;padding:12px 18px;font-size:clamp(14px,1.25vw,19px);font-weight:600}
+.typed{display:inline-block;white-space:nowrap;overflow:hidden;border-inline-end:2px solid var(--gold);max-width:0;vertical-align:bottom}
+@keyframes type{to{max-width:40em}} @keyframes caret{50%{border-color:transparent}}
+.on .typed{animation:type 2s steps(46) .5s forwards,caret .7s step-end 6,nocaret 0s 2.7s forwards}
+@keyframes nocaret{to{border-color:transparent}}
+.reads{display:grid;gap:8px} .reads small{font-size:13px;color:var(--mute);font-weight:600}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tool{display:inline-flex;align-items:center;gap:6px;font-size:clamp(11px,.95vw,14px);padding:6px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--mute);transition:all .4s}
+.slide:not(.on) .tool{opacity:0}
+.on .tool{animation:popIn .5s var(--spring) both;animation-delay:calc(2.7s + var(--t)*90ms)}
+.on .tool.use{animation:popIn .5s var(--spring) both,useIt .5s var(--e) forwards;animation-delay:calc(2.7s + var(--t)*90ms),calc(3.5s + var(--t)*350ms)}
+@keyframes useIt{to{background:var(--g);border-color:var(--g);color:#fff;box-shadow:0 0 0 5px rgba(163,22,79,.15)}}
+.ans{display:grid;gap:.9vh;background:#fff;border:1px solid var(--line);border-radius:18px;padding:2.2vh 1.6vw}
+.ans p{font-size:clamp(13px,1.15vw,17px);line-height:1.7;color:var(--soft)} .ans b{color:var(--ink);font-size:clamp(14px,1.3vw,19px)}
+.ans .h{font-size:13px;font-weight:700;color:var(--g)}
+.ans .li{position:relative;padding-inline-start:18px} .ans .li:before{content:"";position:absolute;inset-inline-start:2px;top:.75em;width:6px;height:6px;border-radius:50%;background:var(--g)}
+.ans .src{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mute);border-top:1px dashed var(--line);padding-top:1vh;margin-top:.4vh}
+.slide:not(.on) .ans,.slide:not(.on) .ans p,.slide:not(.on) .follow span{opacity:0}
+.on .ans{animation:rise .7s var(--e) 4.2s both}
+.on .ans p{animation:rise .6s var(--e) both} .on .a0{animation-delay:4.4s!important}.on .a1{animation-delay:4.8s!important}.on .a2{animation-delay:5s!important}.on .a3{animation-delay:5.2s!important}.on .a4{animation-delay:5.5s!important}.on .a5{animation-delay:5.7s!important}.on .a6{animation-delay:6.1s!important}
+.follow{display:flex;flex-wrap:wrap;gap:10px}
+.follow span{font-size:clamp(12px,1vw,15px);padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.on .follow .f0{animation:chipIn .6s var(--spring) 6.5s both} .on .follow .f1{animation:chipIn .6s var(--spring) 6.7s both}
+/* problem / solution / value / offer */
+.problem .grid4 .card{background:rgba(58,10,22,.72)}
+.cost{display:flex;align-items:center;gap:12px;margin-top:4vh;font-size:clamp(15px,1.5vw,23px);font-weight:600;color:#FFD9D4;background:rgba(217,45,32,.14);border:1px solid rgba(240,120,105,.35);padding:14px 22px;border-radius:16px;justify-self:start}
+.cost .ic{color:#F97066;transform:scaleY(-1)}
+.ba{display:grid;gap:1.6vh}
+.ba__h,.ba li{display:grid;grid-template-columns:minmax(0,1fr) 90px minmax(0,1.25fr);align-items:center;gap:1vw}
+.ba__h{margin:0;font-size:clamp(13px,1.1vw,16px);font-weight:700;color:var(--mute)} .ba__h span:last-child{color:var(--g)}
+.ba ol{list-style:none;margin:0;padding:0;display:grid;gap:2.2vh}
+.was{font-size:clamp(14px,1.35vw,21px);color:#8A6A66;background:#FBEDEB;border:1px solid #F4D3CE;border-radius:16px;padding:2.4vh 1.4vw;text-decoration:line-through 2px;text-decoration-color:transparent}
+.now{display:flex;align-items:center;gap:12px;font-size:clamp(14px,1.35vw,21px);font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:16px;padding:2.4vh 1.4vw;box-shadow:0 20px 40px -30px rgba(52,0,6,.5)} .now .ic{color:var(--g);width:22px;height:22px}
+.arrow{height:3px;background:linear-gradient(270deg,#E9B4AE,var(--g));border-radius:3px;position:relative;transform-origin:100% 50%}
+.arrow:after{content:"";position:absolute;left:-2px;top:50%;width:12px;height:12px;border-left:3px solid var(--g);border-bottom:3px solid var(--g);transform:translateY(-50%) rotate(45deg)}
+.slide:not(.on) .ba li>*{opacity:0}
+.on .ba .was{animation:rise .7s var(--e) both,strike .5s var(--e) forwards;animation-delay:calc(var(--k)*600ms + 300ms),calc(var(--k)*600ms + 900ms)}
+.on .ba .arrow{animation:arrowIn .5s var(--e) both;animation-delay:calc(var(--k)*600ms + 800ms)}
+.on .ba .now{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--k)*600ms + 1100ms)}
+@keyframes arrowIn{from{transform:scaleX(0);opacity:0}to{transform:none;opacity:1}}
+@keyframes strike{to{text-decoration-color:#D9827A;color:#A88480}}
+.val ul{list-style:none;margin:0;padding:0;display:grid;gap:1.4vh}
+.val li{position:relative;padding-inline-start:26px;font-size:clamp(14px,1.25vw,19px);line-height:1.65;color:var(--soft)}
+.val li:before{content:"";position:absolute;inset-inline-start:0;top:.5em;width:14px;height:14px;border-radius:50%;background:#FCE3EE;box-shadow:inset 0 0 0 4px var(--g)}
+.band{display:flex;align-items:center;gap:12px;justify-self:center;margin-top:4vh;font-size:clamp(16px,1.6vw,25px);font-weight:700;color:#fff;background:linear-gradient(90deg,var(--gd),var(--g));padding:14px 28px;border-radius:999px;box-shadow:0 24px 50px -24px rgba(114,0,13,.8)}
+.band .ic{color:var(--gold)}
+.tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.2vw}
+.tile{display:grid;gap:8px;align-content:start;background:#fff;border:1px solid var(--line);border-radius:20px;padding:2.6vh 1.2vw;box-shadow:0 24px 50px -36px rgba(52,0,6,.5);transition:transform .3s var(--e)}
+.tile:hover{transform:translateY(-4px)}
+.tile .ic{width:30px;height:30px;color:var(--g);padding:9px;box-sizing:content-box;background:#FCE6EF;border-radius:12px}
+.tile b{font-size:clamp(15px,1.4vw,21px)} .tile small{font-size:clamp(12px,1.05vw,16px);color:var(--soft);line-height:1.5}
+.slide:not(.on) .tile{opacity:0}
+.on .tile{animation:popIn .7s var(--spring) both;animation-delay:calc(var(--d)*80ms)}
+.on .tile:nth-child(8){animation:popIn .7s var(--spring) both,ring 3s ease-in-out 2s infinite;animation-delay:calc(var(--d)*80ms),2s;border-color:#F4B2AB}
+.tile:nth-child(8) .ic{color:#D92D20;background:#FDECEA}
+.chip.live{color:#067647}.dotlive{width:9px;height:9px;border-radius:50%;background:#17B26A;box-shadow:0 0 0 0 rgba(23,178,106,.5);animation:livep 1.8s ease-out infinite}
+@keyframes livep{70%,100%{box-shadow:0 0 0 8px rgba(23,178,106,0)}}
+/* chrome */
+.progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:10;background:rgba(200,120,150,.18)}
+.progress i{position:absolute;inset-block:0;right:0;background:linear-gradient(270deg,var(--g),var(--gold));transition:width .8s var(--e)}
+.ctrl{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:8px;padding:6px;border-radius:999px;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border:1px solid rgba(239,219,227,.9);box-shadow:0 14px 40px -18px rgba(52,0,6,.45)}
+body[data-tone=dark] .ctrl{background:rgba(40,8,16,.8);border-color:#4A1826}
+.ctrl button{all:unset;cursor:pointer;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--gd);transition:background .2s}
+.ctrl button:hover{background:rgba(163,22,79,.12)} .ctrl button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+body[data-tone=dark] .ctrl button{color:#F8DCE7}
+.ctrl .count{min-width:70px;text-align:center;font-size:14px;font-weight:600;color:var(--soft);font-variant-numeric:tabular-nums;direction:ltr}
+body[data-tone=dark] .ctrl .count{color:#D7AFBF}
+.brand{position:fixed;top:18px;right:24px;z-index:10;display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--gd);text-decoration:none}
+body[data-tone=dark] .brand{color:#F8DCE7}
+.brand svg{width:30px;height:30px}
+.brand img.wt{height:26px;width:auto}
+.wtlogo{width:clamp(120px,12vw,200px);height:auto;display:block}
+.wtlogo.big{width:clamp(170px,17vw,280px);margin-bottom:2vh}
+.on .wtlogo{animation:wtIn 1.2s var(--e) .2s both,wtGlow 3.2s ease-in-out 1.6s infinite}
+@keyframes wtIn{from{opacity:0;clip-path:inset(0 0 0 100%);transform:translateX(30px)}to{opacity:1;clip-path:inset(0);transform:none}}
+@keyframes wtGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(249,20,149,0))}50%{filter:drop-shadow(0 0 14px rgba(249,20,149,.55))}}
+.title.en{direction:ltr;font-size:clamp(46px,6.2vw,104px)}
+.slide.cards4 .grid4 .card .num{font:700 clamp(26px,2.6vw,42px)/1 'IBM Plex Sans Arabic',sans-serif;color:var(--g)}
+.dark .ic.lg{background:#4A0B1C;color:#FF8CC6}
+.dark .eye{color:#FF8CC6}
+.pulse{fill:#F91495}
+/* responsive */
+@media (max-width: 900px){
+ .slide{padding:9vh 6vw 13vh;align-content:start;overflow-y:auto}
+ .cover,.shot,.ai{grid-template-columns:1fr;gap:3vh} .typed{white-space:normal}
+ .cover .stage3d,.shot .stage3d{order:2}
+ .grid3,.grid4,.flowmap,.tl ol{grid-template-columns:1fr} .tiles{grid-template-columns:1fr 1fr} .ba__h{display:none} .ba li{grid-template-columns:1fr;gap:8px} .arrow{display:none}
+ .steps{grid-template-columns:repeat(3,1fr);row-gap:3vh} .rail{display:none}
+ .pair{grid-template-columns:1fr} .chip{display:none}
+ .devs{height:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3vw} .devs .laptop{position:static;width:auto;grid-column:1/-1} .phone{position:static;width:auto;transform:none}
+ .head{max-width:none} .wires{display:none} .tlrail{display:none}
+}
+@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation:none!important;transition:none!important} .slide:not(.on) *{opacity:1!important} .mk-line{stroke-dashoffset:0} .mk-dot{transform:none} .under{background-size:100% 8px}}
+</style>
+</head>
+<body data-tone="dark">
+<div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+<a class="brand" href="https://maazmajid.com/ems/" aria-label="WaveTech"><img src="img/wtmark.png" alt="" class="wt">WaveTech</a>
+<main class="deck" id="deck">
+<section class="slide cover dark" aria-label="WaveTech EMS Intelligence">
+<div class="txt">
+<img class="wtlogo" src="img/wtmark.png" alt="WaveTech">
+<p class="eye r" style="--d:2">WaveTech · طبقة تحليلية فوق Wave</p>
+<h1 class="title en"><span style="--d:3">EMS</span> <span style="--d:4">Intelligence</span></h1>
+<p class="lede r" style="--d:7">من البلاغ إلى المستشفى، كل دقيقة محسوبة.</p>
+<p class="hint r" style="--d:10"><kbd>←</kbd> أو المسافة للتالي</p>
+</div>
+<div class="stage3d float"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/cmd.jpg?v=202611250130" alt="مركز القيادة التنفيذي"></figure></div>
+</section>
+<section class="slide problem dark" aria-label="المشكلة">
+<div class="head"><p class="eye r" style="--d:0">المشكلة</p><h2 class="r" style="--d:1">الدقائق تضيع، ولا أحد يراها في وقتها</h2><p class="lede r" style="--d:2">في الإسعاف كل دقيقة لها ثمن، ومع ذلك تُقرأ الأرقام بعد أن ينتهي الشهر:</p></div>
+<div class="grid4"><article class="card flip" style="--d:4"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><h3>البيانات موجودة، والصورة غائبة</h3><p>كل بلاغ وتقرير محفوظ في Wave، لكن كل سؤال من الإدارة يعني استعلاماً وتقريراً يدوياً.</p></article><article class="card flip" style="--d:6"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>المتوسط يخفي المتأخر</h3><p>الرقم العام يبدو مريحاً، والحالة الحرجة التي وصلناها متأخرين لا تظهر فيه.</p></article><article class="card flip" style="--d:8"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg><h3>النقص يُكتشف متأخراً</h3><p>توقيت عودة النبض أو مستلم المريض في المستشفى ينقص، ولا يُعرف إلا عند التدقيق.</p></article><article class="card flip" style="--d:10"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><h3>الامتثال عمل يدوي</h3><p>NEMSIS والملف السعودي يحتاجان ربط حقول وتحققاً، تقريراً بعد تقرير.</p></article></div>
+<p class="cost r" style="--d:13"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>والنتيجة: تأخير في الطريق والتسليم يتكرر، لأنه لا يظهر إلا بعد أسابيع.</p>
+</section>
+<section class="slide solve light" aria-label="الحل">
+<div class="head"><p class="eye r" style="--d:0">الحل</p><h2 class="r" style="--d:1">من بيانات محفوظة إلى قرار في وقته</h2></div>
+<div class="ba"><p class="ba__h"><span>اليوم</span><span></span><span>مع WaveTech</span></p><ol><li style="--k:0"><span class="was">تقرير يدوي لكل سؤال</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>شاشات حيّة من بيانات Wave تتحدث تلقائياً، لكل دور ما يخصه</span></li><li style="--k:1"><span class="was">متوسط يخفي الحالات المتأخرة</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>الزمن المعتاد وزمن 90% من البلاغات، مقابل المستهدف لكل مستوى فرز ومدينة</span></li><li style="--k:2"><span class="was">نقص التوثيق يظهر عند التدقيق</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>مراجع ذكي يقرأ نص المسعف ويقترح التصحيح، والطاقم يعتمد</span></li><li style="--k:3"><span class="was">امتثال يدوي تقريراً بتقرير</span><span class="arrow" aria-hidden="true"></span><span class="now"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>قاموس بيانات مربوط بـ NEMSIS v3.5 والملف السعودي، وقواعد تحقق تلقائية</span></li></ol></div>
+</section>
+<section class="slide idea mint" aria-label="الفكرة">
+<div class="head"><p class="eye r" style="--d:0">الفكرة</p><h2 class="r" style="--d:1">لا نظام جديد، بل طبقة فوق ما تملكونه</h2><p class="lede r" style="--d:2">تبقى Wave كما هي عند الطواقم. الطبقة تقرأ منها، وتنظّف وتربط، ثم تعرض لكل دور ما يحتاجه.</p></div>
+<div class="flowmap">
+<svg class="wires" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+<path id="w1" d="M1080 150 C 960 150 900 150 780 150"/><path id="w2" d="M600 150 C 500 150 420 150 320 150"/>
+<circle r="7" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#w1"/></animateMotion></circle>
+<circle r="7" class="pulse"><animateMotion dur="2.4s" repeatCount="indefinite" begin="2.4s"><mpath href="#w2"/></animateMotion></circle>
+</svg>
+<article class="node n1 pop" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><h3>Wave</h3><p>البلاغات وتقارير ePCR كما تُسجَّل اليوم. لا تغيير على الطواقم.</p></article>
+<article class="node n2 pop gate" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5"/></svg><h3>طبقة WaveTech</h3><p>تربط كل حقل بـ NEMSIS والملف السعودي، وتتحقق من كل تقرير.</p><span class="gatebadge">طبقة البيانات</span></article>
+<article class="node n3 pop" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><h3>القرار</h3><p>القيادة والعمليات والجودة، كل دور يرى شاشاته وأرقامه.</p></article>
+</div>
+</section>
+<section class="slide journey light" aria-label="رحلة البلاغ">
+<div class="head"><p class="eye r" style="--d:0">رحلة البلاغ</p><h2 class="r" style="--d:1">كل مرحلة من البلاغ لها ساعة</h2><p class="lede r" style="--d:2">الزمن المعتاد لكل مرحلة في منطقة الرياض، من الاستلام حتى إتمام التسليم.</p></div>
+<div class="track"><div class="rail"><i class="runner"></i></div><ol class="steps"><li class="step" style="--k:0"><span class="dotn">1</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><b>استلام البلاغ</b><small>والفرز حسب CTAS</small></li><li class="step" style="--k:1"><span class="dotn">2</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg><b>الإسناد</b><small>1.1 دقيقة معتادة</small></li><li class="step" style="--k:2"><span class="dotn">3</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h11v10H2zM13 10h4l4 4v3h-8z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/><path d="M7.5 9.5v5M5 12h5"/></svg><b>الانطلاق</b><small>0.9 دقيقة</small></li><li class="step" style="--k:3"><span class="dotn">4</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><b>الطريق للموقع</b><small>9.4 دقيقة</small></li><li class="step" style="--k:4"><span class="dotn">5</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/><path d="M3.5 12h4l2-3 3 6 2-3h6"/></svg><b>في الموقع والنقل</b><small>12.6 ثم 14.1 دقيقة</small></li><li class="step" style="--k:5"><span class="dotn">6</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M12 7v6M9 10h6M10 21v-4h4v4"/></svg><b>التسليم</b><small>13.0 دقيقة</small></li></ol></div>
+</section>
+<section class="slide shot light" aria-label="الوردية تبدأ بملخص مكتوب">
+<div class="txt">
+<p class="tag r" style="--d:0">مركز القيادة</p>
+<p class="eye r" style="--d:1">المدير التنفيذي</p>
+<h2 class="r" style="--d:2">الوردية تبدأ بملخص مكتوب</h2>
+<p class="lede r" style="--d:4">يُكتب تلقائياً من بيانات Wave ويراجعه مشرف المناوبة، ثم يعرض ما تغيّر عن الليلة السابقة وأين تبدأ.</p>
+<ul class="pts"><li style="--d:6">أكبر تغيير أولاً، ومن أين تبدأ</li><li style="--d:7">يُسمع في 40 ثانية أو يُرسل للمدير</li><li style="--d:8">كل رقم يفتح ما خلفه</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/cmd.jpg?v=202611250130" alt="ملخص بداية الوردية" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>آخر تحديث 08:42</span><span class="chip alert" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>التسليم (أ) صار أبطأ 8 دقائق</span></div>
+</section>
+<section class="slide shot light stats" aria-label="المؤشرات">
+<div class="txt">
+<p class="tag r" style="--d:0">مركز القيادة</p><p class="eye r" style="--d:1">المؤشرات</p>
+<h2 class="r" style="--d:2">أربعة أرقام تقول أين نقف</h2>
+<p class="lede r" style="--d:3">كل رقم بجملة يفهمها الجميع، ومقابل مستهدفه، وما تغيّر عن الشهر الماضي.</p>
+<div class="kpis">
+<div class="kpi good r" style="--d:5"><b data-count="11.4" data-dec="1">0</b><span>دقيقة: الزمن المعتاد للاستجابة</span></div>
+<div class="kpi bad r" style="--d:6"><b data-count="78" data-suf="%">0%</b><span>الحالات الحرجة ضمن المستهدف</span></div>
+<div class="kpi good r" style="--d:7"><b data-count="91.2" data-dec="1" data-suf="%">0%</b><span>اكتمال تقارير ePCR</span></div>
+<div class="kpi info r" style="--d:8"><b data-count="84" data-suf="%">0%</b><span>التسليم خلال 30 دقيقة</span></div>
+</div>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/kpis.jpg?v=202611250130" alt="مؤشرات مركز القيادة" loading="lazy"></figure><span class="chip c0 live" style="--d:10"><i class="dotlive"></i>متصل بنظام Wave · قبل دقيقتين</span></div>
+</section>
+<section class="slide shot mint" aria-label="المملكة بـ 13 منطقة، ثم المراكز">
+<div class="txt">
+<p class="tag r" style="--d:0">العمليات</p>
+<p class="eye r" style="--d:1">الخريطة التشغيلية</p>
+<h2 class="r" style="--d:2">المملكة بـ 13 منطقة، ثم المراكز</h2>
+<p class="lede r" style="--d:4">اختر المؤشر: حجم البلاغات أو زمن الاستجابة أو الجاهزية، ثم افتح المنطقة لترى مراكزها.</p>
+<ul class="pts"><li style="--d:6">ترتيب المناطق بجانب الخريطة</li><li style="--d:7">افتح الرياض وشاهد 42 مركزاً</li><li style="--d:8">تتبّع آخر بلاغ لأي مركز</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/map.jpg?v=202611250130" alt="الخريطة التشغيلية" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>13 منطقة · 270 مركزاً</span></div>
+</section>
+<section class="slide shot light" aria-label="أين تضيع الدقائق؟">
+<div class="txt">
+<p class="tag r" style="--d:0">العمليات</p>
+<p class="eye r" style="--d:1">البلاغات والاستجابة</p>
+<h2 class="r" style="--d:2">أين تضيع الدقائق؟</h2>
+<p class="lede r" style="--d:4">زمن كل مرحلة، وزمن الاستجابة لكل مستوى فرز ولكل مدينة، مقابل المستهدف.</p>
+<ul class="pts"><li style="--d:6">CTAS II فوق المستهدف بالليل</li><li style="--d:7">الحالات الاستثنائية: إلغاء ورفض نقل</li><li style="--d:8">خريطة حرارية: يوم الأسبوع × الساعة</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/dispatch.jpg?v=202611250130" alt="شاشة البلاغات والاستجابة" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>الطريق للموقع 9.4 دقيقة</span></div>
+</section>
+<section class="slide duo mint" aria-label="الأسطول والتنبيهات">
+<div class="head"><p class="tag r" style="--d:0">العمليات</p><p class="eye r" style="--d:1">الأسطول والتنبيهات</p><h2 class="r" style="--d:2">ما يحتاج تدخلاً الآن، قبل أن يصير تأخيراً</h2><p class="lede r" style="--d:3">كل مركبة في مربع بحالتها. والتنبيهات مرتبة حسب الخطورة، وعدّادها يسخن كلما طال الوقت.</p></div>
+<div class="pair">
+<figure class="frame tiltR" style="--d:5"><div class="bar"><i></i><i></i><i></i><span>الأسطول والفرق</span></div><img src="img/fleet.jpg?v=202611250130" alt="الأسطول والفرق" loading="lazy"></figure>
+<figure class="frame tiltL" style="--d:8"><div class="bar"><i></i><i></i><i></i><span>التنبيهات</span></div><img src="img/alerts.jpg?v=202611250130" alt="مركز التنبيهات" loading="lazy"></figure>
+<span class="chip alert" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>مركز الخرج 3 بلا إسعاف: 0 من 3 متاحة</span>
+</div>
+</section>
+<section class="slide gate dark" aria-label="الطبقة السريرية">
+<div class="gatefx" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="center">
+<p class="eye r" style="--d:0">السريري والجودة</p>
+<h1 class="big r" style="--d:2">كل تقرير <span class="under">موثّق ومُتحقق منه</span></h1>
+<p class="lede r" style="--d:5">من هنا تبدأ شاشات المسارات الحرجة والتسليم والجودة.</p>
+</div>
+</section>
+<section class="slide shot light" aria-label="توقف القلب والجلطات والإصابات، حلقة بحلقة">
+<div class="txt">
+<p class="tag r" style="--d:0">السريري</p>
+<p class="eye r" style="--d:1">المسارات الحرجة</p>
+<h2 class="r" style="--d:2">توقف القلب والجلطات والإصابات، حلقة بحلقة</h2>
+<p class="lede r" style="--d:4">سلسلة الرعاية لكل مسار مع نسبة تحقق كل خطوة، والأزمنة الحرجة مقابل المستهدف.</p>
+<ul class="pts"><li style="--d:6">أضعف حلقة تظهر أولاً</li><li style="--d:7">الاتجاه خلال 6 أشهر</li><li style="--d:8">قراءة تحليلية تُولد من البيانات</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/pathways.jpg?v=202611250130" alt="المسارات السريرية الحرجة" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/><path d="M3.5 12h4l2-3 3 6 2-3h6"/></svg>عودة النبض 24% · +3 نقاط</span><span class="chip alert" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>الإنعاش من المارة 31%، والمستهدف 50%</span></div>
+</section>
+<section class="slide shot mint" aria-label="كم ينتظر الطاقم عند الطوارئ؟">
+<div class="txt">
+<p class="tag r" style="--d:0">السريري</p>
+<p class="eye r" style="--d:1">التسليم للمستشفى</p>
+<h2 class="r" style="--d:2">كم ينتظر الطاقم عند الطوارئ؟</h2>
+<p class="lede r" style="--d:4">توزيع زمن التسليم، ومآلات المرضى من الربط مع أنظمة المستشفيات، وأداء كل مستشفى.</p>
+<ul class="pts"><li style="--d:6">16% من التسليمات فوق 30 دقيقة</li><li style="--d:7">التنبيه المسبق للمستشفى 61%</li><li style="--d:8">مآل المريض: تنويم أو عناية أو خروج</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/handover.jpg?v=202611250130" alt="التسليم للمستشفى" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M12 7v6M9 10h6M10 21v-4h4v4"/></svg>المستشفى (أ): 21% فوق 30 دقيقة</span></div>
+</section>
+<section class="slide shot light" aria-label="جاهزية NEMSIS v3.5 والملف السعودي في شاشة">
+<div class="txt">
+<p class="tag r" style="--d:0">الجودة</p>
+<p class="eye r" style="--d:1">جودة التقارير والامتثال</p>
+<h2 class="r" style="--d:2">جاهزية NEMSIS v3.5 والملف السعودي في شاشة</h2>
+<p class="lede r" style="--d:4">اكتمال ePCR، والامتثال للملف السعودي، وجاهزية التصدير، والتغطية لكل دومين من 26.</p>
+<ul class="pts"><li style="--d:6">404 حقول مربوطة بمصدرها في Wave</li><li style="--d:7">أكثر قواعد التحقق فشلاً</li><li style="--d:8">الاكتمال حسب نوع الحالة</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/quality.jpg?v=202611250130" alt="جودة التقارير والامتثال" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>اكتمال ePCR 91.2%</span><span class="chip c1" style="--d:12"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>2,214 من 2,600 تجتاز التحقق</span></div>
+</section>
+<section class="slide shot light" aria-label="كل تقرير ePCR، ورحلة حالته">
+<div class="txt">
+<p class="tag r" style="--d:0">الجودة</p>
+<p class="eye r" style="--d:1">جميع التقارير</p>
+<h2 class="r" style="--d:2">كل تقرير ePCR، ورحلة حالته</h2>
+<p class="lede r" style="--d:4">ابحث برقم التقرير أو المدينة أو الشكوى، ورتّب حسب الأحدث أو الأقل اكتمالاً، وصدّر CSV.</p>
+<ul class="pts"><li style="--d:6">حالة كل تقرير: مكتمل، مسودة، معدّل</li><li style="--d:7">نسبة الاكتمال لكل تقرير</li><li style="--d:8">رحلة الحالة من الاستلام للتسليم</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/records.jpg?v=202611250130" alt="جميع تقارير ePCR" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>196 مسودة تحتاج إكمال</span></div>
+</section>
+<section class="slide ai dark" aria-label="اسأل ويف">
+<div class="txt">
+<p class="tag r" style="--d:0">الذكاء الاصطناعي</p>
+<p class="eye r" style="--d:1">اسأل ويف</p>
+<h2 class="r" style="--d:2">اسأل بلغتك، والجواب من أرقام Wave</h2>
+<p class="lede r" style="--d:4">ويف يقرأ من نفس المؤشرات التي تعرضها الشاشات، فأي رقم يقوله تجده في صفحته.</p>
+<ul class="pts"><li style="--d:6">يذكر من أين أخذ كل رقم</li><li style="--d:7">يقترح إجراءً، والمشرف يعتمد</li><li style="--d:8">يقترح السؤال التالي</li></ul>
+</div>
+<div class="chat" aria-hidden="true">
+<div class="q"><span class="typed">ليش الخرج أبطأ بعد الساعة 8 مساءً؟</span></div>
+<div class="reads"><small>يقرأ من</small><div class="tools"><span class="tool use" style="--t:0"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5"/></svg>الاستجابة حسب المدينة</span><span class="tool use" style="--t:1"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>الوردية الليلية</span><span class="tool use" style="--t:2"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h11v10H2zM13 10h4l4 4v3h-8z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/><path d="M7.5 9.5v5M5 12h5"/></svg>جاهزية الأسطول</span><span class="tool use" style="--t:3"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>توقع 12 ساعة</span><span class="tool" style="--t:4"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>تفاصيل البلاغات</span><span class="tool" style="--t:5"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10.3 20a2 2 0 0 0 3.4 0"/></svg>التنبيهات</span></div></div>
+<div class="ans">
+<p class="a0"><b>حالات CTAS II في الخرج بعد 8 مساءً وسيطها 14.2 دقيقة مقابل 10.2 للمنطقة، في 47 حالة.</b></p>
+<p class="a1 h">السبب</p>
+<p class="a2 li">3 من 6 مراكز فيها مركبة متاحة واحدة أو أقل.</p>
+<p class="a3 li">AMB-KHJ-07 في الورشة منذ 52 ساعة.</p>
+<p class="a4 h">المقترح</p>
+<p class="a5 li">حرّك AMB-KHJ-01 إلى STN-KHJ-03 قبل 17:30، فترتفع التغطية من 81% إلى 94%.</p>
+<p class="a6 src"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5"/></svg>من: الاستجابة حسب المدينة، جاهزية الأسطول، توقع 12 ساعة</p>
+</div>
+<div class="follow"><span class="f0">أي المراكز أعلى ضغطاً؟</span><span class="f1">وش يصير لو أجّلنا صيانة AMB-KHJ-12؟</span></div>
+</div>
+</section>
+<section class="slide shot mint" aria-label="نعرف الذروة قبل أن تصل">
+<div class="txt">
+<p class="tag r" style="--d:0">الذكاء الاصطناعي</p>
+<p class="eye r" style="--d:1">توقع الـ 12 ساعة الجاية</p>
+<h2 class="r" style="--d:2">نعرف الذروة قبل أن تصل</h2>
+<p class="lede r" style="--d:4">البلاغات المتوقعة ساعة بساعة، من 3 سنوات من بيانات Wave والمواسم والفعاليات، مقابل سعة الأسطول.</p>
+<ul class="pts"><li style="--d:6">اقتراح جاهز: أي مركبة تتحرك ومتى</li><li style="--d:7">كل اقتراح يحتاج اعتماد المشرف</li><li style="--d:8">دقة آخر 30 يوماً: 91% ضمن ±8 بلاغات</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/forecast.jpg?v=202611250130" alt="توقع الـ 12 ساعة الجاية" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>18:00 · متوقع 126 بلاغاً، فوق السعة</span></div>
+</section>
+<section class="slide shot light" aria-label="يقرأ ما كتبه المسعف ويقارنه بالحقول">
+<div class="txt">
+<p class="tag r" style="--d:0">الذكاء الاصطناعي</p>
+<p class="eye r" style="--d:1">مراجع التقارير الذكي</p>
+<h2 class="r" style="--d:2">يقرأ ما كتبه المسعف ويقارنه بالحقول</h2>
+<p class="lede r" style="--d:4">كتب المسعف «أُعطي أدرينالين» وحقل الأدوية فاضي؟ يقترح ويف الإضافة، والطاقم يعتمد ويوقّع.</p>
+<ul class="pts"><li style="--d:6">41 تعارضاً مفتوحاً من 2,600 تقرير</li><li style="--d:7">الاكتمال بعد التصحيح 93.4%</li><li style="--d:8">لا يُعدّل أي تقرير تلقائياً</li></ul>
+</div>
+<div class="stage3d"><figure class="frame"><div class="bar"><i></i><i></i><i></i><span>WaveTech · EMS Intelligence</span></div><img src="img/reviewer.jpg?v=202611250130" alt="مراجع التقارير الذكي" loading="lazy"></figure><span class="chip c0" style="--d:10"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 5.5L19.5 10 14 12l-2 6-2-6-5.5-2L10 8.5z"/></svg>اقتراح: CTAS I وفتح نموذج eArrest</span></div>
+</section>
+<section class="slide cards4 light" aria-label="ذكاء تحت السيطرة">
+<div class="head"><p class="eye r" style="--d:0">الذكاء الاصطناعي</p><h2 class="r" style="--d:1">ذكاء تحت السيطرة</h2><p class="lede r" style="--d:2">يساعد الفرق على الفهم والتحرك، ولا يقرر بدلها.</p></div>
+<div class="grid4"><article class="card flip" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg><h3>يقترح ولا ينفّذ</h3><p>كل اقتراح بتحريك مركبة أو تفعيل فريق يحتاج اعتماد المشرف.</p></article><article class="card flip" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>لا يغيّر تقريراً</h3><p>كل تصحيح يرجع للطاقم للتوقيع، ويُسجَّل في سجل التدقيق.</p></article><article class="card flip" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><h3>أرقامه أرقام الشاشات</h3><p>يقرأ من نفس المؤشرات المعروضة، ويذكر مصدر كل رقم.</p></article><article class="card flip" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><h3>دقته معلنة</h3><p>دقة التوقع في آخر 30 يوماً معروضة على الشاشة نفسها.</p></article></div>
+</section>
+<section class="slide devices mint" aria-label="في كل مكان">
+<div class="head"><p class="eye r" style="--d:0">في كل مكان</p><h2 class="r" style="--d:1">لغتان، ووضعان، وكل الشاشات</h2></div>
+<div class="devs">
+<figure class="frame laptop" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>English · Dark</span></div><img src="img/endark.jpg?v=202611250130" alt="الواجهة بالإنجليزي والوضع الداكن" loading="lazy"></figure>
+<figure class="phone p1" style="--d:6"><img src="img/m1.jpg?v=202611250130" alt="ملخص الوردية على الجوال" loading="lazy"></figure>
+<figure class="phone p2" style="--d:8"><img src="img/m2.jpg?v=202611250130" alt="التنبيهات على الجوال" loading="lazy"></figure>
+<figure class="phone p3" style="--d:10"><img src="img/m3.jpg?v=202611250130" alt="التسليم للمستشفى على الجوال" loading="lazy"></figure>
+</div>
+</section>
+<section class="slide value light" aria-label="القيمة">
+<div class="head"><p class="eye r" style="--d:0">القيمة</p><h2 class="r" style="--d:1">دقائق أقل في الطريق، وقرار في وقته</h2></div>
+<div class="grid3"><article class="card flip val" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><h3>للقيادة</h3><ul><li>صورة واحدة موثوقة لكل الوردية</li><li>ترى المتأخر، لا المتوسط فقط</li><li>تعرف أين تبدأ كل صباح</li></ul></article><article class="card flip val" style="--d:6"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h11v10H2zM13 10h4l4 4v3h-8z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/><path d="M7.5 9.5v5M5 12h5"/></svg><h3>لمركز العمليات</h3><ul><li>يرى نقص التغطية قبل الذروة</li><li>تنبيهات مرتبة حسب الخطورة</li><li>اقتراح جاهز بالمركبة والتوقيت</li></ul></article><article class="card flip val" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h3>لمشرف الجودة</h3><ul><li>يعرف ما ينقص قبل التدقيق</li><li>الامتثال للملف السعودي في شاشة</li><li>تصحيح بنقرة، والطاقم يوقّع</li></ul></article></div>
+<p class="band r" style="--d:13"><svg class="ic sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>الأرقام تصل الفرق خلال الوردية، لا بعد نهاية الشهر.</p>
+</section>
+<section class="slide offer mint" aria-label="ما تقدمه WaveTech">
+<div class="head"><p class="eye r" style="--d:0">ما تقدمه WaveTech</p><h2 class="r" style="--d:1">عشر شاشات فوق Wave، من البلاغ إلى الجودة</h2><p class="lede r" style="--d:2">كل شاشة لها دور، وكل رقم له مصدر.</p></div>
+<ol class="tiles"><li class="tile" style="--d:3"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><b>ملخص الوردية</b><small>مكتوب ومراجع</small></li><li class="tile" style="--d:4"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><b>مؤشرات الأداء</b><small>مقابل المستهدف</small></li><li class="tile" style="--d:5"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><b>الخريطة التشغيلية</b><small>13 منطقة ومراكزها</small></li><li class="tile" style="--d:6"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><b>البلاغات والاستجابة</b><small>زمن كل مرحلة</small></li><li class="tile" style="--d:7"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h11v10H2zM13 10h4l4 4v3h-8z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/><path d="M7.5 9.5v5M5 12h5"/></svg><b>الأسطول والفرق</b><small>كل مركبة بحالتها</small></li><li class="tile" style="--d:8"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/><path d="M3.5 12h4l2-3 3 6 2-3h6"/></svg><b>المسارات الحرجة</b><small>حلقة بحلقة</small></li><li class="tile" style="--d:9"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M12 7v6M9 10h6M10 21v-4h4v4"/></svg><b>التسليم للمستشفى</b><small>ومآلات المرضى</small></li><li class="tile" style="--d:10"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10.3 20a2 2 0 0 0 3.4 0"/></svg><b>التنبيهات</b><small>قبل أن تتأخر</small></li><li class="tile" style="--d:11"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><b>جودة التقارير</b><small>NEMSIS والملف السعودي</small></li><li class="tile" style="--d:12"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b>اسأل ويف</b><small>يجاوب بالأرقام ومصدرها</small></li></ol>
+</section>
+<section class="slide cards4 dark" aria-label="ضوابط مبنية في الطبقة، لا في التعليمات">
+<div class="head"><p class="eye r" style="--d:0">الثقة</p><h2 class="r" style="--d:1">ضوابط مبنية في الطبقة، لا في التعليمات</h2></div>
+<div class="grid4"><article class="card flip" style="--d:3"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg><h3>صلاحيات حسب الدور</h3><p>المدير التنفيذي والجودة والعمليات وفريق البيانات، كل دور يرى شاشاته.</p></article><article class="card flip" style="--d:5"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><h3>NEMSIS v3.5 والملف السعودي</h3><p>قاموس بيانات يربط كل حقل بمصدره، وCTAS أساس الفرز.</p></article><article class="card flip" style="--d:7"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg><h3>سجل تدقيق</h3><p>كل تصحيح وكل اعتماد مسجّل: من، ومتى، وماذا.</p></article><article class="card flip" style="--d:9"><svg class="ic lg" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><h3>Wave لا يتغيّر</h3><p>الطبقة تقرأ من Wave، والطواقم تعمل كما تعمل اليوم.</p></article></div>
+</section>
+<section class="slide plan light" aria-label="الخطوات القادمة">
+<div class="head"><p class="eye r" style="--d:0">الخطوات القادمة</p><h2 class="r" style="--d:1">من النموذج إلى التشغيل في أربع مراحل</h2></div>
+<div class="tl"><div class="tlrail"><i></i></div><ol><li style="--k:0"><span class="when">المرحلة 1</span><b>ربط Wave</b><small>قراءة البيانات وربط الحقول بالقاموس</small></li><li style="--k:1"><span class="when">المرحلة 2</span><b>قواعد التحقق</b><small>الحقول الإلزامية والشرطية للملف السعودي</small></li><li style="--k:2"><span class="when">المرحلة 3</span><b>الشاشات والأدوار</b><small>بيانات حقيقية وصلاحيات لكل دور</small></li><li style="--k:3"><span class="when">المرحلة 4</span><b>التشغيل</b><small>تدريب الفرق ومتابعة أول شهر معكم</small></li></ol></div>
+</section>
+<section class="slide close dark" aria-label="شكرًا">
+<div class="center">
+<img class="wtlogo big" src="img/wtmark.png" alt="WaveTech">
+<h1 class="big r" style="--d:2">شكرًا</h1>
+<p class="lede r" style="--d:4">جرّبوا النموذج</p>
+<a class="cta r" style="--d:6" href="https://maazmajid.com/ems/" rel="noopener">maazmajid.com/ems</a>
+<p class="by r" style="--d:8">نموذج تصميمي ببيانات اصطناعية</p>
+</div>
+</section>
+</main>
+<nav class="ctrl" aria-label="التنقل بين الشرائح">
+<button id="prev" aria-label="السابق"><svg class="ic" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+<span class="count" id="count" aria-live="polite">1 / 25</span>
+<button id="next" aria-label="التالي"><svg class="ic" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+<button id="fs" aria-label="ملء الشاشة"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')], N = slides.length;
+  const bar = document.getElementById('bar'), count = document.getElementById('count');
+  let i = 0;
+  const tone = s => s.classList.contains('dark') ? 'dark' : s.classList.contains('mint') ? 'mint' : 'light';
+  function countUp(s) {
+    s.querySelectorAll('[data-count]').forEach(el => {
+      const to = +el.dataset.count, suf = el.dataset.suf || '', dec = +(el.dataset.dec || 0), t0 = performance.now(), d = 1400;
+      const step = t => { const p = Math.min(1, (t - t0 - 500) / d), e = 1 - Math.pow(1 - Math.max(0, p), 3); el.textContent = (to * e).toFixed(dec) + suf; if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+  }
+  function go(n, dir) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n === i && slides[i].classList.contains('on')) return;
+    const old = slides[i];
+    old.classList.remove('on'); old.classList.add(dir > 0 ? 'out-back' : 'out-fwd');
+    setTimeout(() => old.classList.remove('out-back', 'out-fwd'), 900);
+    i = n; const s = slides[i];
+    // restart animations
+    s.classList.remove('on'); void s.offsetWidth; s.classList.add('on');
+    document.body.dataset.tone = tone(s);
+    bar.style.width = ((i + 1) / N * 100) + '%';
+    count.textContent = (i + 1) + ' / ' + N;
+    history.replaceState(null, '', '#' + (i + 1));
+    countUp(s);
+    const nx = slides[i + 1]; if (nx) nx.querySelectorAll('img[loading=lazy]').forEach(im => im.loading = 'eager');
+  }
+  const next = () => go(i + 1, 1), prev = () => go(i - 1, -1);
+  document.getElementById('next').onclick = next; document.getElementById('prev').onclick = prev;
+  document.getElementById('fs').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+  addEventListener('keydown', e => {
+    if (['ArrowLeft', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowRight', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') go(0, -1); else if (e.key === 'End') go(N - 1, 1);
+    else if (e.key === 'f') document.getElementById('fs').click();
+  });
+  let x0 = null;
+  addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) (dx > 0 ? next : prev)(); x0 = null; });
+  // gentle tilt that follows the pointer
+  addEventListener('pointermove', e => {
+    const f = slides[i].querySelector('.stage3d .frame'); if (!f || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rx = (0.5 - e.clientY / innerHeight) * 6, ry = 6 + (e.clientX / innerWidth - 0.5) * 8;
+    f.style.setProperty('--rx', rx.toFixed(2) + 'deg'); f.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+  });
+  const start = parseInt(location.hash.slice(1), 10);
+  i = start >= 1 && start <= N ? start - 1 : 0;
+  go(i, 1);
+})();
+</script>
+</body>
+</html>
