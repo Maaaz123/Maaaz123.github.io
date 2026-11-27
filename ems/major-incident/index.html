@@ -44,7 +44,7 @@ body{background:#E6E9EE;overflow:hidden;display:grid;place-items:center}
 <body>
 <div class="stage">
   <div class="device">
-    <div class="screen"><iframe src="app.html" title="شاشة المنسق"></iframe></div>
+    <div class="screen"><iframe id="app" title="شاشة المنسق"></iframe></div>
   </div>
 </div>
 <script>
@@ -57,6 +57,8 @@ function fit(){
   const s = Math.min(1, (innerWidth - 64) / w, (innerHeight - 64) / h);
   root.style.setProperty('--scale', s.toFixed(4));
 }
+// always load the latest app.html (the browser may keep an old copy of the framed page)
+document.getElementById('app').src = 'app.html?t=' + Date.now() + location.hash;
 addEventListener('resize', fit);
 fit();
 </script>
