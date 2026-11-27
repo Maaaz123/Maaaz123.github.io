@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الحدث الكبير — شاشة المنسق</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   Design tokens (shared — every component reads from here)
+   ========================================================= */
+:root{
+  --bg:#EEF1F6; --surface:#FFFFFF; --surface-2:#F7F8FB; --border:#E5E8EF;
+  --text:#1C2333; --text-2:#6B7280; --text-3:#9CA3AF;
+  --blue:#2F6BE8; --blue-bg:#EAF0FB;
+  --green:#2E9E5B; --green-bg:#E3F4EA;
+  --red:#E5484D; --red-bg:#FDE8E8;
+  --orange:#D9822B; --orange-bg:#FDEBD3;
+  --lav:#5B5BD6; --lav-bg:#E4E3FA;
+  --chip:#F1F3F7; --chip-text:#4B5563;
+  /* unit status colors */
+  --s-to-staging:#F59E0B; --s-staging:#2E9E5B; --s-to-scene:#2F6BE8;
+  --s-transport:#7C5CDB; --s-hospital:#0EA5A4; --s-released:#94A3B8; --s-broken:#E5484D;
+  /* triage */
+  --t-red:#E5484D; --t-yellow:#EAB308; --t-green:#2E9E5B; --t-black:#1F2937;
+  /* map */
+  --map-bg:#ECEEF1; --map-block:#E3E6EB; --map-road:#FFFFFF; --map-casing:#D6DAE1; --map-highway:#C9D4EA; --map-park:#DCEBDD; --map-label:#8A919C;
+  --shadow:0 2px 8px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04);
+  --shadow-lg:0 12px 32px rgba(16,24,40,.14);
+  --r-card:20px; --r-modal:24px; --r-input:12px; --r-pill:999px;
+  --logo:#1E3A8A;
+  /* layout */
+  --gap:24px; --panel-w:360px; --fy:400px; --top:84px; --kpi-h:106px; --card-h:96px;
+  --cx:calc((100vw - var(--panel-w) - var(--gap)) / 2);
+  --cy:calc((var(--top) + var(--kpi-h) + 100vh - var(--gap) - var(--card-h)) / 2);
+  --font:"IBM Plex Sans Arabic", "Noto Sans Arabic", Tahoma, sans-serif;
+}
+body:has(#dark:checked){
+  --bg:#0F141C; --surface:#18202B; --surface-2:#1F2935; --border:#2A3441;
+  --text:#E8ECF2; --text-2:#A3ACB9; --text-3:#6B7684;
+  --blue-bg:#1C2B47; --green-bg:#16301F; --red-bg:#3A1C1E; --orange-bg:#3A2A17; --lav-bg:#26264A;
+  --chip:#232D3A; --chip-text:#C3CAD4;
+  --map-bg:#141A22; --map-block:#18202A; --map-road:#2A3340; --map-casing:#1E2631; --map-highway:#33425E; --map-park:#17271C; --map-label:#6B7684;
+  --logo:#8FB0FF; --shadow:0 2px 8px rgba(0,0,0,.35); --shadow-lg:0 12px 32px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);color:var(--text);background:var(--bg);font-size:15px;overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.i.sm{width:16px;height:16px}
+#dark{display:none}
+
+/* =========================================================
+   Shared components
+   ========================================================= */
+.card{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:var(--r-pill);background:var(--chip);color:var(--chip-text);font-size:13px;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:var(--r-pill);font-size:13px;font-weight:500;white-space:nowrap}
+.pill.lav{background:var(--lav-bg);color:var(--lav)}
+.pill.green{background:var(--green-bg);color:var(--green)}
+.pill.orange{background:var(--orange-bg);color:var(--orange)}
+.pill.red{background:var(--red-bg);color:var(--red)}
+.pill.blue{background:var(--blue-bg);color:var(--blue)}
+.pill.grey{background:var(--chip);color:var(--chip-text)}
+.tag-ext{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;background:var(--text);color:var(--surface);font-size:11px;font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 20px;border-radius:14px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.outline{background:var(--surface);border-color:var(--border);color:var(--text)}
+.btn.ghost-red{background:transparent;color:var(--red)}
+.btn.disabled{opacity:.45;pointer-events:none}
+.btn.block{width:100%}
+.icon-btn{width:48px;height:48px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center;color:var(--blue);cursor:pointer}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;background:var(--c)}
+.muted{color:var(--text-2)} .small{font-size:13px}
+.section-title{font-size:12px;font-weight:600;color:var(--text-3);letter-spacing:.2px;margin:16px 0 8px;display:flex;justify-content:space-between}
+
+/* =========================================================
+   Screen 1 — the major incident screen (only screen)
+   ========================================================= */
+.screen{position:relative;width:100vw;height:100vh}
+
+/* map */
+.map{position:absolute;inset:0;background:var(--map-bg)}
+.map{overflow:hidden}
+.map-canvas{position:absolute;width:1280px;height:800px;left:calc(var(--cx) - 540px);top:calc(var(--cy) - var(--fy))}
+.map-canvas > svg.base{position:absolute;inset:0}
+.map .ground{fill:var(--map-bg)}
+.map .block{fill:var(--map-block)} .map .park{fill:var(--map-park)}
+.map .casing{stroke:var(--map-casing);fill:none} .map .road{stroke:var(--map-road);fill:none}
+.map .hw{stroke:var(--map-highway);fill:none}
+.map .lbl{fill:var(--map-label);font-family:var(--font);font-size:12px}
+.map .route{stroke:var(--blue);stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.staging{position:absolute;width:150px;height:150px;border:2px dashed var(--green);background:color-mix(in srgb,var(--green) 12%,transparent);border-radius:50%}
+.map-label{position:absolute;transform:translate(-50%,0);background:var(--surface);box-shadow:var(--shadow);border-radius:8px;padding:4px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.pin{position:absolute;width:34px;height:44px;transform:translate(-50%,-100%)}
+.unit{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--c);border:3px solid var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.25);display:grid;place-items:center;color:#fff;cursor:pointer}
+.unit svg.i{width:16px;height:16px;stroke-width:2}
+.unit .ext{position:absolute;top:-10px;left:-14px;height:18px;font-size:10px;padding:0 5px;border-radius:5px}
+.unit.sel{outline:3px solid color-mix(in srgb,var(--c) 35%,transparent);outline-offset:3px}
+.hosp{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--red);border:3px solid var(--surface);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center;box-shadow:var(--shadow)}
+
+/* top row */
+.logo{position:absolute;top:20px;left:24px;display:flex;align-items:center;font-weight:800;font-size:30px;letter-spacing:-1px;color:var(--logo);direction:ltr}
+.logo .ecg{width:44px;height:30px;margin:0 -2px}
+.logo b{color:#C62828;font-weight:800}
+.logo small{font-size:20px;color:var(--logo);font-weight:700;margin-inline-start:2px}
+.top-actions{position:absolute;top:20px;right:24px;display:flex;gap:12px;align-items:center}
+.coord{display:flex;align-items:center;gap:10px;height:48px;padding:0 16px 0 8px;background:var(--surface);border-radius:var(--r-pill);box-shadow:var(--shadow);font-size:13px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--blue-bg);color:var(--blue);display:grid;place-items:center;font-weight:700;font-size:13px}
+.live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:12px}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+
+/* KPI bar */
+.kpis{position:absolute;top:var(--top);right:calc(var(--panel-w) + var(--gap) + 16px);left:var(--gap);display:flex;align-items:stretch;padding:12px;gap:12px}
+.kpi-group{display:flex;flex:1;gap:8px;align-items:stretch}
+.kpi-group + .kpi-group{border-inline-start:1px solid var(--border);padding-inline-start:12px}
+.kpi-head{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:600;color:var(--text-3);text-align:center}
+.kpi{flex:1;border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;justify-content:flex-start;min-height:64px;background:var(--surface-2)}
+.kpi .v{font-size:24px;font-weight:700;line-height:1}
+.kpi .l{font-size:12px;line-height:1.35;color:var(--text-2);margin-top:6px}
+.kpi{min-width:0}
+.kpi.alert{background:var(--red-bg)} .kpi.alert .v,.kpi.alert .l{color:var(--red)}
+.kpi.alert a{font-size:12px;font-weight:600;color:var(--blue);margin-top:4px;white-space:nowrap}
+
+/* right panel */
+.panel{position:absolute;top:var(--top);max-height:calc(100vh - var(--top) - var(--gap));right:var(--gap);width:var(--panel-w);display:flex;flex-direction:column;overflow:hidden}
+.panel > input{display:none}
+.tabs{display:flex;gap:4px;padding:12px 12px 0;border-bottom:1px solid var(--border)}
+.tabs label{flex:1;text-align:center;padding:10px 0 12px;font-size:14px;font-weight:500;color:var(--text-2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;justify-content:center;gap:6px;align-items:center}
+.tabs label .n{font-size:11px;background:var(--chip);border-radius:999px;padding:0 7px;line-height:18px}
+.panel-cta{padding:12px 16px 4px}
+.pane{display:none;flex:1;overflow:auto;padding:0 16px 16px}
+#t1:checked ~ .tabs [for=t1],#t2:checked ~ .tabs [for=t2],#t3:checked ~ .tabs [for=t3],#t4:checked ~ .tabs [for=t4]{color:var(--blue);border-color:var(--blue);font-weight:600}
+#t1:checked ~ .p1,#t2:checked ~ .p2,#t3:checked ~ .p3,#t4:checked ~ .p4{display:block}
+
+.row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--surface-2);margin-bottom:8px}
+a.row:hover{background:var(--blue-bg)}
+.row .main{flex:1;min-width:0}
+.row .t{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center}
+.row .s{font-size:12px;color:var(--text-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .side{font-size:12px;color:var(--text-2);text-align:left;white-space:nowrap}
+.triage{width:4px;align-self:stretch;border-radius:4px;background:var(--c)}
+.counts{display:flex;gap:6px;margin:12px 0 4px}
+.counts span{flex:1;text-align:center;background:var(--surface-2);border-radius:10px;padding:6px 0;font-size:12px;color:var(--text-2)}
+.counts b{display:block;font-size:17px;color:var(--text)}
+.cap{height:6px;border-radius:6px;background:var(--chip);overflow:hidden;margin-top:6px}
+.cap i{display:block;height:100%;background:var(--c);width:var(--w)}
+
+/* timeline (same as "مراحل الطلب" stepper) */
+.tl{list-style:none;padding-top:12px}
+.tl li{position:relative;padding:0 28px 18px 0}
+.tl li::before{content:"";position:absolute;right:6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--c,var(--blue))}
+.tl li::after{content:"";position:absolute;right:10px;top:20px;bottom:0;width:2px;background:var(--border)}
+.tl li:last-child::after{display:none}
+.tl .time{font-size:12px;color:var(--text-3)} .tl .what{font-size:14px;margin-top:2px} .tl .who{font-size:12px;color:var(--text-2);margin-top:2px}
+
+/* bottom incident card */
+.incident{position:absolute;bottom:var(--gap);left:var(--gap);right:calc(var(--panel-w) + var(--gap) + 16px);height:var(--card-h);padding:0 20px;display:flex;align-items:center;gap:16px}
+.incident .ic{width:44px;height:44px;border-radius:14px;background:var(--red-bg);color:var(--red);display:grid;place-items:center;flex:none}
+.incident .info{flex:1;min-width:0}
+.incident h1{font-size:18px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.incident .meta{display:flex;gap:8px;margin-top:8px;flex-wrap:nowrap;overflow:hidden}
+
+/* legend (CSS-only toggle) */
+.legend{position:absolute;top:calc(var(--top) + var(--kpi-h) + 12px);left:var(--gap);z-index:2}
+.legend input{display:none}
+.legend label{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:999px;background:var(--surface);box-shadow:var(--shadow);font-size:13px;cursor:pointer}
+.legend .box{display:none;padding:12px 14px;font-size:12px}
+.legend input:checked ~ .box{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+.legend .box span{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.legend{display:flex;flex-direction:column;align-items:flex-end}
+.legend .box{margin:8px 0 0}
+
+/* =========================================================
+   Overlays (open with :target, always above screen 1)
+   ========================================================= */
+.overlay{position:fixed;inset:0;display:none;z-index:50}
+.overlay:target{display:block}
+.overlay .scrim{position:absolute;inset:0;background:rgba(15,20,28,.32)}
+.sheet{position:absolute;top:16px;bottom:16px;right:16px;width:440px;background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden}
+.sheet.fit{bottom:auto;max-height:calc(100vh - 32px)}
+.modal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:680px;max-height:calc(100vh - 48px);background:var(--surface);border-radius:var(--r-modal);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden}
+.ov-head{display:flex;align-items:center;gap:12px;padding:20px 24px;border-bottom:1px solid var(--border)}
+.ov-head h2{font-size:18px;font-weight:600;flex:1}
+.ov-head .x{width:40px;height:40px;border-radius:50%;background:var(--chip);display:grid;place-items:center}
+.ov-body{flex:1;overflow:auto;padding:8px 24px 24px}
+.ov-foot{display:flex;gap:12px;padding:16px 24px;border-top:1px solid var(--border);background:var(--surface)}
+.ov-foot .btn.primary{flex:1}
+.stack{display:flex;flex-direction:column;gap:10px;padding:16px 24px;border-top:1px solid var(--border)}
+
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kv div{background:var(--surface-2);border-radius:12px;padding:10px 12px}
+.kv span{display:block;font-size:12px;color:var(--text-2)} .kv b{font-size:15px;font-weight:600}
+.person{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:var(--surface-2);margin-bottom:8px}
+.person .main{flex:1} .person .s{font-size:12px;color:var(--text-2)}
+.call{width:40px;height:40px;border-radius:50%;background:var(--green-bg);color:var(--green);display:grid;place-items:center}
+
+/* forms */
+.field{margin-top:16px}
+.field > .lab{display:block;font-size:13px;font-weight:500;color:var(--text-2);margin-bottom:8px}
+.input{width:100%;height:48px;border-radius:var(--r-input);background:var(--surface-2);border:1px solid var(--border);padding:0 14px;font-size:15px}
+textarea.input{height:72px;padding:10px 14px;resize:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opts input{display:none}
+.opts label{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:14px}
+.opts input:checked + label{border-color:var(--blue);background:var(--blue-bg);color:var(--blue);font-weight:600}
+.opts.seg label{flex:1;justify-content:center}
+.opts.seg{flex-wrap:nowrap}
+.hlist input{display:none}
+.hlist label{display:block;padding:12px 14px;border:1px solid var(--border);border-radius:14px;margin-bottom:8px;cursor:pointer}
+.hlist input:checked + label{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.hlist label.off{opacity:.5;pointer-events:none}
+.hlist .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hlist .top b{font-size:14px;font-weight:600}
+.phone{display:flex;gap:8px}
+.phone .cc{width:84px;text-align:center;direction:ltr}
+.phone .input{direction:ltr;text-align:right}
+
+.check{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--surface-2);font-size:14px;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--blue)}
+body:has(#unk:checked) .ident{opacity:.4;pointer-events:none}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.tile{border-radius:16px;padding:14px 16px}
+.tile .v{font-size:26px;font-weight:700;line-height:1}
+.tile .l{font-size:13px;margin-top:8px;color:var(--text-2)}
+.tile.red{background:var(--red-bg)} .tile.red .v{color:var(--red)}
+.tile.orange{background:var(--orange-bg)} .tile.orange .v{color:var(--orange)}
+.tile.blue{background:var(--blue-bg)} .tile.blue .v{color:var(--blue)}
+.note{margin-top:16px;padding:12px 14px;border-radius:12px;background:var(--blue-bg);color:var(--blue);font-size:13px;display:flex;gap:8px;align-items:center}
+
+/* portrait tablet: panel becomes a bottom sheet */
+/* ---------- responsive ---------- */
+/* small landscape tablets (iPad 1024–1180): narrower panel, KPI groups on two rows */
+@media (max-width:1240px){
+  :root{--panel-w:340px; --kpi-h:188px}
+  .kpis{flex-direction:column}
+  .kpi-group + .kpi-group{border-inline-start:0;padding-inline-start:0;border-top:1px solid var(--border);padding-top:12px}
+  .kpi-head{writing-mode:horizontal-tb;transform:none;width:52px;align-self:center;text-align:start}
+  .incident .meta .opt{display:none}
+}
+/* large screens: keep the panel readable, map gets the rest */
+@media (min-width:1600px){ :root{--panel-w:420px} }
+/* portrait tablets: panel becomes a bottom sheet, compact incident card */
+@media (orientation:portrait){
+  :root{--gap:16px; --kpi-h:188px; --card-h:72px; --sheet-h:38vh; --fy:330px;
+        --cx:50vw;
+        --cy:calc((var(--top) + var(--kpi-h) + 100vh - var(--sheet-h) - 2 * var(--gap) - 12px - var(--card-h)) / 2)}
+  .kpis{right:var(--gap);flex-direction:column}
+  .panel{top:auto;bottom:var(--gap);left:var(--gap);width:auto;height:var(--sheet-h);max-height:none}
+  .panel::before{content:"";width:40px;height:4px;border-radius:4px;background:var(--border);margin:8px auto 0;flex:none}
+  .incident{right:var(--gap);bottom:calc(var(--sheet-h) + var(--gap) + 12px)}
+  .incident .meta{display:none}
+  .incident .ic{width:36px;height:36px}
+  .sheet{width:min(480px, calc(100vw - 32px))!important}
+  .modal{width:calc(100vw - 48px)}
+}
+</style>
+</head>
+<body>
+<input type="checkbox" id="dark">
+
+<!-- Shared icon sprite: every icon is defined once and reused with <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-amb" viewBox="0 0 24 24"><path d="M10 10H6M8 8v4"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 8.38A1 1 0 0 0 17.52 8H14"/><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+  <symbol id="i-nav" viewBox="0 0 24 24"><path d="m12 2 7 19-7-4-7 4z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-hash" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+</svg>
+
+<main class="screen">
+
+  <!-- ================= MAP ================= -->
+  <div class="map" aria-label="خريطة الحدث">
+    <!-- canvas is 1:1 px and anchored on the incident, so markers never drift on any screen size -->
+    <div class="map-canvas">
+      <svg class="base" width="1280" height="800" viewBox="0 0 1280 800" overflow="visible">
+        <defs>
+          <pattern id="city" width="180" height="140" patternUnits="userSpaceOnUse">
+            <rect width="180" height="140" class="ground"/>
+            <rect x="10" y="10" width="160" height="120" rx="6" class="block"/>
+          </pattern>
+        </defs>
+        <rect x="-3000" y="-3000" width="7000" height="7000" fill="url(#city)"/>
+        <rect class="park" x="550" y="150" width="160" height="120" rx="6"/>
+        <rect class="park" x="730" y="570" width="160" height="120" rx="6"/>
+        <rect class="park" x="190" y="290" width="160" height="120" rx="6"/>
+        <path class="road" stroke-width="7" d="M-2880 -3000 V4000 M-2700 -3000 V4000 M-2520 -3000 V4000 M-2340 -3000 V4000 M-2160 -3000 V4000 M-1980 -3000 V4000 M-1800 -3000 V4000 M-1620 -3000 V4000 M-1440 -3000 V4000 M-1260 -3000 V4000 M-1080 -3000 V4000 M-900 -3000 V4000 M-720 -3000 V4000 M-540 -3000 V4000 M-360 -3000 V4000 M-180 -3000 V4000 M0 -3000 V4000 M180 -3000 V4000 M360 -3000 V4000 M720 -3000 V4000 M900 -3000 V4000 M1080 -3000 V4000 M1260 -3000 V4000 M1440 -3000 V4000 M1620 -3000 V4000 M1800 -3000 V4000 M1980 -3000 V4000 M2160 -3000 V4000 M2340 -3000 V4000 M2520 -3000 V4000 M2700 -3000 V4000 M2880 -3000 V4000 M3060 -3000 V4000 M3240 -3000 V4000 M3420 -3000 V4000 M3600 -3000 V4000 M3780 -3000 V4000 M3960 -3000 V4000 M-3000 -2940 H4000 M-3000 -2800 H4000 M-3000 -2660 H4000 M-3000 -2520 H4000 M-3000 -2380 H4000 M-3000 -2240 H4000 M-3000 -2100 H4000 M-3000 -1960 H4000 M-3000 -1820 H4000 M-3000 -1680 H4000 M-3000 -1540 H4000 M-3000 -1400 H4000 M-3000 -1260 H4000 M-3000 -1120 H4000 M-3000 -980 H4000 M-3000 -840 H4000 M-3000 -700 H4000 M-3000 -560 H4000 M-3000 -420 H4000 M-3000 -280 H4000 M-3000 -140 H4000 M-3000 0 H4000 M-3000 140 H4000 M-3000 280 H4000 M-3000 560 H4000 M-3000 700 H4000 M-3000 840 H4000 M-3000 980 H4000 M-3000 1120 H4000 M-3000 1260 H4000 M-3000 1400 H4000 M-3000 1540 H4000 M-3000 1680 H4000 M-3000 1820 H4000 M-3000 1960 H4000 M-3000 2100 H4000 M-3000 2240 H4000 M-3000 2380 H4000 M-3000 2520 H4000 M-3000 2660 H4000 M-3000 2800 H4000 M-3000 2940 H4000 M-3000 3080 H4000 M-3000 3220 H4000 M-3000 3360 H4000 M-3000 3500 H4000 M-3000 3640 H4000 M-3000 3780 H4000 M-3000 3920 H4000"/>
+        <path class="casing" stroke-width="16" d="M-3000 420 H4000 M540 -3000 V4000"/>
+        <path class="hw" stroke-width="12" d="M-3000 420 H4000 M540 -3000 V4000"/>
+        <g class="lbl">
+          <text x="1000" y="410">طريق الملك فهد</text>
+          <text x="560" y="60">طريق العليا</text>
+          <text x="600" y="215">العقيق</text>
+          <text x="780" y="520">الصحافة</text>
+          <text x="40" y="520">الياسمين</text>
+          <text x="230" y="355">حديقة</text>
+        </g>
+        <path class="route" d="M620 420 H720 V610"/>
+        <path class="route" d="M620 420 H180 V610"/>
+      </svg>
+
+      <div class="staging" style="left:375px;top:225px"></div>
+      <div class="map-label" style="left:450px;top:382px">منطقة الانتظار</div>
+      <svg class="pin" style="left:620px;top:420px" viewBox="0 0 34 44"><path d="M17 43s15-14 15-26A15 15 0 0 0 2 17c0 12 15 26 15 26z" fill="#E5484D" stroke="#fff" stroke-width="2"/><circle cx="17" cy="17" r="6" fill="#fff"/></svg>
+      <div class="map-label" style="left:620px;top:432px;color:var(--red)">موقع الحدث</div>
+
+      <div class="hosp" style="left:720px;top:630px">H</div>
+      <div class="hosp" style="left:180px;top:630px">H</div>
+      <div class="hosp" style="left:900px;top:250px">H</div>
+
+      <a class="unit sel" href="#unit" style="--c:var(--s-staging);left:420px;top:285px" title="RCD-1179"><svg class="i"><use href="#i-amb"/></svg></a>
+      <a class="unit" href="#unit" style="--c:var(--s-staging);left:478px;top:268px" title="RCD-1204"><svg class="i"><use href="#i-amb"/></svg></a>
+      <a class="unit" href="#unit" style="--c:var(--s-staging);left:455px;top:330px" title="EXT-03"><svg class="i"><use href="#i-amb"/></svg><span class="tag-ext ext">خارجي</span></a>
+      <a class="unit" href="#unit" style="--c:var(--s-to-scene);left:540px;top:360px" title="RCD-1188"><svg class="i"><use href="#i-amb"/></svg></a>
+      <a class="unit" href="#unit" style="--c:var(--s-transport);left:720px;top:520px" title="RCD-1151"><svg class="i"><use href="#i-amb"/></svg></a>
+      <a class="unit" href="#unit" style="--c:var(--s-transport);left:180px;top:520px" title="RCD-1162"><svg class="i"><use href="#i-amb"/></svg></a>
+      <a class="unit" href="#unit" style="--c:var(--s-hospital);left:765px;top:648px" title="RCD-1140"><svg class="i"><use href="#i-amb"/></svg></a>
+      <a class="unit" href="#unit" style="--c:var(--s-to-staging);left:360px;top:190px" title="RCD-1213"><svg class="i"><use href="#i-amb"/></svg></a>
+    </div>
+  </div>
+
+  <!-- ================= TOP ROW ================= -->
+  <div class="logo" aria-label="EMS.AI">EM<svg class="ecg" viewBox="0 0 44 30"><path d="M0 18h10l4-12 6 22 5-14 3 4h16" fill="none" stroke="#C62828" stroke-width="2.6" stroke-linejoin="round"/></svg><b>S</b><small>.AI</small></div>
+
+  <div class="top-actions">
+    <div class="coord">
+      <span class="avatar">س</span>
+      <div>
+        <div style="font-weight:600">سارة القحطاني · منسق</div>
+        <span class="live">مع أحمد الزهراني</span>
+      </div>
+    </div>
+    <a class="icon-btn" href="#" title="الملاحة"><svg class="i"><use href="#i-nav"/></svg></a>
+    <label class="icon-btn" for="dark" title="الوضع الليلي"><svg class="i"><use href="#i-moon"/></svg></label>
+  </div>
+
+  <!-- ================= KPI BAR ================= -->
+  <section class="kpis card" aria-label="ملخص الحدث">
+    <div class="kpi-group">
+      <span class="kpi-head">السيارات</span>
+      <div class="kpi"><span class="v num">10</span><span class="l">المطلوبة</span></div>
+      <div class="kpi"><span class="v num">8</span><span class="l">المشاركة</span></div>
+      <div class="kpi"><span class="v num">3</span><span class="l">جاهزة للإسناد</span></div>
+      <div class="kpi alert"><span class="v num">2</span><span class="l">الناقص</span><a href="#external">+ سيارة خارجية</a></div>
+    </div>
+    <div class="kpi-group">
+      <span class="kpi-head">المرضى</span>
+      <div class="kpi"><span class="v num">9</span><span class="l">المضافون</span></div>
+      <div class="kpi"><span class="v num">2</span><span class="l">بانتظار سيارة</span></div>
+      <div class="kpi"><span class="v num">4</span><span class="l">سُلّموا</span></div>
+    </div>
+  </section>
+
+  <!-- ================= RIGHT PANEL ================= -->
+  <aside class="panel card">
+    <input type="radio" name="tab" id="t1" checked>
+    <input type="radio" name="tab" id="t2">
+    <input type="radio" name="tab" id="t3">
+    <input type="radio" name="tab" id="t4">
+    <nav class="tabs">
+      <label for="t1">السيارات <span class="n num">8</span></label>
+      <label for="t2">المرضى <span class="n num">9</span></label>
+      <label for="t3">المستشفيات</label>
+      <label for="t4">السجل</label>
+    </nav>
+    <div class="panel-cta"><a class="btn primary block" href="#add-patient"><svg class="i"><use href="#i-plus"/></svg>إضافة مريض</a></div>
+
+    <!-- Units -->
+    <div class="pane p1">
+      <div class="section-title"><span>جاهزة في منطقة الانتظار</span><span class="num">3</span></div>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-staging)"></span><div class="main"><div class="t">RCD-1179 <span class="pill grey" style="height:22px">ALS</span></div><div class="s">طاقم 2 · وصلت 14:12</div></div><span class="side">منذ 24 د</span></a>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-staging)"></span><div class="main"><div class="t">RCD-1204 <span class="pill grey" style="height:22px">BLS</span></div><div class="s">طاقم 2 · وصلت 14:20</div></div><span class="side">منذ 16 د</span></a>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-staging)"></span><div class="main"><div class="t">EXT-03 <span class="tag-ext">خارجي</span></div><div class="s">شركة النخبة للإسعاف · BLS</div></div><span class="side">منذ 9 د</span></a>
+
+      <div class="section-title"><span>في الطريق</span><span class="num">2</span></div>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-to-scene)"></span><div class="main"><div class="t">RCD-1188 <span class="pill grey" style="height:22px">ALS</span></div><div class="s">إلى موقع الحدث لاستلام P-008</div></div><span class="side">2 د</span></a>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-to-staging)"></span><div class="main"><div class="t">RCD-1213 <span class="pill grey" style="height:22px">BLS</span></div><div class="s">إلى منطقة الانتظار</div></div><span class="side">4 د</span></a>
+
+      <div class="section-title"><span>تنقل مريض</span><span class="num">2</span></div>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-transport)"></span><div class="main"><div class="t">RCD-1151</div><div class="s">P-006 ← مدينة الملك سعود الطبية</div></div><span class="side">7 د</span></a>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-transport)"></span><div class="main"><div class="t">RCD-1162</div><div class="s">P-007 ← مستشفى دله – النخيل</div></div><span class="side">5 د</span></a>
+
+      <div class="section-title"><span>في المستشفى</span><span class="num">1</span></div>
+      <a class="row" href="#unit"><span class="dot" style="--c:var(--s-hospital)"></span><div class="main"><div class="t">RCD-1140</div><div class="s">سلّمت P-005 · مستشفى الحبيب – السليمانية</div></div><span class="side">منذ 3 د</span></a>
+    </div>
+
+    <!-- Patients -->
+    <div class="pane p2">
+      <div class="counts num"><span><b>9</b>الكل</span><span><b>2</b>بانتظار سيارة</span><span><b>3</b>في الطريق</span><span><b>4</b>سُلّموا</span></div>
+      <div class="section-title"><span>بانتظار سيارة</span><span class="num">2</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">عبدالله السبيعي <span class="muted small">P-009 · ذكر · 40</span></div><div class="s">فوري · أُضيف 14:33</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
+      <div class="row"><span class="triage" style="--c:var(--t-yellow)"></span><div class="main"><div class="t" style="color:var(--text-2)">غير معروف <span class="muted small">P-004 · أنثى · 27</span></div><div class="s">متأخر · أُضيف 14:18</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
+      <div class="section-title"><span>في الطريق</span><span class="num">3</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">سعد القرني <span class="muted small">P-008 · ذكر · 52</span></div><div class="s">RCD-1188 · مدينة الملك سعود الطبية</div></div><span class="pill blue">السيارة قادمة</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">ناصر العنزي <span class="muted small">P-006 · ذكر · 35</span></div><div class="s">RCD-1151 · مدينة الملك سعود الطبية</div></div><a class="pill lav" href="#add-patient">تغيير المستشفى</a></div>
+      <div class="row"><span class="triage" style="--c:var(--t-yellow)"></span><div class="main"><div class="t">منيرة الغامدي <span class="muted small">P-007 · أنثى · 61</span></div><div class="s">RCD-1162 · مستشفى دله – النخيل</div></div><a class="pill lav" href="#add-patient">تغيير المستشفى</a></div>
+      <div class="section-title"><span>سُلّموا</span><span class="num">4</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-green)"></span><div class="main"><div class="t">تركي المطيري <span class="muted small">P-005</span></div><div class="s">RCD-1140 · مستشفى الحبيب – السليمانية</div></div><span class="pill green">14:31</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t" style="color:var(--text-2)">غير معروف <span class="muted small">P-003</span></div><div class="s">RCD-1179 · مدينة الملك سعود الطبية</div></div><span class="pill green">14:05</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-yellow)"></span><div class="main"><div class="t">ريم الشمري <span class="muted small">P-002</span></div><div class="s">RCD-1204 · مستشفى دله – النخيل</div></div><span class="pill green">14:01</span></div>
+      <div class="row"><span class="triage" style="--c:var(--t-green)"></span><div class="main"><div class="t">بندر الحارثي <span class="muted small">P-001</span></div><div class="s">RCD-1151 · مستشفى الحبيب – السليمانية</div></div><span class="pill green">13:58</span></div>
+    </div>
+
+    <!-- Hospitals -->
+    <div class="pane p3">
+      <div class="section-title"><span>المستشفيات القريبة من الحدث</span><span>استلمت / في الطريق</span></div>
+      <div class="row" style="display:block"><div style="display:flex;justify-content:space-between"><b class="small">مدينة الملك سعود الطبية</b><span class="small muted num">1 / 2</span></div><div class="s muted small">6.2 كم · الطوارئ: سعة متاحة</div><div class="cap"><i style="--c:var(--green);--w:45%"></i></div></div>
+      <div class="row" style="display:block"><div style="display:flex;justify-content:space-between"><b class="small">مستشفى دله – النخيل</b><span class="small muted num">1 / 1</span></div><div class="s muted small">4.1 كم · الطوارئ: شبه ممتلئة</div><div class="cap"><i style="--c:var(--orange);--w:82%"></i></div></div>
+      <div class="row" style="display:block"><div style="display:flex;justify-content:space-between"><b class="small">مستشفى الحبيب – السليمانية</b><span class="small muted num">2 / 0</span></div><div class="s muted small">7.8 كم · الطوارئ: ممتلئة — لا تستقبل</div><div class="cap"><i style="--c:var(--red);--w:100%"></i></div></div>
+      <div class="row" style="display:block"><div style="display:flex;justify-content:space-between"><b class="small">مستشفى الملك فيصل التخصصي</b><span class="small muted num">0 / 0</span></div><div class="s muted small">9.4 كم · الطوارئ: سعة متاحة</div><div class="cap"><i style="--c:var(--green);--w:30%"></i></div></div>
+    </div>
+
+    <!-- Log -->
+    <div class="pane p4">
+      <ol class="tl">
+        <li><div class="time num">14:36</div><div class="what">إسناد P-008 إلى RCD-1188 – مدينة الملك سعود الطبية</div><div class="who">سارة القحطاني</div></li>
+        <li style="--c:var(--orange)"><div class="time num">14:34</div><div class="what">تغيير مستشفى P-006 من مستشفى الحبيب إلى مدينة الملك سعود الطبية (الطوارئ ممتلئة)</div><div class="who">أحمد الزهراني</div></li>
+        <li style="--c:var(--green)"><div class="time num">14:31</div><div class="what">تسليم P-005 في مستشفى الحبيب – السليمانية</div><div class="who">طاقم RCD-1140</div></li>
+        <li><div class="time num">14:27</div><div class="what">انضمام EXT-03 – شركة النخبة للإسعاف بعد رمز التحقق</div><div class="who">النظام</div></li>
+        <li><div class="time num">14:20</div><div class="what">وصول RCD-1204 إلى منطقة الانتظار</div><div class="who">النظام</div></li>
+        <li style="--c:var(--text-3)"><div class="time num">14:15</div><div class="what">صرف RCD-1097 إلى المحطة</div><div class="who">سارة القحطاني</div></li>
+        <li><div class="time num">13:56</div><div class="what">إرسال الطلب إلى أقرب 10 سيارات</div><div class="who">مركز العمليات</div></li>
+        <li style="--c:var(--red)"><div class="time num">13:54</div><div class="what">إنشاء الحدث وتعيين المنسقين</div><div class="who">مركز العمليات</div></li>
+      </ol>
+    </div>
+  </aside>
+
+  <!-- ================= LEGEND ================= -->
+  <div class="legend">
+    <input type="checkbox" id="lg">
+    <label for="lg"><svg class="i sm"><use href="#i-layers"/></svg>ألوان السيارات</label>
+    <div class="box card">
+      <span><i class="dot" style="--c:var(--s-to-staging)"></i>في الطريق لمنطقة الانتظار</span>
+      <span><i class="dot" style="--c:var(--s-staging)"></i>جاهزة في منطقة الانتظار</span>
+      <span><i class="dot" style="--c:var(--s-to-scene)"></i>في الطريق لموقع الحدث</span>
+      <span><i class="dot" style="--c:var(--s-transport)"></i>تنقل مريض</span>
+      <span><i class="dot" style="--c:var(--s-hospital)"></i>في المستشفى</span>
+      <span><i class="dot" style="--c:var(--s-released)"></i>مصروفة للمحطة</span>
+      <span><i class="dot" style="--c:var(--s-broken)"></i>معطلة</span>
+    </div>
+  </div>
+
+  <!-- ================= INCIDENT CARD ================= -->
+  <section class="incident card">
+    <div class="ic"><svg class="i"><use href="#i-alert"/></svg></div>
+    <div class="info">
+      <h1>حادث مروري متعدد – طريق الملك فهد</h1>
+      <div class="meta">
+        <span class="chip num"><svg class="i sm"><use href="#i-hash"/></svg>MI-20261126-0003</span>
+        <span class="pill lav">نشط</span>
+        <span class="chip num"><svg class="i sm"><use href="#i-clock"/></svg>المدة 42 د</span>
+        <span class="chip opt"><svg class="i sm"><use href="#i-users"/></svg>منسقان</span>
+      </div>
+    </div>
+    <a class="btn outline" href="#close">طلب إغلاق الحدث</a>
+  </section>
+</main>
+
+<!-- =========================================================
+     OVERLAY 2 — unit details & actions
+     ========================================================= -->
+<div class="overlay" id="unit">
+  <a class="scrim" href="#" aria-label="إغلاق"></a>
+  <div class="sheet fit">
+    <div class="ov-head"><h2>RCD-1179</h2><span class="pill green">جاهزة في منطقة الانتظار</span><a class="x" href="#"><svg class="i"><use href="#i-x"/></svg></a></div>
+    <div class="ov-body">
+      <div class="section-title"><span>السيارة</span></div>
+      <div class="kv">
+        <div><span>النوع</span><b>ALS</b></div>
+        <div><span>المحطة</span><b>South Axis Point</b></div>
+        <div><span>وصلت منطقة الانتظار</span><b class="num">14:12</b></div>
+        <div><span>المرضى المنقولون في الحدث</span><b class="num">1</b></div>
+      </div>
+      <div class="section-title"><span>الطاقم</span></div>
+      <div class="person"><span class="avatar">خ</span><div class="main"><b class="small">خالد العتيبي</b><div class="s">مسعف أول</div></div><a class="call" href="#"><svg class="i"><use href="#i-phone"/></svg></a></div>
+      <div class="person"><span class="avatar">ف</span><div class="main"><b class="small">فهد الشهري</b><div class="s">سائق</div></div><a class="call" href="#"><svg class="i"><use href="#i-phone"/></svg></a></div>
+      <div class="section-title"><span>المريض الحالي</span></div>
+      <div class="person"><div class="main muted small">لا يوجد مريض مسند لهذه السيارة</div></div>
+    </div>
+    <div class="stack">
+      <a class="btn primary block" href="#add-patient">إسناد مريض</a>
+      <div class="grid2">
+        <a class="btn outline disabled">إعادة لموقع الحدث</a>
+        <a class="btn outline" href="#">صرف للمحطة</a>
+      </div>
+      <a class="btn ghost-red block" href="#">تسجيل عطل</a>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY 3 — add & assign patient
+     ========================================================= -->
+<div class="overlay" id="add-patient">
+  <a class="scrim" href="#" aria-label="إغلاق"></a>
+  <div class="sheet" style="width:480px">
+    <div class="ov-head"><h2>إضافة مريض</h2><span class="chip num">P-010</span><a class="x" href="#"><svg class="i"><use href="#i-x"/></svg></a></div>
+    <div class="ov-body">
+      <div class="section-title"><span>بيانات المريض</span></div>
+      <label class="check"><input type="checkbox" id="unk"><span>المريض غير معروف الآن (تُستكمل البيانات لاحقاً)</span></label>
+      <div class="ident">
+        <div class="field"><span class="lab">الاسم الكامل</span><input class="input" value="عبدالله محمد السبيعي"></div>
+        <div class="grid2">
+          <div class="field"><span class="lab">رقم الجوال</span><div class="phone"><input class="input cc num" value="+966"><input class="input num" value="54 223 7810"></div></div>
+          <div class="field"><span class="lab">رقم الهوية / الإقامة</span><input class="input num" style="direction:ltr;text-align:right" value="1087654321"></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><span class="lab">جوال أحد الأقارب</span><div class="phone"><input class="input cc num" value="+966"><input class="input num" value="50 441 2299"></div></div>
+          <div class="field"><span class="lab">صلة القرابة</span><input class="input" value="أخ"></div>
+        </div>
+      </div>
+      <div class="section-title" style="margin-top:24px"><span>الحالة</span></div>
+      <div class="grid2">
+        <div class="field" style="margin-top:0"><span class="lab">الجنس</span>
+          <div class="opts seg"><input type="radio" name="g" id="g1" checked><label for="g1">ذكر</label><input type="radio" name="g" id="g2"><label for="g2">أنثى</label></div>
+        </div>
+        <div class="field" style="margin-top:0"><span class="lab">العمر التقريبي</span><input class="input num" value="40"></div>
+      </div>
+      <div class="field"><span class="lab">مستوى الفرز</span>
+        <div class="opts seg">
+          <input type="radio" name="tr" id="tr1" checked><label for="tr1"><i class="dot" style="--c:var(--t-red)"></i>فوري</label>
+          <input type="radio" name="tr" id="tr2"><label for="tr2"><i class="dot" style="--c:var(--t-yellow)"></i>متأخر</label>
+          <input type="radio" name="tr" id="tr3"><label for="tr3"><i class="dot" style="--c:var(--t-green)"></i>بسيط</label>
+          <input type="radio" name="tr" id="tr4"><label for="tr4"><i class="dot" style="--c:var(--t-black)"></i>متوفى</label>
+        </div>
+      </div>
+      <div class="field"><span class="lab">ملاحظة للطاقم</span><textarea class="input">إصابة في الصدر، واعٍ</textarea></div>
+
+      <div class="section-title" style="margin-top:24px"><span>النقل</span></div>
+      <div class="field" style="margin-top:0"><span class="lab">المستشفى</span>
+        <div class="hlist">
+          <input type="radio" name="h" id="h1" checked>
+          <label for="h1"><div class="top"><b>مدينة الملك سعود الطبية</b><span class="pill green">سعة متاحة</span></div><div class="small muted num">6.2 كم · 11 د</div><div class="cap"><i style="--c:var(--green);--w:45%"></i></div></label>
+          <input type="radio" name="h" id="h2">
+          <label for="h2"><div class="top"><b>مستشفى دله – النخيل</b><span class="pill orange">شبه ممتلئة</span></div><div class="small muted num">4.1 كم · 8 د</div><div class="cap"><i style="--c:var(--orange);--w:82%"></i></div></label>
+          <input type="radio" name="h" id="h3" disabled>
+          <label for="h3" class="off"><div class="top"><b>مستشفى الحبيب – السليمانية</b><span class="pill red">ممتلئة</span></div><div class="small muted num">7.8 كم · 14 د</div><div class="cap"><i style="--c:var(--red);--w:100%"></i></div></label>
+        </div>
+      </div>
+
+      <div class="field"><span class="lab">سيارة الإسعاف (الجاهزة في منطقة الانتظار)</span>
+        <div class="opts">
+          <input type="radio" name="u" id="u1" checked><label for="u1"><i class="dot" style="--c:var(--s-staging)"></i>RCD-1179 · ALS</label>
+          <input type="radio" name="u" id="u2"><label for="u2"><i class="dot" style="--c:var(--s-staging)"></i>RCD-1204 · BLS</label>
+          <input type="radio" name="u" id="u3"><label for="u3"><i class="dot" style="--c:var(--s-staging)"></i>EXT-03 · خارجي</label>
+        </div>
+      </div>
+    </div>
+    <div class="ov-foot"><a class="btn primary" href="#">إسناد وإرسال للطاقم</a><a class="btn outline" href="#">إلغاء</a></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY 5 — external ambulances
+     ========================================================= -->
+<div class="overlay" id="external">
+  <a class="scrim" href="#" aria-label="إغلاق"></a>
+  <div class="modal">
+    <div class="ov-head"><h2>إضافة سيارة من خارج الشركة</h2><a class="x" href="#"><svg class="i"><use href="#i-x"/></svg></a></div>
+    <div class="ov-body">
+      <div class="grid2">
+        <div class="field"><span class="lab">اسم الشركة</span><input class="input" value="شركة الهلال للخدمات الطبية"></div>
+        <div class="field"><span class="lab">رقم السيارة / اللوحة</span><input class="input" value="أ ب ج 4821"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><span class="lab">اسم عضو الطاقم</span><input class="input" value="ماجد الدوسري"></div>
+        <div class="field"><span class="lab">رقم الجوال</span><div class="phone"><input class="input cc num" value="+966"><input class="input num" value="55 012 3456"></div></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><input class="input" value="نايف الحربي"></div>
+        <div class="field"><div class="phone"><input class="input cc num" value="+966"><input class="input num" value="50 987 6543"></div></div>
+      </div>
+      <a class="btn outline" style="margin-top:12px;height:40px" href="#external"><svg class="i sm"><use href="#i-plus"/></svg>إضافة عضو آخر</a>
+
+      <div class="section-title" style="margin-top:24px"><span>الدعوات المرسلة لهذا الحدث</span><span class="num">3</span></div>
+      <div class="row"><svg class="i" style="color:var(--text-2)"><use href="#i-link"/></svg><div class="main"><div class="t">EXT-03 · شركة النخبة للإسعاف</div><div class="s">انضم 14:27 · طاقم 2</div></div><span class="pill green">انضم</span></div>
+      <div class="row"><svg class="i" style="color:var(--text-2)"><use href="#i-link"/></svg><div class="main"><div class="t">EXT-04 · شركة الرعاية الطبية</div><div class="s">فُتح الرابط 14:35</div></div><span class="pill orange">بانتظار رمز التحقق</span><a class="small" style="color:var(--blue);font-weight:600" href="#external">إعادة الإرسال</a></div>
+      <div class="row"><svg class="i" style="color:var(--text-2)"><use href="#i-link"/></svg><div class="main"><div class="t">EXT-05 · شركة الشفاء للإسعاف</div><div class="s">أُرسل 14:37</div></div><span class="pill lav">أُرسل الرابط</span></div>
+    </div>
+    <div class="ov-foot"><a class="btn primary" href="#">حفظ وإرسال الرابط</a><a class="btn outline" href="#">إلغاء</a></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY 6 — review & close incident
+     ========================================================= -->
+<div class="overlay" id="close">
+  <a class="scrim" href="#" aria-label="إغلاق"></a>
+  <div class="modal">
+    <div class="ov-head"><h2>مراجعة قبل إغلاق الحدث</h2><span class="chip num">MI-20261126-0003</span><a class="x" href="#"><svg class="i"><use href="#i-x"/></svg></a></div>
+    <div class="ov-body">
+      <div class="tiles">
+        <div class="tile red"><div class="v num">3</div><div class="l">سيارات في مهمة نقل</div></div>
+        <div class="tile orange"><div class="v num">2</div><div class="l">مرضى بانتظار سيارة</div></div>
+        <div class="tile blue"><div class="v num">5</div><div class="l">سيارات لم تُصرف للمحطة</div></div>
+      </div>
+      <div class="section-title" style="margin-top:20px"><span>ما زال مفتوحاً</span></div>
+      <div class="row"><span class="dot" style="--c:var(--s-transport)"></span><div class="main"><div class="t">RCD-1151 · P-006</div><div class="s">في الطريق إلى مدينة الملك سعود الطبية</div></div></div>
+      <div class="row"><span class="dot" style="--c:var(--s-transport)"></span><div class="main"><div class="t">RCD-1162 · P-007</div><div class="s">في الطريق إلى مستشفى دله – النخيل</div></div></div>
+      <div class="row"><span class="dot" style="--c:var(--s-to-scene)"></span><div class="main"><div class="t">RCD-1188 · P-008</div><div class="s">في الطريق لاستلام المريض</div></div></div>
+      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">P-009 · P-004</div><div class="s">لم تُسند لهما سيارة</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
+      <div class="note"><svg class="i sm"><use href="#i-info"/></svg>النقل الجاري يستمر حتى التسليم حتى بعد إغلاق الحدث.</div>
+    </div>
+    <div class="ov-foot"><a class="btn primary" href="#">طلب الإغلاق</a><a class="btn outline" href="#">صرف كل السيارات الجاهزة</a></div>
+  </div>
+</div>
+
+</body>
+</html>
