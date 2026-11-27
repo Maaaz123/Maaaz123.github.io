@@ -78,7 +78,8 @@ svg.i.sm{width:16px;height:16px}
 .icon-btn{width:48px;height:48px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center;color:var(--blue);cursor:pointer}
 .dot{width:10px;height:10px;border-radius:50%;flex:none;background:var(--c)}
 .muted{color:var(--text-2)} .small{font-size:13px}
-.section-title{font-size:12px;font-weight:600;color:var(--text-3);letter-spacing:.2px;margin:16px 0 8px;display:flex;justify-content:space-between}
+.section-title{font-size:13px;font-weight:600;color:var(--text-2);margin:18px 0 2px;display:flex;justify-content:space-between}
+.section-title .num{font-weight:500;color:var(--text-3)}
 
 /* =========================================================
    Screen 1 — the major incident screen (only screen)
@@ -139,13 +140,19 @@ svg.i.sm{width:16px;height:16px}
 #t1:checked ~ .tabs [for=t1],#t2:checked ~ .tabs [for=t2],#t3:checked ~ .tabs [for=t3],#t4:checked ~ .tabs [for=t4]{color:var(--blue);border-color:var(--blue);font-weight:600}
 #t1:checked ~ .p1,#t2:checked ~ .p2,#t3:checked ~ .p3,#t4:checked ~ .p4{display:block}
 
-.row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--surface-2);margin-bottom:8px}
-a.row:hover{background:var(--blue-bg)}
+.row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--border)}
+.row:last-child,.row:has(+ .section-title),.row:has(+ .note){border-bottom:0}
+a.row:hover{background:var(--surface-2);border-radius:10px}
 .row .main{flex:1;min-width:0}
-.row .t{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center}
+.row .t{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center;white-space:nowrap;min-width:0}
+.row .t .muted{overflow:hidden;text-overflow:ellipsis}
+.row > .pill{flex:none}
 .row .s{font-size:12px;color:var(--text-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .side{font-size:12px;color:var(--text-2);text-align:left;white-space:nowrap}
-.triage{width:4px;align-self:stretch;border-radius:4px;background:var(--c)}
+/* triage is written as a word, not a coloured edge */
+.tri{font-weight:600}
+.tri.red{color:var(--t-red)} .tri.yellow{color:#A16207} .tri.green{color:var(--t-green)} .tri.black{color:var(--text)}
+body:has(#dark:checked) .tri.yellow{color:var(--t-yellow)}
 .counts{display:flex;gap:6px;margin:12px 0 4px}
 .counts span{flex:1;text-align:center;background:var(--surface-2);border-radius:10px;padding:6px 0;font-size:12px;color:var(--text-2)}
 .counts b{display:block;font-size:17px;color:var(--text)}
@@ -364,9 +371,9 @@ body:has(#unk:checked) .ident{opacity:.4;pointer-events:none}
 
   <div class="top-actions">
     <div class="coord">
-      <span class="avatar">س</span>
+      <span class="avatar" style="font-size:17px">أ</span>
       <div>
-        <div style="font-weight:600">سارة القحطاني · منسق</div>
+        <div style="font-weight:600">أنس · منسق</div>
         <span class="live">مع أحمد الزهراني</span>
       </div>
     </div>
@@ -428,17 +435,17 @@ body:has(#unk:checked) .ident{opacity:.4;pointer-events:none}
     <div class="pane p2">
       <div class="counts num"><span><b>9</b>الكل</span><span><b>2</b>بانتظار سيارة</span><span><b>3</b>في الطريق</span><span><b>4</b>سُلّموا</span></div>
       <div class="section-title"><span>بانتظار سيارة</span><span class="num">2</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">عبدالله السبيعي <span class="muted small">P-009 · ذكر · 40</span></div><div class="s">فوري · أُضيف 14:33</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
-      <div class="row"><span class="triage" style="--c:var(--t-yellow)"></span><div class="main"><div class="t" style="color:var(--text-2)">غير معروف <span class="muted small">P-004 · أنثى · 27</span></div><div class="s">متأخر · أُضيف 14:18</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
+      <div class="row"><div class="main"><div class="t">عبدالله السبيعي <span class="muted small">P-009 · ذكر · 40</span></div><div class="s"><span class="tri red">فوري</span> · أُضيف 14:33</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
+      <div class="row"><div class="main"><div class="t" style="color:var(--text-2)">غير معروف <span class="muted small">P-004 · أنثى · 27</span></div><div class="s"><span class="tri yellow">متأخر</span> · أُضيف 14:18</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
       <div class="section-title"><span>في الطريق</span><span class="num">3</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">سعد القرني <span class="muted small">P-008 · ذكر · 52</span></div><div class="s">RCD-1188 · مدينة الملك سعود الطبية</div></div><span class="pill blue">السيارة قادمة</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">ناصر العنزي <span class="muted small">P-006 · ذكر · 35</span></div><div class="s">RCD-1151 · مدينة الملك سعود الطبية</div></div><a class="pill lav" href="#add-patient">تغيير المستشفى</a></div>
-      <div class="row"><span class="triage" style="--c:var(--t-yellow)"></span><div class="main"><div class="t">منيرة الغامدي <span class="muted small">P-007 · أنثى · 61</span></div><div class="s">RCD-1162 · مستشفى دله – النخيل</div></div><a class="pill lav" href="#add-patient">تغيير المستشفى</a></div>
+      <div class="row"><div class="main"><div class="t">سعد القرني <span class="muted small">P-008 · ذكر · 52</span></div><div class="s"><span class="tri red">فوري</span> · RCD-1188 · مدينة الملك سعود الطبية</div></div><span class="pill blue">السيارة قادمة</span></div>
+      <div class="row"><div class="main"><div class="t">ناصر العنزي <span class="muted small">P-006 · ذكر · 35</span></div><div class="s"><span class="tri red">فوري</span> · RCD-1151 · مدينة الملك سعود الطبية</div></div><a class="pill lav" href="#add-patient">تغيير المستشفى</a></div>
+      <div class="row"><div class="main"><div class="t">منيرة الغامدي <span class="muted small">P-007 · أنثى · 61</span></div><div class="s"><span class="tri yellow">متأخر</span> · RCD-1162 · مستشفى دله – النخيل</div></div><a class="pill lav" href="#add-patient">تغيير المستشفى</a></div>
       <div class="section-title"><span>سُلّموا</span><span class="num">4</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-green)"></span><div class="main"><div class="t">تركي المطيري <span class="muted small">P-005</span></div><div class="s">RCD-1140 · مستشفى الحبيب – السليمانية</div></div><span class="pill green">14:31</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t" style="color:var(--text-2)">غير معروف <span class="muted small">P-003</span></div><div class="s">RCD-1179 · مدينة الملك سعود الطبية</div></div><span class="pill green">14:05</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-yellow)"></span><div class="main"><div class="t">ريم الشمري <span class="muted small">P-002</span></div><div class="s">RCD-1204 · مستشفى دله – النخيل</div></div><span class="pill green">14:01</span></div>
-      <div class="row"><span class="triage" style="--c:var(--t-green)"></span><div class="main"><div class="t">بندر الحارثي <span class="muted small">P-001</span></div><div class="s">RCD-1151 · مستشفى الحبيب – السليمانية</div></div><span class="pill green">13:58</span></div>
+      <div class="row"><div class="main"><div class="t">تركي المطيري <span class="muted small">P-005</span></div><div class="s"><span class="tri green">بسيط</span> · RCD-1140 · مستشفى الحبيب – السليمانية</div></div><span class="pill green">14:31</span></div>
+      <div class="row"><div class="main"><div class="t" style="color:var(--text-2)">غير معروف <span class="muted small">P-003</span></div><div class="s"><span class="tri red">فوري</span> · RCD-1179 · مدينة الملك سعود الطبية</div></div><span class="pill green">14:05</span></div>
+      <div class="row"><div class="main"><div class="t">ريم الشمري <span class="muted small">P-002</span></div><div class="s"><span class="tri yellow">متأخر</span> · RCD-1204 · مستشفى دله – النخيل</div></div><span class="pill green">14:01</span></div>
+      <div class="row"><div class="main"><div class="t">بندر الحارثي <span class="muted small">P-001</span></div><div class="s"><span class="tri green">بسيط</span> · RCD-1151 · مستشفى الحبيب – السليمانية</div></div><span class="pill green">13:58</span></div>
     </div>
 
     <!-- Hospitals -->
@@ -453,12 +460,12 @@ body:has(#unk:checked) .ident{opacity:.4;pointer-events:none}
     <!-- Log -->
     <div class="pane p4">
       <ol class="tl">
-        <li><div class="time num">14:36</div><div class="what">إسناد P-008 إلى RCD-1188 – مدينة الملك سعود الطبية</div><div class="who">سارة القحطاني</div></li>
+        <li><div class="time num">14:36</div><div class="what">إسناد P-008 إلى RCD-1188 – مدينة الملك سعود الطبية</div><div class="who">أنس</div></li>
         <li style="--c:var(--orange)"><div class="time num">14:34</div><div class="what">تغيير مستشفى P-006 من مستشفى الحبيب إلى مدينة الملك سعود الطبية (الطوارئ ممتلئة)</div><div class="who">أحمد الزهراني</div></li>
         <li style="--c:var(--green)"><div class="time num">14:31</div><div class="what">تسليم P-005 في مستشفى الحبيب – السليمانية</div><div class="who">طاقم RCD-1140</div></li>
         <li><div class="time num">14:27</div><div class="what">انضمام EXT-03 – شركة النخبة للإسعاف بعد رمز التحقق</div><div class="who">النظام</div></li>
         <li><div class="time num">14:20</div><div class="what">وصول RCD-1204 إلى منطقة الانتظار</div><div class="who">النظام</div></li>
-        <li style="--c:var(--text-3)"><div class="time num">14:15</div><div class="what">صرف RCD-1097 إلى المحطة</div><div class="who">سارة القحطاني</div></li>
+        <li style="--c:var(--text-3)"><div class="time num">14:15</div><div class="what">صرف RCD-1097 إلى المحطة</div><div class="who">أنس</div></li>
         <li><div class="time num">13:56</div><div class="what">إرسال الطلب إلى أقرب 10 سيارات</div><div class="who">مركز العمليات</div></li>
         <li style="--c:var(--red)"><div class="time num">13:54</div><div class="what">إنشاء الحدث وتعيين المنسقين</div><div class="who">مركز العمليات</div></li>
       </ol>
@@ -638,7 +645,7 @@ body:has(#unk:checked) .ident{opacity:.4;pointer-events:none}
       <div class="row"><span class="dot" style="--c:var(--s-transport)"></span><div class="main"><div class="t">RCD-1151 · P-006</div><div class="s">في الطريق إلى مدينة الملك سعود الطبية</div></div></div>
       <div class="row"><span class="dot" style="--c:var(--s-transport)"></span><div class="main"><div class="t">RCD-1162 · P-007</div><div class="s">في الطريق إلى مستشفى دله – النخيل</div></div></div>
       <div class="row"><span class="dot" style="--c:var(--s-to-scene)"></span><div class="main"><div class="t">RCD-1188 · P-008</div><div class="s">في الطريق لاستلام المريض</div></div></div>
-      <div class="row"><span class="triage" style="--c:var(--t-red)"></span><div class="main"><div class="t">P-009 · P-004</div><div class="s">لم تُسند لهما سيارة</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
+      <div class="row"><div class="main"><div class="t">P-009 · P-004</div><div class="s">لم تُسند لهما سيارة</div></div><a class="pill orange" href="#add-patient">إسناد</a></div>
       <div class="note"><svg class="i sm"><use href="#i-info"/></svg>النقل الجاري يستمر حتى التسليم حتى بعد إغلاق الحدث.</div>
     </div>
     <div class="ov-foot"><a class="btn primary" href="#">طلب الإغلاق</a><a class="btn outline" href="#">صرف كل السيارات الجاهزة</a></div>
