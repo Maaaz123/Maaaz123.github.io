@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>DataVital AI · The story</title>
-<meta name="description" content="How DataVital AI turns hospital data into daily decisions: the problem, the solution and every screen.">
+<meta name="description" content="How DataVital AI turns hospital data into daily decisions: the problem, the cause, the action, the owner, the AI and every screen.">
 <meta property="og:title" content="DataVital AI · The story">
 <meta property="og:description" content="Hospital data, turned into daily decisions. The problem, the solution and every screen.">
 <meta property="og:image" content="https://maazmajid.com/datavital/story/shots/executive.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0C1210">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--page:#0C1210;--surface:#161F1B;--surface2:#1C2521;--line:#26312C;--text:#E8EEEB;--soft:#B7C3BD;--muted:#93A19A;--brand:#3DBE86;--brand2:#2FA372;--tint:#163326;--violet:#A9A2F0;--amber:#F0B24A;--red:#F2784B;--display:"Manrope","IBM Plex Sans",sans-serif;--body:"IBM Plex Sans","Segoe UI",sans-serif}
 *{box-sizing:border-box}
@@ -134,6 +134,54 @@ section.block{padding:120px 0}
 .close .cta{justify-content:center}
 footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+/* loop, comparison, AI, owners, cards on each screen */
+.gapline{margin-top:28px;padding:22px 26px;border-radius:18px;border:1px solid #2C4A3B;background:linear-gradient(120deg,rgba(61,190,134,.10),rgba(169,162,240,.06));font:600 19px/1.5 var(--display);max-width:none}
+.gapline span{color:var(--brand)}
+.loop{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+.lp{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.lp .q{display:flex;align-items:center;gap:12px}
+.lp .q i{flex:none;width:36px;height:36px;border-radius:11px;background:var(--tint);color:var(--brand);display:grid;place-items:center;font:800 16px var(--display);font-style:normal}
+.lp h3{font-size:19px}
+.lp p{margin:0;color:var(--soft);font-size:15px}
+.lp .ex{margin-top:auto;padding:12px 14px;border-radius:12px;background:var(--surface2);border-left:3px solid var(--brand);font-size:14px;color:var(--text)}
+.lp .ex b{display:block;font:600 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.duo .f-shot,.duo .f-shot.reveal.in{transform:none}
+.duo figcaption{padding:12px 16px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.note{color:var(--muted);font-size:14px;margin-top:18px}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;margin-top:44px;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;font-size:15px}
+.cmp th,.cmp td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp th{font:600 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:#111816}
+.cmp td:first-child{font-weight:600;color:var(--text);width:18%}
+.cmp td:nth-child(2){color:var(--muted);width:30%}
+.cmp td:nth-child(3){color:var(--soft)}
+.cmp td:nth-child(3):before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand);margin-right:10px;vertical-align:middle}
+.sub{font:700 13px var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:64px 0 0}
+.ai-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 30px}
+.ai-list div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.ai-list h4{font-size:17px;margin-bottom:6px} .ai-list p{margin:0;color:var(--soft);font-size:15px}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+.rules div{border-radius:18px;padding:22px;border:1px dashed #2C3833}
+.rules h4{font-size:17px;margin-bottom:6px;color:var(--brand)} .rules p{margin:0;color:var(--soft);font-size:15px}
+.own{width:100%;border-collapse:separate;border-spacing:0;margin-top:44px;font-size:15px;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.own th,.own td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.own tr:last-child td{border-bottom:0}
+.own th{font:600 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:#111816}
+.own td:first-child{font-weight:600;color:var(--text);white-space:nowrap}
+.own td:nth-child(2){color:var(--brand);font-weight:600;white-space:nowrap}
+.own td:nth-child(3),.own td:nth-child(4){color:var(--soft)}
+.roles{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.roles span{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--soft);font-size:14px}
+.roles b{color:var(--text);font-weight:600}
+.cards-on{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1.7}
+.cards-on b{display:block;font:600 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.sc .cards-on{margin-top:12px;padding-top:10px}
+.new{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(169,162,240,.14);color:var(--violet);font:600 11px var(--body);letter-spacing:.06em;vertical-align:middle}
+@media (max-width:900px){.loop,.duo,.ai-list,.rules{grid-template-columns:1fr}.cmp td:first-child,.cmp td:nth-child(2){width:auto}.own td:first-child,.own td:nth-child(2){white-space:normal}}
+.lang{margin-inline-start:22px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font:600 13px var(--body);color:var(--text);text-decoration:none}.lang:hover{border-color:var(--brand);color:var(--brand)}
+.bar .right{display:flex;align-items:center}
+.lang[lang=ar]{font-family:"IBM Plex Sans Arabic",var(--body)}
 /* reveal */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--d,0) * 70ms)}
 .reveal.in{opacity:1;transform:none}
@@ -148,7 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <div class="progress" id="progress"></div>
 <header class="bar" id="bar">
   <a href="#top" aria-label="DataVital AI"><svg role="img" aria-label="DataVital AI" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495 100"><defs><linearGradient id="dvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e6fe0"/><stop offset=".55" stop-color="#1fa6d8"/><stop offset="1" stop-color="#2ed3b7"/></linearGradient></defs><g><path d="M38 8h24a6 6 0 0 1 6 6v18h18a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6H68v18a6 6 0 0 1-6 6H38a6 6 0 0 1-6-6V68H14a6 6 0 0 1-6-6V38a6 6 0 0 1 6-6h18V14a6 6 0 0 1 6-6z" fill="url(#dvg)"/><polyline points="10,52 32,52 40,36 51,68 60,44 66,52 80,52" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="84" cy="52" r="6" fill="#fff"/></g><path d="M140.75 74.0H123.625V27.4375H140.75Q147.84375 27.4375 152.96875 30.234375Q158.09375 33.03125 160.875 38.25Q163.65625 43.46875 163.65625 50.71875Q163.65625 57.96875 160.890625 63.203125Q158.125 68.4375 152.984375 71.21875Q147.84375 74.0 140.75 74.0ZM134.65625 64.5625H140.28125Q144.28125 64.5625 147.046875 63.21875Q149.8125 61.875 151.21875 58.8125Q152.625 55.75 152.625 50.71875Q152.625 45.6875 151.1875 42.640625Q149.75 39.59375 146.984375 38.234375Q144.21875 36.875 140.125 36.875H134.65625ZM178.985 74.625Q175.64125 74.625 173.031875 73.484375Q170.4225 72.34375 168.95375 70.046875Q167.485 67.75 167.485 64.3125Q167.485 61.40625 168.500625 59.40625Q169.51625 57.40625 171.32875 56.15625Q173.14125 54.90625 175.485 54.25Q177.82875 53.59375 180.485 53.375Q183.45375 53.125 185.26625 52.828125Q187.07875 52.53125 187.9225 51.9375Q188.76625 51.34375 188.76625 50.28125V50.15625Q188.76625 48.9375 188.20375 48.09375Q187.64125 47.25 186.57875 46.8125Q185.51625 46.375 184.01625 46.375Q182.51625 46.375 181.344375 46.8125Q180.1725 47.25 179.4225 48.0625Q178.6725 48.875 178.36 49.96875L168.485 48.6875Q169.1725 45.6875 171.188125 43.421875Q173.20375 41.15625 176.469375 39.890625Q179.735 38.625 184.11 38.625Q187.36 38.625 190.188125 39.390625Q193.01625 40.15625 195.14125 41.640625Q197.26625 43.125 198.45375 45.296875Q199.64125 47.46875 199.64125 50.28125V74.0H189.39125V69.09375H189.11Q188.1725 70.90625 186.719375 72.125Q185.26625 73.34375 183.344375 73.984375Q181.4225 74.625 178.985 74.625ZM182.2975 67.40625Q184.14125 67.40625 185.625625 66.65625Q187.11 65.90625 187.985 64.59375Q188.86 63.28125 188.86 61.5625V58.21875Q188.39125 58.46875 187.688125 58.6875Q186.985 58.90625 186.14125 59.078125Q185.2975 59.25 184.45375 59.390625Q183.61 59.53125 182.82875 59.65625Q181.235 59.875 180.11 60.40625Q178.985 60.9375 178.39125 61.78125Q177.7975 62.625 177.7975 63.8125Q177.7975 64.96875 178.39125 65.765625Q178.985 66.5625 179.985 66.984375Q180.985 67.40625 182.2975 67.40625ZM225.06375000000003 39.0625V47.15625H218.78250000000003V63.3125Q218.78250000000003 64.6875 219.43875000000003 65.359375Q220.09500000000003 66.03125 221.56375000000003 66.03125Q222.12625000000003 66.03125 223.14187500000003 65.90625Q224.15750000000003 65.78125 224.59500000000003 65.65625L226.00125000000003 73.59375Q224.15750000000003 74.125 222.43875000000003 74.3125Q220.72000000000003 74.5 219.18875000000003 74.5Q213.62625000000003 74.5 210.75125000000003 71.890625Q207.87625000000003 69.28125 207.87625000000003 64.28125V47.15625H203.25125000000003V39.0625H207.87625000000003V30.75H218.78250000000003V39.0625ZM239.79875000000004 74.625Q236.45500000000004 74.625 233.84562500000004 73.484375Q231.23625000000004 72.34375 229.76750000000004 70.046875Q228.29875000000004 67.75 228.29875000000004 64.3125Q228.29875000000004 61.40625 229.31437500000004 59.40625Q230.33000000000004 57.40625 232.14250000000004 56.15625Q233.95500000000004 54.90625 236.29875000000004 54.25Q238.64250000000004 53.59375 241.29875000000004 53.375Q244.26750000000004 53.125 246.08000000000004 52.828125Q247.89250000000004 52.53125 248.73625000000004 51.9375Q249.58000000000004 51.34375 249.58000000000004 50.28125V50.15625Q249.58000000000004 48.9375 249.01750000000004 48.09375Q248.45500000000004 47.25 247.39250000000004 46.8125Q246.33000000000004 46.375 244.83000000000004 46.375Q243.33000000000004 46.375 242.15812500000004 46.8125Q240.98625000000004 47.25 240.23625000000004 48.0625Q239.48625000000004 48.875 239.17375000000004 49.96875L229.29875000000004 48.6875Q229.98625000000004 45.6875 232.00187500000004 43.421875Q234.01750000000004 41.15625 237.28312500000004 39.890625Q240.54875000000004 38.625 244.92375000000004 38.625Q248.17375000000004 38.625 251.00187500000004 39.390625Q253.83000000000004 40.15625 255.95500000000004 41.640625Q258.08000000000004 43.125 259.26750000000004 45.296875Q260.45500000000004 47.46875 260.45500000000004 50.28125V74.0H250.20500000000004V69.09375H249.92375000000004Q248.98625000000004 70.90625 247.53312500000004 72.125Q246.08000000000004 73.34375 244.15812500000004 73.984375Q242.23625000000004 74.625 239.79875000000004 74.625ZM243.11125000000004 67.40625Q244.95500000000004 67.40625 246.43937500000004 66.65625Q247.92375000000004 65.90625 248.79875000000004 64.59375Q249.67375000000004 63.28125 249.67375000000004 61.5625V58.21875Q249.20500000000004 58.46875 248.50187500000004 58.6875Q247.79875000000004 58.90625 246.95500000000004 59.078125Q246.11125000000004 59.25 245.26750000000004 59.390625Q244.42375000000004 59.53125 243.64250000000004 59.65625Q242.04875000000004 59.875 240.92375000000004 60.40625Q239.79875000000004 60.9375 239.20500000000004 61.78125Q238.61125000000004 62.625 238.61125000000004 63.8125Q238.61125000000004 64.96875 239.20500000000004 65.765625Q239.79875000000004 66.5625 240.79875000000004 66.984375Q241.79875000000004 67.40625 243.11125000000004 67.40625ZM280.90875000000005 74.0 264.90875000000005 27.4375H277.31500000000005L283.78375000000005 47.78125Q285.31500000000005 52.84375 286.75250000000005 58.40625Q287.56500000000005 61.59375 288.37750000000005 64.96875Q289.15875000000005 61.59375 289.94000000000005 58.375Q291.28375000000005 52.84375 292.75250000000005 47.78125L298.97125000000005 27.4375H311.22125000000005L295.65875000000005 74.0ZM315.64375000000007 74.0V39.0625H326.55000000000007V74.0ZM321.08125000000007 34.96875Q318.76875000000007 34.96875 317.11250000000007 33.421875Q315.45625000000007 31.875 315.45625000000007 29.71875Q315.45625000000007 27.53125 317.11250000000007 26.0Q318.76875000000007 24.46875 321.08125000000007 24.46875Q323.42500000000007 24.46875 325.08125000000007 25.984375Q326.73750000000007 27.5 326.73750000000007 29.71875Q326.73750000000007 31.90625 325.08125000000007 33.4375Q323.42500000000007 34.96875 321.08125000000007 34.96875ZM351.9725000000001 39.0625V47.15625H345.6912500000001V63.3125Q345.6912500000001 64.6875 346.3475000000001 65.359375Q347.0037500000001 66.03125 348.4725000000001 66.03125Q349.0350000000001 66.03125 350.0506250000001 65.90625Q351.0662500000001 65.78125 351.5037500000001 65.65625L352.9100000000001 73.59375Q351.0662500000001 74.125 349.3475000000001 74.3125Q347.6287500000001 74.5 346.0975000000001 74.5Q340.5350000000001 74.5 337.6600000000001 71.890625Q334.7850000000001 69.28125 334.7850000000001 64.28125V47.15625H330.1600000000001V39.0625H334.7850000000001V30.75H345.6912500000001V39.0625ZM366.7075000000001 74.625Q363.3637500000001 74.625 360.7543750000001 73.484375Q358.1450000000001 72.34375 356.6762500000001 70.046875Q355.2075000000001 67.75 355.2075000000001 64.3125Q355.2075000000001 61.40625 356.2231250000001 59.40625Q357.2387500000001 57.40625 359.0512500000001 56.15625Q360.8637500000001 54.90625 363.2075000000001 54.25Q365.5512500000001 53.59375 368.2075000000001 53.375Q371.1762500000001 53.125 372.9887500000001 52.828125Q374.8012500000001 52.53125 375.6450000000001 51.9375Q376.4887500000001 51.34375 376.4887500000001 50.28125V50.15625Q376.4887500000001 48.9375 375.9262500000001 48.09375Q375.3637500000001 47.25 374.3012500000001 46.8125Q373.2387500000001 46.375 371.7387500000001 46.375Q370.2387500000001 46.375 369.0668750000001 46.8125Q367.8950000000001 47.25 367.1450000000001 48.0625Q366.3950000000001 48.875 366.0825000000001 49.96875L356.2075000000001 48.6875Q356.8950000000001 45.6875 358.9106250000001 43.421875Q360.9262500000001 41.15625 364.1918750000001 39.890625Q367.4575000000001 38.625 371.8325000000001 38.625Q375.0825000000001 38.625 377.9106250000001 39.390625Q380.7387500000001 40.15625 382.8637500000001 41.640625Q384.9887500000001 43.125 386.1762500000001 45.296875Q387.3637500000001 47.46875 387.3637500000001 50.28125V74.0H377.1137500000001V69.09375H376.8325000000001Q375.8950000000001 70.90625 374.4418750000001 72.125Q372.9887500000001 73.34375 371.0668750000001 73.984375Q369.1450000000001 74.625 366.7075000000001 74.625ZM370.0200000000001 67.40625Q371.8637500000001 67.40625 373.3481250000001 66.65625Q374.8325000000001 65.90625 375.7075000000001 64.59375Q376.5825000000001 63.28125 376.5825000000001 61.5625V58.21875Q376.1137500000001 58.46875 375.4106250000001 58.6875Q374.7075000000001 58.90625 373.8637500000001 59.078125Q373.0200000000001 59.25 372.1762500000001 59.390625Q371.3325000000001 59.53125 370.5512500000001 59.65625Q368.9575000000001 59.875 367.8325000000001 60.40625Q366.7075000000001 60.9375 366.1137500000001 61.78125Q365.5200000000001 62.625 365.5200000000001 63.8125Q365.5200000000001 64.96875 366.1137500000001 65.765625Q366.7075000000001 66.5625 367.7075000000001 66.984375Q368.7075000000001 67.40625 370.0200000000001 67.40625ZM404.8487500000001 27.4375V74.0H393.9425000000001V27.4375Z" fill="#ffffff"/><path d="M422.66250000000014 74.0 438.19375000000014 27.4375H452.97500000000014L468.97500000000014 74.0H456.60000000000014L453.44375000000014 64.09375H437.94375000000014L434.91250000000014 74.0ZM450.75625000000014 55.65625 450.13125000000014 53.65625Q448.56875000000014 48.5625 447.13125000000014 42.8125Q446.28750000000014 39.59375 445.47500000000014 36.1875Q444.69375000000014 39.59375 443.94375000000014 42.84375Q442.63125000000014 48.59375 441.16250000000014 53.65625L440.53750000000014 55.65625ZM484.46000000000015 27.4375V74.0H473.42875000000015V27.4375Z" fill="#8b6cf2"/></svg></a>
-  <nav><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#why">Why it matters</a><a href="#tour">Every screen</a><a href="#assist">Vital Assist</a></nav>
+  <div class="right"><nav><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#loop">How it works</a><a href="#why">Why DataVital</a><a href="#ai">AI</a><a href="#owners">Owners</a><a href="#tour">Every screen</a></nav><a class="lang" href="ar/" lang="ar">عربي</a></div>
 </header>
 
 <section class="hero" id="top">
@@ -157,7 +205,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="wrap hero-grid"><div>
     <div class="mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="dvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e6fe0"/><stop offset=".55" stop-color="#1fa6d8"/><stop offset="1" stop-color="#2ed3b7"/></linearGradient></defs><path d="M38 8h24a6 6 0 0 1 6 6v18h18a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6H68v18a6 6 0 0 1-6 6H38a6 6 0 0 1-6-6V68H14a6 6 0 0 1-6-6V38a6 6 0 0 1 6-6h18V14a6 6 0 0 1 6-6z" fill="url(#dvg)"/><polyline points="10,52 32,52 40,36 51,68 60,44 66,52 80,52" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="84" cy="52" r="6" fill="#fff"/></svg></div>
     <h1>Hospital data, turned into <em>today's decisions.</em></h1>
-    <p class="lead">DataVital AI connects every system in the hospital, checks the data, and shows each leader what is happening now, what it is costing, and what to do next, with AI that explains the why.</p>
+    <p class="lead">DataVital AI connects every system in the hospital, checks the data, and tells each leader what is wrong, where, why, what to do and who owns it. Then it checks whether it worked.</p>
     <div class="cta"><a class="btn main" href="#problem">Read the story ↓</a><a class="btn ghost" href="#tour">See every screen</a></div>
   </div><div class="hero-shot"><img src="shots/executive.jpg" alt="DataVital AI executive view" width="1389" height="868"></div></div>
   <div class="scrollcue">Scroll</div>
@@ -177,9 +225,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div class="pains">
       <div class="pain reveal"><i>1</i><div><h4>Late</h4><p>Last month's report can't fix today's queue in the emergency department.</p></div></div>
       <div class="pain reveal" style="--d:1"><i>2</i><div><h4>Scattered</h4><p>Six or more systems, each with its own numbers, and no single version of the truth.</p></div></div>
-      <div class="pain reveal" style="--d:2"><i>3</i><div><h4>Silent</h4><p>Dashboards show a number but never say why it moved or who should act.</p></div></div>
+      <div class="pain reveal" style="--d:2"><i>3</i><div><h4>Silent</h4><p>Dashboards show a number but never say why it moved, what to do about it, or who should act.</p></div></div>
       <div class="pain reveal" style="--d:3"><i>4</i><div><h4>Expensive to fix</h4><p>Every new hospital means another consulting project and another BI build.</p></div></div>
+      <div class="pain reveal"><i>5</i><div><h4>Split by department</h4><p>Long stays on the wards show up as crowding in the emergency department. Each team sees its own number and nobody sees the link.</p></div></div>
+      <div class="pain reveal" style="--d:1"><i>6</i><div><h4>Nobody follows up</h4><p>An action is agreed in a meeting and forgotten. Nobody checks a month later whether the number moved.</p></div></div>
     </div>
+    <p class="gapline reveal">The missing piece is not more data. It is the step from a number to a decision: <span>what is wrong, where, why, what to do, who does it, and did it work.</span></p>
   </div>
 </section>
 
@@ -191,22 +242,126 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div class="flow" id="flow">
       <div class="step reveal" style="--d:0"><div class="n">1</div><h3>Connect</h3><p>Links the patient record, lab, radiology, pharmacy, billing and NPHIES, without replacing anything.</p></div>
       <div class="step reveal" style="--d:1"><div class="n">2</div><h3>Unify</h3><p>One data model for the hospital, with quality checks before anything is published.</p></div>
-      <div class="step reveal" style="--d:2"><div class="n">3</div><h3>Understand</h3><p>69 screens and 86 standards, each with its target, plus AI that forecasts, explains and suggests.</p></div>
-      <div class="step reveal" style="--d:3"><div class="n">4</div><h3>Act</h3><p>Every problem comes with an owner and an action, and the result is tracked afterwards.</p></div>
+      <div class="step reveal" style="--d:2"><div class="n">3</div><h3>Understand</h3><p>69 screens and 86 standards, each with its target, plus AI that forecasts, finds the cause, predicts and drafts.</p></div>
+      <div class="step reveal" style="--d:3"><div class="n">4</div><h3>Act</h3><p>Every problem comes with one action and an owner by role. It goes on the action plan and is checked again 30 days later.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="block" id="loop">
+  <div class="wrap">
+    <p class="kicker reveal">How it works</p>
+    <h2 class="reveal">From a number to a named owner, in six steps.</h2>
+    <p class="intro reveal">This is one real run on the demo hospital, DataVital Riyadh 1. Nobody wrote it: the agents, the investigator and the brain found it from the hospital's own records.</p>
+    <div class="loop"><div class="lp reveal" style="--d:0"><div class="q"><i>1</i><h3>What is wrong?</h3></div><p>Each area's agent watches its standards after every data release and flags what moved the wrong way.</p><div class="ex"><b>Example</b>Emergency: seen by a doctor within CTAS time fell from 67.6% to 62.0% in 30 days.</div></div><div class="lp reveal" style="--d:1"><div class="q"><i>2</i><h3>Where exactly?</h3></div><p>The investigator splits the change by hour, ward, payer, test, scanner type or theatre, so the problem has an address.</p><div class="ex"><b>Example</b>Most of the fall is in patients arriving 11:00–19:00: 53% were seen in time, down from 65%.</div></div><div class="lp reveal" style="--d:2"><div class="q"><i>3</i><h3>Why?</h3></div><p>It checks the usual causes over the same weeks and says which did not change, and which did.</p><div class="ex"><b>Example</b>More patients, sicker patients, waits for ward beds and staff hours did not explain it. Beds in use rose from 71.0% to 74.8%.</div></div><div class="lp reveal" style="--d:0"><div class="q"><i>4</i><h3>Where does it start?</h3></div><p>The brain links findings across areas along the patient's way through the hospital, and points to the first step.</p><div class="ex"><b>Example</b>Stays longer than expected on General Surgery and Internal Medicine (31.3% → 37.3%), so more beds in use, longer waits for a ward bed, admitted patients waiting in the emergency department, fewer seen in time.</div></div><div class="lp reveal" style="--d:1"><div class="q"><i>5</i><h3>What to do, and who?</h3></div><p>One action at the start of the chain, with the owner by role. One click puts it on the hospital's action plan.</p><div class="ex"><b>Example</b>Review every stay past its expected length at the daily round and name what it waits for. Owner: Director of Nursing.</div></div><div class="lp reveal" style="--d:2"><div class="q"><i>6</i><h3>Did it work?</h3></div><p>The agents check the whole chain again in 30 days, and the leadership brief shows how the area has done since the decision.</p><div class="ex"><b>Example</b>If it works, the rest of the chain follows in order: beds in use, then the wait for a ward bed, then the emergency department.</div></div></div>
+    <div class="duo">
+      <figure class="f-shot reveal"><div class="browser"><span></span><span></span><span></span><em>app.datavital.io/command</em></div><img src="shots/agents.jpg" alt="Area agents and findings linked across areas in DataVital AI" loading="lazy" width="1389" height="868"><figcaption>Steps 1, 4 and 5: what each area's agent found, and the chain the brain linked.</figcaption></figure>
+      <figure class="f-shot reveal" style="--d:1"><div class="browser"><span></span><span></span><span></span><em>app.datavital.io/enterprise-ai</em></div><img src="shots/why.jpg" alt="Why it changed: the investigator in DataVital AI" loading="lazy" width="1389" height="868"><figcaption>Steps 2 and 3: where the change is, and the usual causes checked.</figcaption></figure>
+    </div>
+    <p class="note reveal">It shows a likely chain, not proof. People decide; nothing is changed without a person. Demo data for 22 synthetic hospitals.</p>
   </div>
 </section>
 
 <section class="block" id="why">
   <div class="wrap">
-    <p class="kicker reveal">Why it matters</p>
-    <h2 class="reveal">Small daily decisions add up to beds, money and lives.</h2>
+    <p class="kicker reveal">Why DataVital</p>
+    <h2 class="reveal">It closes the whole loop, not one piece of it.</h2>
+    <p class="intro reveal">A report tells you a number. A dashboard tells you the number sooner. DataVital AI carries it all the way to a decision, a person and a result.</p>
+    <table class="cmp reveal"><thead><tr><th></th><th>A report or dashboard</th><th>DataVital AI</th></tr></thead><tbody><tr><td>When</td><td>Last month's report</td><td>Live screens refreshed every 5 minutes; every standard worked out each night, checked against a 06:00 deadline</td></tr><tr><td>Data</td><td>One system at a time, each with its own numbers</td><td>Every system linked into one patient journey, with quality checks before anything is published</td></tr><tr><td>What is wrong</td><td>A number</td><td>The number against its target, the period before, and the best hospital in the network</td></tr><tr><td>Where and why</td><td>Left to a meeting</td><td>The change split by hour, ward, payer or test, with the usual causes checked over the same weeks</td></tr><tr><td>Across departments</td><td>Each team sees its own screen</td><td>The brain links one area's problem to another's and points to where it starts</td></tr><tr><td>What to do</td><td>Not said</td><td>One suggested action for each problem, from fixed rules on the same figures</td></tr><tr><td>Who</td><td>Not said</td><td>An owner by role: Head of Emergency, Director of Nursing, Revenue cycle manager and so on</td></tr><tr><td>Did it work</td><td>Not followed up</td><td>The action plan records the decision; the standards are read again 30 days later</td></tr><tr><td>Money</td><td>A separate finance report</td><td>Money lost beyond the standards, denials caught before sending, appeals drafted with the deadline</td></tr></tbody></table>
+    <p class="sub reveal">What changes in the hospital</p>
+    <h2 class="reveal" style="margin-top:14px">Small daily decisions add up to beds, money and lives.</h2>
     <div class="why">
-      <div class="reveal" style="--d:0"><b>Beds</b><h4>More capacity, no new building</h4><p>Discharges planned before noon and ICU step-downs on time free beds the emergency department is waiting for.</p></div>
-      <div class="reveal" style="--d:1"><b>SAR</b><h4>Revenue that is not lost</h4><p>Denials caught before submission, appeals ranked by value, and cash chased by age and payer.</p></div>
+      <div class="reveal" style="--d:0"><b>Beds</b><h4>More capacity, no new building</h4><p>Who is likely to go home today, ranked by chance, and stays past their expected length on every ward, free the beds the emergency department is waiting for.</p></div>
+      <div class="reveal" style="--d:1"><b>SAR</b><h4>Revenue that is not lost</h4><p>Claims likely to be denied are fixed before they are sent, and every denial gets an appeal letter drafted from the bill before the deadline.</p></div>
       <div class="reveal" style="--d:2"><b>Safety</b><h4>Harm caught early</h4><p>Critical results not taken, late urgent doses and overdue actions surface the same day, not the next audit.</p></div>
       <div class="reveal" style="--d:3"><b>Time</b><h4>Answers in seconds</h4><p>Leaders ask Vital Assist in plain words and get the cause and the next step, not another spreadsheet.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="block" id="ai" style="padding-bottom:40px">
+  <div class="wrap">
+    <p class="kicker reveal">The AI</p>
+    <h2 class="reveal">AI that does the work, and shows how often it was right.</h2>
+    <p class="intro reveal">Each piece of AI sits on the screen where the work happens, says why, suggests the next step, and is checked against what really happened. People decide.</p>
+  </div>
+</section>
+<div class="wrap">
+<article class="feature flip">
+  <div class="f-text reveal">
+    <p class="f-kicker">Command centre · Area agents and the brain</p>
+    <h3>Seven agents watch their areas. The brain finds the problems that are really one.</h3>
+    <ul class="points"><li><span class="tick"></span>One agent each for emergency, wards and beds, intensive care, surgery, laboratory, radiology and the revenue cycle</li><li><span class="tick"></span>Each says Needs attention, Watching or Steady, with the finding: the standard, before → now, and where most of the change is</li><li><span class="tick"></span>The brain links wrong-way findings along the patient's way through the hospital into one chain, and marks where it starts</li><li><span class="tick"></span>One action at the start of the chain, the owner, and Add to action plan; findings that do not link are listed on their own</li><li><span class="tick"></span>Ask Vital Assist explains the chain from what the agents found, judging each figure only against its own target</li></ul>
+  </div>
+  <figure class="f-shot reveal">
+    <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/command</em></div>
+    <img src="shots/agents.jpg" alt="Area agents in DataVital AI" loading="lazy" width="1389" height="868">
+  </figure>
+</article>
+<article class="feature ">
+  <div class="f-text reveal">
+    <p class="f-kicker">Leadership brief · Why it changed</p>
+    <h3>Press Why it changed on any priority and the investigator does the first hour of analysis.</h3>
+    <ul class="points"><li><span class="tick"></span>Splits the change by the part that carries it: arrival hour, ward, payer, test, scanner type or theatre</li><li><span class="tick"></span>Checks the usual causes over the same weeks: more patients, sicker patients, bed waits, staff hours, analyzer or scanner stops</li><li><span class="tick"></span>Says plainly what the data cannot show yet, so nobody draws the wrong conclusion</li><li><span class="tick"></span>One suggested action with its owner, added to the action plan in one click and checked again in 30 days</li><li><span class="tick"></span>Covers 25 standards; the opening paragraph is built from the figures only, not written by a model</li></ul>
+  </div>
+  <figure class="f-shot reveal">
+    <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/enterprise-ai</em></div>
+    <img src="shots/why.jpg" alt="Why it changed in DataVital AI" loading="lazy" width="1389" height="868">
+  </figure>
+</article>
+<article class="feature flip">
+  <div class="f-text reveal">
+    <p class="f-kicker">Wards, now · Who is likely to go home today</p>
+    <h3>Every patient on the wards gets a chance of going home before midnight.</h3>
+    <ul class="points"><li><span class="tick"></span>The chance comes from how often stays like this one ended that day before: ward, day of stay, age, operation, ICU, ready, order, open consults</li><li><span class="tick"></span>Each patient has the reason and the next step: write the discharge order, or ask the team for a decision on the round</li><li><span class="tick"></span>Likely today, likely tomorrow and likely but held up, next to what the old rule of thumb says</li><li><span class="tick"></span>Refreshed every 5 minutes; on the Bed outlook screen, Was the going-home prediction right? compares each morning's chance with who actually went home</li></ul>
+  </div>
+  <figure class="f-shot reveal">
+    <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/inpatient/now</em></div>
+    <img src="shots/goinghome.jpg" alt="Who is likely to go home today in DataVital AI" loading="lazy" width="1389" height="868">
+  </figure>
+</article>
+<article class="feature ">
+  <div class="f-text reveal">
+    <p class="f-kicker">Claims and denials · Before the claim is sent</p>
+    <h3>Claims likely to be denied are caught while they can still be fixed.</h3>
+    <ul class="points"><li><span class="tick"></span>Every billed claim not yet sent gets a chance of denial, the reason and the fix: attach the discharge summary, send before the payer's 60-day limit</li><li><span class="tick"></span>Most money at risk first: chance × value</li><li><span class="tick"></span>Was the warning right? On the demo data, checking the riskiest 5% of claims would catch 53% of denials; of every 100 claims warned about, 54 were denied</li><li><span class="tick"></span>Denials warned about, by reason, so the team sees which ones the check can and cannot catch</li></ul>
+  </div>
+  <figure class="f-shot reveal">
+    <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/rcm/claims</em></div>
+    <img src="shots/claims.jpg" alt="Claims likely to be denied in DataVital AI" loading="lazy" width="1389" height="868">
+  </figure>
+</article>
+<article class="feature flip">
+  <div class="f-text reveal">
+    <p class="f-kicker">Claims and denials · Appeal drafts</p>
+    <h3>Every denied claim gets a draft appeal letter, written from the bill and the insurer's answer.</h3>
+    <ul class="points"><li><span class="tick"></span>The facts of the denial: amount claimed, charges before discount, days left to appeal, and how often appeals for this reason were won</li><li><span class="tick"></span>The letter, with every figure checked against the bill; boxes in yellow are for the team to fill in</li><li><span class="tick"></span>What to attach for this reason, then Copy letter, Write it again or Mark as sent, which records it on the action plan</li><li><span class="tick"></span>Nothing is sent from DataVital: a person reviews the letter and sends it through the payer's portal</li></ul>
+  </div>
+  <figure class="f-shot reveal">
+    <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/rcm/claims</em></div>
+    <img src="shots/appeal.jpg" alt="Appeal draft in DataVital AI" loading="lazy" width="1389" height="868">
+  </figure>
+</article>
+  <div class="ai-list">
+    <div class="reveal"><h4>Emergency forecast</h4><p>Arrivals hour by hour for the next 24 hours with a likely range, doctors planned against doctors needed, and what to do about the gap.</p></div>
+    <div class="reveal" style="--d:1"><h4>Bed outlook</h4><p>Beds in use for the next three days and free beds on each ward by 08:00 tomorrow, with what to do about it.</p></div>
+    <div class="reveal" style="--d:2"><h4>Vital Assist</h4><p>Ask in plain words on any screen. It answers from that screen's hospital and period and turns its suggestions into actions on the plan.</p></div>
+  </div>
+  <div class="rules">
+    <div class="reveal"><h4>Checked, every time</h4><p>Every forecast and prediction has its own card that compares it with what really happened, so the hospital can see how far to trust it.</p></div>
+    <div class="reveal" style="--d:1"><h4>From the hospital's own figures</h4><p>Findings, causes and actions come from fixed rules on the same figures every screen shows. Where a model writes, as in the appeal letter, every figure is checked against the bill.</p></div>
+    <div class="reveal" style="--d:2"><h4>People decide</h4><p>Nothing is sent, ordered or changed without a person. No clinical decision, hiring or spending is ever made by DataVital.</p></div>
+  </div>
+</div>
+
+<section class="block" id="owners">
+  <div class="wrap">
+    <p class="kicker reveal">Who owns what</p>
+    <h2 class="reveal">Every finding lands on one desk.</h2>
+    <p class="intro reveal">Each area has an owner by role, the standards that person answers for, and the first action DataVital suggests when one of them is off target. The hospital can change any of them.</p>
+    <table class="own reveal"><thead><tr><th>Area</th><th>Owner</th><th>Standards they answer for</th><th>First suggested action</th></tr></thead><tbody><tr><td>Emergency</td><td>Head of Emergency</td><td>Left within 4 hours; seen by a doctor within CTAS time; admitted patients waiting over 4 h for a bed</td><td>Agree a bed-request escalation at 2 hours and a daily 10:00 flow huddle with the wards</td></tr><tr><td>Wards and beds</td><td>Director of Nursing</td><td>Beds in use; home before noon; stays longer than expected; still in hospital a day after being ready</td><td>Start discharge planning on admission and aim for one discharge per ward before 11:00</td></tr><tr><td>Intensive care</td><td>ICU lead</td><td>Waited over 2 hours for an ICU bed; still in ICU over 4 hours after being ready</td><td>Review ICU step-down twice a day and reserve a ward bed for each patient ready to leave</td></tr><tr><td>Surgery</td><td>Theatre manager</td><td>Theatre time used; first operation on time; cancelled on the day</td><td>Hold a list-planning meeting 48 hours ahead and confirm beds before the first case</td></tr><tr><td>Outpatient clinics</td><td>Outpatient manager</td><td>Seen within 15 min of appointment time; did not attend; days to an appointment</td><td>Send reminders 72 and 24 hours before, and start clinics on time with a daily check</td></tr><tr><td>Radiology</td><td>Radiology manager</td><td>Urgent exams done within 1 hour of the order; reports signed within 24 hours</td><td>Protect urgent slots on each scanner and review urgent orders every hour</td></tr><tr><td>Laboratory</td><td>Laboratory manager</td><td>Urgent results within 60 minutes; samples rejected; critical results not taken within 30 min</td><td>Review urgent samples waiting over 30 minutes and the top rejection reasons each week</td></tr><tr><td>Pharmacy</td><td>Chief pharmacist</td><td>Pharmacist check within 30 minutes; urgent medicines on time; barcode scanned at the bedside</td><td>Prioritise urgent orders in the queue and check pharmacist cover at peak hours</td></tr><tr><td>Quality and safety</td><td>Quality lead</td><td>Falls and pressure injuries per 1,000 days in hospital; hand hygiene; actions closed on time</td><td>Run a focused review on the wards with the most events and close overdue actions</td></tr><tr><td>Patient experience</td><td>Patient experience lead</td><td>Rating of care; complaints acknowledged in 2 days and closed in 30</td><td>Call back every complaint within 2 days and review the lowest-rated steps of care</td></tr><tr><td>Revenue cycle</td><td>Revenue cycle manager</td><td>Claims accepted on the first submission; claims denied; cash collected against the amount billed</td><td>Work the denied and over-90-day claims by payer every week and fix the top denial reasons</td></tr><tr><td>Supply chain</td><td>Supply chain manager</td><td>Items in stock; units received of units ordered; stock lost to expiry</td><td>Review items below safety stock with suppliers weekly and chase late orders the same day</td></tr><tr><td>Finance and workforce</td><td>Finance director</td><td>Operating margin; staff cost; overtime and agency hours</td><td>Fill the longest-open posts and cap overtime and agency hours by department</td></tr></tbody></table>
+    <p class="sub reveal" style="margin-top:44px">Each leader gets the brief for their role</p>
+    <div class="roles reveal"><span><b>Chief executive</b> · every area</span><span><b>Chief operating officer</b> · patient flow, theatres, clinics, diagnostics, pharmacy, supplies</span><span><b>Chief financial officer</b> · revenue cycle, finance, supplies</span><span><b>Chief medical and nursing officer</b> · quality, experience and the clinical areas</span></div>
   </div>
 </section>
 
@@ -214,7 +369,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="wrap">
     <p class="kicker reveal">Inside the app</p>
     <h2 class="reveal">15 areas, 69 screens, one patient journey.</h2>
-    <p class="intro reveal">Every screen follows the same idea: what is happening, against what standard, why, and what to do. Pick an area or keep scrolling.</p>
+    <p class="intro reveal">Every screen follows the same idea: what is happening, against what standard, why, and what to do. Below, every screen and every card on it. Pick an area or keep scrolling.</p>
     <div class="chips"><a class="chip reveal" style="--d:0" href="#ent"><b>ENT</b>Enterprise</a><a class="chip reveal" style="--d:1" href="#ed"><b>ED</b>Emergency</a><a class="chip reveal" style="--d:2" href="#ipd"><b>IPD</b>Inpatient Care</a><a class="chip reveal" style="--d:3" href="#icu"><b>ICU</b>ICU &amp; Critical Care</a><a class="chip reveal" style="--d:4" href="#opd"><b>OPD</b>Outpatient</a><a class="chip reveal" style="--d:5" href="#or"><b>OR</b>Surgery</a><a class="chip reveal" style="--d:6" href="#rad"><b>Rad</b>Radiology</a><a class="chip reveal" style="--d:7" href="#lab"><b>Lab</b>Laboratory</a><a class="chip reveal" style="--d:0" href="#rx"><b>Rx</b>Pharmacy</a><a class="chip reveal" style="--d:1" href="#rcm"><b>RCM</b>Revenue Cycle</a><a class="chip reveal" style="--d:2" href="#px"><b>PX</b>Patient Experience</a><a class="chip reveal" style="--d:3" href="#qs"><b>QS</b>Quality &amp; Safety</a><a class="chip reveal" style="--d:4" href="#sc"><b>SC</b>Supply Chain</a><a class="chip reveal" style="--d:5" href="#st"><b>ST</b>Strategy</a><a class="chip reveal" style="--d:6" href="#dp"><b>DP</b>Data Platform</a></div>
   </div>
 </section>
@@ -230,7 +385,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Enterprise · Executive view</p>
     <h3>Standards on target in every area, what needs attention and money beyond the standards.</h3>
-    <ul class="points"><li><span class="tick"></span>41 of 86 standards on target across 22 hospitals, with the trend</li><li><span class="tick"></span>SAR 2.6M lost beyond the standards in 30 days, and where it went</li><li><span class="tick"></span>The three standards furthest from target, each with an owner and an action</li><li><span class="tick"></span>A map of the Kingdom and a time machine that replays the last 12 months</li></ul>
+    <ul class="points"><li><span class="tick"></span>41 of 86 standards on target across 22 hospitals, with the trend</li><li><span class="tick"></span>SAR 2.6M lost beyond the standards in 30 days, and where it went</li><li><span class="tick"></span>The three standards furthest from target, each with an owner and an action</li><li><span class="tick"></span>A map of the Kingdom and a time machine that replays the last 12 months</li></ul><p class="cards-on"><b>On this screen</b>Needs your attention: furthest from target · Every area: standards on target · Standards on target, month by month · What moved most · Every hospital</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/executive</em></div>
@@ -240,8 +395,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <article class="feature ">
   <div class="f-text reveal">
     <p class="f-kicker">Enterprise · Command centre</p>
-    <h3>Latest day, patient flow, exceptions and what is unusual this week.</h3>
-    <ul class="points"><li><span class="tick"></span>Yesterday in five numbers, each against a usual day</li><li><span class="tick"></span>Patient flow in seven steps, from arrival to home</li><li><span class="tick"></span>Every off-target standard beside the best hospital in the network</li></ul>
+    <h3>Latest day, what each area's agent found, problems linked across areas, and every exception.<span class="new">New</span></h3>
+    <ul class="points"><li><span class="tick"></span>Yesterday in five numbers, each against a usual day</li><li><span class="tick"></span>Seven area agents, each with its state and the finding that matters most</li><li><span class="tick"></span>Findings linked across areas into one chain, with one action at its start and an owner</li><li><span class="tick"></span>Every off-target standard beside the best hospital in the network</li></ul><p class="cards-on"><b>On this screen</b>What each area's agent found · Linked across areas · Off target, furthest first · Unusual this week · Off target, by area</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/command</em></div>
@@ -252,7 +407,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Enterprise · Network comparison</p>
     <h3>Every hospital side by side, area by area.</h3>
-    <ul class="points"><li><span class="tick"></span>All 13 regions shaded by standards on target</li><li><span class="tick"></span>Every hospital pinned and ranked, area by area</li></ul>
+    <ul class="points"><li><span class="tick"></span>All 13 regions shaded by standards on target</li><li><span class="tick"></span>Every hospital pinned and ranked, area by area</li></ul><p class="cards-on"><b>On this screen</b>Each hospital in each area · What each hospital does well, and where it falls short · Standard by standard</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/network</em></div>
@@ -262,15 +417,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <article class="feature ">
   <div class="f-text reveal">
     <p class="f-kicker">Enterprise · Leadership brief</p>
-    <h3>Three priorities for your role, suggested actions and decisions.</h3>
-    <ul class="points"><li><span class="tick"></span>Written for a role: chief executive, nursing, finance and more</li><li><span class="tick"></span>Three priorities, the measures that move with each, and an owner</li><li><span class="tick"></span>One click adds a suggested action to the action plan</li></ul>
+    <h3>Three priorities for your role, why each one changed, suggested actions and decisions.<span class="new">New</span></h3>
+    <ul class="points"><li><span class="tick"></span>Written for a role: chief executive, nursing, finance and more</li><li><span class="tick"></span>Three priorities, the measures that move with each, and an owner</li><li><span class="tick"></span>Why it changed: where the change is, the usual causes checked, and the next step</li><li><span class="tick"></span>One click adds a suggested action to the action plan</li></ul><p class="cards-on"><b>On this screen</b>Three priorities · Why it changed · Decisions and how the area has done since · Money beyond the standards · What moved most · How this brief is made</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/enterprise-ai</em></div>
     <img src="shots/brief.jpg" alt="Leadership brief screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Definitions</h4><p>How every standard is worked out, its target and which way is better.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Definitions</h4><p>How every standard is worked out, its target and which way is better.</p><p class="cards-on"><b>On this screen</b>The standards · Other indicators</p></div></li></ul>
 </section>
 <section class="domain" id="ed">
   <header class="d-head reveal">
@@ -282,7 +437,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Emergency · Emergency, now</p>
     <h3>Who is in the department right now, who is past their CTAS time, and who is waiting for a ward bed.</h3>
-    <ul class="points"><li><span class="tick"></span>Every bay live, coloured by CTAS level</li><li><span class="tick"></span>Who is past their CTAS time and who is waiting for a ward bed</li><li><span class="tick"></span>Patients in the department today against a usual day</li></ul>
+    <ul class="points"><li><span class="tick"></span>Every bay live, coloured by CTAS level</li><li><span class="tick"></span>Who is past their CTAS time and who is waiting for a ward bed</li><li><span class="tick"></span>Patients in the department today against a usual day</li></ul><p class="cards-on"><b>On this screen</b>Bays and waiting room · Patients in the department, today · Waiting by CTAS level · Arrivals by hour, today · Seen within CTAS time</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/emergency/now</em></div>
@@ -293,7 +448,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Emergency · Emergency forecast</p>
     <h3>Arrivals, doctors needed and ward beds for the next hours, and how often the forecast was right.</h3>
-    <ul class="points"><li><span class="tick"></span>Arrivals expected hour by hour for the next 24 hours, with a likely range</li><li><span class="tick"></span>Doctor-hours short against the planned cover</li><li><span class="tick"></span>What to do about it, ranked by impact: add a doctor, open fast-track</li></ul>
+    <ul class="points"><li><span class="tick"></span>Arrivals expected hour by hour for the next 24 hours, with a likely range</li><li><span class="tick"></span>Doctor-hours short against the planned cover</li><li><span class="tick"></span>What to do about it, ranked by impact: add a doctor, open fast-track</li></ul><p class="cards-on"><b>On this screen</b>Arrivals per hour · What to do about it · Ward beds free by 08:00 · Doctors planned and needed · Was the forecast right?</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/emergency/forecast</em></div>
@@ -304,14 +459,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Emergency · Patient journey</p>
     <h3>How patients move: stage times, who goes where, where the hours go and one visit start to finish.</h3>
-    <ul class="points"><li><span class="tick"></span>Arrival to triage to doctor to decision, step by step</li><li><span class="tick"></span>Where patients come from and where they go</li><li><span class="tick"></span>The longest step is highlighted, with how much of the visit it takes</li></ul>
+    <ul class="points"><li><span class="tick"></span>Arrival to triage to doctor to decision, step by step</li><li><span class="tick"></span>Where patients come from and where they go</li><li><span class="tick"></span>The longest step is highlighted, with how much of the visit it takes</li></ul><p class="cards-on"><b>On this screen</b>Where patients go after arrival · Time at each step · Time by CTAS level · Arrival to doctor, by hour · Patient-hours by step · One visit, start to finish</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/emergency/journey</em></div>
     <img src="shots/ed-journey.jpg" alt="Patient journey screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Performance and improvement</h4><p>The 4-hour, CTAS, time-in-ED and bed-wait standards over time, against other hospitals, and whether a change worked.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Safety and return visits</h4><p>Leaving before a doctor, against advice, 72-hour returns, time-critical pathways, deaths and visits to review.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Performance and improvement</h4><p>The 4-hour, CTAS, time-in-ED and bed-wait standards over time, against other hospitals, and whether a change worked.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Safety and return visits</h4><p>Leaving before a doctor, against advice, 72-hour returns, time-critical pathways, deaths and visits to review.</p><p class="cards-on"><b>On this screen</b>Time-critical care · Who leaves before a doctor · Why patients come back · Back within 72 hours, by week · Visits flagged for clinical review · Visits to review</p></div></li></ul>
 </section>
 <section class="domain" id="ipd">
   <header class="d-head reveal">
@@ -323,7 +478,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Inpatient Care · Wards, now</p>
     <h3>Beds free, patients waiting in the ED for a bed, who goes home today.</h3>
-    <ul class="points"><li><span class="tick"></span>Free beds on every ward, now</li><li><span class="tick"></span>Patients still waiting in the ED for a ward bed</li><li><span class="tick"></span>Who should go home today and who is past their expected stay</li></ul>
+    <ul class="points"><li><span class="tick"></span>Free beds on every ward, now</li><li><span class="tick"></span>Patients still waiting in the ED for a ward bed</li><li><span class="tick"></span>Who should go home today and who is past their expected stay</li><li><span class="tick"></span>Who is likely to go home today: each patient's chance, the reason and the next step</li></ul><p class="cards-on"><b>On this screen</b>Beds by ward · Waiting in the ED for a ward bed · Who is likely to go home today · Past their expected stay · Admissions and discharges so far today</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/inpatient/now</em></div>
@@ -334,14 +489,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Inpatient Care · Bed outlook</p>
     <h3>Beds in use over the next three days and free beds each morning.</h3>
-    <ul class="points"><li><span class="tick"></span>Beds in use for the next three days, with a likely range</li><li><span class="tick"></span>Free beds expected at 08:00 tomorrow</li><li><span class="tick"></span>What to do about it, ranked by impact</li></ul>
+    <ul class="points"><li><span class="tick"></span>Beds in use for the next three days, with a likely range</li><li><span class="tick"></span>Free beds expected at 08:00 tomorrow</li><li><span class="tick"></span>What to do about it, ranked by impact</li><li><span class="tick"></span>Was the going-home prediction right? Each morning's chance against who actually went home</li></ul><p class="cards-on"><b>On this screen</b>Beds in use, next 3 days · What to do about it · Free beds by ward, now and by 08:00 · Was the forecast right? · Was the going-home prediction right?</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/inpatient/outlook</em></div>
     <img src="shots/bed-outlook.jpg" alt="Bed outlook screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>From admission to discharge</h4><p>From the admit decision to going home: where the time goes.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Inpatient performance</h4><p>Bed within an hour, stays against expected, home before noon.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Inpatient outcomes</h4><p>Back in hospital within 30 days, deaths, stays to review.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>From admission to discharge</h4><p>From the admit decision to going home: where the time goes.</p><p class="cards-on"><b>On this screen</b>Time at each step · Bed-days by step · Where patients come from and where they go · Discharges by hour of the day · Days in hospital against expected, by ward · Specialist consults: time to answer · Bed ready for the next patient, by ward · One stay, start to finish</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Inpatient performance</h4><p>Bed within an hour, stays against expected, home before noon.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Inpatient outcomes</h4><p>Back in hospital within 30 days, deaths, stays to review.</p><p class="cards-on"><b>On this screen</b>Back in hospital within 30 days, by ward · Back in hospital within 30 days, by week · Where patients went after the ward · Back in the ED within 72 h of going home · Stays flagged for clinical review · Stays to review</p></div></li></ul>
 </section>
 <section class="domain" id="icu">
   <header class="d-head reveal">
@@ -353,14 +508,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">ICU &amp; Critical Care · ICU, now</p>
     <h3>Beds in use, patients by how sick, waiting for a bed, ready to leave.</h3>
-    <ul class="points"><li><span class="tick"></span>ICU beds in use and patients waiting for one</li><li><span class="tick"></span>Patients by how sick they were on arrival (SOFA)</li><li><span class="tick"></span>Who is ready to leave and still holding a bed</li></ul>
+    <ul class="points"><li><span class="tick"></span>ICU beds in use and patients waiting for one</li><li><span class="tick"></span>Patients by how sick they were on arrival (SOFA)</li><li><span class="tick"></span>Who is ready to leave and still holding a bed</li></ul><p class="cards-on"><b>On this screen</b>Patients in the unit now · Patients now, by how sick on arrival · Coming in and going out</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/icu/now</em></div>
     <img src="shots/icu-now.jpg" alt="ICU, now screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From ICU request to discharge</h4><p>Where patients come from, the wait for a bed, the wait to leave.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Beds and ventilators</h4><p>Beds in use, days full, ventilators in use and out of use.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>ICU quality</h4><p>Deaths against what is expected for how sick patients were.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>ICU performance</h4><p>The intensive care standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From ICU request to discharge</h4><p>Where patients come from, the wait for a bed, the wait to leave.</p><p class="cards-on"><b>On this screen</b>Where patients come from, and how sick they are · Wait for an ICU bed · Asked for an ICU bed, by time of day · Ready to leave ICU to leaving · Week by week: admissions and the wait for a bed</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Beds and ventilators</h4><p>Beds in use, days full, ventilators in use and out of use.</p><p class="cards-on"><b>On this screen</b>Every hospital's ICU · Week by week: ICU beds in use · Ventilators out of use</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>ICU quality</h4><p>Deaths against what is expected for how sick patients were.</p><p class="cards-on"><b>On this screen</b>Deaths against expected, by how sick on arrival · By where patients came from · Every hospital's ICU · Month by month: deaths against expected</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>ICU performance</h4><p>The intensive care standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="opd">
   <header class="d-head reveal">
@@ -372,14 +527,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Outpatient · Bookings</p>
     <h3>Slots in the next two weeks, days to an appointment, referrals waiting.</h3>
-    <ul class="points"><li><span class="tick"></span>Days to an appointment by clinic, against a 14-day standard</li><li><span class="tick"></span>Slots booked day by day for the next two weeks</li><li><span class="tick"></span>Referrals waiting, and those waiting over 30 days</li></ul>
+    <ul class="points"><li><span class="tick"></span>Days to an appointment by clinic, against a 14-day standard</li><li><span class="tick"></span>Slots booked day by day for the next two weeks</li><li><span class="tick"></span>Referrals waiting, and those waiting over 30 days</li></ul><p class="cards-on"><b>On this screen</b>Days from booking to appointment, by clinic · Slots booked, day by day · By clinic · Reminders and did not attend · Referrals waiting to be seen</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/outpatient/bookings</em></div>
     <img src="shots/bookings.jpg" alt="Bookings screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:0"><span class="sc-dot"></span><div><h4>Clinics, now</h4><p>Who is waiting, who did not come, which doctor is running behind.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>From booking to visit note</h4><p>From booking to follow-up: where visits are lost and patients wait.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Outpatient performance</h4><p>Seen on time, typical wait, did not attend, days to an appointment.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:0"><span class="sc-dot"></span><div><h4>Clinics, now</h4><p>Who is waiting, who did not come, which doctor is running behind.</p><p class="cards-on"><b>On this screen</b>Clinics today · Doctors running behind · Waiting now, longest first</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>From booking to visit note</h4><p>From booking to follow-up: where visits are lost and patients wait.</p><p class="cards-on"><b>On this screen</b>From booking to follow-up · Time in clinic · Wait for the doctor, by clinic · Doctors who start late · Wait for the doctor, by appointment hour</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Outpatient performance</h4><p>Seen on time, typical wait, did not attend, days to an appointment.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="or">
   <header class="d-head reveal">
@@ -391,14 +546,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Surgery · Theatre use</p>
     <h3>Staffed time used, first operation on time, cancellations and why.</h3>
-    <ul class="points"><li><span class="tick"></span>Staffed theatre time used, theatre by theatre</li><li><span class="tick"></span>First operation of the day on time</li><li><span class="tick"></span>Cancellations on the day, and why</li></ul>
+    <ul class="points"><li><span class="tick"></span>Staffed theatre time used, theatre by theatre</li><li><span class="tick"></span>First operation of the day on time</li><li><span class="tick"></span>Cancellations on the day, and why</li></ul><p class="cards-on"><b>On this screen</b>Each theatre · Cancelled operations, and why · Time used, by list length · Week by week: time used and first operation on time · By day of the week</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/surgery/theatres</em></div>
     <img src="shots/theatres.jpg" alt="Theatre use screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:0"><span class="sc-dot"></span><div><h4>Theatres, now</h4><p>Each theatre today, operations waiting, running late, in recovery or cancelled.</p></div></li><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From booking to recovery</h4><p>Decision to operation by priority, the waiting list, where patients go after.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Quality and safety</h4><p>Safety checklist, complications, return to theatre, wound infections.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Surgery performance</h4><p>The surgery standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:0"><span class="sc-dot"></span><div><h4>Theatres, now</h4><p>Each theatre today, operations waiting, running late, in recovery or cancelled.</p><p class="cards-on"><b>On this screen</b>Each theatre today · Emergencies, recovery and cancellations · Next operations today</p></div></li><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From booking to recovery</h4><p>Decision to operation by priority, the waiting list, where patients go after.</p><p class="cards-on"><b>On this screen</b>Decision to operation, by priority · The waiting list now, by priority · By specialty · After surgery, by type of operation · Week by week: operations done and the wait for planned cases</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Quality and safety</h4><p>Safety checklist, complications, return to theatre, wound infections.</p><p class="cards-on"><b>On this screen</b>By specialty and by type of operation · Returns to theatre and wound infections: the latest · Week by week: operations with a complication</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Surgery performance</h4><p>The surgery standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="rad">
   <header class="d-head reveal">
@@ -410,14 +565,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Radiology · Imaging, now</p>
     <h3>Orders waiting by scanner type, urgent exams running late, reports not signed, critical findings, scanners stopped.</h3>
-    <ul class="points"><li><span class="tick"></span>Exams waiting by scanner type, urgent ones first</li><li><span class="tick"></span>Critical findings and how fast the ward acknowledged them</li><li><span class="tick"></span>Every scanner, open or stopped</li></ul>
+    <ul class="points"><li><span class="tick"></span>Exams waiting by scanner type, urgent ones first</li><li><span class="tick"></span>Critical findings and how fast the ward acknowledged them</li><li><span class="tick"></span>Every scanner, open or stopped</li></ul><p class="cards-on"><b>On this screen</b>Waiting for an exam today, by scanner type · Critical findings today · Scanners · Urgent exams · Exams waiting for a signed report · Clinic patients with a booked date</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/radiology/now</em></div>
     <img src="shots/imaging-now.jpg" alt="Imaging, now screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From order to signed report</h4><p>Order to exam to signed report by setting and scanner type; how long clinic patients wait.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Scanners</h4><p>Load against what each scanner can do, stops and the exams they cost, repeat exams.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Radiology performance</h4><p>Urgent exams and reports within 1 hour, reports within 24 hours, clinic waits, critical findings.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From order to signed report</h4><p>Order to exam to signed report by setting and scanner type; how long clinic patients wait.</p><p class="cards-on"><b>On this screen</b>Order to exam to signed report, by where the order came from · One urgent ward exam, step by step · By scanner type · How long clinic patients wait for the exam · When orders come in</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Scanners</h4><p>Load against what each scanner can do, stops and the exams they cost, repeat exams.</p><p class="cards-on"><b>On this screen</b>Each scanner: exams against what it can do · Why scanners stopped · Through the day: exams against what the open scanners can do · Repeat exams, by scanner type · Scanners in detail</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Radiology performance</h4><p>Urgent exams and reports within 1 hour, reports within 24 hours, clinic waits, critical findings.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="lab">
   <header class="d-head reveal">
@@ -429,14 +584,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Laboratory · Lab, now</p>
     <h3>What is waiting, urgent tests running late, critical results not taken, analyzers stopped.</h3>
-    <ul class="points"><li><span class="tick"></span>Tests in the lab now, by section</li><li><span class="tick"></span>Critical results and how fast the ward took them</li><li><span class="tick"></span>Urgent results within 60 minutes</li></ul>
+    <ul class="points"><li><span class="tick"></span>Tests in the lab now, by section</li><li><span class="tick"></span>Critical results and how fast the ward took them</li><li><span class="tick"></span>Urgent results within 60 minutes</li></ul><p class="cards-on"><b>On this screen</b>In the lab now, by section · Critical results today · Analyzers · Urgent results · Longest waiting, urgent first</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/laboratory/now</em></div>
     <img src="shots/lab-now.jpg" alt="Lab, now screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From order to lab result</h4><p>Sample taken to result step by step, by test and hour; samples rejected and why.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Analyzers</h4><p>Load against what each analyzer can run, busiest hours, stops.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Lab performance</h4><p>Urgent results within 60 min, sample to result, rejected samples, critical results.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From order to lab result</h4><p>Sample taken to result step by step, by test and hour; samples rejected and why.</p><p class="cards-on"><b>On this screen</b>Sample to result, step by step · Where the order came from · By test · Samples rejected, and why · By the hour the sample was taken</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Analyzers</h4><p>Load against what each analyzer can run, busiest hours, stops.</p><p class="cards-on"><b>On this screen</b>Each analyzer: tests against what it can run · Why analyzers stopped · Through the day · Analyzers in detail</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Lab performance</h4><p>Urgent results within 60 min, sample to result, rejected samples, critical results.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="rx">
   <header class="d-head reveal">
@@ -448,14 +603,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Pharmacy · Pharmacy, now</p>
     <h3>Orders waiting for the pharmacist check, sent back to the prescriber, urgent orders late, medicines out of stock.</h3>
-    <ul class="points"><li><span class="tick"></span>Orders waiting for the pharmacist check</li><li><span class="tick"></span>Urgent and high-alert orders in the queue</li><li><span class="tick"></span>Medicines out of stock or below safety stock</li></ul>
+    <ul class="points"><li><span class="tick"></span>Orders waiting for the pharmacist check</li><li><span class="tick"></span>Urgent and high-alert orders in the queue</li><li><span class="tick"></span>Medicines out of stock or below safety stock</li></ul><p class="cards-on"><b>On this screen</b>Waiting for the pharmacist check, by how long · Urgent and high-alert orders in the queue · The queue, by how the medicine reaches the patient · Sent back to the prescriber · Medicines out of stock, low or with the least cover · Days of supply, by medicine group · Last 24 hours, hour by hour</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/pharmacy/now</em></div>
     <img src="shots/pharmacy-now.jpg" alt="Pharmacy, now screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From order to first dose</h4><p>Order to pharmacist check to ready to first dose, by setting and pathway; why orders are sent back.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Stock and cost</h4><p>Out of stock and low stock, days of supply, value expiring, write-offs and spend.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Medication safety</h4><p>Barcode scanning, high-alert double check, incidents and harm, missed and late doses.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Pharmacy performance</h4><p>Pharmacist check within 30 min, urgent and routine medicines on time, barcode and double check.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>From order to first dose</h4><p>Order to pharmacist check to ready to first dose, by setting and pathway; why orders are sent back.</p><p class="cards-on"><b>On this screen</b>Order to check to ready to first dose, by where the order came from · One high-alert ward order, step by step · By how the medicine reaches the patient · Why orders are sent back to the prescriber · Orders by medicine group · Each setting in detail · Orders through the day, and how long the pharmacist check takes</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Stock and cost</h4><p>Out of stock and low stock, days of supply, value expiring, write-offs and spend.</p><p class="cards-on"><b>On this screen</b>Medicines most at risk · Days of supply, by medicine group · Money by medicine group · Value expiring, and why stock was written off · Week by week: spend, write-offs and days out of stock</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Medication safety</h4><p>Barcode scanning, high-alert double check, incidents and harm, missed and late doses.</p><p class="cards-on"><b>On this screen</b>Barcode scanned at the bedside, by unit · High-alert doses with a second nurse check · Where incidents happen, and what went wrong · Why ward doses were missed or held · Each unit in detail</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Pharmacy performance</h4><p>Pharmacist check within 30 min, urgent and routine medicines on time, barcode and double check.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="rcm">
   <header class="d-head reveal">
@@ -467,14 +622,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Revenue Cycle · Claims and denials</p>
     <h3>Accepted first time, denials and why, appeals, claims waiting.</h3>
-    <ul class="points"><li><span class="tick"></span>Accepted on the first submission against the 95% standard</li><li><span class="tick"></span>Denials and why: coding, insurance, prior approval</li><li><span class="tick"></span>Denied claims to appeal, largest first, with days left</li></ul>
+    <ul class="points"><li><span class="tick"></span>Accepted on the first submission against the 95% standard</li><li><span class="tick"></span>Denials and why: coding, insurance, prior approval</li><li><span class="tick"></span>Denied claims to appeal, largest first, with days left</li><li><span class="tick"></span>Claims likely to be denied if sent as they are, with the fix, before they go</li><li><span class="tick"></span>An appeal letter drafted from the bill for each denied claim</li></ul><p class="cards-on"><b>On this screen</b>Claims likely to be denied if sent as they are · Was the warning right? · Denials warned about, by reason · Claims sent, answered and appealed · Denied claims to appeal, largest first, with an appeal draft · Why claims are denied · By payer: first time, denied and the wait · Claims waiting for an answer now, by how long · Week by week: claims sent and the share denied</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/rcm/claims</em></div>
     <img src="shots/claims.jpg" alt="Claims and denials screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:0"><span class="sc-dot"></span><div><h4>Insurance and approvals</h4><p>Insurance confirmed before the visit, prior approvals and how long they take.</p></div></li><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Billing</h4><p>End of visit to bill, bills held and why, visits not billed yet.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Cash and money owed</h4><p>Cash in, money owed by age and payer, money lost.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Revenue cycle performance</h4><p>The revenue cycle standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:0"><span class="sc-dot"></span><div><h4>Insurance and approvals</h4><p>Insurance confirmed before the visit, prior approvals and how long they take.</p><p class="cards-on"><b>On this screen</b>Insurance checks and prior approvals, by visit type · Prior approvals waiting for a decision · Insurance confirmed and approvals granted, by payer · Denied for no approval or insurance · Week by week: insurance confirmed and the wait for an approval</p></div></li><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Billing</h4><p>End of visit to bill, bills held and why, visits not billed yet.</p><p class="cards-on"><b>On this screen</b>End of visit to bill, by visit type · Bills held over a week, and why · Visits not billed yet: the oldest · Not billed yet, by how long and why · What was charged · Contract discounts, by payer · Week by week: amount billed and days to bill</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Cash and money owed</h4><p>Cash in, money owed by age and payer, money lost.</p><p class="cards-on"><b>On this screen</b>Money owed, by age and payer · Largest amounts owed for over 90 days · Where the money owed stands · Money lost, and why · Self-pay bills of the period · Week by week: cash in and money lost</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Revenue cycle performance</h4><p>The revenue cycle standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="px">
   <header class="d-head reveal">
@@ -486,14 +641,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Patient Experience · Experience this week</p>
     <h3>Surveys and ratings in the last 7 days, complaints open now.</h3>
-    <ul class="points"><li><span class="tick"></span>Surveys and ratings this week, day by day</li><li><span class="tick"></span>What negative comments were about</li><li><span class="tick"></span>Complaints open now, oldest first</li></ul>
+    <ul class="points"><li><span class="tick"></span>Surveys and ratings this week, day by day</li><li><span class="tick"></span>What negative comments were about</li><li><span class="tick"></span>Complaints open now, oldest first</li></ul><p class="cards-on"><b>On this screen</b>Surveys back and rating, day by day · What negative comments were about · Lowest-rated departments · Complaints open now</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/patient-experience</em></div>
     <img src="shots/experience.jpg" alt="Experience this week screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Surveys</h4><p>Surveys answered, rating, would recommend, what comments are about.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Steps of the visit</h4><p>Waiting, communication, discharge, cleanliness, coordination.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Complaints</h4><p>Acknowledged in 2 days, closed in 30 days, open and overdue.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Patient experience performance</h4><p>The patient experience standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Surveys</h4><p>Surveys answered, rating, would recommend, what comments are about.</p><p class="cards-on"><b>On this screen</b>By where the patient was seen · How patients rated their care, 0 to 10 · What comments were about · Departments, lowest rated first · Month by month: rating and surveys answered · Every hospital</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Steps of the visit</h4><p>Waiting, communication, discharge, cleanliness, coordination.</p><p class="cards-on"><b>On this screen</b>Rated 6 or below, by step · Weakest step in each department · Each step, by where the patient was seen · Departments, lowest average first · Month by month: waiting and discharge information · Every hospital</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Complaints</h4><p>Acknowledged in 2 days, closed in 30 days, open and overdue.</p><p class="cards-on"><b>On this screen</b>What complaints are about · How long open complaints have waited · Open complaints, oldest first · By department · Month by month · Every hospital</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Patient experience performance</h4><p>The patient experience standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="qs">
   <header class="d-head reveal">
@@ -505,14 +660,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Quality &amp; Safety · Safety this week</p>
     <h3>Harm events in the last 7 days, what is open and overdue now.</h3>
-    <ul class="points"><li><span class="tick"></span>Harm events and near misses, day by day</li><li><span class="tick"></span>Where harm happened</li><li><span class="tick"></span>Investigations and corrective actions past due</li></ul>
+    <ul class="points"><li><span class="tick"></span>Harm events and near misses, day by day</li><li><span class="tick"></span>Where harm happened</li><li><span class="tick"></span>Investigations and corrective actions past due</li></ul><p class="cards-on"><b>On this screen</b>Harm events and near misses, day by day · Where harm happened · Latest harm events · Open work, past due first</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/quality</em></div>
     <img src="shots/safety.jpg" alt="Safety this week screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Incidents</h4><p>Events by kind and harm, falls and pressure injuries per 1,000 days.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Infections and prevention</h4><p>Line, catheter and C. difficile infections, hand hygiene, audits.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Investigations and actions</h4><p>Closed on time, root causes, open and overdue work.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Quality and safety performance</h4><p>The quality and safety standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Incidents</h4><p>Events by kind and harm, falls and pressure injuries per 1,000 days.</p><p class="cards-on"><b>On this screen</b>Events by kind · How much harm · Where events happen · Month by month: falls and pressure injuries per 1,000 days in hospital · Every hospital</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Infections and prevention</h4><p>Line, catheter and C. difficile infections, hand hygiene, audits.</p><p class="cards-on"><b>On this screen</b>Infection rates against the standard · Prevention checks · By department · Month by month: hand hygiene and infections caught in hospital · Every hospital</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Investigations and actions</h4><p>Closed on time, root causes, open and overdue work.</p><p class="cards-on"><b>On this screen</b>Open work, past due first · How long open work has been open · Root causes found · Open now, by kind of event · Month by month: closed by their due date · Every hospital</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Quality and safety performance</h4><p>The quality and safety standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="sc">
   <header class="d-head reveal">
@@ -524,14 +679,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Supply Chain · Supplies this week</p>
     <h3>Out of stock and low at the latest count, orders due, stock about to expire.</h3>
-    <ul class="points"><li><span class="tick"></span>Lowest days of supply at the latest count</li><li><span class="tick"></span>Items out or low, by type</li><li><span class="tick"></span>Stock that will expire in the next 90 days</li></ul>
+    <ul class="points"><li><span class="tick"></span>Lowest days of supply at the latest count</li><li><span class="tick"></span>Items out or low, by type</li><li><span class="tick"></span>Stock that will expire in the next 90 days</li></ul><p class="cards-on"><b>On this screen</b>Lowest days of supply at the count · Items out or low, by type · In stock and below safety stock, count by count · Orders due or late · Stock that will expire on the shelf in the next 90 days</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/supply-chain</em></div>
     <img src="shots/supplies.jpg" alt="Supplies this week screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Stock and availability</h4><p>In stock, out of stock and below safety stock by type and item.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Orders and suppliers</h4><p>On time and complete by supplier, days to deliver, approval time.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Use and waste</h4><p>What is used by type and department, what expires or is damaged.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Supply chain performance</h4><p>The supply chain standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Stock and availability</h4><p>In stock, out of stock and below safety stock by type and item.</p><p class="cards-on"><b>On this screen</b>Below safety stock and out of stock, by type of item · Items most often out or low · Month by month: below safety stock and out of stock · Every hospital</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Orders and suppliers</h4><p>On time and complete by supplier, days to deliver, approval time.</p><p class="cards-on"><b>On this screen</b>On time by supplier · By type of item · Every supplier · Month by month: on time and days to deliver · Every hospital</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Use and waste</h4><p>What is used by type and department, what expires or is damaged.</p><p class="cards-on"><b>On this screen</b>Used and lost, by type of item · Who uses the most · Month by month: lost to expiry and damage · Items losing the most · Every hospital: lost to expiry and damage</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Supply chain performance</h4><p>The supply chain standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="st">
   <header class="d-head reveal">
@@ -543,14 +698,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Strategy · Financial picture</p>
     <h3>Revenue, operating cost and margin for closed months.</h3>
-    <ul class="points"><li><span class="tick"></span>Revenue, operating cost and margin for closed months</li><li><span class="tick"></span>Where the money goes, by kind of cost</li><li><span class="tick"></span>What changed since the period before</li></ul>
+    <ul class="points"><li><span class="tick"></span>Revenue, operating cost and margin for closed months</li><li><span class="tick"></span>Where the money goes, by kind of cost</li><li><span class="tick"></span>What changed since the period before</li></ul><p class="cards-on"><b>On this screen</b>Where the money goes · What changed, by kind of cost · Month by month: revenue, cost and margin · Every hospital</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/strategy</em></div>
     <img src="shots/financial.jpg" alt="Financial picture screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Workforce</h4><p>Hours needed and staffed, overtime, agency, absence, posts not filled.</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Service lines</h4><p>Revenue, cost and margin for emergency, wards, surgery and clinics.</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Cost drivers</h4><p>Cost per visit and per day in hospital, overtime and agency, maintenance.</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Strategy performance</h4><p>The strategy standards over time and across hospitals.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Workforce</h4><p>Hours needed and staffed, overtime, agency, absence, posts not filled.</p><p class="cards-on"><b>On this screen</b>Month by month: overtime and agency · Hours of work needed, of hours staffed · Departments, most overtime and agency first · Every hospital</p></div></li><li class="sc reveal" style="--d:2"><span class="sc-dot"></span><div><h4>Service lines</h4><p>Revenue, cost and margin for emergency, wards, surgery and clinics.</p><p class="cards-on"><b>On this screen</b>Revenue against cost, by service line · Shared services shared out · Departments: own revenue and own cost · Month by month: margin by service line</p></div></li><li class="sc reveal" style="--d:3"><span class="sc-dot"></span><div><h4>Cost drivers</h4><p>Cost per visit and per day in hospital, overtime and agency, maintenance.</p><p class="cards-on"><b>On this screen</b>Cost per day in hospital, by ward · Overtime and agency cost, by department · Every department · Month by month: cost per visit · Every hospital: cost per visit</p></div></li><li class="sc reveal" style="--d:4"><span class="sc-dot"></span><div><h4>Strategy performance</h4><p>The strategy standards over time and across hospitals.</p><p class="cards-on"><b>On this screen</b>Each standard, week by week against its target · Did the change work? · Each standard, by hospital · Month by month · Days on target</p></div></li></ul>
 </section>
 <section class="domain" id="dp">
   <header class="d-head reveal">
@@ -562,14 +717,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="f-text reveal">
     <p class="f-kicker">Data Platform · Nightly pipeline</p>
     <h3>Each night&#x27;s run, step by step, against the 06:00 deadline.</h3>
-    <ul class="points"><li><span class="tick"></span>Every run against the 06:00 deadline</li><li><span class="tick"></span>Receive, clean and check, work out standards, AI scoring</li><li><span class="tick"></span>90 of the last 90 nights on time</li></ul>
+    <ul class="points"><li><span class="tick"></span>Every run against the 06:00 deadline</li><li><span class="tick"></span>Receive, clean and check, work out standards, AI scoring</li><li><span class="tick"></span>90 of the last 90 nights on time</li></ul><p class="cards-on"><b>On this screen</b>Every night against the 06:00 deadline · The last 90 nights · Records that failed a data check, each day</p>
   </div>
   <figure class="f-shot reveal">
     <div class="browser"><span></span><span></span><span></span><em>app.datavital.io/data-platform/pipeline-monitoring</em></div>
     <img src="shots/pipeline.jpg" alt="Nightly pipeline screen in DataVital AI" loading="lazy" width="1389" height="868">
   </figure>
 </article>
-  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Data quality</h4><p>What the nightly checks found in each hospital&#x27;s source data.</p></div></li></ul>
+  <ul class="screens"><li class="sc reveal" style="--d:1"><span class="sc-dot"></span><div><h4>Data quality</h4><p>What the nightly checks found in each hospital&#x27;s source data.</p><p class="cards-on"><b>On this screen</b>Problems the checks found · Where records fail: hospital by source system · Is each feed up to date? · Every check</p></div></li></ul>
 </section></div>
 
 <section class="block" id="assist" style="border-top:1px solid var(--line)">
@@ -607,6 +762,7 @@ function count(el){const t=+el.dataset.count,s=el.dataset.suffix||'',t0=performa
   (function f(now){const p=Math.min(1,(now-t0)/d),v=Math.round(t*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('en')+s;if(p<1)requestAnimationFrame(f)})(t0)}
 const bar=document.getElementById('bar'),pr=document.getElementById('progress');
 addEventListener('scroll',()=>{const h=document.documentElement;bar.classList.toggle('solid',scrollY>40);pr.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+document.querySelectorAll('a.lang').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();location.href=a.getAttribute('href')+location.hash}));
 </script>
 </body>
 </html>
